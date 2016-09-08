@@ -725,3 +725,7 @@ ol, ul {
 	/* z-index: 1; */
 	z-index: 6;
 }
+
+.modal-dialog{
+	z-index: 10;
+}

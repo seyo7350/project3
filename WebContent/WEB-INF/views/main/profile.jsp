@@ -48,11 +48,11 @@
 							게시물 
 							<span class="_bkw5z _kjym7">1</span>개
 					</span></li>
-					<li class=" _7gq8o"><span class="_s53mj _13vpi" href="#none" id="popbutton2">
+					<li class=" _7gq8o"><span class="_s53mj _13vpi" id="popbutton">
 							팔로워
 							<span class="_bkw5z _kjym7" title="0">0</span>명
 					</span></li>
-					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton">
+					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
 							팔로우
 							<span class="_bkw5z _kjym7">6</span>명
 					</a></li>
@@ -97,17 +97,21 @@
 
 
 <!-- Modal -->
+  			
 <div>
   <div class="modal modal-center" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  			<div class="_quk42">
-				<div class="_7629j">
-					<div class="_hj98d">
-											
-					</div>
-				</div>
+  	<div data-reactroot class="_a1rcs _ea084">
+  	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
 			</div>
+		</div>
+	</div>
+	
     <div class="modal-dialog">
       <!-- Modal content-->
+      
       <div class="modal-content">
         <div class="modal-body">
           <ul class="_pdba0" role="menu">
@@ -118,10 +122,19 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   
 <!-- Modal2 -->
   <div class="modal modal-center" id="myModal2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div data-reactroot class="_a1rcs _ea084">
+  	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
+			</div>
+		</div>
+	</div>
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -131,6 +144,7 @@
             <li class="_bt6iq"><button class="_4y3e3" data-dismiss="modal" style="border: none;">닫기</button></li></ul>
         </div>
       </div>
+    </div>
     </div>
   </div>
   
@@ -145,7 +159,18 @@
 	
 	<!-- 모달 팝업3 -->
 	<div class="modal" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">	 
+	<div data-reactroot class="_a1rcs _ea084">
+	
+		<div class="_quk42">
+			<div class="_7629j">
+				<div class="_hj98d">
+										
+				</div>
+			</div>
+		</div>
+		
+	  <div class="modal-dialog">
+	  	
 	     <div class="modal-content">
 	      <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
@@ -173,15 +198,23 @@
 				</li>
 			</ul>
 	      </div>
-	      
-	      <!-- <div class="modal-footer">
-	      </div> -->
 	    </div>
 	  </div>
+	 </div>
 	</div>
 	
 	<!-- 모달 팝업4 -->
 	<div class="modal" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div data-reactroot class="_a1rcs _ea084">
+	
+	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
+			</div>
+		</div>
+	</div>
+		
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -216,7 +249,10 @@
 	    </div>
 	  </div>
 	</div>
-
+	</div>
+	
+	
+	<!-- modal5 -->
 	<div class="modal" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div data-reactroot class="_a1rcs _ea084">
 			<div class="_quk42">
@@ -312,7 +348,14 @@
 </div><!-- 모달 -->
 
   
-  <script type="text/javascript">
+<script type="text/javascript">
+
+/* var $layerPopupObj = $('#myModa4');
+var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
+var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
+$layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
+$('body').css('position','relative').append($layerPopupObj); */
+
 $(function(){
     $('#popbutton').click(function(){
         $('#myModal3').modal();
@@ -345,6 +388,67 @@ $(document).ready(function(){
 		$('#myModal5').modal('hide');
 	});
 });
+
+$(document).ready(function(){
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal2').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal3').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal4').modal('hide');
+	});
+	
+	
+	/* $('._3eajp').click(function(){
+		
+		$('#myModal').modal('hide');
+	}); */
+});
+
+
+
+
+/* function wrapWindowByMask(){
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();  
+    var maskWidth = $(window).width();  
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({'width':maskWidth,'height':maskHeight});  
+
+    //애니메이션 효과
+    $('#mask').fadeIn(1000);      
+    $('#mask').fadeTo("slow",0.8);    
+}	
+	
+$(document).ready(function(){	
+	//닫기 버튼을 눌렀을 때
+	$('.window .close').click(function (e) {  
+	    //링크 기본동작은 작동하지 않도록 한다.
+	    e.preventDefault();  
+	    $('#mask, .window').hide();  
+	});       
+	
+	//검은 막을 눌렀을 때
+	$('#mask').click(function () {  
+	    $(this).hide();  
+	    $('.window').hide();  
+	});
+}); */
+
+
 </script>
   
   
