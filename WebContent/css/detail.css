@@ -250,7 +250,8 @@ a._kul9p, a._kul9p:visited {
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 1;
+    /* z-index: 1; */
+    z-index: 6;
 }
 
 ._ea084 {
@@ -264,7 +265,8 @@ a._kul9p, a._kul9p:visited {
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 0;
+    /* z-index: 0; */
+    z-index: 5;
 }
 
 ._7629j {
@@ -343,7 +345,8 @@ a._kul9p, a._kul9p:visited {
     min-height: 100%;
     overflow: auto;
     width: auto;
-    z-index: 1;
+    /* z-index: 1; */
+    z-index: 6;
 }
 
 @media (min-width: 481px) {
@@ -700,11 +703,13 @@ ol, ul {
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 2;
+    /* z-index: 2; */
+    z-index: 7;
 }
 
 .modal{
-	z-index: 1;
+	/* z-index: 1; */
+	z-index:  6;
 }
 
 .modal-backdrop {
@@ -713,9 +718,10 @@ ol, ul {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 0;
+    z-index: -1;
 }
 
 ._7629j {
-	z-index: 1;
+	/* z-index: 1; */
+	z-index: 6;
 }

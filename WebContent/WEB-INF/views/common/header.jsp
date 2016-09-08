@@ -16,7 +16,8 @@
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css"> 
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/detail.css">
 
 
 
