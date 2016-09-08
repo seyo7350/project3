@@ -27,5 +27,10 @@ public class MemberController {
 	public String newspeed(Model model){
 		return "newspeed.tiles";
 	}
+	
+	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String profile(Model model){
+		return "profile.tiles";
+	}
 
 }

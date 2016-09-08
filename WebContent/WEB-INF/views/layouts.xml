@@ -23,4 +23,9 @@
 		<put-attribute name="main" value="/WEB-INF/views/main/newspeed.jsp"/>
 	</definition>
 	
+	<definition name="profile.tiles" extends="newspeed.tiles">
+	    <put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/main/profile.jsp"/>
+	</definition>
+	
 </tiles-definitions>
