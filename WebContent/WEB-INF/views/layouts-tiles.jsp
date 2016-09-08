@@ -14,13 +14,9 @@
 <body>
 	<span id="react-root">
 		<section data-reactroot class="_8f735">
-			<main class="_6ltyr _rnpza" role="main">
-				<tiles:insertAttribute name="main"/>
-			</main>
+			<tiles:insertAttribute name="main"/>
 			<tiles:insertAttribute name="nav"/>
-			<footer class="_oofbn" role="contentinfo">
-				<tiles:insertAttribute name="footer"/>
-			</footer>
+			<tiles:insertAttribute name="footer"/>
 		</section>
 	</span>
 </body>
