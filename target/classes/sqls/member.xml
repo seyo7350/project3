@@ -6,16 +6,20 @@
   <mapper namespace="member">
   	
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
-  		INSERT INTO INSTAMEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE)
-  			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 'null')
+  		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN)
+  		VALUES(SEQ_INSTA_MEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0)
   	
   	</insert>
   	
   	<select id="getMemberList" resultType="sist.co.model.MemberDTO">
-  		SELECT * FROM INSTAMEMBER
+  		SELECT * FROM INSTA_MEMBER
   	
   	</select>
   
-  
+	<select id="login" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+		SELECT * 
+			FROM INSTA_MEMBER
+				WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>  
   
   </mapper>

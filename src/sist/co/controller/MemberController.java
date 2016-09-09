@@ -40,16 +40,23 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(Model model, String id, String pwd) throws Exception {
+	public boolean loginAf(HttpServletRequest request, Model model, String id, String pwd, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
+		
+		MemberDTO login = null;
+		
 		
 		//회원 조회
 		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
 		memberList = memberService.getMemberList();
 		
 		for(MemberDTO list : memberList){
-			if(list.getId().equals(id) && list.getPwd().equals(pwd))
+			if(list.getId().equals(id) && list.getPwd().equals(pwd)) {
+				login = memberService.login(memberDTO);
+				request.getSession().setAttribute("login", login);
+				
 				return true;
+			}
 		}
 		
 		return false;
@@ -92,8 +99,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="newspeed.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeed(Model model){
-		System.out.println("뉴스피드");
+	public String newspeed(Model model, String id){
+		logger.info("newspeed " + new Date());
+		model.addAttribute("id", id);
 		return "newspeed.tiles";
 	}
 	
