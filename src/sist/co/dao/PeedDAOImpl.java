@@ -1,4 +1,4 @@
-/*package sist.co.dao;
+package sist.co.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,4 +12,3 @@ public class PeedDAOImpl implements PeedDAO {
 	
 	private String ns="Peed.";
 }
-*/

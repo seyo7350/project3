@@ -98,11 +98,6 @@ public class MemberController {
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String profile(Model model){
 		return "profile.tiles";
-	}
-	
-	@RequestMapping(value="write.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String write(Model model){
-		return "write.tiles";
-	}
+	}	
 
 }
