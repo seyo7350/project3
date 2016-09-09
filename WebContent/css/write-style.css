@@ -14,6 +14,22 @@
   border-radius: .25em;
 }
 
+.wbtn {
+	display: inline-block;
+  padding: .5em .75em;
+  color: #999;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+  float: right;
+  margin: 10px 0;
+}
+
 /* .filebox label {
   background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
     background-repeat: no-repeat;
