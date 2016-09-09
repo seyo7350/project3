@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login-style.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/nav-style.css"/>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/footer-style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/newspeed.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/write-style.css">
@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/detail.css">
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/nav-style.css"/>
 
 
 

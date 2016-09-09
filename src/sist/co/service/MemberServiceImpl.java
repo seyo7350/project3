@@ -32,7 +32,20 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.login(memberDTO);
 	}
+
+	@Override
+	public boolean memberInfo(MemberDTO memberDTO) throws Exception {
+		
+		if((boolean)memberDAO.memberInfo(memberDTO)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int alreadyCheck(MemberDTO memberDTO) throws Exception {
 	
-	
-	
+		return memberDAO.alreadyMemberId(memberDTO) + memberDAO.alreadyMemberEmail(memberDTO);
+	}
+
 }

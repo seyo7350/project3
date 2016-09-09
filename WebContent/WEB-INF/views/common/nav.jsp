@@ -7,7 +7,7 @@
 				<a class="_1b8in _soakw coreSpriteDesktopNavLogoAndWordmark">Instagram</a>
 				<div class="_nhei4">
 					<div class="_9pxkq _icv3j">
-						<input type="text" class="_9x5sw _qy55y" placeholder="검색" value>
+						<input type="text" class="_9x5sw _qy55y" placeholder="검색">
 						<div class="_t1y9a _98hun">
 							<div class="_etslc">
 								<span class="_oqxv9 coreSpriteSearchIcon"></span>
@@ -37,7 +37,7 @@ $(document).ready(function(){
 	$('div').on('click', '._t1y9a', function(){
 		/* alert('1'); */
 		var s = '';
-		s += '<input type="text" class="_9x5sw _qy55y" placeholder="검색" value>';
+		s += '<input type="text" class="_9x5sw _qy55y" placeholder="검색">';
 		s += '<span class="_n3dw7 coreSpriteSearchIcon"></span>';
 		s += '<div class="_jacrq"></div>';
 		
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	$('div').on('click', '._jacrq', function(){
 		/* alert('2'); */
 		var s = '';
-		s += '<input type="text" class="_9x5sw _qy55y" placeholder="검색" value>';
+		s += '<input type="text" class="_9x5sw _qy55y" placeholder="검색">';
 		s += '<div class="_t1y9a _98hun">';
 		s += '<div class="_etslc">';
 		s += '<span class="_oqxv9 coreSpriteSearchIcon"></span>';
