@@ -78,7 +78,11 @@
 	</section>
 </main>
 
-<script  type="text/javascript">
+<script type="text/javascript">
+
+</script>
+
+<!-- <script  type="text/javascript">
 $(window).scroll(function () {
 	
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -94,4 +98,4 @@ $(window).scroll(function () {
 		for(var i=0; i<10; i++){
 		$('._8ab8k').append
 	} */ 
-</script>
+</script> -->

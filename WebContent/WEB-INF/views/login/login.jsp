@@ -49,7 +49,7 @@
 </main>
 
 <script type="text/javascript">
-$('#a_join').click(function(){
+$(document).ready(function(){
  	$.ajax({
 		type:"POST",
 		url:"./regi.do",
