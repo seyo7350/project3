@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="member">
+  	
+  	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
+  		INSERT INTO INSTAMEMBER(SEQ, ID, PWD, EMAIL, NAME, REGIDATE, OPEN, PROFILEIMAGE)
+  			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 0)
+  	
+  	</insert>
+  	
+  	<select id="getMemberList" resultType="sist.co.model.MemberDTO">
+  		SELECT * FROM INSTAMEMBER
+  	
+  	</select>
+  
+  
+  
+  </mapper>
