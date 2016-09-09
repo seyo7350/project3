@@ -120,9 +120,7 @@ public class MemberController {
 	public String pwdchange(Model model){
 		return "pwdchange.tiles";
 	}
-	
-<<<<<<< HEAD
-=======
+
 	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
 
@@ -139,5 +137,4 @@ public class MemberController {
 	}
 
 
->>>>>>> fc293eda9948fdd56e410ae23b2304faf3efed02
 }
