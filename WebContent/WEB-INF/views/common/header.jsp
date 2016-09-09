@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/nav-style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/footer-style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/newspeed.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/write-style.css">
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
 

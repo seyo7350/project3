@@ -32,5 +32,10 @@ public class MemberController {
 	public String profile(Model model){
 		return "profile.tiles";
 	}
+	
+	@RequestMapping(value="write.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String write(Model model){
+		return "write.tiles";
+	}
 
 }
