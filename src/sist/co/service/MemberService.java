@@ -12,4 +12,6 @@ public interface MemberService {
 	
 	public int loginPwd(MemberDTO memberDTO) throws Exception;
 	public int alreadyCheck(MemberDTO memberDTO) throws Exception;
+	
+	public boolean PWDChange(MemberDTO memberDTO) throws Exception;
 }

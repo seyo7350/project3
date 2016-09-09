@@ -1,5 +1,9 @@
-
-CREATE TABLE INSTAMEMBER(
+   drop table INSTA_MEMBER
+   cascade constraint;
+   
+   drop sequence SEQ_INSTA_MEMBER
+   
+CREATE TABLE INSTA_MEMBER(
 		SEQ NUMBER(8) PRIMARY KEY,
 		ID VARCHAR2(50) NOT NULL,
 		PWD VARCHAR2(50) NOT NULL,
@@ -12,9 +16,6 @@ CREATE TABLE INSTAMEMBER(
 
 	CREATE SEQUENCE SEQ_INSTA_MEMBER;
 	
-	select * from INSTAMEMBER
-	
-   drop table INSTAMEMBER
-   cascade constraint;
+	select * from INSTA_MEMBER
    
-   drop sequence SEQ_INSTA_MEMBER
+   update INSTA_MEMBER set pwd='11' where seq=1

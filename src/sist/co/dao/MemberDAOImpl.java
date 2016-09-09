@@ -53,6 +53,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne(ns+"loginPwd", memberDTO);
 	}
 
-	
+	@Override
+	public boolean PWDChange(MemberDTO memberDTO) throws Exception {
+		sqlSession.update(ns+"PWDChange", memberDTO);
+		return true;
+	}
 
 }

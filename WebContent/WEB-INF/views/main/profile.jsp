@@ -4,100 +4,127 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
     
 
-
-
-<!--실제내용 시작  -->
-
-			<main class="_6ltyr _rnpza" role="main">
-			<article class="_42elc">
-				<header class=" _o2h6b">
-					<div class="_o0ohn">
-						<div class="_8gpiy _r43r5">
-							<button class="_jzgri" title="프로필 사진 변경"  data-toggle="modal" data-target="#myModal">
-								<img alt="프로필 사진 변경" class="_g5pg0"
-									src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/13768311_1786432404968210_1975323943_a.jpg">
-							</button>
-							<form enctype="multipart/form-data">
-								<input type="file" accept="image/jpeg" class="_loq3v">
-							</form>
-						</div>
-					</div>
-					<div class="_de9bg">
-						<div class="_8mm5v">
-							<h1 class="_i572c notranslate" title="leehy860930">${login.id }</h1>&nbsp;&nbsp;&nbsp;
-							<div class="_38y5t">
-								<button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
-							</div>
-						</div>
-						<div class="_bugdy">
-							<h2 class="_79dar">${login.name }</h2>&nbsp;&nbsp;&nbsp;
-							<a class="_56pjv" href="http://www.naver.com" target="_blank">www.naver.com</a>
-						</div>
-						<div class="_hcch2">
-							<a class=" _t2uoe" href="edit.do">
-							  <span	class="_5ji7m _e616g">
-							    <button	class="_aj7mu _je2uz _kenyh _o0442">프로필 편집</button></span></a>
-						</div>
-					
-				
-				<ul class=" _i305n">
-					<li class=" _7gq8o"><a class="_s53mj _13vpi">
-							게시물 
-							<span class="_bkw5z _kjym7">1</span>개
-					</a></li>
-					<li class=" _7gq8o"><a class="_s53mj _13vpi" id="popbutton">
-							팔로워
-							<span class="_bkw5z _kjym7" title="0">0</span>명
-					</a></li>
-					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
-							팔로우
-							<span class="_bkw5z _kjym7">6</span>명
-					</a></li>
-				</ul>
+		<main class="_6ltyr _rnpza" role="main">
+		<div class="_40h7m">
+			<ul class="_g2cyn">
+               <li><a class="_9hbou _siw05" href="edit.do">프로필 편집</a></li>
+				<li><a class="_9hbou _g6sjr" href="pwdchange.do">비밀번호 변경</a></li>
+			</ul>
+			<article class="_e5cd3">
+			<div class="_ljqf0">
+				<div class="_8gpiy _f7gj7">
+					<button class="_jzgri" title="프로필 사진 변경"  data-toggle="modal" data-target="#myModal">
+						<img alt="프로필 사진 변경" class="_g5pg0" 	src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/13768311_1786432404968210_1975323943_a.jpg">
+					</button>
+					<form enctype="multipart/form-data">
+						<input type="file" accept="image/jpeg" class="_loq3v">
+					</form>
 				</div>
-				</header>
-				
-				<div>
-					<div class="_nljxa">
-						<div class="_myci9">
-						<!--그림1  -->
-							<a class="_8mlbc _vbtk2 _t5r8b"	href="#none" id="img1"> 
-							   <div class="_22yr2">
-									<div class="_jjzlb">
-										<img alt="고고" class="_icyx7" id="pImage_12"
-											src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
-									</div>
-								</div></a>
-								
-						<!--그림2  -->
-							<a class="_8mlbc _vbtk2 _t5r8b"	href="/p/BJ_zpWyhOlg/?taken-by=leehy860930">
-							   <div class="_22yr2">
-									<div class="_jjzlb">
-										<img alt="고고" class="_icyx7" id="pImage_12"
-											src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
-									</div>
-								</div></a>
-								
-							<div class="_t5r8b _81g1f"></div>
-							<div class="_t5r8b _81g1f"></div>
+				<h1 class="_4s1oa">${login.id }</h1>
+			</div>
+
+			<form class="_cmoxu">
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepName">이름</label></aside>
+					<div class="_lxlnj">
+						<input type="text" class="_cm95b _qy55y" aria-required="false"
+							id="pepName" value="${login.name }">
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepUsername">사용자 이름</label></aside>
+					<div class="_lxlnj">
+						<input type="text" class="_cm95b _qy55y" aria-required="true" id="pepUsername" value="${login.id }">
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepWebsite">웹사이트(비활성화)</label></aside>
+					<div class="_lxlnj">
+						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepWebsite" value="">
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepBio">웹사이트(비활성화)</label></aside>
+					<div class="_lxlnj">
+						<textarea class="_9pfjt" id="pepBio"></textarea>
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label></label></aside>
+					<div class="_lxlnj">
+						<div class="_sdis1">
+							<h2 class="_bgfey">개인 정보</h2>
 						</div>
 					</div>
 				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepEmail">이메일</label></aside>
+					<div class="_lxlnj">
+						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepEmail" value="${login.email }">
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepPhone Number">전화번호(비활성화)</label></aside>
+					<div class="_lxlnj">
+						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepPhone Number" value="">
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepGender">성별(비활성화)</label></aside>
+					<div class="_lxlnj">
+						<div class="_3m0ft">
+							<span class="_fu55f _soakw coreSpriteChevronDownGrey"></span>
+							<select class="_g6a4a _aifc3" id="pepGender">
+							    <option	class="_ldrzi" value="1">남성</option>
+								<option class="_ldrzi" value="2">여성</option>
+								<option class="_ldrzi" value="3">선택 안 함</option></select>
+						</div>
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label>비슷한 계정 추천(비활성화)</label></aside>
+					<div class="_lxlnj">
+						<div class="_pjb58">
+							<input type="checkbox" class="_32vu6" id="pepChainingEnabled"
+								value="on">
+						</div>
+						<label class="_q3o2l" for="pepChainingEnabled">
+							<!-- react-text: 2947 -->팔로우할 만한 비슷한 계정을 추천할 때 회원님의 계정을 포함합니다.<!-- /react-text -->
+							<a class="_6dth5"
+							href="https://help.instagram.com/530450580417848" target="_blank">[?]</a>
+						</label>
+					</div>
+				</div>
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label></label></aside>
+					<div class="_lxlnj">
+						<div class="_c7q5m">
+							<span class="_e616g">
+							   <button	class="_aj7mu _2hpcs _kenyh _o0442">제출</button></span>
+							   <a	class="_5r95g" href="/accounts/remove/request/temporary/">
+							   계정을	일시적으로 비활성화</a>
+						</div>
+					</div>
+				</div>
+			</form>
 			</article>
-			</main>
-
-
-<!--실제내용 끝  -->
-
-<script src="//instagramstatic-a.akamaihd.net/h1/bundles/ko_KR_Commons.js/efd84397bd12.js" type="text/javascript" crossorigin="anonymous"></script>
-<script src="//instagramstatic-a.akamaihd.net/h1/bundles/ko_KR_FeedPage.js/3cb0f1947120.js" type="text/javascript" crossorigin="anonymous"></script>
+		</div>
+		</main>
 
 
 <!-- Modal -->
-  			
 <div>
   <div class="modal modal-center" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div data-reactroot class="_a1rcs _ea084">
@@ -108,10 +135,8 @@
 			</div>
 		</div>
 	</div>
-	
     <div class="modal-dialog">
       <!-- Modal content-->
-      
       <div class="modal-content">
         <div class="modal-body">
           <ul class="_pdba0" role="menu">
@@ -124,331 +149,13 @@
     </div>
     </div>
   </div>
-  
-<!-- Modal2 -->
-  <div class="modal modal-center" id="myModal2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  	<div data-reactroot class="_a1rcs _ea084">
-  	<div class="_quk42">
-		<div class="_7629j">
-			<div class="_hj98d">
-									
-			</div>
-		</div>
-	</div>
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-          <ul class="_pdba0" role="menu">
-            <li class="_bt6iq"><a href="logout.do"><button class="_4y3e3">로그아웃</button></a></li>
-            <li class="_bt6iq"><button class="_4y3e3" data-dismiss="modal" style="border: none;">닫기</button></li></ul>
-        </div>
-      </div>
-    </div>
-    </div>
   </div>
   
-  
-
-	<!-- 버튼 -->
-	<!-- <button type="button" class="btn btn-primary btn-lg" id="popbutton">
-	  팔로우
-	</button> -->
-	
-	
-	
-	<!-- 모달 팝업3 -->
-	<div class="modal" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div data-reactroot class="_a1rcs _ea084">
-	
-		<div class="_quk42">
-			<div class="_7629j">
-				<div class="_hj98d">
-										
-				</div>
-			</div>
-		</div>
-		
-	  <div class="modal-dialog">
-	  	
-	     <div class="modal-content">
-	      <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-			<h4 class="modal-title" id="myModalLabel">팔로잉</h4>
-	      </div>
-	      <div class="modal-body">
-			<ul class="_539vh _4j13h">
-				<li class="_cx1ua">
-				<div class="_6jvgy">
-					<div class="_9tu8m">
-							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
-							<div class="_mmgca"> <!-- 아이디, 이름 -->
-								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
-								<div class="_2uju6">이름</div> <!-- 이름-->
-							</div>
-					
-						<div class="_72gdz">
-							<span class="_e616g">
-								<button type="button" class="btn btn-primary" style="background-color: green;">팔로잉</button>
-								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로잉</button> -->
-							</span>
-						</div>
-					</div>
-				</div> 
-				</li>
-			</ul>
-	      </div>
-	    </div>
-	  </div>
-	 </div>
-	</div>
-	
-	<!-- 모달 팝업4 -->
-	<div class="modal" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	<div data-reactroot class="_a1rcs _ea084">
-	
-	<div class="_quk42">
-		<div class="_7629j">
-			<div class="_hj98d">
-									
-			</div>
-		</div>
-	</div>
-		
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">팔로워</h4>
-	      </div>
-	      <div class="modal-body">
-			<ul class="_539vh _4j13h">
-				<li class="_cx1ua">
-				<div class="_6jvgy">
-					<div class="_9tu8m">
-							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
-							<div class="_mmgca"> <!-- 아이디, 이름 -->
-								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
-								<div class="_2uju6">이름</div> <!-- 이름-->
-							</div>
-					
-						<div class="_72gdz">
-							<span class="_e616g">
-								<button type="button" class="btn btn-primary">팔로우</button>
-								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로우</button> -->
-							</span>
-						</div>
-					</div>
-				</div> 
-				</li>
-			</ul>
-	      </div>
-	      
-	      <!-- <div class="modal-footer">
-	      </div> -->
-	    </div>
-	  </div>
-	</div>
-	</div>
-	
-	
-	<!-- modal5 -->
-	<div class="modal" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div data-reactroot class="_a1rcs _ea084">
-			<div class="_quk42">
-				<div class="_7629j">
-					<div class="_hj98d">
-											
-					</div>
-				</div>
-			</div>
-			<div class="_7629j">
-				<div class="_hj98d">
-					<a class="_qdy3e coreSpriteLeftPaginationArrow" href="javascript:alert('11');" role="button">이전</a>
-					<a class="_de018 coreSpriteRightPaginationArrow" href="#" role="button">다음</a>
-				</div>
-			</div>			
-			<div class="_g1ax7">
-				<div class="_n3cp9 _d20no">
-					<article class="_djxz1 _j5hrx">
-						<header class="_s6yvg">
-							<a class="_5lote _pss4f _vbtk2">
-								<img class="_a012k" src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12519560_1521410768167162_695266703_a.jpg">
-							</a>
-							<div class="_f95g7">
-								<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">anhwichan</a>
-								<a class="_kul9p _rnlnu" title="페넬로페" href="#">페넬로페</a>
-							</div>
-							<span class="_fbms8 _e616g">
-								<button class="_aj7mu _2hpcs _kenyh _o0442">
-									팔로우
-								</button>
-							</span>
-						</header>
-						<div>
-							<div class="_22yr2 _e0mru">
-								<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
-									<img alt="기다림이 즐거워🙄💕
-케이크 먹고싶다는 한마디에 뚝!딱! 
-항상 고맙지만 오늘은 이렇게 딱 표현해야지,
-잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
-								</div>
-								<div class="_ovg3g"></div>
-							</div>
-						</div>
-						<div class="_es1du _rgrbt">
-							<section class="_tfkbw _d39wz">
-								<div class="_iuf51 _oajsw">
-									<span class="_tf9x3">좋아요 <span>57</span>개</span>
-								</div>
-								<a class="_rmo1e" href="#">
-									<time class="_379kp" datetime="2016-08-29T16:26:48.000Z" title="2016년 8월 30일">1주</time>
-								</a>
-							</section>
-							<ul class="_mo9iw _123ym">
-								<li class="_nk46a">
-									<h1>
-										<a class="_4zhc5 notranslate _iqaka" title="selimee_e" href="#">selimee_e</a>
-										<span>
-										기다림이 즐거워🙄💕
-										<br>
-										케이크 먹고싶다는 한마디에 뚝!딱!
-										<br>
-										<a href="#">#케이크</a>
-										</span>
-									</h1>
-								</li>
-								<li class="_nk46a">
-									<h1>
-										<a class="_4zhc5 notranslate _iqaka" title="yumyumiku2" href="#">yumyumiku2</a>
-										<span>
-										친하게 지내도 될까요^^?? 인친해요~😃
-										</span>
-									</h1>
-								</li>
-							</ul>
-							<section class="_jveic _rhgel">
-								<a class="_ebwb5 _1tv0k" href="#" role="button" aria-disabled="false">
-									<span class="_soakw coreSpriteHeartOpen">좋아요</span>
-								</a>
-								<form class="_k3t69">
-									<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment…" placeholder="Add a comment…" value>
-								</form>
-								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션 더 보기</button>
-							</section>
-						</div>			
-					</article>
-				</div>
-			</div>
-			<button class="_3eajp">닫기</button>
-						
-		</div>
-	</div>
-	
-</div><!-- 모달 -->
-
-  
-<script type="text/javascript">
-
-/* var $layerPopupObj = $('#myModa4');
-var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
-var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
-$layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
-$('body').css('position','relative').append($layerPopupObj); */
-
-$(function(){
-    $('#popbutton').click(function(){
-        $('#myModal3').modal();
-    })
-    
-});
-
-$(function(){
-    $('#popbutton2').click(function(){
-        $('#myModal4').modal();
-    })
-    
-});
-
-$(function(){
-    $('#pImage_12').click(function(){
-        $('#myModal5').modal();
-    })
-    
-});
-
-$(document).ready(function(){
-	$('._quk42').click(function(){
-		 /* alert(this.className); */
-		$('#myModal5').modal('hide');
-	});
-	
-	$('._3eajp').click(function(){
-		
-		$('#myModal5').modal('hide');
-	});
-});
-
-$(document).ready(function(){
-	$('._quk42').click(function(){
-		 /* alert(this.className); */
-		$('#myModal').modal('hide');
-	});
-	
-	$('._quk42').click(function(){
-		 /* alert(this.className); */
-		$('#myModal2').modal('hide');
-	});
-	
-	$('._quk42').click(function(){
-		 /* alert(this.className); */
-		$('#myModal3').modal('hide');
-	});
-	
-	$('._quk42').click(function(){
-		 /* alert(this.className); */
-		$('#myModal4').modal('hide');
-	});
-	
-	
-	/* $('._3eajp').click(function(){
-		
-		$('#myModal').modal('hide');
-	}); */
-});
-
-
-
-
-/* function wrapWindowByMask(){
-    //화면의 높이와 너비를 구한다.
-    var maskHeight = $(document).height();  
-    var maskWidth = $(window).width();  
-
-    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-    $('#mask').css({'width':maskWidth,'height':maskHeight});  
-
-    //애니메이션 효과
-    $('#mask').fadeIn(1000);      
-    $('#mask').fadeTo("slow",0.8);    
-}	
-	
-$(document).ready(function(){	
-	//닫기 버튼을 눌렀을 때
-	$('.window .close').click(function (e) {  
-	    //링크 기본동작은 작동하지 않도록 한다.
-	    e.preventDefault();  
-	    $('#mask, .window').hide();  
-	});       
-	
-	//검은 막을 눌렀을 때
-	$('#mask').click(function () {  
-	    $(this).hide();  
-	    $('.window').hide();  
-	});
-}); */
-
-
-</script>
-  
-  
+  <script>
+  $(document).ready(function(){
+		$('._quk42').click(function(){
+			 /* alert(this.className); */
+			$('#myModal').modal('hide');
+		});
+  });
+  </script>

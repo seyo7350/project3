@@ -39,6 +39,10 @@
 			FROM INSTA_MEMBER
 				WHERE PWD=#{pwd}			
 	</select>
+	
+	<update id="PWDChange" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_MEMBER SET PWD= #{pwd} where SEQ= #{seq}
+	</update> 
 	  	
   </mapper>
   

@@ -44,5 +44,11 @@ public class MemberServiceImpl implements MemberService {
 	public int loginPwd(MemberDTO memberDTO) throws Exception {
 		return memberDAO.alreadyMemberId(memberDTO) + memberDAO.loginPwd(memberDTO);
 	}
+	
+	@Override
+	public boolean PWDChange(MemberDTO memberDTO) throws Exception {
+		memberDAO.PWDChange(memberDTO);
+		return true;
+	}
 
 }
