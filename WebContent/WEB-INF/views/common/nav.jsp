@@ -23,7 +23,7 @@
 							<a class="_im3et _soakw _vbtk2 coreSpriteDesktopNavActivity" href="#">활동 피드</a>
 						</div>
 						<div class="_7smet">
-							<a class="_soakw _vbtk2 coreSpriteDesktopNavProfile" href="profile.do">프로필</a>
+							<a class="_soakw _vbtk2 coreSpriteDesktopNavProfile" href="profile.do?id="+id>프로필</a>
 						</div>
 					</div>
 				</div>

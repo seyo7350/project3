@@ -90,8 +90,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="newspeed.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeed(Model model){
-		System.out.println("뉴스피드");
+	public String newspeed(Model model, String id){
+		logger.info("newspeed " + new Date());
+		System.out.println(id);
 		return "newspeed.tiles";
 	}
 	

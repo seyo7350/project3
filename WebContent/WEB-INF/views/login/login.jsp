@@ -78,7 +78,7 @@ $('#btnLogin').click(function(){
 				data:"id="+id+"&pwd="+pwd,
 				success: function(check){
 					if(check == true){
-						location.href='newspeed.do';
+						location.href='newspeed.do?id='+id;
 					}else{
 						location.href='index.do';
 					}
