@@ -121,4 +121,23 @@ public class MemberController {
 		return "pwdchange.tiles";
 	}
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
+
+			
+		boolean isS = memberService.PWDChange(memberDTO);
+		
+		if(isS){
+			
+			return "redirect:/profile.do";
+ 
+		}else{
+		   return "pwdchange.tiles";
+		}
+	}
+
+
+>>>>>>> fc293eda9948fdd56e410ae23b2304faf3efed02
 }
