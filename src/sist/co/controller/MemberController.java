@@ -100,16 +100,8 @@ public class MemberController {
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String profile(Model model){
 		return "profile.tiles";
-<<<<<<< HEAD
-	}	
-=======
 	}
-	
-	@RequestMapping(value="write.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String write(Model model){
-		return "write.tiles";
-	}
-	
+		
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) throws Exception{
 		logger.info("logout  " + new Date());
@@ -127,6 +119,5 @@ public class MemberController {
 	public String pwdchange(Model model){
 		return "pwdchange.tiles";
 	}
->>>>>>> 79f773fd5be2b6c804521906f3a775f1e61e0c10
 
 }
