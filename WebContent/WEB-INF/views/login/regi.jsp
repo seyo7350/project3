@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
 $('._fcn8k').click(function(){
-	$.ajax({
+	/* $.ajax({
 		type:"POST",
 		url:"./login.do",
 		async:true,
@@ -71,7 +71,8 @@ $('._fcn8k').click(function(){
 			alert(data);
 			$('._60k3m').html(data);
 		}
-	});
+	}); */
+	location.href='index.do';
 }); 
 
 $('#btnJoin').click(function(){
@@ -108,27 +109,21 @@ function goJoin(email, fullname, username, password){
 		async:true,
 		data:"email="+email+"&fullname="+fullname+"&username="+username+"&password="+password,
 		success: function(ok){
-			alert(ok);
+			
 			if(ok==true){
 				alert('회원 가입 성공');
-				/* location.href='login.do'; */
+				location.href='index.do';
 			}else{
-				alert('회원 가입 실패');
-				/* $('#_email').val("");
+				alert('이미 존재하는 아이디 입니다.');
+				$('#_email').val("");
 				$('#_fullName').val("");
 				$('#_username').val("");
-				$('#_password').val(""); */
+				$('#_password').val("");
 			}
 		}
 	});
 	
 };
-
-
-
-
-
-
 
 
 </script>

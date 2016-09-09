@@ -80,14 +80,7 @@ $('#btnLogin').click(function(){
 					if(check == true){
 						location.href='newspeed.do';
 					}else{
-						$.ajax({
-							type:"POST",
-							url:"login.do",
-							async:true,
-							success: function(data) {
-								$('._60k3m').html(data);
-							}
-						});
+						location.href='index.do';
 					}
 				}
 			});
