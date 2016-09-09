@@ -11,9 +11,10 @@ package sist.co.model;
 		PROFILE_IMAGE VARCHAR2(500)
 	);
 
-	CREATE SEQUENCE SEQ_INSTAMEMBER;*/
+	CREATE SEQUENCE SEQ_INSTA_MEMBER;*/
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MemberDTO implements Serializable{
 
@@ -22,7 +23,7 @@ public class MemberDTO implements Serializable{
 	private String pwd;
 	private String email;
 	private String name;
-	private String regi_date;
+	private Date regi_date;
 	private int open;
 	private String profile_image;
 	
@@ -30,7 +31,7 @@ public class MemberDTO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberDTO(int seq, String id, String pwd, String email, String name, String regi_date, int open,
+	public MemberDTO(int seq, String id, String pwd, String email, String name, Date regi_date, int open,
 			String profile_image) {
 		super();
 		this.seq = seq;
@@ -83,11 +84,11 @@ public class MemberDTO implements Serializable{
 		this.name = name;
 	}
 
-	public String getRegi_date() {
+	public Date getRegi_date() {
 		return regi_date;
 	}
 
-	public void setRegi_date(String regi_date) {
+	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
 	}
 
