@@ -40,17 +40,23 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(HttpServletRequest request, Model model, String id, String pwd) throws Exception {
+	public boolean loginAf(HttpServletRequest request, Model model, String id, String pwd, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
+		
+		MemberDTO login = null;
+		
 		
 		//회원 조회
 		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
 		memberList = memberService.getMemberList();
 		
 		for(MemberDTO list : memberList){
-			if(list.getId().equals(id) && list.getPwd().equals(pwd))
-				/*request.setAttribute(arg0, arg1);*/
+			if(list.getId().equals(id) && list.getPwd().equals(pwd)) {
+				login = memberService.login(memberDTO);
+				request.getSession().setAttribute("login", login);
+				
 				return true;
+			}
 		}
 		
 		return false;
