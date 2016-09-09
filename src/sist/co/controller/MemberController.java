@@ -40,7 +40,7 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(HttpServletRequest request, Model model, String id, String pwd, MemberDTO memberDTO) throws Exception {
+	public boolean loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
 		
 		MemberDTO login = null;
@@ -51,7 +51,7 @@ public class MemberController {
 		memberList = memberService.getMemberList();
 		
 		for(MemberDTO list : memberList){
-			if(list.getId().equals(id) && list.getPwd().equals(pwd)) {
+			if(list.getId().equals(memberDTO.getId()) && list.getPwd().equals(memberDTO.getPwd())) {
 				login = memberService.login(memberDTO);
 				request.getSession().setAttribute("login", login);
 				
