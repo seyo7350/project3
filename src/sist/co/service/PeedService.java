@@ -1,6 +1,5 @@
-/*package sist.co.service;
+package sist.co.service;
 
 public interface PeedService {
 
 }
-*/

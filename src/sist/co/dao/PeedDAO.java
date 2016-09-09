@@ -1,6 +1,5 @@
-/*package sist.co.dao;
+package sist.co.dao;
 
 public interface PeedDAO {
 
 }
-*/

@@ -37,7 +37,7 @@
 							<a class="_56pjv" href="http://www.naver.com" target="_blank">www.naver.com</a>
 						</div>
 						<div class="_hcch2">
-							<a class=" _t2uoe" href="edit.jsp">
+							<a class=" _t2uoe" href="edit.do">
 							  <span	class="_5ji7m _e616g">
 							    <button	class="_aj7mu _je2uz _kenyh _o0442">프로필 편집</button></span></a>
 						</div>
@@ -140,7 +140,7 @@
       <div class="modal-content">
         <div class="modal-body">
           <ul class="_pdba0" role="menu">
-            <li class="_bt6iq"><button class="_4y3e3">로그아웃</button></li>
+            <li class="_bt6iq"><a href="logout.do"><button class="_4y3e3">로그아웃</button></a></li>
             <li class="_bt6iq"><button class="_4y3e3" data-dismiss="modal" style="border: none;">닫기</button></li></ul>
         </div>
       </div>

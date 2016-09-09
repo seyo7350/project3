@@ -12,7 +12,7 @@
 	<section class="_jx516">
 		<div class="_qj7yb">
 			<div>
-				<article class="_8ab8k _j5hrx _pieko">
+				<form class="_8ab8k _j5hrx _pieko">
 					<header class="_s6yvg">
 						<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
 							<img class="_a012k" src="주소">
@@ -85,7 +85,7 @@
 								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button>
 							</section>
 						</div>
-				</article>
+				</form>
 				
 			</div>
 		</div>
