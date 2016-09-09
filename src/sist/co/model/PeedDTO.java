@@ -1,5 +1,7 @@
 package sist.co.model;
 
+import java.io.Serializable;
+
 /*
 CREATE TABLE INSTA_PEED(
 	SEQ NUMBER(8) PRIMARY KEY,
@@ -19,7 +21,7 @@ CREATE SEQUENCE SEQ_INSTA_PEED;
 
 import java.util.Date;
 
-public class PeedDTO {
+public class PeedDTO implements Serializable{
 	
 	private int seq;
 	private int member_seq;
