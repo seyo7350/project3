@@ -12,20 +12,20 @@
 					<form class="_3bqd5" method="POST">
 						<h2 class="_9qbcz">친구들의 사진과 동영상을 보려면 가입하세요.</h2>
 						<div class="_djahe _i31zu">
-							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="이메일" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="email" placeholder="이메일">
+							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="이메일" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="email" id="_email" placeholder="이메일">
 						</div>
 						<div class="_djahe _i31zu">
-							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="성명" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="fullName" placeholder="성명">
+							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="성명" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="fullName" id="_fullName" placeholder="성명">
 						</div>
 						<div class="_djahe _i31zu">
-							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="사용자 이름" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="username" placeholder="사용자 이름">
+							<input type="text" class="_kp5f7 _qy55y" aria-describedby aria-label="사용자 이름" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="username" id="_username" placeholder="사용자 이름">
 						</div>
 						<div class="_djahe _i31zu">
-							<input type="password" class="_kp5f7 _qy55y" aria-describedby aria-label="비밀번호" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="password" placeholder="비밀번호">
+							<input type="password" class="_kp5f7 _qy55y" aria-describedby aria-label="비밀번호" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="password" id="_password" placeholder="비밀번호">
 						</div>
 						<div>
 							<span class="_1on88 _e616g">
-								<button class="_aj7mu _taytv _ki5uo _o0442">
+								<button type="button" class="_aj7mu _taytv _ki5uo _o0442" id="btnJoin">
 									가입
 								</button>
 							</span>				
@@ -68,8 +68,67 @@ $('._fcn8k').click(function(){
 		url:"./login.do",
 		async:true,
 		success: function(data) {
+			alert(data);
 			$('._60k3m').html(data);
 		}
 	});
+}); 
+
+$('#btnJoin').click(function(){
+	if($('#_email').val() == ""){
+		alert('이메일을 정확히 입력해주세요.');
+		$('#_email').focus();
+	}else if($('#_fullName').val() == ""){
+		alert('이름을 정확히 입력해주세요.');
+		$('#_fullName').focus();
+	}else if($('#_username').val() == ""){
+		alert('사용자 이름을 정확히 입력해주세요.');
+		$('#_username').focus();
+	}else if($('#_password').val() == ""){
+		alert('비밀번호를 정확히 입력해주세요.');
+		$('#_password').focus();
+	}else{
+	
+	
+		var email = $('#_email').val();
+		var fullname = $('#_fullName').val();
+		var username = $('#_username').val();
+		var password = $('#_password').val();
+		
+		goJoin(email, fullname, username, password);
+		
+	}
+	
 });
+
+function goJoin(email, fullname, username, password){
+	$.ajax({
+		type:"POST",
+		url:"regiAf.do",
+		async:true,
+		data:"email="+email+"&fullname="+fullname+"&username="+username+"&password="+password,
+		success: function(ok){
+			alert(ok);
+			if(ok==true){
+				alert('회원 가입 성공');
+				/* location.href='login.do'; */
+			}else{
+				alert('회원 가입 실패');
+				/* $('#_email').val("");
+				$('#_fullName').val("");
+				$('#_username').val("");
+				$('#_password').val(""); */
+			}
+		}
+	});
+	
+};
+
+
+
+
+
+
+
+
 </script>
