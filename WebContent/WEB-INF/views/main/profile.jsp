@@ -27,13 +27,13 @@
 					</div>
 					<div class="_de9bg">
 						<div class="_8mm5v">
-							<h1 class="_i572c notranslate" title="leehy860930">${login.id }</h1>&nbsp;&nbsp;&nbsp;
+							<h1 class="_i572c notranslate" title="leehy860930">leehy860930</h1>
 							<div class="_38y5t">
 								<button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
 							</div>
 						</div>
 						<div class="_bugdy">
-							<h2 class="_79dar">${login.name }</h2>&nbsp;&nbsp;&nbsp;
+							<h2 class="_79dar">leehy0930</h2>
 							<a class="_56pjv" href="http://www.naver.com" target="_blank">www.naver.com</a>
 						</div>
 						<div class="_hcch2">

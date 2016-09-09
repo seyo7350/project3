@@ -41,22 +41,27 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) {
+	public CheckMember loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
-		System.out.println(memberDTO.toString());
+
+		int count = -1;
+		MemberDTO login = null;
 		
-		try {
-			if(memberService.memberInfo(memberDTO)) {
-				MemberDTO login = memberService.login(memberDTO);
-				request.getSession().setAttribute("login", login);
-				
-				return true;
-			}
-		} catch (Exception e) {
-			return false;
+		login = memberService.login(memberDTO);
+		
+		count = memberService.loginPwd(memberDTO);
+		
+		CheckMember checkMember = new CheckMember();
+		
+		if(count > 1){
+			checkMember.setMessage("로그인 성공");
+			request.getSession().setAttribute("login", login);
+		}else{
+			checkMember.setMessage("로그인 실패");
 		}
 		
-		return false;
+		return checkMember;
+		
 	}
 	
 	@RequestMapping(value="regi.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -74,11 +79,9 @@ public class MemberController {
 		
 		count = memberService.alreadyCheck(memberDTO);
 		
-		System.out.println(count+"@#$@#$@#$@#$");
-		
 		CheckMember checkMember = new CheckMember();
 		
-		if(count > 0){
+		if(count > 1){
 			checkMember.setMessage("회원가입 실패");
 		}else{
 			checkMember.setMessage("회원가입 성공");
@@ -117,5 +120,24 @@ public class MemberController {
 	public String pwdchange(Model model){
 		return "pwdchange.tiles";
 	}
+	
+<<<<<<< HEAD
+=======
+	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
 
+			
+		boolean isS = memberService.PWDChange(memberDTO);
+		
+		if(isS){
+			
+			return "redirect:/profile.do";
+ 
+		}else{
+		   return "pwdchange.tiles";
+		}
+	}
+
+
+>>>>>>> fc293eda9948fdd56e410ae23b2304faf3efed02
 }
