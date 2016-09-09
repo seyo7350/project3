@@ -33,7 +33,13 @@
 			FROM INSTA_MEMBER
 				WHERE EMAIL=#{email}			
 	</select>
-  	
+	
+	<select id="loginPwd" parameterType="sist.co.model.MemberDTO" resultType="int">
+		SELECT NVL(COUNT(*), 0)
+			FROM INSTA_MEMBER
+				WHERE PWD=#{pwd}			
+	</select>
+	  	
   </mapper>
   
   

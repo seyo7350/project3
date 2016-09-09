@@ -37,14 +37,6 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public boolean memberInfo(MemberDTO memberDTO) throws Exception {
-		if((boolean) sqlSession.selectOne(ns+"memberInfo", memberDTO)){
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public int alreadyMemberId(MemberDTO memberDTO) throws Exception {
 		
 		return sqlSession.selectOne(ns+"getId", memberDTO);
@@ -54,6 +46,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public int alreadyMemberEmail(MemberDTO memberDTO) throws Exception {
 		
 		return sqlSession.selectOne(ns+"getEmail", memberDTO);
+	}
+
+	@Override
+	public int loginPwd(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(ns+"loginPwd", memberDTO);
 	}
 
 	

@@ -41,22 +41,23 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) {
+	public CheckMember loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
-		System.out.println(memberDTO.toString());
+
+		int count = -1;
 		
-		try {
-			if(memberService.memberInfo(memberDTO)) {
-				MemberDTO login = memberService.login(memberDTO);
-				request.getSession().setAttribute("login", login);
-				
-				return true;
-			}
-		} catch (Exception e) {
-			return false;
+		count = memberService.loginPwd(memberDTO);
+		
+		CheckMember checkMember = new CheckMember();
+		
+		if(count > 0){
+			checkMember.setMessage("로그인 성공");
+		}else{
+			checkMember.setMessage("로그인 실패");
 		}
 		
-		return false;
+		return checkMember;
+		
 	}
 	
 	@RequestMapping(value="regi.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -73,8 +74,6 @@ public class MemberController {
 		int count = -1;
 		
 		count = memberService.alreadyCheck(memberDTO);
-		
-		System.out.println(count+"@#$@#$@#$@#$");
 		
 		CheckMember checkMember = new CheckMember();
 		

@@ -77,7 +77,8 @@ $('#btnLogin').click(function(){
 				async:true,
 				data:"id="+id+"&pwd="+pwd,
 				success: function(check){
-					if(check == true){
+					if(check.message == '로그인 성공'){
+						alert('로그인 성공');
 						location.href='newspeed.do';
 					}else{
 						alert('로그인 실패');
