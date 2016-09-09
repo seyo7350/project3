@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sist.co.model.CheckMember;
 import sist.co.model.MemberDTO;
 import sist.co.service.MemberService;
 
@@ -40,23 +41,19 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception {
+	public boolean loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) {
 		logger.info("loginAf " + new Date());
+		System.out.println(memberDTO.toString());
 		
-		MemberDTO login = null;
-		
-		
-		//회원 조회
-		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
-		memberList = memberService.getMemberList();
-		
-		for(MemberDTO list : memberList){
-			if(list.getId().equals(memberDTO.getId()) && list.getPwd().equals(memberDTO.getPwd())) {
-				login = memberService.login(memberDTO);
+		try {
+			if(memberService.memberInfo(memberDTO)) {
+				MemberDTO login = memberService.login(memberDTO);
 				request.getSession().setAttribute("login", login);
 				
 				return true;
 			}
+		} catch (Exception e) {
+			return false;
 		}
 		
 		return false;
@@ -70,32 +67,25 @@ public class MemberController {
 	
 	@RequestMapping(value="regiAf.do", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean regiAf(Model model, String email, String fullname, String username, String password) throws Exception{
+	public CheckMember regiAf(Model model, MemberDTO memberDTO) throws Exception {
 		logger.info("regiAf " + new Date());
 		
-		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
-		memberList = memberService.getMemberList();
+		int count = -1;
 		
-		for(MemberDTO list : memberList){
-			if(list.getEmail().equals(email) && list.getId().equals(username)){
-				return false;
-			}
-		}
+		count = memberService.alreadyCheck(memberDTO);
 		
-		MemberDTO memberDTO = new MemberDTO();
+		System.out.println(count+"@#$@#$@#$@#$");
 		
-		memberDTO.setEmail(email);
-		memberDTO.setName(fullname);
-		memberDTO.setId(username);
-		memberDTO.setPwd(password);
+		CheckMember checkMember = new CheckMember();
 		
-		try {
+		if(count > 0){
+			checkMember.setMessage("회원가입 실패");
+		}else{
+			checkMember.setMessage("회원가입 성공");
 			memberService.addMember(memberDTO);
-		} catch (Exception e) {
-			return false;
 		}
 		
-		return true;
+		return checkMember;
 	}
 	
 	@RequestMapping(value="newspeed.do", method={RequestMethod.GET, RequestMethod.POST})
