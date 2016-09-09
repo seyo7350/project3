@@ -107,14 +107,14 @@ function goJoin(email, fullname, username, password){
 		type:"POST",
 		url:"regiAf.do",
 		async:true,
-		data:"email="+email+"&fullname="+fullname+"&username="+username+"&password="+password,
+		data:"email="+email+"&name="+fullname+"&id="+username+"&pwd="+password,
 		success: function(ok){
-			
-			if(ok==true){
+			alert(ok.message);
+			if(ok.message=='회원가입 성공'){
 				alert('회원 가입 성공');
 				location.href='index.do';
 			}else{
-				alert('이미 존재하는 아이디 입니다.');
+				alert('회원가입 실패');
 				$('#_email').val("");
 				$('#_fullName').val("");
 				$('#_username').val("");

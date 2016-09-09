@@ -12,18 +12,19 @@
 	<section class="_jx516">
 		<div class="_qj7yb">
 			<div>
-				<form class="_8ab8k _j5hrx _pieko">
+				<form class="_8ab8k _j5hrx _pieko" id="_frmForm" method="post" enctype="multipart/form-data">
 					<header class="_s6yvg">
 						<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
 							<img class="_a012k" src="주소">
 						</a>
 						<div class="_f95g7">
-							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">아이디</a>
+							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${login.id}</a>
+							<%-- <input type="hidden" name="member_seq" value="${login.id}"> --%>
 							<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
 						</div>
 						<div class="filebox">				
-							<label for="ex_file">사진</label>
-							<input type="file" id="ex_file" onchange="previewImage(this,'previewId')">
+							<label for="ff">사진</label>
+							<input type="file" id="ff" name="fileload" onchange="previewImage(this,'previewId');">
 						</div>
 						<!-- <a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">
 								<time class="_379kp" datetime="날짜 .시간" title="날짜">몇시간전에 올렸는지</time>
@@ -41,49 +42,28 @@
 							</div>
 						</div><!-- 이미지 부분 끝 -->
 					</div>
-						<div class="_es1du _rgrbt">
-							<section class="_tfkbw _hpiil">
-								<div class="_iuf51  _oajsw">
-									<span>
-										<!-- react text: 3316 -->
-										좋아요
-										<!-- /react text -->
-										<span>몇</span>
-										<!-- reat-text : 3318 -->
-										개
-										<!-- /react-text -->
-									</span>
-								</div>
-							</section><!-- 좋아요 아이콘 부분 끝 -->
+						<div class="_es1du _rgrbt">							
 							<ul class="_mo9iw _pnraw">
 								<li class="_nk46a">
 									<h1>
-										<a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">게시물 쓴 사람 아이디</a>
+										<!-- <a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">게시물 쓴 사람 아이디</a> -->
 										<span title="수정됨">
-											<a href="인터넷에서 해시태그 검색 연결">#해시태그</a>
-											<!-- react-text : 3326 -->
-											content 내용
+											<textarea style="resize: none;" rows="5" cols="25" name="content" class="_7uiwk _qy55y" aria-label="Add a content..." placeholder="Add a content..."></textarea>
+											<!-- <button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button> -->
+											<button type="button" class="wbtn" id="_btnAdd">글 쓰기</button>
 										</span>
 									</h1>
-								</li><!-- content 내용 부분 끝 -->
-								<li class="_nk46a">
-									<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">댓글 쓴 아이디</a>
-									<span>
-									<!-- react text:3330 -->
-									"댓글 내용"
-									<!-- /react text -->
-									</span>
-								</li><!-- 댓글 부분 끝 -->
+								</li>
 							</ul>
-							<section class="_jveic _dsvln">
+							<!-- <section class="_jveic _dsvln">
 								<a class="_ebwb5 _1tv0k" href="#" role="button" aria-disbled="false">
 									<span class="_soakw coreSpriteHeartOpen">좋아요</span>
 								</a>
-								<form class="_k3t69">
+								<div class="_k3t69">
 									<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment..." placeholder="Add a comment..." value="">
-								</form>
+								</div>
 								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button>
-							</section>
+							</section> -->
 						</div>
 				</form>
 				
@@ -94,8 +74,7 @@
 
 <script type="text/javascript">
 
-	function previewImage(targetObj, previewId) {
-		clear();
+	function previewImage(targetObj, previewId) {		
 		var preview = document.getElementById(previewId); //div id   
 		var ua = window.navigator.userAgent;
 
@@ -170,7 +149,7 @@
 		}
 	}
 	
-	function clear(){
-		$('#previewId').html('');
-	}
+	$('#_btnAdd').click(function(){
+		$('#_frmForm').attr({'target':'_self', "action":"writeAf.do"}).submit();
+	});
 </script>

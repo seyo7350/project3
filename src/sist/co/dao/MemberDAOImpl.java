@@ -36,4 +36,26 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne(ns+"login", memberDTO);
 	}
 
+	@Override
+	public boolean memberInfo(MemberDTO memberDTO) throws Exception {
+		if((boolean) sqlSession.selectOne(ns+"memberInfo", memberDTO)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int alreadyMemberId(MemberDTO memberDTO) throws Exception {
+		
+		return sqlSession.selectOne(ns+"getId", memberDTO);
+	}
+
+	@Override
+	public int alreadyMemberEmail(MemberDTO memberDTO) throws Exception {
+		
+		return sqlSession.selectOne(ns+"getEmail", memberDTO);
+	}
+
+	
+
 }
