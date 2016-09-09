@@ -219,12 +219,21 @@
 }
 
 /* 사람찾기 */
+/* .coreSpriteDesktopNavExplore {
+    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+    background-repeat: no-repeat;
+    background-position: -659px -321px;    
+    height: 24px;
+    width: 24px;
+} */
+
+/* 사진기 */
 .coreSpriteDesktopNavExplore {
     background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
     background-repeat: no-repeat;
-    background-position: -659px -321px;
-    height: 24px;
-    width: 24px;
+    background-position: -505px -585px;
+    height: 25px;
+    width: 25px;
 }
 
 @media not all, (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi){

@@ -27,4 +27,10 @@
 		<put-attribute name="main" value="/WEB-INF/views/main/profile.jsp"/>
 	</definition>
 	
+	<!-- write -->
+	<definition name="write.tiles" extends="newspeed.tiles">
+	    <put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/main/write.jsp"/>
+	</definition>
+	
 </tiles-definitions>

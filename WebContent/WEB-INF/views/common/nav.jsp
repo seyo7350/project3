@@ -17,7 +17,7 @@
 					</div>
 					<div class="_pq5am">
 						<div class="_7smet" style="margin-right: 30px;">
-							<a class="_soakw _vbtk2 coreSpriteDesktopNavExplore" href="#">사람 찾기</a>
+							<a class="_soakw _vbtk2 coreSpriteDesktopNavExplore" href="write.do">새 피드</a>
 						</div>
 						<div class="_7smet" style="margin-right: 30px;">
 							<a class="_im3et _soakw _vbtk2 coreSpriteDesktopNavActivity" href="#">활동 피드</a>
