@@ -6,9 +6,9 @@ package sist.co.model;
 		PWD VARCHAR2(50) NOT NULL,
 		EMAIL VARCHAR2(50) NOT NULL,
 		NAME VARCHAR2(50) NOT NULL,
-		REGIDATE DATE NOT NULL,
+		REGI_DATE DATE NOT NULL,
 		OPEN NUMBER(2),
-		PROFILEIMAGE VARCHAR2(500)
+		PROFILE_IMAGE VARCHAR2(500)
 	);
 
 	CREATE SEQUENCE SEQ_INSTAMEMBER;*/
@@ -22,33 +22,25 @@ public class MemberDTO implements Serializable{
 	private String pwd;
 	private String email;
 	private String name;
-	private String regidate;
+	private String regi_date;
 	private int open;
-	private String profileImage;
+	private String profile_image;
 	
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberDTO(int seq, String id, String pwd, String email, String name, String regidate, int open,
-			String profileImage) {
+	public MemberDTO(int seq, String id, String pwd, String email, String name, String regi_date, int open,
+			String profile_image) {
 		super();
 		this.seq = seq;
 		this.id = id;
 		this.pwd = pwd;
 		this.email = email;
 		this.name = name;
-		this.regidate = regidate;
+		this.regi_date = regi_date;
 		this.open = open;
-		this.profileImage = profileImage;
-	}
-
-	public MemberDTO(String id, String pwd, String email, String name) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.email = email;
-		this.name = name;
+		this.profile_image = profile_image;
 	}
 
 	public int getSeq() {
@@ -91,12 +83,12 @@ public class MemberDTO implements Serializable{
 		this.name = name;
 	}
 
-	public String getRegidate() {
-		return regidate;
+	public String getRegi_date() {
+		return regi_date;
 	}
 
-	public void setRegidate(String regidate) {
-		this.regidate = regidate;
+	public void setRegi_date(String regi_date) {
+		this.regi_date = regi_date;
 	}
 
 	public int getOpen() {
@@ -107,19 +99,18 @@ public class MemberDTO implements Serializable{
 		this.open = open;
 	}
 
-	public String getProfileImage() {
-		return profileImage;
+	public String getProfile_image() {
+		return profile_image;
 	}
 
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberDTO [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name
-				+ ", regidate=" + regidate + ", open=" + open + ", profileImage=" + profileImage + "]";
+				+ ", regi_date=" + regi_date + ", open=" + open + ", profile_image=" + profile_image + "]";
 	}
-	
 	
 }

@@ -61,8 +61,17 @@ public class MemberController {
 	
 	@RequestMapping(value="regiAf.do", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean regiAf(Model model, String email, String fullname, String username, String password){
+	public boolean regiAf(Model model, String email, String fullname, String username, String password) throws Exception{
 		logger.info("regiAf " + new Date());
+		
+		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
+		memberList = memberService.getMemberList();
+		
+		for(MemberDTO list : memberList){
+			if(list.getEmail().equals(email) && list.getId().equals(username)){
+				return false;
+			}
+		}
 		
 		MemberDTO memberDTO = new MemberDTO();
 		
@@ -76,7 +85,6 @@ public class MemberController {
 		} catch (Exception e) {
 			return false;
 		}
-		
 		
 		return true;
 	}

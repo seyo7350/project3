@@ -6,8 +6,13 @@
   <mapper namespace="member">
   	
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
+<<<<<<< HEAD
   		INSERT INTO INSTAMEMBER(SEQ, ID, PWD, EMAIL, NAME, REGIDATE, OPEN, PROFILEIMAGE)
   			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 0)
+=======
+  		INSERT INTO INSTAMEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE)
+  			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 'null')
+>>>>>>> e35361caca1850c2a47aee3707f4ff3f57544590
   	
   	</insert>
   	

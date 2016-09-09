@@ -44,14 +44,14 @@
 					
 				
 				<ul class=" _i305n">
-					<li class=" _7gq8o"><span class="_s53mj _13vpi">
+					<li class=" _7gq8o"><a class="_s53mj _13vpi">
 							게시물 
 							<span class="_bkw5z _kjym7">1</span>개
-					</span></li>
-					<li class=" _7gq8o"><span class="_s53mj _13vpi" id="popbutton">
+					</a></li>
+					<li class=" _7gq8o"><a class="_s53mj _13vpi" id="popbutton">
 							팔로워
 							<span class="_bkw5z _kjym7" title="0">0</span>명
-					</span></li>
+					</a></li>
 					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
 							팔로우
 							<span class="_bkw5z _kjym7">6</span>명
