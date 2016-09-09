@@ -28,11 +28,6 @@ public class PeedController {
 	@Autowired
 	private PeedService peedService;
 	
-	@RequestMapping(value="article.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String article(Model model){
-		return "newspeedsrticle.tiles";
-	}
-	
 	@RequestMapping(value="write.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String write(Model model){
 		return "write.tiles";

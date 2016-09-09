@@ -121,6 +121,7 @@ public class MemberController {
 		return "pwdchange.tiles";
 	}
 
+
 	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
 
