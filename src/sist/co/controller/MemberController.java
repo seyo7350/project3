@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class MemberController {
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public boolean loginAf(Model model, String id, String pwd) throws Exception {
+	public boolean loginAf(HttpServletRequest request, Model model, String id, String pwd) throws Exception {
 		logger.info("loginAf " + new Date());
 		
 		//회원 조회
@@ -47,6 +49,7 @@ public class MemberController {
 		
 		for(MemberDTO list : memberList){
 			if(list.getId().equals(id) && list.getPwd().equals(pwd))
+				/*request.setAttribute(arg0, arg1);*/
 				return true;
 		}
 		
@@ -92,7 +95,7 @@ public class MemberController {
 	@RequestMapping(value="newspeed.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String newspeed(Model model, String id){
 		logger.info("newspeed " + new Date());
-		System.out.println(id);
+		model.addAttribute("id", id);
 		return "newspeed.tiles";
 	}
 	

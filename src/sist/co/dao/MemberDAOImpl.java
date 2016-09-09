@@ -30,4 +30,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return memberList;
 	}
 
+	@Override
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		
+		return sqlSession.selectOne(ns+"login", memberDTO);
+	}
+
 }

@@ -16,6 +16,10 @@
   	
   	</select>
   
-  
+	<select id="login" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+		SELECT * 
+			FROM INSTA_MEMBER
+				WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>  
   
   </mapper>

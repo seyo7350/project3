@@ -26,6 +26,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.getMemberList();
 		
 	}
+
+	@Override
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		
+		return memberDAO.login(memberDTO);
+	}
 	
 	
 	
