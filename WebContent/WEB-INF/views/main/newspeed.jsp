@@ -13,7 +13,7 @@
 							<img class="_a012k" src="주소">
 						</a>
 						<div class="_f95g7">
-							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">아이디</a>
+							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${login.id }</a>
 							<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
 						</div>
 						<a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">

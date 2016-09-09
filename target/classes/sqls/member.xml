@@ -7,15 +7,23 @@
   	
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
   		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE)
+<<<<<<< HEAD
   			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 'null')
+=======
+  			VALUES(SEQ_INSTA_MEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 'null')
+>>>>>>> 32afb9aa3af294739ae63c4e4495066025d95486
   	
   	</insert>
   	
   	<select id="getMemberList" resultType="sist.co.model.MemberDTO">
-  		SELECT * FROM INSTAMEMBER
+  		SELECT * FROM INSTA_MEMBER
   	
   	</select>
   
-  
+	<select id="login" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+		SELECT * 
+			FROM INSTA_MEMBER
+				WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>  
   
   </mapper>

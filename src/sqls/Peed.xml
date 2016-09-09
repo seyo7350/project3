@@ -5,6 +5,9 @@
  
 <mapper namespace="Peed">
 	
-	
+	<select id="getPeedList" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
+		SELECT SEQ, MEMBER_SEQ, IMAGE, LIKE, REGI_DATE, CONTENT
+		FROM INSTA_PEED
+	</select>
 	
 </mapper>
