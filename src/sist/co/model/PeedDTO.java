@@ -1,4 +1,5 @@
 package sist.co.model;
+
 /*
 CREATE TABLE INSTA_PEED(
 	SEQ NUMBER(8) PRIMARY KEY,
@@ -11,6 +12,7 @@ CREATE TABLE INSTA_PEED(
 
 CREATE SEQUENCE SEQ_INSTA_PEED;
 */
+
 import java.util.Date;
 
 public class PeedDTO {
