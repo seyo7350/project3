@@ -355,17 +355,26 @@
 <script  type="text/javascript">
 $(window).scroll(function () {
 	
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            alert("bottom");
-    }
+    /* if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            alert("bottom");       
+    } */
     
-});
 
-	/* var scrollerHeight = $(window).scrollTop() + $(window).height();
+	var scrollerHeight = $(window).scrollTop() + $(window).height();
 	var documentHeight = $(document).height();
 	
 	if(scrollHeight + 200) >= documentHeight{
 		for(var i=0; i<10; i++){
-		$('._8ab8k').append
-	} */ 
-</script>
+			 $(document).ready(function(){
+	             	$.ajax({
+	            		type:"POST",
+	            		url:"./newspeedarticle.do",
+	            		async:true,
+	            		success: function(data) {
+	            			$('._8ab8k').html(data);
+	            		}
+	            	});
+	            });
+		} 
+});
+</script> 
