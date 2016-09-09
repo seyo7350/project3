@@ -7,7 +7,12 @@
 	
 	<select id="getPeedList" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
 		SELECT SEQ, MEMBER_SEQ, IMAGE, LIKE, REGI_DATE, CONTENT
-		FROM INSTA_PEED
+		FROM (
+			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE ASC) as rnum, SEQ, MEMBER_SEQ, LIKE, REGI_DATE, CONTNET
+			FROM INSTA_PEED
+			WHERE MEMBER_SEQ=#{peed}
+		)A
+		WHERE rnum between #{start} AND #{end}
 	</select>
 	
 </mapper>
