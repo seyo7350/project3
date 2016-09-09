@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +100,33 @@ public class MemberController {
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String profile(Model model){
 		return "profile.tiles";
+<<<<<<< HEAD
 	}	
+=======
+	}
+	
+	@RequestMapping(value="write.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String write(Model model){
+		return "write.tiles";
+	}
+	
+	@RequestMapping(value="logout.do", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request, Model model) throws Exception{
+		logger.info("logout  " + new Date());
+		
+			request.getSession().invalidate();
+			return "index.tiles";
+	}
+	
+	@RequestMapping(value="edit.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String edit(Model model){
+		return "edit.tiles";
+	}
+	
+	@RequestMapping(value="pwdchange.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String pwdchange(Model model){
+		return "pwdchange.tiles";
+	}
+>>>>>>> 79f773fd5be2b6c804521906f3a775f1e61e0c10
 
 }
