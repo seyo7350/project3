@@ -1,19 +1,16 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:requestEncoding value="utf-8"/>
+<%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<link rel="stylesheet" type="text/css" href="css/profile.css">     
- <!--모달  -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 
 
 
 <!--실제내용 시작  -->
-	<span id="react-root"><section data-reactroot="" class="_8f735">
+
 			<main class="_6ltyr _rnpza" role="main">
 			<article class="_42elc">
 				<header class=" _o2h6b">
@@ -51,11 +48,11 @@
 							게시물 
 							<span class="_bkw5z _kjym7">1</span>개
 					</span></li>
-					<li class=" _7gq8o"><span class="_s53mj _13vpi">
+					<li class=" _7gq8o"><span class="_s53mj _13vpi" id="popbutton">
 							팔로워
 							<span class="_bkw5z _kjym7" title="0">0</span>명
 					</span></li>
-					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="/leehy860930/following/">
+					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
 							팔로우
 							<span class="_bkw5z _kjym7">6</span>명
 					</a></li>
@@ -67,7 +64,7 @@
 					<div class="_nljxa">
 						<div class="_myci9">
 						<!--그림1  -->
-							<a class="_8mlbc _vbtk2 _t5r8b"	href="/p/BJ_zpWyhOlg/?taken-by=leehy860930">
+							<a class="_8mlbc _vbtk2 _t5r8b"	href="#none" id="img1"> 
 							   <div class="_22yr2">
 									<div class="_jjzlb">
 										<img alt="고고" class="_icyx7" id="pImage_12"
@@ -91,8 +88,7 @@
 				</div>
 			</article>
 			</main>
-		</section>
-	</span>
+
 
 <!--실제내용 끝  -->
 
@@ -101,9 +97,21 @@
 
 
 <!-- Modal -->
-  <div class="modal modal-center" id="myModal" role="dialog">
+  			
+<div>
+  <div class="modal modal-center" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div data-reactroot class="_a1rcs _ea084">
+  	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
+			</div>
+		</div>
+	</div>
+	
     <div class="modal-dialog">
       <!-- Modal content-->
+      
       <div class="modal-content">
         <div class="modal-body">
           <ul class="_pdba0" role="menu">
@@ -114,10 +122,19 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   
 <!-- Modal2 -->
-  <div class="modal modal-center" id="myModal2" role="dialog">
+  <div class="modal modal-center" id="myModal2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div data-reactroot class="_a1rcs _ea084">
+  	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
+			</div>
+		</div>
+	</div>
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -128,5 +145,310 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
+  
+  
 
+	<!-- 버튼 -->
+	<!-- <button type="button" class="btn btn-primary btn-lg" id="popbutton">
+	  팔로우
+	</button> -->
+	
+	
+	
+	<!-- 모달 팝업3 -->
+	<div class="modal" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div data-reactroot class="_a1rcs _ea084">
+	
+		<div class="_quk42">
+			<div class="_7629j">
+				<div class="_hj98d">
+										
+				</div>
+			</div>
+		</div>
+		
+	  <div class="modal-dialog">
+	  	
+	     <div class="modal-content">
+	      <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="myModalLabel">팔로잉</h4>
+	      </div>
+	      <div class="modal-body">
+			<ul class="_539vh _4j13h">
+				<li class="_cx1ua">
+				<div class="_6jvgy">
+					<div class="_9tu8m">
+							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
+							<div class="_mmgca"> <!-- 아이디, 이름 -->
+								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
+								<div class="_2uju6">이름</div> <!-- 이름-->
+							</div>
+					
+						<div class="_72gdz">
+							<span class="_e616g">
+								<button type="button" class="btn btn-primary" style="background-color: green;">팔로잉</button>
+								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로잉</button> -->
+							</span>
+						</div>
+					</div>
+				</div> 
+				</li>
+			</ul>
+	      </div>
+	    </div>
+	  </div>
+	 </div>
+	</div>
+	
+	<!-- 모달 팝업4 -->
+	<div class="modal" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div data-reactroot class="_a1rcs _ea084">
+	
+	<div class="_quk42">
+		<div class="_7629j">
+			<div class="_hj98d">
+									
+			</div>
+		</div>
+	</div>
+		
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">팔로워</h4>
+	      </div>
+	      <div class="modal-body">
+			<ul class="_539vh _4j13h">
+				<li class="_cx1ua">
+				<div class="_6jvgy">
+					<div class="_9tu8m">
+							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
+							<div class="_mmgca"> <!-- 아이디, 이름 -->
+								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
+								<div class="_2uju6">이름</div> <!-- 이름-->
+							</div>
+					
+						<div class="_72gdz">
+							<span class="_e616g">
+								<button type="button" class="btn btn-primary">팔로우</button>
+								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로우</button> -->
+							</span>
+						</div>
+					</div>
+				</div> 
+				</li>
+			</ul>
+	      </div>
+	      
+	      <!-- <div class="modal-footer">
+	      </div> -->
+	    </div>
+	  </div>
+	</div>
+	</div>
+	
+	
+	<!-- modal5 -->
+	<div class="modal" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div data-reactroot class="_a1rcs _ea084">
+			<div class="_quk42">
+				<div class="_7629j">
+					<div class="_hj98d">
+											
+					</div>
+				</div>
+			</div>
+			<div class="_7629j">
+				<div class="_hj98d">
+					<a class="_qdy3e coreSpriteLeftPaginationArrow" href="javascript:alert('11');" role="button">이전</a>
+					<a class="_de018 coreSpriteRightPaginationArrow" href="#" role="button">다음</a>
+				</div>
+			</div>			
+			<div class="_g1ax7">
+				<div class="_n3cp9 _d20no">
+					<article class="_djxz1 _j5hrx">
+						<header class="_s6yvg">
+							<a class="_5lote _pss4f _vbtk2">
+								<img class="_a012k" src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12519560_1521410768167162_695266703_a.jpg">
+							</a>
+							<div class="_f95g7">
+								<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">anhwichan</a>
+								<a class="_kul9p _rnlnu" title="페넬로페" href="#">페넬로페</a>
+							</div>
+							<span class="_fbms8 _e616g">
+								<button class="_aj7mu _2hpcs _kenyh _o0442">
+									팔로우
+								</button>
+							</span>
+						</header>
+						<div>
+							<div class="_22yr2 _e0mru">
+								<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
+									<img alt="기다림이 즐거워🙄💕
+케이크 먹고싶다는 한마디에 뚝!딱! 
+항상 고맙지만 오늘은 이렇게 딱 표현해야지,
+잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
+								</div>
+								<div class="_ovg3g"></div>
+							</div>
+						</div>
+						<div class="_es1du _rgrbt">
+							<section class="_tfkbw _d39wz">
+								<div class="_iuf51 _oajsw">
+									<span class="_tf9x3">좋아요 <span>57</span>개</span>
+								</div>
+								<a class="_rmo1e" href="#">
+									<time class="_379kp" datetime="2016-08-29T16:26:48.000Z" title="2016년 8월 30일">1주</time>
+								</a>
+							</section>
+							<ul class="_mo9iw _123ym">
+								<li class="_nk46a">
+									<h1>
+										<a class="_4zhc5 notranslate _iqaka" title="selimee_e" href="#">selimee_e</a>
+										<span>
+										기다림이 즐거워🙄💕
+										<br>
+										케이크 먹고싶다는 한마디에 뚝!딱!
+										<br>
+										<a href="#">#케이크</a>
+										</span>
+									</h1>
+								</li>
+								<li class="_nk46a">
+									<h1>
+										<a class="_4zhc5 notranslate _iqaka" title="yumyumiku2" href="#">yumyumiku2</a>
+										<span>
+										친하게 지내도 될까요^^?? 인친해요~😃
+										</span>
+									</h1>
+								</li>
+							</ul>
+							<section class="_jveic _rhgel">
+								<a class="_ebwb5 _1tv0k" href="#" role="button" aria-disabled="false">
+									<span class="_soakw coreSpriteHeartOpen">좋아요</span>
+								</a>
+								<form class="_k3t69">
+									<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment…" placeholder="Add a comment…" value>
+								</form>
+								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션 더 보기</button>
+							</section>
+						</div>			
+					</article>
+				</div>
+			</div>
+			<button class="_3eajp">닫기</button>
+						
+		</div>
+	</div>
+	
+</div><!-- 모달 -->
+
+  
+<script type="text/javascript">
+
+/* var $layerPopupObj = $('#myModa4');
+var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
+var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
+$layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
+$('body').css('position','relative').append($layerPopupObj); */
+
+$(function(){
+    $('#popbutton').click(function(){
+        $('#myModal3').modal();
+    })
+    
+});
+
+$(function(){
+    $('#popbutton2').click(function(){
+        $('#myModal4').modal();
+    })
+    
+});
+
+$(function(){
+    $('#pImage_12').click(function(){
+        $('#myModal5').modal();
+    })
+    
+});
+
+$(document).ready(function(){
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal5').modal('hide');
+	});
+	
+	$('._3eajp').click(function(){
+		
+		$('#myModal5').modal('hide');
+	});
+});
+
+$(document).ready(function(){
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal2').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal3').modal('hide');
+	});
+	
+	$('._quk42').click(function(){
+		 /* alert(this.className); */
+		$('#myModal4').modal('hide');
+	});
+	
+	
+	/* $('._3eajp').click(function(){
+		
+		$('#myModal').modal('hide');
+	}); */
+});
+
+
+
+
+/* function wrapWindowByMask(){
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();  
+    var maskWidth = $(window).width();  
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({'width':maskWidth,'height':maskHeight});  
+
+    //애니메이션 효과
+    $('#mask').fadeIn(1000);      
+    $('#mask').fadeTo("slow",0.8);    
+}	
+	
+$(document).ready(function(){	
+	//닫기 버튼을 눌렀을 때
+	$('.window .close').click(function (e) {  
+	    //링크 기본동작은 작동하지 않도록 한다.
+	    e.preventDefault();  
+	    $('#mask, .window').hide();  
+	});       
+	
+	//검은 막을 눌렀을 때
+	$('#mask').click(function () {  
+	    $(this).hide();  
+	    $('.window').hide();  
+	});
+}); */
+
+
+</script>
+  
+  
