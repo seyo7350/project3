@@ -14544,3 +14544,8 @@ transform
 .modal-backdrop {
 	z-index: -1;
 }
+
+.modal-content {
+  position: relative; 
+  top:250px; 
+}
