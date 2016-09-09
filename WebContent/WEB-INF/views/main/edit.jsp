@@ -22,7 +22,7 @@
 						<input type="file" accept="image/jpeg" class="_loq3v">
 					</form>
 				</div>
-				<h1 class="_4s1oa">leehy860930</h1>
+				<h1 class="_4s1oa">${login.id }</h1>
 			</div>
 
 			<form class="_cmoxu">
@@ -31,26 +31,26 @@
 					<label for="pepName">이름</label></aside>
 					<div class="_lxlnj">
 						<input type="text" class="_cm95b _qy55y" aria-required="false"
-							id="pepName" value="leehy0930">
+							id="pepName" value="${login.name }">
 					</div>
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
 					<label for="pepUsername">사용자 이름</label></aside>
 					<div class="_lxlnj">
-						<input type="text" class="_cm95b _qy55y" aria-required="true" id="pepUsername" value="leehy860930">
+						<input type="text" class="_cm95b _qy55y" aria-required="true" id="pepUsername" value="${login.id }">
 					</div>
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label for="pepWebsite">웹사이트</label></aside>
+					<label for="pepWebsite">웹사이트(비활성화)</label></aside>
 					<div class="_lxlnj">
-						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepWebsite" value="http://www.naver.com">
+						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepWebsite" value="">
 					</div>
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label for="pepBio">소개</label></aside>
+					<label for="pepBio">웹사이트(비활성화)</label></aside>
 					<div class="_lxlnj">
 						<textarea class="_9pfjt" id="pepBio"></textarea>
 					</div>
@@ -68,19 +68,19 @@
 					<aside class="_891mt">
 					<label for="pepEmail">이메일</label></aside>
 					<div class="_lxlnj">
-						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepEmail" value="leehy0930@nate.com">
+						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepEmail" value="${login.email }">
 					</div>
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label for="pepPhone Number">전화번호</label></aside>
+					<label for="pepPhone Number">전화번호(비활성화)</label></aside>
 					<div class="_lxlnj">
 						<input type="text" class="_cm95b _qy55y" aria-required="false" id="pepPhone Number" value="">
 					</div>
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label for="pepGender">성별</label></aside>
+					<label for="pepGender">성별(비활성화)</label></aside>
 					<div class="_lxlnj">
 						<div class="_3m0ft">
 							<span class="_fu55f _soakw coreSpriteChevronDownGrey"></span>
@@ -93,7 +93,7 @@
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label>비슷한 계정 추천</label></aside>
+					<label>비슷한 계정 추천(비활성화)</label></aside>
 					<div class="_lxlnj">
 						<div class="_pjb58">
 							<input type="checkbox" class="_32vu6" id="pepChainingEnabled"
