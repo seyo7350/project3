@@ -5,10 +5,14 @@ CREATE TABLE INSTA_PEED(
 	SEQ NUMBER(8) PRIMARY KEY,
 	MEMBER_SEQ NUMBER(8) NOT NULL,
 	IMAGE VARCHAR2(500) NOT NULL,
-	LIKE NUMBER(100) NOT NULL,
+	PEED_LIKE NUMBER(38) NOT NULL,
 	REGI_DATE DATE NOT NULL,
 	CONTENT VARCHAR2(4000)
 )
+
+ALTER TABLE INSTA_PEED
+ADD CONSTRAINT FK_INSTA_PEED_MEMBER_SEQ FOREIGN KEY(MEMBER_SEQ)
+REFERENCES INSTA_MEMBER(SEQ);
 
 CREATE SEQUENCE SEQ_INSTA_PEED;
 */
@@ -20,17 +24,17 @@ public class PeedDTO {
 	private int seq;
 	private int member_seq;
 	private String image;
-	private int like;
+	private int peed_like;
 	private Date regi_date;
 	private String content;
 	
 	public PeedDTO() {	}
 	
-	public PeedDTO(int seq, int member_seq, String image, int like, Date regi_date, String content) {
+	public PeedDTO(int seq, int member_seq, String image, int peed_like, Date regi_date, String content) {
 		this.seq = seq;
 		this.member_seq = member_seq;
 		this.image = image;
-		this.like = like;
+		this.peed_like = peed_like;
 		this.regi_date = regi_date;
 		this.content = content;
 	}
@@ -59,12 +63,12 @@ public class PeedDTO {
 		this.image = image;
 	}
 
-	public int getLike() {
-		return like;
+	public int getPeed_like() {
+		return peed_like;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setPeed_like(int peed_like) {
+		this.peed_like = peed_like;
 	}
 
 	public Date getRegi_date() {
@@ -85,7 +89,7 @@ public class PeedDTO {
 
 	@Override
 	public String toString() {
-		return "PeedDTO [seq=" + seq + ", member_seq=" + member_seq + ", image=" + image + ", like=" + like
+		return "PeedDTO [seq=" + seq + ", member_seq=" + member_seq + ", image=" + image + ", peed_like=" + peed_like
 				+ ", regi_date=" + regi_date + ", content=" + content + "]";
 	}
 	

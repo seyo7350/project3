@@ -6,7 +6,7 @@
   <mapper namespace="member">
   	
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
-  		INSERT INTO INSTAMEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE)
+  		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE)
   			VALUES(SEQ_INSTAMEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0, 'null')
   	
   	</insert>
