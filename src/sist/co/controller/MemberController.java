@@ -45,13 +45,17 @@ public class MemberController {
 		logger.info("loginAf " + new Date());
 
 		int count = -1;
+		MemberDTO login = null;
+		
+		login = memberService.login(memberDTO);
 		
 		count = memberService.loginPwd(memberDTO);
 		
 		CheckMember checkMember = new CheckMember();
 		
-		if(count > 0){
+		if(count > 1){
 			checkMember.setMessage("로그인 성공");
+			request.getSession().setAttribute("login", login);
 		}else{
 			checkMember.setMessage("로그인 실패");
 		}
@@ -77,7 +81,7 @@ public class MemberController {
 		
 		CheckMember checkMember = new CheckMember();
 		
-		if(count > 0){
+		if(count > 1){
 			checkMember.setMessage("회원가입 실패");
 		}else{
 			checkMember.setMessage("회원가입 성공");
