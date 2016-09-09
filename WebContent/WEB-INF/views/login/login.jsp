@@ -80,6 +80,7 @@ $('#btnLogin').click(function(){
 					if(check == true){
 						location.href='newspeed.do';
 					}else{
+						alert('로그인 실패');
 						location.href='index.do';
 					}
 				}
