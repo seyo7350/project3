@@ -18,7 +18,7 @@
 	<definition name="login.tiles" template="/WEB-INF/views/login/login.jsp">
 	</definition>
 	
-	<definition name="newspeedarticle.tiles" template="/WEB-INF/views/main/newspeedarticle.jsp">
+	<definition name="article.tiles" template="/WEB-INF/views/main/newspeedarticle.jsp">
 	</definition>
 	
 	<definition name="newspeed.tiles" extends="index.tiles">
