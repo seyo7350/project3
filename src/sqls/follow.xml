@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="follow">
+  	
+  	<select id="getFollowList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+  		SELECT * 
+			FROM INSTA_MEMBER
+				WHERE SEQ IN(SELECT INSTA_FOLLOW.FOLLOW
+								FROM INSTA_MEMBER, INSTA_FOLLOW
+									WHERE INSTA_FOLLOW.MEMBER_SEQ=#{seq})
+			
+  	</select>
+  	
+  	<select id="getFollowerList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+  		SELECT * 
+			FROM INSTA_MEMBER
+				WHERE SEQ IN(SELECT MEMBER_SEQ
+								FROM INSTA_FOLLOW
+									WHERE FOLLOW=#{seq})
+  	</select>
+  	
+  </mapper>

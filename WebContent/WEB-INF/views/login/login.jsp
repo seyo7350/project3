@@ -55,6 +55,7 @@ $('#a_join').click(function(){
 		url:"./regi.do",
 		async:true,
 		success: function(data) {
+			/* alert(data); */
 			$('._60k3m').html(data);
 		}
 	});
