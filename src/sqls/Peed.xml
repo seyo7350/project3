@@ -4,15 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="Peed">
-	
-	<select id="getPeedList" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
+
+	<select id="getpeedlist" parameterType="java.lang.Integer" resultType="sist.co.model.PeedDTO">
 		SELECT SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
-		FROM (
-			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE ASC) as rnum, SEQ, MEMBER_SEQ, PEED_LIKE, REGI_DATE, CONTNET
-			FROM INSTA_PEED
-			WHERE MEMBER_SEQ=#{peed}
-		)A
-		WHERE rnum between #{start} AND #{end}
+		FROM(
+			SELECT ROWNUM AS RN, SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
+			FROM(
+				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE ASC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
+				FROM INSTA_FOLLOW FOLLOW, INSTA_PEED PEED
+				WHERE FOLLOW.FOLLOW = PEED.MEMBER_SEQ
+				AND FOLLOW.MEMBER_SEQ = #{seq} OR PEED.MEMBER_SEQ = #{member_seq}
+			) A
+			WHERE rnum = 1
+		)
+		WHERE RN BETWEEN #{start} AND #{end} 
 	</select>
 	
 	<insert id="writePeed" parameterType="sist.co.model.PeedDTO">
