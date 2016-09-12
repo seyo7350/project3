@@ -1,7 +1,6 @@
 package sist.co.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,40 +40,40 @@ public class PeedController {
 	}
 	
 	@RequestMapping(value="writeAf.do", method=RequestMethod.POST)
-	public String write(@RequestParam(value="fileload", required=false)MultipartFile fileload, Model model, PeedDTO peed, HttpServletRequest request){
-		model.addAttribute("doc_title", "PDS 업로드");
+	public String writeAf(@RequestParam(value="fileload", required=false)MultipartFile fileload, Model model, PeedDTO peedDTO, HttpServletRequest request){
+		
 		
 		System.out.println(fileload.getOriginalFilename());
 		
-		/*peed.setImage(fileload.getOriginalFilename());*/
+		peedDTO.setImage(fileload.getOriginalFilename());
 		
-		System.out.println(peed.toString());
+		System.out.println(peedDTO.toString());
 		
-		return "redirect:/write.do";
+		/*return "redirect:/write.do";*/
 		
 		/*String fupload = "c:\\upload";*/
-		/*String fupload = request.getServletContext().getRealPath("/upload");
+		String fupload = request.getServletContext().getRealPath("/upload");
 		logger.info(": " + fupload);
 		
-		String f = pds.getFileName();
+		String f = peedDTO.getImage();
 		String newFile = FUpUtil.getNewFile(f);
 		logger.info(fupload + "/" + newFile);
 		
-		pds.setFileName(newFile);
+		peedDTO.setImage(newFile);
 		
 		try {
 			File file = new File(fupload + "/" + newFile);
 			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
 			
-			System.out.println(pds.toString());
+			System.out.println(peedDTO.toString());
 			
-			sistPdsService.uploadPds(pds);
-			logger.info("pdsupload success");
-		} catch (IOException e) {
+			peedService.writePeed(peedDTO);
+			logger.info("writeAf success");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.info("pdsupload fail");
+			logger.info("writeAf fail");
 		}
 		
-		return "redirect:/pdslist.do";*/
+		return "redirect:/newspeed.do";
 	}
 }
