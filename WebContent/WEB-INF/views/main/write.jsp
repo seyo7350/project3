@@ -19,7 +19,7 @@
 						</a>
 						<div class="_f95g7">
 							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${login.id}</a>
-							<%-- <input type="hidden" name="member_seq" value="${login.id}"> --%>
+							<input type="hidden" name="member_seq" value="${login.seq}">
 							<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
 						</div>
 						<div class="filebox">				
