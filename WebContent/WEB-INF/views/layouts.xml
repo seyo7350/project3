@@ -36,6 +36,9 @@
 	<definition name="modal3.tiles" template="/WEB-INF/views/main/modal3.jsp">
 	</definition>
 	
+	<definition name="modal5.tiles" template="/WEB-INF/views/main/modal5.jsp">
+	</definition>
+	
 	<definition name="edit.tiles" extends="profile.tiles">
 		<put-attribute name="main" value="/WEB-INF/views/main/edit.jsp"/>
 	</definition>

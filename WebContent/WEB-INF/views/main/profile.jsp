@@ -80,10 +80,10 @@
 										<c:forEach items="${peedList }" var="peed" varStatus="vs">
 												
 												<!--그림1  -->
-													<a class="_8mlbc _vbtk2 _t5r8b"	href="#none" id="img1"> 
+													<a class="_8mlbc _vbtk2 _t5r8b"	href="#none"> 
 													   <div class="_22yr2">
 															<div class="_jjzlb">
-																<img alt="이미지 없음" class="_icyx7" id="pImage_12" src="${peed.image }" />
+																<img alt="이미지 없음${vs.count }" class="_icyx7" src="${peed.image }" onclick="openModal5(${vs.count})" />
 															</div>
 														</div>
 													</a>
@@ -273,7 +273,7 @@
 	<!-- modal5 -->
 	<div class="modal" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div data-reactroot class="_a1rcs _ea084">
-			<div class="_quk42">
+		<div class="_quk42">
 				<div class="_7629j">
 					<div class="_hj98d">
 											
@@ -288,8 +288,8 @@
 			</div>			
 			<div class="_g1ax7">
 				<div class="_n3cp9 _d20no">
-					<article class="_djxz1 _j5hrx">
-						<header class="_s6yvg">
+					<article class="_djxz1 _j5hrx" id="modal5">
+						<!-- <header class="_s6yvg">
 							<a class="_5lote _pss4f _vbtk2">
 								<img class="_a012k" src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12519560_1521410768167162_695266703_a.jpg">
 							</a>
@@ -306,10 +306,7 @@
 						<div>
 							<div class="_22yr2 _e0mru">
 								<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
-									<img alt="기다림이 즐거워🙄💕
-케이크 먹고싶다는 한마디에 뚝!딱! 
-항상 고맙지만 오늘은 이렇게 딱 표현해야지,
-잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
+									<img alt="기다림이 즐거워🙄💕케이크 먹고싶다는 한마디에 뚝!딱! 항상 고맙지만 오늘은 이렇게 딱 표현해야지,잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
 								</div>
 								<div class="_ovg3g"></div>
 							</div>
@@ -354,12 +351,12 @@
 								</form>
 								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션 더 보기</button>
 							</section>
-						</div>			
+						</div>	 -->		
 					</article>
 				</div>
 			</div>
-			<button class="_3eajp">닫기</button>
-						
+			<button class="_3eajp">닫기</button> 
+						 
 		</div>
 	</div>
 	
@@ -384,7 +381,7 @@ $(function(){
     		async:true,
     		data:"id=${login.id}&seq=${login.seq}",
     		success: function(data){
-    			alert(data);
+    			/* alert(data); */
     			$('#modal3').html(data);
         		$('#myModal3').modal();
     		}
@@ -403,7 +400,7 @@ $(function(){
     		async:true,
     		data:"id=${login.id}&seq=${login.seq}",
     		success: function(data){
-    			alert(data);
+    			/* alert(data); */
     			$('#modal4').html(data);
 		        $('#myModal4').modal();
 		        
@@ -413,6 +410,27 @@ $(function(){
     })
     
 });
+
+// detail
+function openModal5(peed_idx){
+	var peed_index = peed_idx;
+		alert(peed_index);
+
+		$.ajax({
+			type:"POST",
+			url:"detail.do",
+			async:true,
+			data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+			success: function(data){
+				alert(data);
+				$('#modal5').html(data);
+				
+				$('#myModal5').modal();
+			}
+		});
+		
+	
+};
 
 /* function showModal4(데이터) {
 	

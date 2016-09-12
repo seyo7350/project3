@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
+import sist.co.model.MemberDTO;
 import sist.co.model.PeedDTO;
 import sist.co.service.PeedService;
 
@@ -75,5 +76,17 @@ public class PeedController {
 		}
 		
 		return "redirect:/newspeed.do";
+	}
+	
+	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
+		logger.info("detail " + new Date());
+		System.out.println(peed_index+"!@#!@#!@");
+		// 내 아이디에 해당하는 peed를 가져와야지
+		
+		/*request.getSession().setAttribute("peed_index", peed_index);*/
+		model.addAttribute("peed_index", peed_index);
+		
+		return "modal5.tiles";
 	}
 }

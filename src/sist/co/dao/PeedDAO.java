@@ -11,4 +11,5 @@ public interface PeedDAO {
 	
 	public boolean writePeed(PeedDTO peedDTO) throws Exception;
 	public List<PeedDTO> getpeedlist(PagingParam param, MemberDTO member, FollowDTO follow) throws Exception;
+	public PeedDTO getPeed(int image_number) throws Exception;
 }
