@@ -9,20 +9,6 @@
 		SELECT * FROM INSTA_PEED WHERE SEQ=	
 	</select> -->
 	
-	
-<<<<<<< HEAD
-=======
-	<select id="getPeedList" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
-		SELECT SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
-		FROM (
-			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE ASC) as rnum, SEQ, MEMBER_SEQ, PEED_LIKE, REGI_DATE, CONTNET
-			FROM INSTA_PEED
-			WHERE MEMBER_SEQ=#{peed}
-		)A
-		WHERE rnum between #{start} AND #{end}
-	</select>
->>>>>>> 10e4ae3a8cf3ddcfffdf91b4bd953af2c72529b7
-	
 	<insert id="writePeed" parameterType="sist.co.model.PeedDTO">
 		INSERT INTO INSTA_PEED(SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT)
   		VALUES(SEQ_INSTA_PEED.NEXTVAL, #{member_seq}, #{image}, 0, SYSDATE, #{content})
