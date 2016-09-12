@@ -1,0 +1,90 @@
+@CHARSET "UTF-8";
+
+._o1o4h::after, ._pnw2j {
+    content: ' ';
+    position: absolute;
+}
+
+._pnw2j, ._q6fzq {
+    border: solid 1px #dbdbdb;
+}
+
+._pnw2j {
+    background: #fff;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,.13);
+    left: 0;
+    right: 0;
+    top: 12px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 1;
+    height: 14px;
+    margin: auto;
+    width: 14px;
+}
+
+._o1o4h {
+    background: #fff;
+    border: solid 1px #dbdbdb;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.13);
+    display: block;
+    left: 50%;
+    margin-left: -121px;
+    position: absolute;
+    right: -12px;
+    top: 18px;
+    width: 243px;
+    z-index: 9;
+}
+
+._q8rex {
+    max-height: 362px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+._k2vj6 {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: solid 1px #dbdbdb;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    height: 50px;
+    padding: 8px 14px;
+}
+
+._oluat {
+    display: inline;
+    margin-right: 0;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.coreSpriteHashtag {
+    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+    background-repeat: no-repeat;
+    background-position: -14px -679px;
+    height: 18px;
+    width: 14px;
+}
+
+a, a:visited {
+    color: #003569;
+    text-decoration: none;
+}

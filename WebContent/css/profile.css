@@ -11225,7 +11225,7 @@ to {
 	background: #fff;
 	border: solid 1px #dbdbdb;
 	border-radius: 3px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, .13);
+	box-shadow: 0,0,5px,rgba(0,0,0,.13);
 	display: block;
 	left: 50%;
 	margin-left: -121px;
