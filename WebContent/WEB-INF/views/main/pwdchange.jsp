@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -10,7 +10,7 @@
 		<div class="_40h7m">
 			<ul class="_g2cyn">
 				<li><a class="_9hbou _g6sjr" href="edit.do">프로필 편집</a></li>
-				<li><a class="_9hbou _siw05" href="pwdchange.do">비밀번호	변경</a></li>
+				<li><a class="_9hbou _siw05" href="pwdchange.do">비밀번호 변경</a></li>
 			</ul>
 			<article class="_e5cd3">
 			<div class="_ljqf0">

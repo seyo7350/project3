@@ -18,6 +18,9 @@
 	<definition name="login.tiles" template="/WEB-INF/views/login/login.jsp">
 	</definition>
 	
+	<definition name="article.tiles" template="/WEB-INF/views/main/newspeedarticle.jsp">
+	</definition>
+	
 	<definition name="newspeed.tiles" extends="index.tiles">
 		<put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
 		<put-attribute name="main" value="/WEB-INF/views/main/newspeed.jsp"/>

@@ -50,7 +50,7 @@
 				</div>
 				<div class="_9w2xs">
 					<aside class="_891mt">
-					<label for="pepBio">웹사이트(비활성화)</label></aside>
+					<label for="pepBio">소개(비활성화)</label></aside>
 					<div class="_lxlnj">
 						<textarea class="_9pfjt" id="pepBio"></textarea>
 					</div>

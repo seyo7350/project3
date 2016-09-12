@@ -279,7 +279,7 @@
 						</div>
 				</article>
 				
-				<article class="_8ab8k _j5hrx _pieko">
+				<article class="_8ab8k _j5hrx _pieko" id="_last">
 					<header class="_s6yvg">
 						<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
 							<img class="_a012k" src="주소">
@@ -346,26 +346,43 @@
 							</section>
 						</div>
 				</article>
-				
+				<!-- <div>
+					<input type="button" value="데이터 가지고 오기" id="button">
+				</div>-->
 			</div>
 		</div>
 	</section>
 </main>
 
 <script  type="text/javascript">
+/*$('#button').click(function(){
+	alert('click');
+	$.ajax({
+   		type:"POST",
+   		url:"./article.do",
+   		async:true,
+   		success: function(data) {
+   			//alert(data);
+   			$('#_last').append(data);
+   		}
+   	});
+});*/
 $(window).scroll(function () {
-	
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            alert("bottom");
-    }
-    
+   if ($(window).scrollTop() == $(document).height() - $(window).height()) {		//스크롤이 제일 하단에 있다는 것을 알려주는 부분
+		alert('스크롤 제일 밑이다!!!!');
+   
+	   	$(document).ready(function(){
+	   		$.ajax({
+	   			type:"POST",
+	   	   		url:"./article.do",
+	   	   		async:true,
+	   	   		success: function(data) {
+	   	   			//alert(data);
+	   	   			$('#_last').append(data);
+	   	   		}
+	   		});
+	   	});
+   
+   }
 });
-
-	/* var scrollerHeight = $(window).scrollTop() + $(window).height();
-	var documentHeight = $(document).height();
-	
-	if(scrollHeight + 200) >= documentHeight{
-		for(var i=0; i<10; i++){
-		$('._8ab8k').append
-	} */ 
-</script>
+</script> 

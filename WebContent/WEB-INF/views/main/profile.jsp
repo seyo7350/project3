@@ -29,7 +29,7 @@
 							</div>
 						</div>
 						<div class="_bugdy">
-							<h2 class="_79dar">leehy0930</h2>
+							<h2 class="_79dar">leehy0930</h2>&nbsp;&nbsp;&nbsp;
 							<a class="_56pjv" href="http://www.naver.com" target="_blank">www.naver.com</a>
 						</div>
 						<div class="_hcch2">
