@@ -37,11 +37,37 @@ $(document).ready(function(){
 	$('div').on('click', '._t1y9a', function(){
 		/* alert('1'); */
 		var s = '';
-		s += '<input type="text" class="_9x5sw _qy55y" placeholder="검색">';
+		s += '<input type="text" id="searchBox" class="_9x5sw _qy55y" placeholder="검색">';
 		s += '<span class="_n3dw7 coreSpriteSearchIcon"></span>';
 		s += '<div class="_jacrq"></div>';
 		
 		$('._9pxkq').html(s);
+		$('#searchBox').focus();
+				
+		$('#searchBox').keyup(function(e){
+			/* alert(e.keyCode); */
+			if($('#searchBox').val()==''){				
+				$('div._jacrq').nextAll().remove();
+			}
+			else{
+				$.ajax({
+					type:"POST",
+					url:"search.do",
+					async:true,
+					success: function(data){
+						$('div._jacrq').nextAll().remove();
+						$('div._jacrq').after(data);
+					},beforeSend:function(){
+						var spi = '';
+						spi = '<div class="spiSpinner"></div>';
+				        $('div._jacrq').after(spi);
+				    }
+				    /* ,complete:function(){			        
+				        $('div.spiSpinner').remove();				 
+				    } */
+				});
+			}		
+		});
 	});
 
 	$('div').on('click', '._jacrq', function(){
@@ -57,5 +83,7 @@ $(document).ready(function(){
 		
 		$('._9pxkq').html(s);
 	});
+	
+	
 });
 </script>
