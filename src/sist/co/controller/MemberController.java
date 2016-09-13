@@ -104,7 +104,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String profile(Model model, int member_seq) throws Exception{
+	public String profile(HttpServletRequest request, Model model, int member_seq) throws Exception{
 		logger.info("profile " + new Date());
 		
 		MemberDTO memberDTO = new MemberDTO();
@@ -127,7 +127,8 @@ public class MemberController {
 		model.addAttribute("peedCount", peedCount);
 		model.addAttribute("followCount", followCount);
 		model.addAttribute("followerCount", followerCount);
-		model.addAttribute("peedList", peedList);
+		request.getSession().setAttribute("peedList", peedList);
+		/*model.addAttribute("peedList", peedList);*/
 		
 		
 		return "profile.tiles";
