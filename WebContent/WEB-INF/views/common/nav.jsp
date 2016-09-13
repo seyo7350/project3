@@ -46,13 +46,15 @@ $(document).ready(function(){
 				
 		$('#searchBox').keyup(function(e){
 			/* alert(e.keyCode); */
-			if($('#searchBox').val()==''){				
+			var keyword = $('#searchBox').val();
+			if(keyword==''){				
 				$('div._jacrq').nextAll().remove();
 			}
 			else{
 				$.ajax({
 					type:"POST",
 					url:"search.do",
+					data:"keyword="+keyword,
 					async:true,
 					success: function(data){
 						$('div._jacrq').nextAll().remove();

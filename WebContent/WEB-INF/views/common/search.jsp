@@ -5,7 +5,7 @@
 	<div class="_pnw2j"></div>
 	<div class="_o1o4h">
 		<div class="_q8rex">
-			<a href="#">
+			<a class="_k2vj6" href="#">
 				<div class="_oluat">
 					<span class="_90x7z coreSpriteHashtag"></span>
 					<div class="_orhxc">
@@ -13,7 +13,7 @@
 					</div>
 					<div class="_qasqy">
 						<span>
-							게시물 <span>5,111,111</span>개
+							${keyword} <span>5,111,111</span>개
 						</span>
 					</div>
 				</div>				

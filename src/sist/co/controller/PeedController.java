@@ -75,11 +75,6 @@ public class PeedController {
 		}
 		
 		return "redirect:/newspeed.do";
-	}
+	}	
 	
-	@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String search(Model model){		
-		
-		return "search.tiles";
-	}
 }
