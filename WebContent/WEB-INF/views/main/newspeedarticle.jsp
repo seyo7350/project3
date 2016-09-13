@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:requestEncoding value="utf-8"/>
+
 <article class="_8ab8k _j5hrx _pieko">
 		<header class="_s6yvg">
 			<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
@@ -63,10 +64,17 @@
 					<span class="_soakw coreSpriteHeartOpen">좋아요</span>
 				</a>
 				<form class="_k3t69">
-					<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment..." placeholder="Add a comment..." value="">
+					<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment....." placeholder="Add a comment..." value="">
 				</form>
 				<button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button>
 			</section>
 		</div>
 </article>
 </main>
+
+<!-- <script  type="text/javascript">
+$('._ebwb5').click(function(){
+	alert('좋아요 클릭');
+	$('span').attr('class':'_soakw coreSpriteHeartFull');
+});
+</script> -->

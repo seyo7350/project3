@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
+import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.service.PeedService;
 
@@ -28,8 +29,18 @@ public class PeedController {
 	private PeedService peedService;
 	
 	@RequestMapping(value="article.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeedsarticle(Model model){
+	public String newspeedsarticle(PagingParam param, PeedDTO peed, Model model){
 		logger.info("newspeedarticle " + new Date());
+		
+		// paging
+		int sn = param.getPageNumber();
+		int start = sn*param.getRecordCountPerPage() + 1;
+		int end = (sn+1)*param.getRecordCountPerPage();
+		
+		param.setStart(start);
+		param.setEnd(end);
+		
+		System.out.println(param.toString());
 		
 		return "article.tiles";
 	}

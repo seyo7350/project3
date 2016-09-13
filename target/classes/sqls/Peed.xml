@@ -5,7 +5,7 @@
  
 <mapper namespace="Peed">
 
-	<select id="getpeedlist" parameterType="java.lang.Integer" resultType="sist.co.model.PeedDTO">
+	<select id="getpeedlist" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
 		SELECT SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
 		FROM(
 			SELECT ROWNUM AS RN, SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT

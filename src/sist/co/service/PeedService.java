@@ -10,7 +10,7 @@ import sist.co.model.PeedDTO;
 public interface PeedService {
 	
 	public boolean writePeed(PeedDTO peedDTO) throws Exception;
-	public List<PeedDTO> getpeedlist(PagingParam param, MemberDTO member, FollowDTO follow) throws Exception;
+	public List<PeedDTO> getpeedlist(PagingParam param) throws Exception;
 	
 
 }
