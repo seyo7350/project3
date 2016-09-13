@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
-<<<<<<< HEAD
+
 import sist.co.model.PagingParam;
-=======
+
 import sist.co.model.MemberDTO;
->>>>>>> 4ffb023d05c00c6cb058ebe872e73204a9b460ce
+
 import sist.co.model.PeedDTO;
 import sist.co.service.PeedService;
 
@@ -92,9 +92,7 @@ public class PeedController {
 		return "redirect:/newspeed.do";
 	}	
 	
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
 		logger.info("detail " + new Date());
@@ -105,12 +103,12 @@ public class PeedController {
 		model.addAttribute("peed_index", peed_index);
 		
 		return "modal5.tiles";
-=======
-	@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
+
+	/*@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String search(Model model){		
 		
 		return "search.tiles";
->>>>>>> e4a7483d9a4c32aec3f5a38b1d3356e30b2abf46
+
+	}*/
 	}
->>>>>>> 50added86f7f94cedc9741a8da696c4e9f9169cb
 }
