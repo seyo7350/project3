@@ -34,6 +34,12 @@ public class PeedDAOImpl implements PeedDAO {
 		
 		return peedlist;
 	}
+
+	@Override
+	public PeedDTO getPeed(int image_number) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

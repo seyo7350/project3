@@ -3778,7 +3778,7 @@ to {
 	-webkit-flex-shrink: 0;
 	-ms-flex-negative: 0;
 	flex-shrink: 0;
-	height: 50px;
+	height: 66px;
 	padding: 8px 14px
 }
 
@@ -11225,7 +11225,7 @@ to {
 	background: #fff;
 	border: solid 1px #dbdbdb;
 	border-radius: 3px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, .13);
+	box-shadow: 0,0,5px,rgba(0,0,0,.13);
 	display: block;
 	left: 50%;
 	margin-left: -121px;
@@ -11299,28 +11299,6 @@ to {
 	float: left;
 	margin: 12px 18px 0 8px;
 	width: 16px
-}
-
-._k2vj6 {
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
-	border-bottom: solid 1px #dbdbdb;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-webkit-flex-shrink: 0;
-	-ms-flex-negative: 0;
-	flex-shrink: 0;
-	height: 50px;
-	padding: 8px 14px
 }
 
 ._k2vj6:last-child {

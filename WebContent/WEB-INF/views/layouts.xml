@@ -21,6 +21,9 @@
 	<definition name="article.tiles" template="/WEB-INF/views/main/newspeedarticle.jsp">
 	</definition>
 	
+	<definition name="search.tiles" template="/WEB-INF/views/common/search.jsp">
+	</definition>
+	
 	<definition name="newspeed.tiles" extends="index.tiles">
 		<put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
 		<put-attribute name="main" value="/WEB-INF/views/main/newspeed.jsp"/>
@@ -28,6 +31,15 @@
 	
 	<definition name="profile.tiles" extends="newspeed.tiles">
 		<put-attribute name="main" value="/WEB-INF/views/main/profile.jsp"/>
+	</definition>
+	
+	<definition name="modal4.tiles" template="/WEB-INF/views/main/modal4.jsp">
+	</definition>
+	
+	<definition name="modal3.tiles" template="/WEB-INF/views/main/modal3.jsp">
+	</definition>
+	
+	<definition name="modal5.tiles" template="/WEB-INF/views/main/modal5.jsp">
 	</definition>
 	
 	<definition name="edit.tiles" extends="profile.tiles">
@@ -43,5 +55,6 @@
 	    <put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
 		<put-attribute name="main" value="/WEB-INF/views/main/write.jsp"/>
 	</definition>
+	
 	
 </tiles-definitions>

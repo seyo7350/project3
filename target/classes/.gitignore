@@ -1,2 +1,9 @@
+<<<<<<< HEAD
+/log4j.xml
+/properties/
 /sist/
+/sql.sql
+=======
+/sist/
+>>>>>>> d977c1ec495bb6ff7eb061d2f984e3fe0fbbe5e8
 /sqls/

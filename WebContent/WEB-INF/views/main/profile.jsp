@@ -5,10 +5,6 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-    
-
-
-
 <!--실제내용 시작  -->
 
 			<main class="_6ltyr _rnpza" role="main">
@@ -46,45 +42,67 @@
 				<ul class=" _i305n">
 					<li class=" _7gq8o"><a class="_s53mj _13vpi">
 							게시물 
-							<span class="_bkw5z _kjym7">1</span>개
+							<span class="_bkw5z _kjym7">${peedCount }</span>개
 					</a></li>
 					<li class=" _7gq8o"><a class="_s53mj _13vpi" id="popbutton">
 							팔로워
-							<span class="_bkw5z _kjym7" title="0">0</span>명
+							<span class="_bkw5z _kjym7" title="0">${followerCount }</span>명
 					</a></li>
 					<li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
 							팔로우
-							<span class="_bkw5z _kjym7">6</span>명
+							<span class="_bkw5z _kjym7">${followCount }</span>명
 					</a></li>
 				</ul>
 				</div>
 				</header>
 				
 				<div>
-					<div class="_nljxa">
-						<div class="_myci9">
-						<!--그림1  -->
-							<a class="_8mlbc _vbtk2 _t5r8b"	href="#none" id="img1"> 
-							   <div class="_22yr2">
-									<div class="_jjzlb">
-										<img alt="고고" class="_icyx7" id="pImage_12"
-											src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
-									</div>
-								</div></a>
-								
-						<!--그림2  -->
-							<a class="_8mlbc _vbtk2 _t5r8b"	href="/p/BJ_zpWyhOlg/?taken-by=leehy860930">
-							   <div class="_22yr2">
-									<div class="_jjzlb">
-										<img alt="고고" class="_icyx7" id="pImage_12"
-											src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
-									</div>
-								</div></a>
-								
+					<c:if test="${empty peedList }">
+						<div class="_nljxa">
+							<div class="_myci9">
+								<a class="_8mlbc _vbtk2 _t5r8b"	href="#none" id="img1"> 
+									 <div class="_22yr2">
+									 	<div class="_jjzlb">
+									 		등록된 게시물이 없습니다.
+									 	</div>
+									 </div>
+								</a>
+							</div>
+							
 							<div class="_t5r8b _81g1f"></div>
 							<div class="_t5r8b _81g1f"></div>
 						</div>
-					</div>
+					</c:if>
+							<div class="_nljxa">
+								<div class="_myci9">
+					
+									<c:if test="${not empty peedList }">
+										<c:forEach items="${peedList }" var="peed" varStatus="vs">
+												
+												<!--그림1  -->
+													<a class="_8mlbc _vbtk2 _t5r8b"	href="#none"> 
+													   <div class="_22yr2">
+															<div class="_jjzlb">
+																<img alt="이미지 없음${vs.count }" class="_icyx7" src="${peed.image }" onclick="openModal5(${vs.count})" />
+															</div>
+														</div>
+													</a>
+														
+												<!--그림2  -->
+													<!-- <a class="_8mlbc _vbtk2 _t5r8b"	href="/p/BJ_zpWyhOlg/?taken-by=leehy860930">
+													   <div class="_22yr2">
+															<div class="_jjzlb">
+																<img alt="고고" class="_icyx7" id="pImage_12"
+																	src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
+															</div>
+														</div></a> -->
+														
+													<div class="_t5r8b _81g1f"></div>
+													<div class="_t5r8b _81g1f"></div>
+										</c:forEach>
+									</c:if>
+								</div>
+							</div>
 				</div>
 			</article>
 			</main>
@@ -176,27 +194,26 @@
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
 			<h4 class="modal-title" id="myModalLabel">팔로잉</h4>
 	      </div>
-	      <div class="modal-body">
-			<ul class="_539vh _4j13h">
+	      <div class="modal-body" id="modal3">
+			<!-- <ul class="_539vh _4j13h">
 				<li class="_cx1ua">
-				<div class="_6jvgy">
-					<div class="_9tu8m">
-							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
-							<div class="_mmgca"> <!-- 아이디, 이름 -->
-								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
-								<div class="_2uju6">이름</div> <!-- 이름-->
+					<div class="_6jvgy">
+						<div class="_9tu8m">
+							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> 사진 링크
+							<div class="_mmgca"> 아이디, 이름
+								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> 아이디
+								<div class="_2uju6">이름</div> 이름
+							</div>						
+							<div class="_72gdz">
+								<span class="_e616g">
+									<button type="button" class="btn btn-primary" style="background-color: green;">팔로잉</button>
+									<button class="_aj7mu _2hpcs _95tat _o0442">팔로잉</button>
+								</span>
 							</div>
-					
-						<div class="_72gdz">
-							<span class="_e616g">
-								<button type="button" class="btn btn-primary" style="background-color: green;">팔로잉</button>
-								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로잉</button> -->
-							</span>
 						</div>
-					</div>
-				</div> 
+					</div> 
 				</li>
-			</ul>
+			</ul> -->
 	      </div>
 	    </div>
 	  </div>
@@ -204,6 +221,7 @@
 	</div>
 	
 	<!-- 모달 팝업4 -->
+
 	<div class="modal" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div data-reactroot class="_a1rcs _ea084">
 	
@@ -221,31 +239,31 @@
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
 		<h4 class="modal-title" id="myModalLabel">팔로워</h4>
 	      </div>
-	      <div class="modal-body">
-			<ul class="_539vh _4j13h">
+	      <div class="modal-body" id="modal4">
+			<!-- <ul class="_539vh _4j13h" id="contentList">
 				<li class="_cx1ua">
 				<div class="_6jvgy">
 					<div class="_9tu8m">
-							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> <!-- 사진 링크 -->
-							<div class="_mmgca"> <!-- 아이디, 이름 -->
-								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> <!-- 아이디 -->
-								<div class="_2uju6">이름</div> <!-- 이름-->
+							<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a> 사진 링크
+							<div class="_mmgca"> 아이디, 이름
+								<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">아이디</a></div> 아이디
+								<div class="_2uju6">이름</div> 이름
 							</div>
 					
 						<div class="_72gdz">
 							<span class="_e616g">
 								<button type="button" class="btn btn-primary">팔로우</button>
-								<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로우</button> -->
+								<button class="_aj7mu _2hpcs _95tat _o0442">팔로우</button>
 							</span>
 						</div>
 					</div>
 				</div> 
 				</li>
-			</ul>
+			</ul> -->
 	      </div>
 	      
-	      <!-- <div class="modal-footer">
-	      </div> -->
+	      <div class="modal-footer">
+	      </div>
 	    </div>
 	  </div>
 	</div>
@@ -255,7 +273,7 @@
 	<!-- modal5 -->
 	<div class="modal" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div data-reactroot class="_a1rcs _ea084">
-			<div class="_quk42">
+		<div class="_quk42">
 				<div class="_7629j">
 					<div class="_hj98d">
 											
@@ -270,8 +288,8 @@
 			</div>			
 			<div class="_g1ax7">
 				<div class="_n3cp9 _d20no">
-					<article class="_djxz1 _j5hrx">
-						<header class="_s6yvg">
+					<article class="_djxz1 _j5hrx" id="modal5">
+						<!-- <header class="_s6yvg">
 							<a class="_5lote _pss4f _vbtk2">
 								<img class="_a012k" src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12519560_1521410768167162_695266703_a.jpg">
 							</a>
@@ -288,10 +306,7 @@
 						<div>
 							<div class="_22yr2 _e0mru">
 								<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
-									<img alt="기다림이 즐거워🙄💕
-케이크 먹고싶다는 한마디에 뚝!딱! 
-항상 고맙지만 오늘은 이렇게 딱 표현해야지,
-잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
+									<img alt="기다림이 즐거워🙄💕케이크 먹고싶다는 한마디에 뚝!딱! 항상 고맙지만 오늘은 이렇게 딱 표현해야지,잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
 								</div>
 								<div class="_ovg3g"></div>
 							</div>
@@ -336,12 +351,12 @@
 								</form>
 								<button class="_9q0pi coreSpriteEllipsis _soakw">옵션 더 보기</button>
 							</section>
-						</div>			
+						</div>	 -->		
 					</article>
 				</div>
 			</div>
-			<button class="_3eajp">닫기</button>
-						
+			<button class="_3eajp">닫기</button> 
+						 
 		</div>
 	</div>
 	
@@ -356,19 +371,74 @@ var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height(
 $layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
 $('body').css('position','relative').append($layerPopupObj); */
 
+// follower
 $(function(){
     $('#popbutton').click(function(){
-        $('#myModal3').modal();
+
+    	$.ajax({
+    		type:"POST",
+    		url:"follower.do",
+    		async:true,
+    		data:"id=${login.id}&seq=${login.seq}",
+    		success: function(data){
+    			/* alert(data); */
+    			$('#modal3').html(data);
+        		$('#myModal3').modal();
+    		}
+    	});
     })
     
 });
 
+// follow
 $(function(){
     $('#popbutton2').click(function(){
-        $('#myModal4').modal();
+    	
+    	$.ajax({
+    		type:"POST",
+    		url:"follow.do",
+    		async:true,
+    		data:"id=${login.id}&seq=${login.seq}",
+    		success: function(data){
+    			/* alert(data); */
+    			$('#modal4').html(data);
+		        $('#myModal4').modal();
+		        
+    		}
+    	});
+    	
     })
     
 });
+
+// detail
+function openModal5(peed_idx){
+	var peed_index = peed_idx;
+		alert(peed_index);
+
+		$.ajax({
+			type:"POST",
+			url:"detail.do",
+			async:true,
+			data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+			success: function(data){
+				alert(data);
+				$('#modal5').html(data);
+				
+				$('#myModal5').modal();
+			}
+		});
+		
+	
+};
+
+/* function showModal4(데이터) {
+	
+    $("#myModalLabel").html("ajax를 통해 얻어온 id에 해당하는 값");
+    $("#contentList").html("ajax를 통해 얻어온 id에 해당하는 값");
+	
+	$('#myModal4').modal('show');
+} */
 
 $(function(){
     $('#pImage_12').click(function(){

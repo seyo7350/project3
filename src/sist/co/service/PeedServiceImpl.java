@@ -29,6 +29,12 @@ public class PeedServiceImpl implements PeedService {
 		// TODO Auto-generated method stub
 		return peedDAO.getpeedlist(param);
 	}
+
+	@Override
+	public PeedDTO getPeed(int image_number) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

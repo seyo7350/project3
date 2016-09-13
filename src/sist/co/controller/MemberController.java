@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sist.co.model.CheckMember;
 import sist.co.model.MemberDTO;
+import sist.co.model.PeedDTO;
 import sist.co.service.MemberService;
+import sist.co.service.ProfileService;
 
 @Controller
 public class MemberController {
@@ -26,6 +28,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping(value="index.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String login(Model model){
@@ -99,7 +104,33 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String profile(Model model){
+	public String profile(HttpServletRequest request, Model model, int member_seq) throws Exception{
+		logger.info("profile " + new Date());
+		
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO = profileService.findMemberDTO(member_seq);
+		
+		List<PeedDTO> peedList = new ArrayList<PeedDTO>();
+		peedList = profileService.getPeedList(member_seq);
+		
+		int peedCount = profileService.countPeed(memberDTO);
+		
+		int followCount = profileService.countFollow(memberDTO);
+		
+		int followerCount = profileService.countFollower(memberDTO);
+		
+		/*System.out.println(peedCount+"!!!!!");
+		System.out.println(followCount+"@@@@@@");
+		System.out.println(followerCount+"#######");
+		System.out.println(peedList.toString()+"$$$$$$$$");*/
+		
+		model.addAttribute("peedCount", peedCount);
+		model.addAttribute("followCount", followCount);
+		model.addAttribute("followerCount", followerCount);
+		request.getSession().setAttribute("peedList", peedList);
+		/*model.addAttribute("peedList", peedList);*/
+		
+		
 		return "profile.tiles";
 	}
 		
