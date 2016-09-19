@@ -47,7 +47,7 @@ $(document).ready(function(){
 		$('#searchBox').keyup(function(e){
 			/* alert(e.keyCode); */
 			var keyword = $('#searchBox').val();
-			if(keyword==''){				
+			if(keyword==''||keyword=='#'||keyword=='@'){				
 				$('div._jacrq').nextAll().remove();
 			}
 			else{
@@ -61,7 +61,7 @@ $(document).ready(function(){
 						$('div._jacrq').after(data);
 					},beforeSend:function(){
 						var spi = '';
-						spi = '<div class="spiSpinner"></div>';
+						spi = '<div class="_pnwyi spiSpinner"></div>';
 				        $('div._jacrq').after(spi);
 				    }
 				    /* ,complete:function(){			        

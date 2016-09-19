@@ -9068,8 +9068,7 @@ to {
 	max-width: 360px
 }
 
- @-webkit-keyframes 
-	'spin8 '{ 0%{
+@-webkit-keyframes spin8 { 0%{
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
@@ -9084,8 +9083,7 @@ to {
 }
 
 }
-@
--moz-keyframes spin8 { 0%{
+@-moz-keyframes spin8 { 0%{
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
@@ -9100,8 +9098,7 @@ to {
 }
 
 }
-@
--ms-keyframes spin8 { 0%{
+@-ms-keyframes spin8 { 0%{
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
@@ -9116,8 +9113,7 @@ to {
 }
 
 }
-@
--o-keyframes spin8 { 0%{
+@-o-keyframes spin8 { 0%{
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
@@ -9162,7 +9158,8 @@ to {
 	-webkit-animation: spin8 .8s steps(8) infinite;
 	-moz-animation: spin8 .8s steps(8) infinite;
 	-o-animation: spin8 .8s steps(8) infinite;
-	animation: spin8 .8s steps(8) infinite
+	animation: spin8 .8s steps(8) infinite;
+	z-index: 2;
 }
 
 ._e616g {
