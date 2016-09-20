@@ -100,7 +100,7 @@ body, button, input, textarea {
 }
 
 a, a:link, a:visited, a:hover, a:active {
-    color: #ffffff;
+    /* color: #ffffff; */
     text-decoration: none;
 }
 

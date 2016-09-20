@@ -35,6 +35,13 @@ public class PeedDAOImpl implements PeedDAO {
 		return peedlist;
 	}
 
+	
+	@Override
+	public int getPeedCount(PagingParam param) throws Exception {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.selectOne(ns+"getPeedCount", param);
+	}
+
 	@Override
 	public PeedDTO getPeed(int image_number) throws Exception {
 		// TODO Auto-generated method stub

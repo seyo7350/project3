@@ -12,5 +12,6 @@ public interface PeedService {
 	public boolean writePeed(PeedDTO peedDTO) throws Exception;
 	public List<PeedDTO> getpeedlist(PagingParam param) throws Exception;
 	public PeedDTO getPeed(int image_number) throws Exception;
+	public int getPeedCount(PagingParam param) throws Exception;
 
 }
