@@ -18,6 +18,7 @@
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/detail.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/nav-style.css"/>
 
 
