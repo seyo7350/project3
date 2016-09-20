@@ -9,6 +9,7 @@ package sist.co.model;
 		REGI_DATE DATE NOT NULL,
 		OPEN NUMBER(2),
 		PROFILE_IMAGE VARCHAR2(500)
+		HOMEPAGE VARCHAR2(500)
 	);
 
 	CREATE SEQUENCE SEQ_INSTA_MEMBER;*/
@@ -26,13 +27,14 @@ public class MemberDTO implements Serializable{
 	private Date regi_date;
 	private int open;
 	private String profile_image;
+	private String homepage;
 	
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemberDTO(int seq, String id, String pwd, String email, String name, Date regi_date, int open,
-			String profile_image) {
+			String profile_image, String homepage) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -42,6 +44,7 @@ public class MemberDTO implements Serializable{
 		this.regi_date = regi_date;
 		this.open = open;
 		this.profile_image = profile_image;
+		this.homepage = homepage;
 	}
 
 	public int getSeq() {
@@ -108,10 +111,23 @@ public class MemberDTO implements Serializable{
 		this.profile_image = profile_image;
 	}
 
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name
-				+ ", regi_date=" + regi_date + ", open=" + open + ", profile_image=" + profile_image + "]";
+				+ ", regi_date=" + regi_date + ", open=" + open + ", profile_image=" + profile_image + ", homepage="
+				+ homepage + "]";
 	}
+	
+	
+
+
 	
 }

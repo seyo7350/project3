@@ -105,10 +105,10 @@ public class PeedController {
 
 	}
 		
-	@RequestMapping(value="search.do", method={RequestMethod.GET, RequestMethod.POST})
+/*	@RequestMapping(value="search.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String search(Model model){		
 		
 		return "search.tiles";
 
-	}
+	}*/
 }
