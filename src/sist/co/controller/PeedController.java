@@ -92,10 +92,6 @@ public class PeedController {
 		return "redirect:/newspeed.do";
 	}	
 	
-<<<<<<< HEAD
-=======
-
->>>>>>> 1cf7b124445a786769df127664ed212c23a2b15c
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
 		logger.info("detail " + new Date());
@@ -106,21 +102,13 @@ public class PeedController {
 		model.addAttribute("peed_index", peed_index);
 		
 		return "modal5.tiles";
-<<<<<<< HEAD
+
 	}
 		
 	@RequestMapping(value="search.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String search(Model model){		
 		
 		return "search.tiles";
-=======
 
-	/*@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String search(Model model){		
-		
-		return "search.tiles";
-
-	}*/
->>>>>>> 1cf7b124445a786769df127664ed212c23a2b15c
 	}
 }
