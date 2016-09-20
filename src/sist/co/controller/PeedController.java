@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
+
+import sist.co.model.PagingParam;
+
 import sist.co.model.MemberDTO;
+
 import sist.co.model.PeedDTO;
 import sist.co.service.PeedService;
 
@@ -29,8 +33,18 @@ public class PeedController {
 	private PeedService peedService;
 	
 	@RequestMapping(value="article.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeedsarticle(Model model){
+	public String newspeedsarticle(PagingParam param, PeedDTO peed, Model model){
 		logger.info("newspeedarticle " + new Date());
+		
+		// paging
+		int sn = param.getPageNumber();
+		int start = sn*param.getRecordCountPerPage() + 1;
+		int end = (sn+1)*param.getRecordCountPerPage();
+		
+		param.setStart(start);
+		param.setEnd(end);
+		
+		System.out.println(param.toString());
 		
 		return "article.tiles";
 	}
@@ -76,8 +90,12 @@ public class PeedController {
 		}
 		
 		return "redirect:/newspeed.do";
-	}
+	}	
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1cf7b124445a786769df127664ed212c23a2b15c
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
 		logger.info("detail " + new Date());
@@ -88,11 +106,21 @@ public class PeedController {
 		model.addAttribute("peed_index", peed_index);
 		
 		return "modal5.tiles";
+<<<<<<< HEAD
 	}
 		
 	@RequestMapping(value="search.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String search(Model model){		
 		
 		return "search.tiles";
+=======
+
+	/*@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String search(Model model){		
+		
+		return "search.tiles";
+
+	}*/
+>>>>>>> 1cf7b124445a786769df127664ed212c23a2b15c
 	}
 }

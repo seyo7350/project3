@@ -46,20 +46,22 @@ $(document).ready(function(){
 				
 		$('#searchBox').keyup(function(e){
 			/* alert(e.keyCode); */
-			if($('#searchBox').val()==''){				
+			var keyword = $('#searchBox').val();
+			if(keyword==''||keyword=='#'||keyword=='@'){				
 				$('div._jacrq').nextAll().remove();
 			}
 			else{
 				$.ajax({
 					type:"POST",
 					url:"search.do",
+					data:"keyword="+keyword,
 					async:true,
 					success: function(data){
 						$('div._jacrq').nextAll().remove();
 						$('div._jacrq').after(data);
 					},beforeSend:function(){
 						var spi = '';
-						spi = '<div class="spiSpinner"></div>';
+						spi = '<div class="_pnwyi spiSpinner"></div>';
 				        $('div._jacrq').after(spi);
 				    }
 				    /* ,complete:function(){			        

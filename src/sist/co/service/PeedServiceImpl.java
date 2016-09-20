@@ -25,9 +25,9 @@ public class PeedServiceImpl implements PeedService {
 	}
 
 	@Override
-	public List<PeedDTO> getpeedlist(PagingParam param, MemberDTO member, FollowDTO follow) throws Exception {
+	public List<PeedDTO> getpeedlist(PagingParam param) throws Exception {
 		// TODO Auto-generated method stub
-		return peedDAO.getpeedlist(param, member, follow);
+		return peedDAO.getpeedlist(param);
 	}
 
 	@Override

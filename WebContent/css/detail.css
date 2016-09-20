@@ -99,8 +99,8 @@ body, button, input, textarea {
     flex-direction: row;
 }
 
-a, a:visited {
-    color: #003569;
+a, a:link, a:visited, a:hover, a:active {
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -729,3 +729,7 @@ ol, ul {
 .modal-dialog{
 	z-index: 10;
 }
+
+/* ._k2vj6 {
+	line-height: 16px;
+} */

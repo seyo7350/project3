@@ -27,10 +27,11 @@ public class PeedDAOImpl implements PeedDAO {
 	}
 
 	@Override
-	public List<PeedDTO> getpeedlist(PagingParam param, MemberDTO member, FollowDTO follow) throws Exception {
+	public List<PeedDTO> getpeedlist(PagingParam param) throws Exception {
 		
 		List<PeedDTO> peedlist = new ArrayList<PeedDTO>();
 		peedlist = sqlSession.selectList(ns+"getpeedlist", param);
+		
 		return peedlist;
 	}
 
