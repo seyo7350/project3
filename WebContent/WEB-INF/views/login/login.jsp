@@ -16,7 +16,7 @@
 						<div class="_ccek6 _i31zu">
 							<input type="password" class="_kp5f7 _qy55y" aria-describedby aria-label="비밀번호" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="password" id="_password" placeholder="비밀번호">
 							<div class="_j4ox0">
-								<a class="_19gtn" href="#">비밀번호를 잊으셨나요?</a>
+								<a class="_19gtn" href="findPW.do">비밀번호를 잊으셨나요?</a>
 							</div>
 						</div>
 						<span class="_rz1lq _e616g">

@@ -19,7 +19,7 @@
 <div>
 	<div class="_22yr2 _e0mru">
 		<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
-			<img alt="기다림이 즐거워🙄💕케이크 먹고싶다는 한마디에 뚝!딱! 항상 고맙지만 오늘은 이렇게 딱 표현해야지,잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="${peedList[peed_index].image }">
+			<img alt="이미지 없음" src="${peedList[peed_index].image }">
 		</div>
 		<div class="_ovg3g"></div>
 	</div>
