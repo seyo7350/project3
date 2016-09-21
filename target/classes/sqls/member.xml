@@ -8,42 +8,81 @@
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
   		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN)
   		VALUES(SEQ_INSTA_MEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0)
-  	
   	</insert>
   	
   	<select id="getMemberList" resultType="sist.co.model.MemberDTO">
   		SELECT * FROM INSTA_MEMBER
+  	</select>
   	
+   	<select id="getProfile" resultType="sist.co.model.MemberDTO">
+  		SELECT * FROM INSTA_MEMBER WHERE SEQ=#{seq}
+  	</select>
+  	
+  	<select id="Loadprofile" resultType="String">
+  		SELECT PROFILE_IMAGE FROM INSTA_MEMBER WHERE SEQ=#{seq}
   	</select>
   
 	<select id="login" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
-		SELECT * 
-			FROM INSTA_MEMBER
-				WHERE ID=#{id} AND PWD=#{pwd}	
+		SELECT * FROM INSTA_MEMBER
+		WHERE ID=#{id} AND PWD=#{pwd}	
 	</select>  
 	
 	<select id="getId" parameterType="sist.co.model.MemberDTO" resultType="int">
 		SELECT NVL(COUNT(*), 0)
-			FROM INSTA_MEMBER
-				WHERE ID=#{id}			
+		FROM INSTA_MEMBER
+		WHERE ID=#{id}			
+	</select>
+	
+	<select id="getMember" parameterType="sist.co.model.MemberDTO" resultType="int">
+		SELECT NVL(COUNT(*), 0)
+		FROM INSTA_MEMBER
+		WHERE NAME=#{name} AND ID=#{id}
 	</select>
 	
 	<select id="getEmail" parameterType="sist.co.model.MemberDTO" resultType="int">
 		SELECT NVL(COUNT(*), 0)
-			FROM INSTA_MEMBER
-				WHERE EMAIL=#{email}			
+		FROM INSTA_MEMBER
+		WHERE EMAIL=#{email}			
 	</select>
 	
 	<select id="loginPwd" parameterType="sist.co.model.MemberDTO" resultType="int">
 		SELECT NVL(COUNT(*), 0)
-			FROM INSTA_MEMBER
-				WHERE PWD=#{pwd}			
+		FROM INSTA_MEMBER
+		WHERE PWD=#{pwd}			
 	</select>
 	
 	<update id="PWDChange" parameterType="sist.co.model.MemberDTO">
 	    UPDATE INSTA_MEMBER SET PWD= #{pwd} where SEQ= #{seq}
 	</update> 
-	  	
+	
+    <update id="profileChange" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_MEMBER SET ID= #{id}, NAME=#{name}, EMAIL=#{email}, HOMEPAGE=#{homepage} where SEQ= #{seq}
+	</update> 
+	
+	<update id="findPW" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_MEMBER SET PWD= #{pwd} WHERE ID= #{id} AND NAME=#{name}
+	</update>
+	
+	<select id="findEmail" parameterType="sist.co.model.MemberDTO" resultType="String">
+		SELECT EMAIL	FROM INSTA_MEMBER WHERE ID= #{id} AND NAME=#{name}	
+	</select>
+	
+	<update id="imageDelAF" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_MEMBER SET PROFILE_IMAGE = null WHERE SEQ =#{seq}
+	</update>  
+	
+    <select id="chkMbId" resultType="int">
+       SELECT count(*) FROM INSTA_MEMBER WHERE ID = #{id} 
+    </select> 
+    
+    <select id="chkMbEmail" resultType="int">
+       SELECT count(*) FROM INSTA_MEMBER WHERE EMAIL = #{email} 
+    </select> 
+    
+	<update id="profile_upload" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_MEMBER SET PROFILE_IMAGE = #{profile_image} WHERE SEQ =#{seq}
+	</update>  
+	
   </mapper>
   
   

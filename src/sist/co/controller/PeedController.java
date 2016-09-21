@@ -1,7 +1,9 @@
 package sist.co.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +26,7 @@ import sist.co.model.MemberDTO;
 
 import sist.co.model.PeedDTO;
 import sist.co.service.HashService;
+import sist.co.model.PeedReplyDTO;
 import sist.co.service.PeedService;
 
 @Controller
@@ -37,18 +40,39 @@ public class PeedController {
 	private HashService hashService;
 	
 	@RequestMapping(value="article.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeedsarticle(PagingParam param, PeedDTO peed, Model model){
+	public String newspeedsarticle(HttpServletRequest request, PagingParam param, Model model) throws Exception{
 		logger.info("newspeedarticle " + new Date());
 		
+		int member_seq = ((MemberDTO)request.getSession().getAttribute("login")).getSeq();
+		
 		// paging
-		int sn = param.getPageNumber();
-		int start = sn*param.getRecordCountPerPage() + 1;
-		int end = (sn+1)*param.getRecordCountPerPage();
+		int sn = param.getIndex();
+		int start = sn*param.getPeedCountPerPage() + 1;
+		int end = (sn+1)*param.getPeedCountPerPage();
 		
 		param.setStart(start);
 		param.setEnd(end);
-		
+		param.setMember_seq(member_seq);
 		System.out.println(param.toString());
+		
+		int totalPeedCount = peedService.getPeedCount(param);
+		List<PeedDTO> peedlist = peedService.getpeedlist(param);		
+		
+		System.out.println("totalPeedCount:" +totalPeedCount);
+		System.out.println("size:" + peedlist.size());
+		System.out.println("peedlist:"+ peedlist.toString());
+		
+		List<List<PeedReplyDTO>> peedreplylist = new ArrayList<List<PeedReplyDTO>>();
+		
+		for(int i = 0; i<peedlist.size(); i++){
+			List<PeedReplyDTO> replylist = peedService.getPeedReplylist(peedlist.get(i).getSeq());
+			peedreplylist.add(replylist);
+		}
+		System.out.println("peedreplylist:"+peedreplylist.toString());
+		
+		model.addAttribute("peedreplylist", peedreplylist);
+		model.addAttribute("peedlist", peedlist);
+		model.addAttribute("totalPeedCount", totalPeedCount);
 		
 		return "article.tiles";
 	}
@@ -153,23 +177,21 @@ public class PeedController {
 		return "redirect:/newspeed.do";
 	}	
 	
-
+	// 개인 피드
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
 		logger.info("detail " + new Date());
 		System.out.println(peed_index+"!@#!@#!@");
 		// 내 아이디에 해당하는 peed를 가져와야지
 		
-		/*request.getSession().setAttribute("peed_index", peed_index);*/
-		model.addAttribute("peed_index", peed_index);
+		// ajax로 보낸후 a태그 href에 넣어주자.
+		
+		/*model.addAttribute("peed_index", peed_index);*/
+		request.getSession().setAttribute("peedIndex", peed_index);
 		
 		return "modal5.tiles";
 
-	/*@RequestMapping(value="search.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String search(Model model){		
-		
-		return "search.tiles";
-
-	}*/
 	}
+		
+
 }

@@ -9,16 +9,26 @@
 		<main class="_6ltyr _rnpza" role="main">
 		<div class="_40h7m">
 			<ul class="_g2cyn">
-				<li><a class="_9hbou _g6sjr" href="edit.do">프로필 편집</a></li>
-				<li><a class="_9hbou _siw05" href="pwdchange.do">비밀번호 변경</a></li>
+				<li><a class="_9hbou _g6sjr" href="edit.do?seq=${login.seq}">프로필 편집</a></li>
+				<li><a class="_9hbou _siw05" href="pwdchange.do?seq=${login.seq}">비밀번호 변경</a></li>
 			</ul>
 			<article class="_e5cd3">
 			<div class="_ljqf0">
-				<img class="_8gpiy _f7gj7"
-					src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/13768311_1786432404968210_1975323943_a.jpg">
+				<img class="_8gpiy _f7gj7"	src="${file }">
 				<h1 class="_4s1oa">${login.id }</h1>
 			</div>
 			<form class="_tf7jx" action="pwdchangeAF.do" method="post" name ="form" onsubmit="return checkIt()">
+				<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="cppNewPassword">기존 비밀번호</label></aside>
+					<div class="_lxlnj">
+						<input type="password" class="_1n8j5 _qy55y" aria-required="true"
+							name="oldpwd" id="oldpwd" onkeyup="noSpaceForm(this)" maxlength='20'>
+						<input type="hidden" class="_1n8j5 _qy55y" aria-required="true"
+							name=Confirmoldpwd id="Confirmoldpwd" value="${login.pwd }">
+					</div>
+				</div>
+
 				<div class="_9w2xs">
 					<aside class="_891mt">
 					<label for="cppNewPassword">새 비밀번호</label></aside>
@@ -66,27 +76,45 @@ function noSpaceForm(obj) { // 공백사용못하게
 function checkIt() {
 	var user = document.form;
 		
+	if (user.oldpwd.value == "") {
+		alert('기존 비밀번호를 입력하세요!');
+		user.oldpwd.focus();
+		return false;
+	}
+	
+	if (user.oldpwd.value != user.Confirmoldpwd.value) {
+		alert('기존 비밀번호가 입력하신 것과 다릅니다. 확인하세요!');
+		user.oldpwd.focus();
+		return false;
+	}
 	
 	if (user.pwd.value == '') {
-		alert('	새 비밀번호를 입력하세요!');
+		alert('새 비밀번호를 입력하세요!');
 		user.pwd.focus();
 		return false;
 	}
 	
 	if (user.ConfirmPassword.value == '') {
-		alert('	새 비밀번호 확인을 입력하세요!');
+		alert('새 비밀번호 확인을 입력하세요!');
 		user.ConfirmPassword.focus();
 		return false;
 	}
 	
 	if (user.pwd.value != user.ConfirmPassword.value) {
-		alert('	새 비밀번호와 새 비밀번호 확인이 다릅니다. 확인하세요!');
+		alert('새 비밀번호와 새 비밀번호 확인이 다릅니다. 확인하세요!');
 		user.ConfirmPassword.focus();
 		return false;
 	}
-	
+
    alert("비밀번호 수정을 시작합니다.");
 }
+
+$("#oldpwd").keypress(function () {
+	if(event.which =="13"){
+		event.preventDefault();
+		$("#pwd").focus();
+	}
+});
 
 $("#pwd").keypress(function () {
 	if(event.which =="13"){

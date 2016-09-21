@@ -53,6 +53,13 @@
 		<put-attribute name="main" value="/WEB-INF/views/main/pwdchange.jsp"/>
 	</definition>
 	
+	<definition name="findPW.tiles"  template="/WEB-INF/views/layouts-tiles.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/login/findPW.jsp"/>
+		<put-attribute name="nav" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	
 	<!-- write -->
 	<definition name="write.tiles" extends="newspeed.tiles">
 	    <put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
