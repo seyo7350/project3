@@ -97,6 +97,7 @@ body, button, input, textarea {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
+    z-index: 2;
 }
 
 a, a:link, a:visited, a:hover, a:active {

@@ -42,17 +42,19 @@
 							</div>
 						</div><!-- 이미지 부분 끝 -->
 					</div>
-						<div class="_es1du _rgrbt">							
+						<div class="_es1du _rgrbt">
+										
 							<ul class="_mo9iw _pnraw">
 								<li class="_nk46a">
-									<h1>
+									<div>
+										<div class="_jacrq2"></div>							
 										<!-- <a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">게시물 쓴 사람 아이디</a> -->
-										<span title="수정됨">
-											<textarea style="resize: none;" rows="5" cols="25" name="content" class="_7uiwk _qy55y" aria-label="Add a content..." placeholder="Add a content..."></textarea>
+										<span title="수정됨" style="z-index: 2;">											
+											<textarea style="resize: none;" rows="5" cols="25" id="_content" name="content" class="_7uiwk _qy55y" aria-label="Add a content..." placeholder="Add a content..."></textarea>
 											<!-- <button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button> -->
 											<button type="button" class="wbtn" id="_btnAdd">글 쓰기</button>
 										</span>
-									</h1>
+									</div>
 								</li>
 							</ul>
 							<!-- <section class="_jveic _dsvln">
@@ -149,6 +151,128 @@
 		}
 	}
 	
+	var text = ''; 		//content 내용
+	var r = -1;			// 커서 위치
+	var s = '';			// 커서위치까지의 문자열
+	var enter_pos = -1;	// 커서 위치부터 가까운 엔터 위치
+	var space_pos = -1;	// 커서 위치부터 가까운 스페이스 위치
+	var hash_pos = -1;	// 커서 위치부터 가까운 # 위치
+	var at_pos = -1;	// 커서 위치부터 가까운 @ 위치
+	var end_pos = -1;	// keyword가 끝나는 위치, 한글이면 맞지 않아서 계산해야 함
+	var end_enter_pos = -1;	// 태그로부터 뒤로 가까운 엔터 위치
+	var end_space_pos = -1;	// 태그로부터 뒤로 가까운 스페이스 위치
+	var keyword = '';
+	
+	$.fn.selectRange = function(start, end) {		// 커서 위치 변경하는 함수
+	    return this.each(function() {
+	         if(this.setSelectionRange) {
+	             this.focus();
+	             this.setSelectionRange(start, end);
+	         } else if(this.createTextRange) {
+	             var range = this.createTextRange();
+	             range.collapse(true);
+	             range.moveEnd('character', end);
+	             range.moveStart('character', start);
+	             range.select();
+	         }
+	     });
+	 };
+		
+	$('#_content').keyup(function(e){
+		text = $('#_content').val();
+		r = $('#_content').prop("selectionEnd");	// 커서 위치
+		s = text.substring(0, r);	// 커서위치까지의 문자열
+				
+		enter_pos = s.lastIndexOf('\n');
+		space_pos = s.lastIndexOf(' ');
+		hash_pos = s.lastIndexOf('#');
+		at_pos = s.lastIndexOf('@');
+		end_pos = -1;
+		keyword = '';
+		
+		// 커서로부터 무엇이 더 가까운지
+		if(enter_pos>hash_pos && enter_pos>at_pos){			// enter, 리턴
+			$('div._jacrq2').prevAll().remove();
+			return;
+		}
+		if(space_pos>hash_pos && space_pos>at_pos){			// space, 리턴
+			$('div._jacrq2').prevAll().remove();
+			return;
+		}else if(hash_pos>space_pos && hash_pos>at_pos){	// hash, 해시태그 검색
+			end_enter_pos = text.indexOf('\n', hash_pos);
+			end_space_pos = text.indexOf(' ', hash_pos);
+			
+			if(end_enter_pos < 0){			// enter가 없을 때
+				end_pos = end_space_pos;
+			}else if(end_space_pos < 0){	// space가 없을 때
+				end_pos = end_enter_pos;
+			}else{							// enter가 멀면 space, space가 멀면 enter
+				end_pos = (end_enter_pos > end_space_pos) ? end_space_pos : end_enter_pos;
+			}
+			
+			end_pos = (end_pos == -1) ? text.length : end_pos;	// enter, space 둘 다 없을 경우엔 text.length
+			keyword = text.substring(hash_pos, end_pos);			
+		}else if(at_pos>space_pos && at_pos>hash_pos){		// at, 멤버 검색
+			end_enter_pos = text.indexOf('\n', at_pos);
+			end_space_pos = text.indexOf(' ', at_pos);
+			
+			if(end_enter_pos < 0){			// enter가 없을 때
+				end_pos = end_space_pos;
+			}else if(end_space_pos < 0){	// space가 없을 때
+				end_pos = end_enter_pos;
+			}else{							// enter가 멀면 space, space가 멀면 enter
+				end_pos = (end_enter_pos > end_space_pos) ? end_space_pos : end_enter_pos;
+			}
+			
+			end_pos = (end_pos == -1) ? text.length : end_pos;	// enter, space 둘 다 없을 경우엔 text.length
+			keyword = text.substring(at_pos, end_pos);
+		}		
+				
+		if(keyword==''||keyword=='#'||keyword=='@'||e.which==13){	// 검색 예외		
+			$('div._jacrq2').prevAll().remove();
+			return;
+		}
+				
+		$.ajax({
+			type:"POST",
+			url:"writesearch.do",
+			data:"keyword="+keyword,
+			async:true,
+			success: function(data){
+				$('div._jacrq2').prevAll().remove();
+				$('div._jacrq2').before(data);
+			}
+		});
+		
+	});
+	
+	function changeKeyword(searchKeyword){
+		$('div._jacrq2').prevAll().remove();
+		var prevStr = '';		// keyword 앞 내용
+		var afterStr = '';		// keyword 뒷 내용
+		var replacedStr = '';	// 대체될 문자열
+		var cursorIndex = -1;	// 대체 후 커서 위치
+		
+		if(hash_pos>at_pos){	// hash	해시태그 검색			
+			prevStr = text.substring(0, hash_pos+1);	// 처음부터 #까지의 문자열
+			afterStr = text.substring(end_pos);			// keyword 뒷 문자열
+			replacedStr = prevStr + searchKeyword + ' ' + afterStr;	// keyword 후 한칸 띄워줌
+			cursorIndex = replacedStr.indexOf(' ', hash_pos);
+		}else if(at_pos>hash_pos){		// at 멤버 검색
+			prevStr = text.substring(0, at_pos+1);		// 처음부터 @까지의 문자열
+			afterStr = text.substring(end_pos);
+			replacedStr = prevStr + searchKeyword + ' ' + afterStr;
+			cursorIndex = replacedStr.indexOf(' ', at_pos);
+		}
+		$('#_content').val(replacedStr);
+		/* $('#_content').focus(); */
+		$('#_content').selectRange(cursorIndex+1, cursorIndex+1);
+	}
+	
+	$('._jacrq2').click(function(){
+		$('div._jacrq2').prevAll().remove();
+	});
+		
 	$('#_btnAdd').click(function(){
 		$('#_frmForm').attr({'target':'_self', "action":"writeAf.do"}).submit();
 	});

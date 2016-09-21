@@ -216,6 +216,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    z-index: 2;
 }
 
 /* 사람찾기 */
@@ -248,6 +249,7 @@
     overflow: hidden;
     text-indent: 110%;
     white-space: nowrap;
+    z-index: 2;
 }
 
 /* 알림 */

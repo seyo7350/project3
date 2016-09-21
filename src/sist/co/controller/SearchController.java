@@ -47,5 +47,29 @@ public class SearchController {
 		
 		return "search.tiles";
 	}
+	
+	@RequestMapping(value="writesearch.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String writesearch(String keyword, Model model){
+		List<SearchDTO> writesearchList = new ArrayList<SearchDTO>();
+		
+		System.out.println(keyword.substring(1));
+		
+		try {
+			if(keyword.substring(0, 1).equals("#")){	// 해시태그 검색	
+				writesearchList = searchService.searchHash(keyword.substring(1));
+			}else if(keyword.substring(0, 1).equals("@")){	// 사람 검색
+				writesearchList = searchService.searchMember(keyword.substring(1));
+			}else{	// 다 검색
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("writesearchList", writesearchList);
+		
+		return "writesearch.tiles";
+	}
 
 }

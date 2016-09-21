@@ -48,3 +48,48 @@
   clip:rect(0,0,0,0);
   border: 0;
 }
+
+.writesearch {
+	background: #fff;
+    border: solid 1px #dbdbdb;
+    border-radius: 3px;
+    box-shadow: 0,0,5px,rgba(0,0,0,.13);
+    display: block;
+    position: absolute;
+    top: -80px;
+    width: 552px;
+    z-index: 9;
+}
+
+.writesearchsub {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+._jacrq2 {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+/* .writesearch::after {
+    border-color: transparent transparent #fff;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    height: 0;
+    left: 110px;
+    top: -10px;
+    width: 0;
+    z-index: 3;
+}
+
+.writesearch::after {
+    content: ' ';
+    position: absolute;
+} */
