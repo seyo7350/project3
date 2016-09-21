@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:requestEncoding value="utf-8"/>
 
-<c:forEach items="${peedlist }" var="peed" varStatus="vs">
+<c:forEach items="${peedlist }" var="peed" varStatus="peedVs">
 <article class="_8ab8k _j5hrx _pieko">
 		<header class="_s6yvg">
 			<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
@@ -44,21 +44,37 @@
 				<li class="_nk46a">
 					<h1>
 						<a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">${peed.member_seq }</a>
-						<span title="수정됨">
-							<a href="인터넷에서 해시태그 검색 연결">#해시태그</a>
-							<!-- react-text : 3326 -->
 							${peed.content }
-						</span>
 					</h1>
 				</li><!-- content 내용 부분 끝 -->
-				<li class="_nk46a">
-					<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">댓글 쓴 아이디</a>
-					<span>
-					<!-- react text:3330 -->
-					"댓글 내용"
-					<!-- /react text -->
-					</span>
-				</li><!-- 댓글 부분 끝 -->
+				
+				<c:set var="replyIndex" value="-1"/>
+				<c:forEach items="${peedreplylist }" var="reply" varStatus="replyVs">
+					<c:if test="${peed.seq eq reply[0].peed_seq }" >
+						<c:set var="replyIndex" value="${replyVs.index}"/>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${replyIndex ne -1}">
+					<li class="_nk46a">						
+						<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][0].member_seq}</a>
+						<span>
+						<!-- react text:3330 -->
+						${peedreplylist[replyIndex][0].content }
+						<!-- /react text -->
+						</span>
+					</li><!-- 댓글 부분 끝 -->
+				</c:if>
+				<c:if test="${replyIndex ne -1}">
+					<li class="_nk46a">						
+						<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][1].member_seq}</a>
+						<span>
+						<!-- react text:3330 -->
+						${peedreplylist[replyIndex][1].content }
+						<!-- /react text -->
+						</span>
+					</li><!-- 댓글 부분 끝 -->
+				</c:if>
 			</ul>
 			<section class="_jveic _dsvln">
 				<a class="_ebwb5 _1tv0k" href="#" role="button" aria-disbled="false">
@@ -67,7 +83,7 @@
 				<form class="_k3t69">
 					<input type="text" class="_7uiwk _qy55y" aria-label="Add a comment....." placeholder="Add a comment..." value="">
 				</form>
-				<button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button>
+				<!-- <button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button> -->
 			</section>
 		</div>
 </article>

@@ -10,6 +10,7 @@ import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
+import sist.co.model.PeedReplyDTO;
 
 @Service
 public class PeedServiceImpl implements PeedService {
@@ -30,7 +31,6 @@ public class PeedServiceImpl implements PeedService {
 		return peedDAO.getpeedlist(param);
 	}
 	
-	
 
 	@Override
 	public int getPeedCount(PagingParam param) throws Exception {
@@ -42,6 +42,12 @@ public class PeedServiceImpl implements PeedService {
 	public PeedDTO getPeed(int image_number) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<PeedReplyDTO> getPeedReplylist(int peed_seq) throws Exception {
+		// TODO Auto-generated method stub
+		return peedDAO.getPeedReplylist(peed_seq);
 	}
 	
 	

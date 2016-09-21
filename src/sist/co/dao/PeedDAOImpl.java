@@ -11,6 +11,7 @@ import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
+import sist.co.model.PeedReplyDTO;
 
 @Repository
 public class PeedDAOImpl implements PeedDAO {
@@ -47,6 +48,16 @@ public class PeedDAOImpl implements PeedDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<PeedReplyDTO> getPeedReplylist(int peed_seq) throws Exception {
+		// TODO Auto-generated method stub
+		List<PeedReplyDTO> peedreplylist = new ArrayList<>();
+		peedreplylist = sqlSession.selectList(ns+"getPeedReplyList", peed_seq);
+		return peedreplylist;
+	}
+	
+	
 	
 	
 }

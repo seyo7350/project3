@@ -244,7 +244,11 @@
 	    <artifactId>jackson-databind</artifactId>
 	</dependency>	
 	<!-- ajax -->
-	
+
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+	</dependency>
   </dependencies>
   
   <dependencyManagement>

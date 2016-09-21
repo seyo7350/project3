@@ -41,4 +41,9 @@
 			WHERE MEMBER_SEQ=#{seq}
 	</select>
 	
+	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
+		SELECT * FROM INSTA_PEED_REPLY
+			WHERE PEED_SEQ = #{peed_seq}
+	</select>
+	
 </mapper>

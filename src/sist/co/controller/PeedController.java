@@ -1,6 +1,7 @@
 package sist.co.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import sist.co.model.PagingParam;
 import sist.co.model.MemberDTO;
 
 import sist.co.model.PeedDTO;
+import sist.co.model.PeedReplyDTO;
 import sist.co.service.PeedService;
 
 @Controller
@@ -56,6 +58,15 @@ public class PeedController {
 		System.out.println("size:" + peedlist.size());
 		System.out.println("peedlist:"+ peedlist.toString());
 		
+		List<List<PeedReplyDTO>> peedreplylist = new ArrayList<List<PeedReplyDTO>>();
+		
+		for(int i = 0; i<peedlist.size(); i++){
+			List<PeedReplyDTO> replylist = peedService.getPeedReplylist(peedlist.get(i).getSeq());
+			peedreplylist.add(replylist);
+		}
+		System.out.println("peedreplylist:"+peedreplylist.toString());
+		
+		model.addAttribute("peedreplylist", peedreplylist);
 		model.addAttribute("peedlist", peedlist);
 		model.addAttribute("totalPeedCount", totalPeedCount);
 		
