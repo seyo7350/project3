@@ -92,23 +92,22 @@ public class PeedController {
 		return "redirect:/newspeed.do";
 	}	
 	
+	// 개인 피드
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
 		logger.info("detail " + new Date());
 		System.out.println(peed_index+"!@#!@#!@");
 		// 내 아이디에 해당하는 peed를 가져와야지
 		
-		/*request.getSession().setAttribute("peed_index", peed_index);*/
-		model.addAttribute("peed_index", peed_index);
+		// ajax로 보낸후 a태그 href에 넣어주자.
+		
+		/*model.addAttribute("peed_index", peed_index);*/
+		request.getSession().setAttribute("peedIndex", peed_index);
 		
 		return "modal5.tiles";
 
 	}
 		
-	@RequestMapping(value="search.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String search(Model model){		
-		
-		return "search.tiles";
-
-	}
+	
+	
 }

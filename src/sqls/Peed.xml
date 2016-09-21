@@ -25,9 +25,4 @@
   		VALUES(SEQ_INSTA_PEED.NEXTVAL, #{member_seq}, #{image}, 0, SYSDATE, #{content})
 	</insert>
 	
-	<select id="getPeed" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.PeedDTO">
-		SELECT * FROM INSTA_PEED
-			WHERE MEMBER_SEQ=#{seq}
-	</select>
-	
 </mapper>

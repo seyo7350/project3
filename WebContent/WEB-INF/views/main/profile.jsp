@@ -73,37 +73,38 @@
 							<div class="_t5r8b _81g1f"></div>
 						</div>
 					</c:if>
-							<div class="_nljxa">
-								<div class="_myci9">
 					
-									<c:if test="${not empty peedList }">
-										<c:forEach items="${peedList }" var="peed" varStatus="vs">
-												
-												<!--그림1  -->
-													<a class="_8mlbc _vbtk2 _t5r8b"	href="#none"> 
-													   <div class="_22yr2">
-															<div class="_jjzlb">
-																<img alt="이미지 없음${vs.count }" class="_icyx7" src="${peed.image }" onclick="openModal5(${vs.count})" />
-															</div>
-														</div>
-													</a>
-														
-												<!--그림2  -->
-													<!-- <a class="_8mlbc _vbtk2 _t5r8b"	href="/p/BJ_zpWyhOlg/?taken-by=leehy860930">
-													   <div class="_22yr2">
-															<div class="_jjzlb">
-																<img alt="고고" class="_icyx7" id="pImage_12"
-																	src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14262823_149945558786032_1677948224_n.jpg?ig_cache_key=MTMzMzAxMTE1NzA2NTQ2MDA2NA%3D%3D.2"/>
-															</div>
-														</div></a> -->
-														
-													<div class="_t5r8b _81g1f"></div>
-													<div class="_t5r8b _81g1f"></div>
-										</c:forEach>
-									</c:if>
-								</div>
-							</div>
+					<c:if test="${not empty peedList }">
+						<div class="_nljxa">
+							<c:forEach items="${peedList }" var="peed" varStatus="vs">
+								<c:if test="${vs.count%3 eq 1}">
+									<div class="_myci9">
+								</c:if>
+								<a class="_8mlbc _vbtk2 _t5r8b"	href="#none"> 
+								   <div class="_22yr2">
+										<div class="_jjzlb" style="width: 311px;">
+											<img alt="이미지${vs.index }" class="_icyx7" src="${peed.image }" onclick="openModal5(${vs.index})" />
+										</div>
+									</div>
+								</a>
+								<c:if test="${vs.last && (vs.count%3 eq 1)}">
+									<div class="_t5r8b _81g1f"></div>
+									<div class="_t5r8b _81g1f"></div>
+									</div>
+								</c:if>
+								<c:if test="${vs.last && (vs.count%3 eq 2)}">
+									<div class="_t5r8b _81g1f"></div>
+									</div>
+								</c:if>
+								<c:if test="${vs.count%3 eq 0}">
+									</div>
+								</c:if>		
+							</c:forEach>
+						</div>
+					</c:if>
 				</div>
+						
+				
 			</article>
 			</main>
 
@@ -282,8 +283,8 @@
 			</div>
 			<div class="_7629j">
 				<div class="_hj98d">
-					<a class="_qdy3e coreSpriteLeftPaginationArrow" href="javascript:alert('11');" role="button">이전</a>
-					<a class="_de018 coreSpriteRightPaginationArrow" href="#" role="button">다음</a>
+					<!-- <a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>	
+					<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a> -->
 				</div>
 			</div>			
 			<div class="_g1ax7">
@@ -412,26 +413,166 @@ $(function(){
 });
 
 // detail
-function openModal5(peed_idx){
-	var peed_index = peed_idx;
-		alert(peed_index);
+var end = '${fn:length(peedList)}'-1;
+var peed_index = -1;
 
+function openModal5(peed_idx){
+	peed_index = peed_idx;
+		/* alert(peed_index);*/
+		/* alert('^^'+end); */
+		
+		
+		/* if(peed_index == end){
+			$('a').removeClass('coreSpriteRightPaginationArrow');
+		}else{
+			$('a').addClass('coreSpriteRightPaginationArrow');	
+		} */
+		
 		$.ajax({
 			type:"POST",
 			url:"detail.do",
 			async:true,
 			data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
 			success: function(data){
-				alert(data);
-				$('#modal5').html(data);
+				/* alert(data); */
 				
+				var s = '';
+				
+				if(peed_index == 0){
+					s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+					
+				}else if(peed_index == end){
+					s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+				}else{
+					alert(peed_index);
+					s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+					s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+				}
+				
+				$('._hj98d').html(s);
+				
+				/* $('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
+					peed_index++;
+					alert(peed_index);
+					if(peed_index == end){
+						s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+					}else{
+						s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+						s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+					}
+					$('._hj98d').html(s);
+					
+					$.ajax({
+						type:"POST",
+						url:"detail.do",
+						async:true,
+						data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+						success: function(data) {
+							
+							$('#modal5').html(data);
+							$('#myModal5').modal();
+						}
+						
+					});
+				});
+				
+				$('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
+					peed_index--;
+					alert(peed_index);
+					if(peed_index == 0){
+						s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+						
+					}else{
+						s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+						s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+					}
+					$('._hj98d').html(s);
+					
+					$.ajax({
+						type:"POST",
+						url:"detail.do",
+						async:true,
+						data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+						success: function(data) {
+							$('#modal5').html(data);
+							$('#myModal5').modal();
+						}
+						
+					});
+				}); */
+				
+				
+			 	$('#modal5').html(data);
 				$('#myModal5').modal();
+				
+				/* $('#_left').addClass('coreSpriteLeftPaginationArrow');
+				$('#_left').addClass('coreSpriteLeftPaginationArrow');
+				
+				if(peed_index == 0){
+					$('#_left').removeClass('coreSpriteLeftPaginationArrow');
+					
+				}else if(peed_index == end){
+					$('#_right').removeClass('coreSpriteRightPaginationArrow');
+					$('#_left').addClass('coreSpriteLeftPaginationArrow');
+					
+				} */
+				
+				
 			}
-		});
-		
-	
+		});	
 };
 
+$(document).ready(function(){
+	$('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
+		peed_index++;
+		alert(peed_index);
+		if(peed_index == end){
+			s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+		}else{
+			s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+			s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+		}
+		$('._hj98d').html(s);
+		
+		$.ajax({
+			type:"POST",
+			url:"detail.do",
+			async:true,
+			data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+			success: function(data) {
+				$('#modal5').html(data);
+				$('#myModal5').modal();
+			}
+			
+		});
+	});
+	
+	$('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
+		peed_index--;
+		alert(peed_index);
+		if(peed_index == 0){
+			s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+			
+		}else{
+			s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+			s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+		}
+		$('._hj98d').html(s);
+		
+		$.ajax({
+			type:"POST",
+			url:"detail.do",
+			async:true,
+			data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+			success: function(data) {
+				$('#modal5').html(data);
+				$('#myModal5').modal();
+			}
+			
+		});
+	});
+});
+	
 /* function showModal4(데이터) {
 	
     $("#myModalLabel").html("ajax를 통해 얻어온 id에 해당하는 값");

@@ -4,7 +4,7 @@
 
 <header class="_s6yvg">
 	<a class="_5lote _pss4f _vbtk2">
-		<img class="_a012k" src="${peedList[peed_index].image }" >
+		<img class="_a012k" src="${peedList[peedIndex].image }" >
 	</a>
 	<div class="_f95g7">
 		<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">anhwichan</a>
@@ -19,7 +19,7 @@
 <div>
 	<div class="_22yr2 _e0mru">
 		<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
-			<img alt="이미지 없음" src="${peedList[peed_index].image }">
+			<img alt="이미지 없음${peedIndex }" src="${peedList[peedIndex].image }" style="height: 600px; width: 600px;">
 		</div>
 		<div class="_ovg3g"></div>
 	</div>
@@ -39,7 +39,7 @@
 				<a class="_4zhc5 notranslate _iqaka" title="selimee_e" href="#">selimee_e</a>
 				<span>
 				기다림이 즐거워🙄💕
-				${peedList[peed_index].image }
+				${peedList[peedIndex].image }
 				<br>
 				케이크 먹고싶다는 한마디에 뚝!딱!
 				<br>
