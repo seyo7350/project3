@@ -11202,7 +11202,7 @@ to {
 
 ._s53mj,
 	._s53mj:active, ._s53mj:hover, ._s53mj:visited {
-	color: inherit
+	color: black;
 }
 
 ._13vpi {
@@ -13305,7 +13305,7 @@ transform
 }
 
 ._8gpiy {
-	background-color: #fafafa;
+	background-color: #dbdbdb;
 	border-radius: 50%;
 	border: 1px solid #dbdbdb;
 	box-sizing: border-box;

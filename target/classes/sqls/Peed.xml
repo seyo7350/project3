@@ -8,16 +8,27 @@
 	<select id="getpeedlist" parameterType="sist.co.model.PagingParam" resultType="sist.co.model.PeedDTO">
 		SELECT SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
 		FROM(
-			SELECT ROWNUM AS RN, SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
+			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE DESC) AS RN, SEQ, MEMBER_SEQ, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
 			FROM(
 				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE ASC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
 				FROM INSTA_FOLLOW FOLLOW, INSTA_PEED PEED
 				WHERE FOLLOW.FOLLOW = PEED.MEMBER_SEQ
-				AND FOLLOW.MEMBER_SEQ = #{seq} OR PEED.MEMBER_SEQ = #{member_seq}
+				AND FOLLOW.MEMBER_SEQ = #{member_seq} OR PEED.MEMBER_SEQ = #{member_seq}
 			) A
 			WHERE rnum = 1
 		)
-		WHERE RN BETWEEN #{start} AND #{end} 
+		WHERE RN BETWEEN #{start} AND #{end} ORDER BY REGI_DATE DESC
+	</select>
+	
+	<select id="getPeedCount" parameterType="sist.co.model.PagingParam" resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*), 0) AS CNT
+		FROM(
+				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE ASC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
+				FROM INSTA_FOLLOW FOLLOW, INSTA_PEED PEED
+				WHERE FOLLOW.FOLLOW = PEED.MEMBER_SEQ
+				AND FOLLOW.MEMBER_SEQ = #{member_seq} OR PEED.MEMBER_SEQ = #{member_seq}
+			) A
+			WHERE rnum = 1
 	</select>
 	
 	<insert id="writePeed" parameterType="sist.co.model.PeedDTO">
@@ -25,4 +36,17 @@
   		VALUES(SEQ_INSTA_PEED.NEXTVAL, #{member_seq}, #{image}, 0, SYSDATE, #{content})
 	</insert>
 	
+<<<<<<< HEAD
+=======
+	<select id="getPeed" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.PeedDTO">
+		SELECT * FROM INSTA_PEED
+			WHERE MEMBER_SEQ=#{seq}
+	</select>
+	
+	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
+		SELECT * FROM INSTA_PEED_REPLY
+			WHERE PEED_SEQ = #{peed_seq}
+	</select>
+	
+>>>>>>> 433f2a71a24045759f79f27acd9afd60307af4f0
 </mapper>
