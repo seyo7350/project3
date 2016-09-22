@@ -144,8 +144,7 @@ public class MemberController {
 	      request.getSession().setAttribute("peedList", peedList);
 	      /*model.addAttribute("peedList", peedList);*/
 	      
-	      
-	      model.addAttribute("mem", memberDTO);
+	      request.getSession().setAttribute("mem", memberDTO);
 			
 		  String filename = memberService.Loadprofile(memberDTO);
 		  String file = "upload/" + filename;

@@ -1,3 +1,6 @@
+<%@page import="java.util.Collections"%>
+<%@page import="sist.co.model.PeedDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -162,7 +165,15 @@
                </c:if>
                 <c:if test="${not empty peedList }">
           		<div class="_nljxa">
-                   <c:forEach items="${peedList }" var="peed" varStatus="vs">
+          		
+          		<c:set var="peedlists" value="${peedList }" />
+          		<%
+          			List<PeedDTO> r_peedlists = (List<PeedDTO>)pageContext.getAttribute("peedlists");
+          			Collections.reverse(r_peedlists);
+          			pageContext.setAttribute("peedlists", r_peedlists);
+          		%>
+          		
+                   <c:forEach items="${peedlists }" var="peed" varStatus="vs">
                    	<c:if test="${vs.count%3 eq 1 }">
              			<div class="_myci9">
                    	</c:if>
@@ -500,7 +511,7 @@ var end = '${fn:length(peedList)}'-1;
 var peed_index = -1;
 function openModal5(peed_idx){
    peed_index = peed_idx;
-      alert(peed_index);
+      /* alert(peed_index); */
 
       $.ajax({
          type:"POST",
@@ -516,7 +527,7 @@ function openModal5(peed_idx){
              }else if(peed_index == end){
                  s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
              }else{
-                 alert(peed_index);
+                 /* alert(peed_index); */
                  s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                  s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
              }
@@ -535,7 +546,7 @@ function openModal5(peed_idx){
 $(document).ready(function(){
     $('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
         peed_index++;
-        alert(peed_index);
+        /* alert(peed_index); */
         if(peed_index == end){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
         }else{
@@ -559,7 +570,7 @@ $(document).ready(function(){
     
     $('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
         peed_index--;
-        alert(peed_index);
+        /* alert(peed_index); */
         if(peed_index == 0){
             s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
             
