@@ -294,7 +294,6 @@
 		   },
 		   dataType : "json",
 		   success : function(data){
-		       
 			   if(data.resultMsg =="사용가능한 이메일입니다."){
 				   alert(data.resultMsg);
 				   $('input[id=chkemail]').attr('value',true); 

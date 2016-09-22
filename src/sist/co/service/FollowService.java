@@ -9,4 +9,8 @@ public interface FollowService {
 
 	public List<MemberDTO> getFollowList(MemberDTO memberDTO) throws Exception;
 	public List<MemberDTO> getFollowerList(MemberDTO memberDTO) throws Exception;
+	public int getFollow(FollowDTO followDTO) throws Exception;
+	public boolean delFollow(FollowDTO followDTO) throws Exception;
+	public boolean IntFollow(FollowDTO followDTO) throws Exception;
+	public boolean updateFollow(FollowDTO followDTO) throws Exception;
 }

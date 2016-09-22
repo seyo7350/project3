@@ -17,44 +17,44 @@
                <div class="_o0ohn">
                   <div class="_8gpiy _r43r5">
                      <button class="_jzgri" title="프로필 사진 변경"  data-toggle="modal" data-target="#myModal">
-                     <c:if test="${mem.profile_image eq null}">
-                       <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg" id="blah">
-                     </c:if>
-                     <c:if test="${mem.profile_image ne null}">
-                        <img alt="이미지 오류" class="_g5pg0" src="${file }"  id="blah" > 
-                     </c:if>
-                  </button>
-                  <form id="_frmForm" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="seq" value="${mem.seq}">
-                    <input type="file" name="fileload"  id="image_file" size="60" class="_loq3v" onchange="previewUploadImg(this);"  accept="image/*" /> 
-                  </form>
+					      <c:if test="${mem.profile_image eq null}">
+						     <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg" id="blah">
+					      </c:if>
+					      <c:if test="${mem.profile_image ne null}">
+						      <img alt="이미지 오류" class="_g5pg0" src="${file }"  id="blah" > 
+					      </c:if>
+					   </button>
+					   <form id="_frmForm" method="post" enctype="multipart/form-data">
+						  <input type="hidden" name="seq" value="${mem.seq}">
+						  <input type="file" name="fileload"  id="image_file" size="60" class="_loq3v" onchange="previewUploadImg(this);"  accept="image/*" /> 
+					   </form>
                   </div>
                </div>
                <div class="_de9bg">
-                  <div class="_8mm5v">
-                        <h1 class="_i572c notranslate" >${mem.id }&nbsp;&nbsp;</h1>
-                          <input type="hidden" value="${mem.seq }" id="seq">   
-                      <a class=" _t2uoe" href="edit.do?seq=${mem.seq}">
-                       <span   class="_5ji7m _e616g">
-                         <button   class="_aj7mu _2hpcs _kenyh _o0442">프로필 편집</button></span></a>
-                     <div class="_38y5t">
-                        <button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
-                     </div>
-                  </div>
-                  
-               <c:if test="${mem.homepage == null}">
-                    <div class="_bugdy">
-                     <h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
-                     <a class="_56pjv" href="#none" target="_blank"></a>
-                  </div>
-                </c:if>
-            
-               <c:if test="${mem.homepage != null}">
-                    <div class="_bugdy">
-                     <h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
-                     <a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
-                  </div>
-                </c:if>
+						<div class="_8mm5v">
+						   	<h1 class="_i572c notranslate" >${mem.id }&nbsp;&nbsp;</h1>
+		                    <input type="hidden" value="${mem.seq }" id="seq">	
+    						<a class=" _t2uoe" href="edit.do?seq=${mem.seq}">
+							  <span	class="_5ji7m _e616g">
+							    <button	class="_aj7mu _2hpcs _kenyh _o0442">프로필 편집</button></span></a>
+							<div class="_38y5t">
+								<button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
+							</div>
+						</div>
+						
+					<c:if test="${mem.homepage == null}">
+				        <div class="_bugdy">
+							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<a class="_56pjv" href="#none" target="_blank"></a>
+						</div>
+				    </c:if>
+				
+					<c:if test="${mem.homepage != null}">
+				        <div class="_bugdy">
+							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
+						</div>
+				    </c:if>
                
             
             <ul class=" _i305n">
@@ -74,61 +74,63 @@
             </div>
             </header>
             </c:if>
-            <c:if test="${login.seq ne mem.seq}">
-            <header class=" _o2h6b">         	
-               <div class="_o0ohn">
-                  <div class="_8gpiy _r43r5">
-                       <button class="_jzgri" title="프로필 사진 변경" >
-                    <c:if test="${mem.profile_image eq null}">
-                       <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg">
-                     </c:if>
-                     <c:if test="${mem.profile_image ne null}">
-                        <img alt="이미지 오류" class="_g5pg0"   src="${file }">
-                     </c:if>
-                  </button>
-                     <form enctype="multipart/form-data" >
-                        <input type="file" accept="image/*" class="_loq3v" id="file">
-                     </form>
-                  </div>
-               </div>
-               <div class="_de9bg">
-                  <div class="_8mm5v">
-                     <h1 class="_i572c notranslate" >${mem.id }&nbsp;&nbsp;</h1>
-                          <form id="Form" method="post">
-                              <input type="hidden" value="${mem.seq }" name="follow" id="follow">
-                              <input type="hidden" value="${mem.id }" name="sid" id="sid">
-                              <input type="hidden" value="${follow }" name="connection" id="connection">
-                              <input type="hidden" value="${login.seq }" name="member_seq" id="member_seq">
-                              <input type="hidden" value="${login.id }" name="id" id="id">
-                           </form>
-                            <span   class="_5ji7m _e616g">
-                              <c:if test="${2 eq follow }">
-                                   <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로우 삭제</button>
-                              </c:if>
-                              <c:if test="${2 ne follow }">
-                                <button class="_aj7mu _2hpcs _kenyh _o0442" onclick="IntFollow()">팔로우</button>
-                              </c:if>   
-                            </span>
-   
-                     <div class="_38y5t">
-                        <button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
-                     </div>
-                  </div>
-                  
-               <c:if test="${mem.homepage == null}">
-                    <div class="_bugdy">
-                     <h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
-                     <a class="_56pjv" href="#none" target="_blank"></a>
-                  </div>
-                </c:if>
             
-               <c:if test="${mem.homepage != null}">
-                    <div class="_bugdy">
-                     <h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
-                     <a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
-                  </div>
-                </c:if>
-          <ul class=" _i305n">
+            <!--다른사람 프로필  -->
+            <c:if test="${login.seq ne mem.seq}">
+				<header class=" _o2h6b">
+					<div class="_o0ohn">
+						<div class="_8gpiy _r43r5">
+                       <button class="_jzgri" title="프로필 사진 변경" >
+						  <c:if test="${mem.profile_image eq null}">
+						     <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg">
+					      </c:if>
+					      <c:if test="${mem.profile_image ne null}">
+						      <img alt="이미지 오류" class="_g5pg0"	src="${file }">
+					      </c:if>
+					   </button>
+							<form enctype="multipart/form-data" >
+								<input type="file" accept="image/*" class="_loq3v" id="file">
+							</form>
+						</div>
+					</div>
+					<div class="_de9bg">
+						<div class="_8mm5v">
+							<h1 class="_i572c notranslate" >${mem.id }&nbsp;&nbsp;</h1>
+		                    <form id="Form" method="post">
+		                        <input type="hidden" value="${mem.seq }" name="follow" id="follow">
+		                        <input type="hidden" value="${mem.id }" name="sid" id="sid">
+		                        <input type="hidden" value="${follow }" name="connection" id="connection">
+		                        <input type="hidden" value="${login.seq }" name="member_seq" id="member_seq">
+		                        <input type="hidden" value="${login.id }" name="id" id="id">
+		                     </form>
+		                      <span	class="_5ji7m _e616g">
+		                        <c:if test="${2 eq follow }">
+  		                           <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로우 삭제</button>
+		                        </c:if>
+		                        <c:if test="${2 ne follow }">
+		                          <button class="_aj7mu _2hpcs _kenyh _o0442" onclick="IntFollow()">팔로우</button>
+		                        </c:if>	
+		                      </span>
+   
+							<div class="_38y5t">
+								<button class="_fcwm8 coreSpriteEllipsis _soakw" data-toggle="modal" data-target="#myModal2">옵션</button>
+							</div>
+						</div>
+						
+					<c:if test="${mem.homepage == null}">
+				        <div class="_bugdy">
+							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<a class="_56pjv" href="#none" target="_blank"></a>
+						</div>
+				    </c:if>
+				
+					<c:if test="${mem.homepage != null}">
+				        <div class="_bugdy">
+							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
+						</div>
+				    </c:if>
+			 <ul class=" _i305n">
                <li class=" _7gq8o"><a class="_s53mj _13vpi">
                      게시물 
                      <span class="_bkw5z _kjym7">${peedCount }</span>개
@@ -144,7 +146,7 @@
             </ul>
             </div>
             </header>
-			</c:if>
+            </c:if>
 			
             <div>
                <c:if test="${empty peedList }">

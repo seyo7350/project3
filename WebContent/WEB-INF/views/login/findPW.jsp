@@ -6,11 +6,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
-      <input type="text" value="${msg }" style="text-align: center; font-size: 30px; color: red; font-weight: bold;">
+      <input type="text" value="${msg }" style="text-align: center; font-size: 30px; color: black; font-weight: bold;">
       <main class="_6ltyr _rnpza" role="main">
 		<div class="_40h7m">
 			<article class="_e5cd3">
 			<form class="_cmoxu" action="findPWAF.do"  method="post" name ="form" onsubmit="return checkIt()">
+					<div class="_9w2xs">
+					<aside class="_891mt">
+					<label for="pepName">비밀번호 찾기</label></aside>
+					</div>
+				
 				<div class="_9w2xs">
 					<aside class="_891mt">
 					<label for="pepName">사용자 이름</label></aside>
@@ -38,7 +43,7 @@
 							    <input type="hidden" id="pwd" name="pwd" value="${t_pwd }">
 							   <button class="_aj7mu _2hpcs _kenyh _o0442" id="btn">제출</button>
 							   </span>
-							    &nbsp;&nbsp;&nbsp;<a href="index.do" class="_aj7mu _2hpcs _kenyh _o0442" >돌아가기</a>
+							    &nbsp;&nbsp;&nbsp;<button class="_aj7mu _2hpcs _kenyh _o0442"  onclick="">돌아가기</button>
 						</div>
 					</div>
 				</div>
@@ -74,4 +79,8 @@
 				}
 			   alert("비밀번호 찾기를 시작합니다. 고객님이 입력하신 정보가 올바른 경우 회원가입 시 입력한 이메일 걔정으로 임시 비밀번호를 보내드립니다.");
 			}
+		  
+		  function goback() {
+			  location.href='index.do';
+		  }
 		</script>
