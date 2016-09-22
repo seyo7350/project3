@@ -27,8 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
 import sist.co.model.CheckMember;
+import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.model.PeedDTO;
+import sist.co.service.FollowService;
 import sist.co.service.MemberService;
 import sist.co.service.ProfileService;
 
@@ -36,12 +38,17 @@ import sist.co.service.ProfileService;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
+    
+	public int l_seq = -1;
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private ProfileService profileService;
+	
+	@Autowired
+	private FollowService followService;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -76,6 +83,7 @@ public class MemberController {
 		if(count > 1){
 			checkMember.setMessage("로그인 성공");
 			request.getSession().setAttribute("login", login);
+			l_seq = login.getSeq();
 		}else{
 			checkMember.setMessage("로그인 실패");
 		}
@@ -143,15 +151,21 @@ public class MemberController {
 	      model.addAttribute("followerCount", followerCount);
 	      request.getSession().setAttribute("peedList", peedList);
 	      /*model.addAttribute("peedList", peedList);*/
+	    
+	      //팔로우 여부 확인
+	      FollowDTO followDTO = new FollowDTO();
+	      followDTO.setMember_seq(l_seq);
+	      followDTO.setFollow(seq);
 	      
+	      int follow = followService.getFollow(followDTO);
+	      System.out.println("팔로우 관계 = " + follow );	      
+	      model.addAttribute("follow", follow);
 	      
+	      //프로필 이미지 불러오기
 	      model.addAttribute("mem", memberDTO);
-			
 		  String filename = memberService.Loadprofile(memberDTO);
 		  String file = "upload/" + filename;
-
 		  model.addAttribute("file", file);
-			
 		  System.out.println("파일 위치 및 주소 = " + file );
 
 	      return "profile.tiles";
@@ -160,7 +174,7 @@ public class MemberController {
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) throws Exception{
 		logger.info("logout  " + new Date());
-		
+		    l_seq = -1;
 			request.getSession().invalidate();
 			return "index.tiles";
 	}
@@ -224,13 +238,10 @@ public class MemberController {
 	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
 
-			
 		boolean isS = memberService.PWDChange(memberDTO);
 		
 		if(isS){
-			
 			return "forward:/profile.do";
- 
 		}else{
 		   return "pwdchange.tiles";
 		}
@@ -387,6 +398,123 @@ public class MemberController {
 			
 		}	
 	 
-	 
+	 @RequestMapping(value="delFollow.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String delFollow(Model model, HttpServletRequest request, FollowDTO followDTO) throws Exception{
+			logger.info("delFollow " + new Date());
+
+			String mseq = request.getParameter("member_seq");
+			String fseq = request.getParameter("follow");
+			
+			int seq = Integer.parseInt(fseq);
+			int member_seq = Integer.parseInt(mseq);
+			int follow = Integer.parseInt(fseq);
+			
+			followDTO.setMember_seq(member_seq);
+			followDTO.setFollow(follow);
+
+		    boolean isS = followService.delFollow(followDTO);
+			
+			if(isS){
+				return "forward:/profile.do?seq="+seq;
+			}else{
+				return "redirect:/profile.do?seq="+seq;
+			}
+		}
+		
+		@RequestMapping(value="IntFollow.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String IntFollow(Model model, HttpServletRequest request, FollowDTO followDTO) throws Exception{
+			logger.info("IntFollow " + new Date());
+
+			String mseq = request.getParameter("member_seq");
+			String fseq = request.getParameter("follow");
+			
+			int seq = Integer.parseInt(fseq);
+			int member_seq = Integer.parseInt(mseq);
+			int follow = Integer.parseInt(fseq);
+			
+			followDTO.setMember_seq(member_seq);
+			followDTO.setFollow(follow);
+
+		    boolean isS = followService.IntFollow(followDTO);
+			
+			if(isS){
+				return "forward:/profile.do?seq="+seq;
+			}else{
+				return "redirect:/profile.do?seq="+seq;
+			}
+			
+		}
+		
+		@RequestMapping(value="updateFollow.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String updateFollow(Model model, HttpServletRequest request, FollowDTO followDTO) throws Exception{
+			logger.info("updateFollow " + new Date());
+
+			String mseq = request.getParameter("member_seq");
+			String fseq = request.getParameter("follow");
+			
+			int seq = Integer.parseInt(fseq);
+			int member_seq = Integer.parseInt(mseq);
+			int follow = Integer.parseInt(fseq);
+			
+			followDTO.setMember_seq(member_seq);
+			followDTO.setFollow(follow);
+
+		    boolean isS = followService.updateFollow(followDTO);
+			
+			if(isS){
+				return "forward:/profile.do?seq="+seq;
+			}else{
+				return "redirect:/profile.do?seq="+seq;
+			}
+			
+		}
+		
+		 
+		@RequestMapping(value="singo.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String singo(Model model, HttpServletRequest request) throws Exception{
+			logger.info("singo " + new Date());
+			
+			String id = request.getParameter("id");  //내 아이디
+			String seq = request.getParameter("member_seq"); //내 시퀀스
+			String sid = request.getParameter("sid"); //신고하는 넘 아이디   
+			String sseq = request.getParameter("follow"); //신고하는 넘 시퀀스
+
+	
+			model.addAttribute("id", id);	
+			model.addAttribute("seq", seq);	
+			model.addAttribute("sid", sid);	
+			model.addAttribute("sseq", sseq);		
+			
+			return "singo.tiles";
+		}
+		
+		@RequestMapping(value="singoAF.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String singoAF(Model model, HttpServletRequest request) throws Exception{
+			logger.info("singoAF " + new Date());
+			        
+			        String fseq = request.getParameter("seq"); 
+			        int seq = Integer.parseInt(fseq);
+			        
+					String setfrom = "qlalf666@gmail.com";         
+				    String tomail  = "qlalf666@gmail.com";  
+				    String title   = "인수다구래문 신고";      // 보내는 사람 이메일
+				    String content = request.getParameter("content1") +"\n\n" + request.getParameter("content2") ;   // 메일내용
+				    
+				    System.out.println(content);
+				    
+				    try {
+				      MimeMessage message = mailSender.createMimeMessage();
+				      MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+				      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+				      messageHelper.setTo(tomail);     // 받는사람 이메일
+				      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				      messageHelper.setText(content);  // 메일 내용
+				      mailSender.send(message);
+				    } catch(Exception e){
+				      System.out.println(e);
+				    }
+				    return "forward:/profile.do?seq="+seq;
+		}
 
 }

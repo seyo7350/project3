@@ -31,5 +31,33 @@ public class FollowDAOImpl implements FollowDAO {
 		followerList = sqlSession.selectList(ns+"getFollowerList", memberDTO);
 		return followerList;
 	}
+	
+	@Override
+	public int getFollow1(FollowDTO followDTO) throws Exception {
+		return sqlSession.selectOne(ns+"getFollow1", followDTO);
+	}
+
+	@Override
+	public int getFollow2(FollowDTO followDTO) throws Exception {
+		return sqlSession.selectOne(ns+"getFollow2", followDTO);
+	}
+
+	@Override
+	public boolean delFollow(FollowDTO followDTO) throws Exception {
+		sqlSession.update(ns+"delFollow", followDTO);
+		return true;
+	}
+
+	@Override
+	public boolean IntFollow(FollowDTO followDTO) throws Exception {
+		sqlSession.insert(ns+"IntFollow", followDTO);
+		return true;
+	}
+
+	@Override
+	public boolean updateFollow(FollowDTO followDTO) throws Exception {
+		sqlSession.update(ns+"updateFollow", followDTO);
+		return true;
+	}
 
 }

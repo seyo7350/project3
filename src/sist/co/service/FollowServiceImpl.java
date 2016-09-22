@@ -28,5 +28,28 @@ public class FollowServiceImpl implements FollowService {
 		followerList = followDAO.getFollowerList(memberDTO);
 		return followerList;
 	}
+	
+	@Override
+	public int getFollow(FollowDTO followDTO) throws Exception {
+		return followDAO.getFollow1(followDTO) + followDAO.getFollow2(followDTO);
+	}
+
+	@Override
+	public boolean delFollow(FollowDTO followDTO) throws Exception {
+		followDAO.delFollow(followDTO);
+		return true;
+	}
+
+	@Override
+	public boolean IntFollow(FollowDTO followDTO) throws Exception {
+		followDAO.IntFollow(followDTO);
+		return true;
+	}
+
+	@Override
+	public boolean updateFollow(FollowDTO followDTO) throws Exception {
+		followDAO.updateFollow(followDTO);
+		return true;
+	}
 
 }
