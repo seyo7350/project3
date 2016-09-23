@@ -157,17 +157,14 @@ public class MemberController {
 	      followDTO.setMember_seq(l_seq);
 	      followDTO.setFollow(seq);
 	      
-<<<<<<< HEAD
+
 	      request.getSession().setAttribute("mem", memberDTO);
 			
-=======
+
 	      int follow = followService.getFollow(followDTO);
 	      System.out.println("팔로우 관계 = " + follow );	      
 	      model.addAttribute("follow", follow);
-	      
-	      //프로필 이미지 불러오기
-	      model.addAttribute("mem", memberDTO);
->>>>>>> 909debfe3bff4fd07fc62fbcc9c727fdd5511a4b
+
 		  String filename = memberService.Loadprofile(memberDTO);
 		  String file = "upload/" + filename;
 		  model.addAttribute("file", file);
