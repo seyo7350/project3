@@ -56,7 +56,13 @@ public class PeedController {
 		System.out.println(param.toString());
 		
 		int totalPeedCount = peedService.getPeedCount(param);
-		List<PeedDTO> peedlist = peedService.getpeedlist(param);		
+		List<PeedDTO> peedlist = peedService.getpeedlist(param);
+		
+		// 글 내용에 링크 걸기...
+		/*for(int i = 0; i < peedlist.size(); i++){
+			String content = peedlist.get(i).getContent();
+			
+		}*/
 		
 		System.out.println("totalPeedCount:" +totalPeedCount);
 		System.out.println("size:" + peedlist.size());

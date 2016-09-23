@@ -159,6 +159,16 @@ public class MemberController {
 		request.getSession().setAttribute("peedList", peedList);
 		/*model.addAttribute("peedList", peedList);*/
 		
+		//팔로우 여부 확인
+        FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(l_seq);
+        followDTO.setFollow(seq);
+        request.getSession().setAttribute("mem", memberDTO);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+        model.addAttribute("follow", follow);
+		
 		
 		model.addAttribute("mem", memberDTO);
 		
@@ -178,10 +188,16 @@ public class MemberController {
 				
 		int hash_seq = searchDTO.getSeq();
 		
+		
+		
 		List<PeedDTO> peedList = searchService.getPeedList(hash_seq);
+		
+		System.out.println(peedList);
 		
 		model.addAttribute("searchDTO", searchDTO);
 		request.getSession().setAttribute("peedList", peedList);
+		
+		
 				
 		return "hash.tiles";
 	}

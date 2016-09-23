@@ -5,20 +5,15 @@
 <header class="_s6yvg">
 	<a class="_5lote _pss4f _vbtk2">
 		<c:if test="${peedList[peedIndex].member_profile_image eq null}">
-          <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg" id="blah">
+          <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
         </c:if>
         <c:if test="${peedList[peedIndex].member_profile_image ne null}">
            <img class="_a012k" src="upload/${peedList[peedIndex].member_profile_image }">
         </c:if>
 	</a>
 	<div class="_f95g7">
-<<<<<<< HEAD
 		<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">${peedList[peedIndex].member_id}</a>
 		<a class="_kul9p _rnlnu" title="페넬로페" href="#">위치정보</a>
-=======
-		<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">${mem.id }</a>
-		<a class="_kul9p _rnlnu" title="페넬로페" href="#">위치 정보(나중에 할 것)</a>
->>>>>>> 50ec0eedc8939289b6f33ab471b2fe3afa6a52c9
 	</div>
 	<span class="_fbms8 _e616g">
 		<button class="_aj7mu _2hpcs _kenyh _o0442" id="send_follow_btn">

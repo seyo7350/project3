@@ -17,7 +17,7 @@
 			<header class="_s6yvg">
 			<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
 			<c:if test="${peed.member_profile_image eq null}">
-              <img alt="이미지 오류" class="_g5pg0" src="image/not.jpg" id="blah">
+              <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
             </c:if>
             <c:if test="${peed.member_profile_image ne null}">
                <img class="_a012k" src="upload/${peed.member_profile_image}">
@@ -34,7 +34,7 @@
 		<div>
 			<div class="_22yr2 _e0mru">
 				<div class="_jjzlb" style="padding-buttom: 100%">
-					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="${peed.image}" style>
+					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}" style>
 				</div>
 				<!-- react - empthy : 3308 -->
 				<div class="_ovg3g"></div>
@@ -57,7 +57,7 @@
 				<ul class="_mo9iw _pnraw">
 					<li class="_nk46a">
 						<h1>
-							<a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">${peed.member_seq }</a>
+							<a class="_4zhc5 notranslate _iqaka" title="어아다" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
 								${peed.content }
 						</h1>
 					</li><!-- content 내용 부분 끝 -->
@@ -69,7 +69,7 @@
 						</c:if>
 					</c:forEach>
 			
-					<c:out value="${fn:length(peedreplylist[replyIndex])}"/>
+					<%-- <c:out value="${fn:length(peedreplylist[replyIndex])}"/> --%>
 					
 					<c:if test="${empty peedreplylist[replyIndex] }">
 						<li></li>

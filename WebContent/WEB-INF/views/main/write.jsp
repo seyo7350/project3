@@ -15,7 +15,12 @@
 				<form class="_8ab8k _j5hrx _pieko" id="_frmForm" method="post" enctype="multipart/form-data">
 					<header class="_s6yvg">
 						<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
-							<img class="_a012k" src="upload/${login.profile_image}">
+							<c:if test="${login.profile_image eq null}">
+				              <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
+				            </c:if>
+				            <c:if test="${login.profile_image ne null}">
+				               <img class="_a012k" src="upload/${login.profile_image}">
+				            </c:if>							
 						</a>
 						<div class="_f95g7">
 							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${login.id}</a>

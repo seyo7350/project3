@@ -62,11 +62,11 @@
                      게시물 
                      <span class="_bkw5z _kjym7">${peedCount }</span>개
                </li>
-               <li class=" _7gq8o"><a class="_s53mj _13vpi"  href="#none"  id="popbutton">
+               <li class=" _7gq8o"><a class="_s53mj _13vpi"  href="javacript:;" id="popbutton">
                      팔로워
                      <span class="_bkw5z _kjym7" title="0">${followerCount }</span>명
                </a></li>
-               <li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
+               <li class=" _7gq8o"><a class="_s53mj _13vpi" href="javacript:;" id="popbutton2">
                      팔로우
                      <span class="_bkw5z _kjym7"  title="0">${followCount }</span>명
                </a></li>
@@ -135,11 +135,11 @@
                      게시물 
                      <span class="_bkw5z _kjym7">${peedCount }</span>개
                </a></li>
-               <li class=" _7gq8o"><a class="_s53mj _13vpi" id="popbutton">
+               <li class=" _7gq8o"><a class="_s53mj _13vpi" href="javacript:;" id="popbutton">
                      팔로워
                      <span class="_bkw5z _kjym7" title="0">${followerCount }</span>명
                </a></li>
-               <li class=" _7gq8o"><a class="_s53mj _13vpi" href="#none" id="popbutton2">
+               <li class=" _7gq8o"><a class="_s53mj _13vpi" href="javacript:;" id="popbutton2">
                      팔로우
                      <span class="_bkw5z _kjym7">${followCount }</span>명
                </a></li>
@@ -522,8 +522,7 @@ function openModal5(peed_idx){
          data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
          success: function(data){
              var s = '';
-             
-<<<<<<< HEAD
+
              if(end != 0){
             	 if(peed_index == 0){
                      s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
@@ -535,17 +534,6 @@ function openModal5(peed_idx){
                      s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                      s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
                  }
-=======
-             if(peed_index == 0){
-                 s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-                 
-             }else if(peed_index == end){
-                 s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-             }else{
-                 /* alert(peed_index); */
-                 s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-                 s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
->>>>>>> 50ec0eedc8939289b6f33ab471b2fe3afa6a52c9
              }
              
              $('._hj98d').html(s);
