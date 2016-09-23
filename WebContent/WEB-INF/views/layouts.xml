@@ -64,6 +64,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
 	</definition>
 	
+	<definition name="singo.tiles" extends="profile.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/main/singo.jsp"/>
+	</definition>
+	
 	<!-- write -->
 	<definition name="write.tiles" extends="newspeed.tiles">
 	    <put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>

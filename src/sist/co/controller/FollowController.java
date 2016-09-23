@@ -54,6 +54,16 @@ public class FollowController {
 		
 		return "modal3.tiles";
 	}
+	
+	@RequestMapping(value="sendFollow.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String sendFollow(Model model, FollowDTO followDTO) throws Exception{
+		logger.info("sendFollow " + new Date());
+		System.out.println(followDTO.toString()+"시팔로팔로미");
+		
+		
+		return "";
+	}
 }
 
 
