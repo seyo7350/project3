@@ -15,11 +15,13 @@
 				<form class="_8ab8k _j5hrx _pieko" id="_frmForm" method="post" enctype="multipart/form-data">
 					<header class="_s6yvg">
 						<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
-							<img class="_a012k" src="주소">
+							<img class="_a012k" src="upload/${login.profile_image}">
 						</a>
 						<div class="_f95g7">
 							<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${login.id}</a>
 							<input type="hidden" name="member_seq" value="${login.seq}">
+							<input type="hidden" name="member_id" value="${login.id}">
+							<input type="hidden" name="member_profile_image" value="${login.profile_image}">
 							<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
 						</div>
 						<div class="filebox">				

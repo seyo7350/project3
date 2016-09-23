@@ -22,7 +22,7 @@
   	</insert>
   	
   	<select id="getLastHashSeq" resultType="java.lang.Integer">
-  		SELECT MAX(SEQ)
+  		SELECT NVL(MAX(SEQ), 0) AS SEQ
   		FROM INSTA_HASH
   	</select>
   	

@@ -24,7 +24,7 @@
   
 	<select id="login" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
 		SELECT * FROM INSTA_MEMBER
-		WHERE ID=#{id} AND PWD=#{pwd}	
+		WHERE ID=#{id} AND PWD=#{pwd}
 	</select>  
 	
 	<select id="getId" parameterType="sist.co.model.MemberDTO" resultType="int">
@@ -57,7 +57,11 @@
 	
     <update id="profileChange" parameterType="sist.co.model.MemberDTO">
 	    UPDATE INSTA_MEMBER SET ID= #{id}, NAME=#{name}, EMAIL=#{email}, HOMEPAGE=#{homepage} where SEQ= #{seq}
-	</update> 
+	</update>
+	
+	<update id="profileChangePeed" parameterType="sist.co.model.MemberDTO">
+		UPDATE INSTA_PEED SET MEMBER_ID=#{id}
+	</update>
 	
 	<update id="findPW" parameterType="sist.co.model.MemberDTO">
 	    UPDATE INSTA_MEMBER SET PWD= #{pwd} WHERE ID= #{id} AND NAME=#{name}
@@ -81,7 +85,11 @@
     
 	<update id="profile_upload" parameterType="sist.co.model.MemberDTO">
 	    UPDATE INSTA_MEMBER SET PROFILE_IMAGE = #{profile_image} WHERE SEQ =#{seq}
-	</update>  
+	</update>
+	
+	<update id="peed_profile_upload" parameterType="sist.co.model.MemberDTO">
+		UPDATE INSTA_PEED SET MEMBER_PROFILE_IMAGE = #{profile_image} WHERE MEMBER_SEQ =#{seq}
+	</update>
 	
   </mapper>
   

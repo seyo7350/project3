@@ -36,6 +36,10 @@
 		<put-attribute name="main" value="/WEB-INF/views/main/profile.jsp"/>
 	</definition>
 	
+	<definition name="hash.tiles" extends="newspeed.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/main/hash.jsp"/>
+	</definition>
+	
 	<definition name="modal4.tiles" template="/WEB-INF/views/main/modal4.jsp">
 	</definition>
 	

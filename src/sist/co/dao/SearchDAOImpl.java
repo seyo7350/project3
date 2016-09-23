@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import sist.co.model.HashDTO;
 import sist.co.model.MemberDTO;
+import sist.co.model.PeedDTO;
 import sist.co.model.SearchDTO;
 
 @Repository
@@ -37,7 +38,7 @@ public class SearchDAOImpl implements SearchDAO {
 			String top = hashList.get(i).getHash();
 			String bottom = "게시물 " + df.format(count) +"개";
 			
-			SearchDTO searchDTO = new SearchDTO(0, null, top, bottom);
+			SearchDTO searchDTO = new SearchDTO(0, hash_seq, null, top, bottom);
 			searchList.add(searchDTO);
 		}
 		
@@ -54,14 +55,29 @@ public class SearchDAOImpl implements SearchDAO {
 		
 		for(int i = 0; i < memberList.size(); i++){
 			String image = memberList.get(i).getProfile_image();
+			if(image == null){
+				image = "image/not.jpg";
+			}else{
+				image = "upload/" + image;
+			}			
+			int member_seq = memberList.get(i).getSeq();
 			String top = memberList.get(i).getId();
 			String bottom = memberList.get(i).getName();
 			
-			SearchDTO searchDTO = new SearchDTO(1, image, top, bottom);
+			SearchDTO searchDTO = new SearchDTO(1, member_seq, image, top, bottom);
 			searchList.add(searchDTO);
 		}
 		
 		return searchList;
+	}
+
+	@Override
+	public List<PeedDTO> getPeedList(int hash_seq) {
+		// TODO Auto-generated method stub
+		List<PeedDTO> peedList = new ArrayList<PeedDTO>();
+		peedList = sqlSession.selectList(ns+"getPeedList", hash_seq);
+		
+		return peedList;
 	}
 
 }
