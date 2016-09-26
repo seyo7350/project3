@@ -43,7 +43,7 @@ public class FollowController {
 	@RequestMapping(value="follower.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String follower(Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follower " + new Date());
-		/*System.out.println(memberDTO.toString());*/
+		System.out.println(memberDTO.toString());
 		
 		List<MemberDTO> followerList = new ArrayList<MemberDTO>();
 		followerList = followService.getFollowerList(memberDTO);

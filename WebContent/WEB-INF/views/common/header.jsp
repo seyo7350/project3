@@ -20,6 +20,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/detail.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/nav-style.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/hash-style.css"/>
 
 
 

@@ -62,6 +62,7 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public boolean profileChange(MemberDTO memberDTO) throws Exception {
 		sqlSession.update(ns+"profileChange", memberDTO);
+		sqlSession.update(ns+"profileChangePeed", memberDTO);
 		return true;
 	}
 
@@ -101,6 +102,7 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public boolean upload(MemberDTO memberDTO) throws Exception {
 		sqlSession.update(ns+"profile_upload", memberDTO);
+		sqlSession.update(ns+"peed_profile_upload", memberDTO);		
 		return true;
 	}
 

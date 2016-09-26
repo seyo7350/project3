@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <fmt:requestEncoding value="utf-8"/>
+
 <c:if test="${empty peedlist  }">
 		<div class="_s6b3o _i5nnf">
 			<div class="_3fhxa coreSpriteWelcomeDesktop"></div>
@@ -14,21 +15,26 @@
 	<c:forEach items="${peedlist }" var="peed" varStatus="peedVs">
 	<article class="_8ab8k _j5hrx _pieko">
 			<header class="_s6yvg">
-				<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
-				<img class="_a012k" src="주소">
-			</a>
-			<div class="_f95g7">
-				<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${peed.member_seq }</a>
-				<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
-			</div>
-			<a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">
-					<time class="_379kp" datetime="날짜 .시간" title="날짜">${peed.regi_date }</time>
-			</a>
-		</header><!-- 게시글 상단 메뉴  끝-->
+			<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
+			<c:if test="${peed.member_profile_image eq null}">
+              <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
+            </c:if>
+            <c:if test="${peed.member_profile_image ne null}">
+               <img class="_a012k" src="upload/${peed.member_profile_image}">
+            </c:if>
+		</a>
+		<div class="_f95g7">
+			<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${peed.member_id }</a>
+			<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
+		</div>
+		<a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">
+				<time class="_379kp" datetime="날짜 .시간" title="날짜">${peed.regi_date }</time>
+		</a>
+	</header><!-- 게시글 상단 메뉴  끝-->
 		<div>
 			<div class="_22yr2 _e0mru">
 				<div class="_jjzlb" style="padding-buttom: 100%">
-					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="${peed.image}" style>
+					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}" style>
 				</div>
 				<!-- react - empthy : 3308 -->
 				<div class="_ovg3g"></div>
@@ -51,7 +57,7 @@
 				<ul class="_mo9iw _pnraw">
 					<li class="_nk46a">
 						<h1>
-							<a class="_4zhc5 notranslate _iqaka" title="어아다" href="/게시물 아이디 프로필페이지주소/">${peed.member_seq }</a>
+							<a class="_4zhc5 notranslate _iqaka" title="어아다" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
 								${peed.content }
 						</h1>
 					</li><!-- content 내용 부분 끝 -->
@@ -63,7 +69,7 @@
 						</c:if>
 					</c:forEach>
 			
-					<c:out value="${fn:length(peedreplylist[replyIndex])}"/>
+					<%-- <c:out value="${fn:length(peedreplylist[replyIndex])}"/> --%>
 					
 					<c:if test="${empty peedreplylist[replyIndex] }">
 						<li></li>
