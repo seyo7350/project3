@@ -74,7 +74,17 @@
 							<button class="_1086v _ifrvy">댓글더보기</button>
 						</c:if>
 						<c:if test="${replyIndex ne -1}">
-							<li class="_nk46a">						
+							<c:forEach begin="0" end="${fn:length(peedreplylist[replyIndex])}" var="i">
+								<li class="_nk46a">						
+									<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][i].member_seq}</a>
+										<span>
+										<!-- react text:3330 -->
+										<%-- ${peedreplylist[replyIndex].content } --%>
+										<!-- /react text -->
+									</span>
+								</li>
+							</c:forEach>
+							<%-- <li class="_nk46a">						
 								<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][0].member_seq}</a>
 								<span>
 								<!-- react text:3330 -->
@@ -91,7 +101,7 @@
 								${peedreplylist[replyIndex][1].content }
 								<!-- /react text -->
 								</span>
-							</li><!-- 댓글 부분 끝 -->
+							</li><!-- 댓글 부분 끝 --> --%>
 						</c:if>
 					</c:if>
 				</ul>
