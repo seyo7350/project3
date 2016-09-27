@@ -42,5 +42,10 @@
 			ORDER BY REGI_DATE ASC
 	</select>
 	
+	<insert id="insertreply" parameterType="sist.co.model.PeedReplyDTO">
+		INSERT INTO INSTA_PEED_REPLY(SEQ, PEED_SEQ, MEMBER_SEQ, MEMBER_ID, CONTENT, REGI_DATE)
+		VALUES(SEQ_INSTA_PEED_REPLY.NEXTVAL,#{peed_seq},#{member_seq},#{member_id},#{content},SYSDATE)
+	</insert>
+	
 
 </mapper>

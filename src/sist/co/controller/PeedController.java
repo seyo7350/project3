@@ -198,6 +198,29 @@ public class PeedController {
 		return "modal5.tiles";
 
 	}
+	
+	@RequestMapping(value="insertreply.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String insertreply(HttpServletRequest request, Model model, PeedReplyDTO replyDTO) throws Exception{
+		logger.info("insertreply " + new Date());
+		
+		String content = request.getParameter("content");
+		String s_peed_seq = request.getParameter("val");
+		int peed_seq = Integer.parseInt(s_peed_seq);
+		System.out.println("content:"+content+"peed_seq:"+peed_seq);
+		
+		String member_id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+		int member_seq = ((MemberDTO)request.getSession().getAttribute("login")).getSeq();
+		
+		replyDTO.setPeed_seq(peed_seq);
+		replyDTO.setMember_seq(member_seq);
+		replyDTO.setMember_id(member_id);
+		replyDTO.setContent(content);
+		
+		System.out.println(replyDTO.toString());
+		
+		peedService.insertreply(replyDTO);	
+		return "redirect:/article.do";
+	}
 		
 
 }

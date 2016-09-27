@@ -49,6 +49,13 @@ public class PeedServiceImpl implements PeedService {
 		// TODO Auto-generated method stub
 		return peedDAO.getPeedReplylist(peed_seq);
 	}
+
+	@Override
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
+		// TODO Auto-generated method stub
+		peedDAO.insertreply(replyDTO);
+		return true;
+	}
 	
 	
 	

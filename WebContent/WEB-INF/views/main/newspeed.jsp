@@ -56,24 +56,4 @@ function add(){
 	});
 };
 
-/* $(window).scroll(function () {
-   if ($(window).scrollTop() == $(document).height() - $(window).height()) {		//스크롤이 제일 하단에 있다는 것을 알려주는 부분
-		alert('스크롤 제일 밑이다!!!!');
-   
-	   	$(document).ready(function(){
-	   		$.ajax({
-	   			type:"POST",
-	   	   		url:"./article.do",
-	   	   		data:"index="+index,
-	   	   		async:true,
-	   	   		success: function(data) {
-	   	   			alert(index);
-	   	   			$('#_last').append(data);
-	   	   			index++;
-	   	   		}
-	   		});
-	   	});
-   
-   }
-}); */
 </script> 

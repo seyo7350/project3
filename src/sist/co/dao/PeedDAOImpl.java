@@ -56,6 +56,13 @@ public class PeedDAOImpl implements PeedDAO {
 		peedreplylist = sqlSession.selectList(ns+"getPeedReplyList", peed_seq);
 		return peedreplylist;
 	}
+
+	@Override
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(ns+"insertreply", replyDTO);
+		return true;
+	}
 	
 	
 	

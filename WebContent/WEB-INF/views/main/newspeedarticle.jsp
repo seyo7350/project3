@@ -15,7 +15,7 @@
 	<c:forEach items="${peedlist }" var="peed" varStatus="peedVs">
 	<article class="_8ab8k _j5hrx _pieko">
 			<header class="_s6yvg">
-			<a class="_5lote _pss4f _vbtk2" href="/아이디/" style="width: 30px; height: 30px;">
+			<a class="_5lote _pss4f _vbtk2" href="" style="width: 30px; height: 30px;">
 			<c:if test="${peed.member_profile_image eq null}">
               <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
             </c:if>
@@ -24,7 +24,8 @@
             </c:if>
 		</a>
 		<div class="_f95g7">
-			<a class="_4zhc5 notranslate _ook48" title="아이디" href="/아이디 프로필/">${peed.member_id }</a>
+			<input type="hidden" id="_peed_seq${peed.seq}" name="peed_seq" value="${peed.seq}"/>
+			<a class="_4zhc5 notranslate _ook48" title="아이디" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
 			<!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
 		</div>
 		<a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">
@@ -82,10 +83,10 @@
 						<c:if test="${replyIndex ne -1}">
 							<c:forEach begin="0" end="${fn:length(peedreplylist[replyIndex])}" var="i">
 								<li class="_nk46a">						
-									<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][i].member_seq}</a>
+									<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?seq=${peedreplylist[replyIndex][i].member_seq}">${peedreplylist[replyIndex][i].member_id}</a>
 										<span>
 										<!-- react text:3330 -->
-										<%-- ${peedreplylist[replyIndex].content } --%>
+										${peedreplylist[replyIndex][i].content}
 										<!-- /react text -->
 									</span>
 								</li>
@@ -116,7 +117,9 @@
 						<span class="_soakw coreSpriteHeartOpen">좋아요</span>
 					</a>
 					<form class="_k3t69" name="replyform">
-						<input type="text" name="reply" class="_7uiwk _qy55y" aria-label="Add a comment....." placeholder="Add a comment..." value="">
+						<%-- <input type="hidden" id="_peed_seq" name="peed_seq" value="${peed.seq}"/> --%>
+						<input type="text" name="reply" id="_reply${peed.seq}" class="_7uiwk _qy55y" aria-label="Add a comment....." placeholder="Add a comment..." 
+							onkeydown="javascript:if(event.keyCode==13){insertreply(${peed.seq})};" value="">
 					</form>
 					<!-- <button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button> -->
 				</section>
@@ -124,13 +127,19 @@
 	</article>
 	</c:forEach>
 </c:if>
+
 <script  type="text/javascript">
-/* $(document).ready(function(){
-	$('#reply input[name=reply]').keydown(function(e){
-		if(e.keyCode == 13){
-			e.cancelBubble = true;
-			alert('엔터키');
-		}
+function insertreply(val){
+	var content= $('#_reply'+val).val();
+	alert('content:'+content+'val'+val);
+	$.ajax({
+		type:"POST",
+   		url:"./insertreply.do",
+   		data:{content:content,val:val},
+   		async:true,
+   		success: function(content) {
+   			alert("content:"+content+" "+"peed_seq:"+val);
+   		}
 	});
-}); */
+}
 </script> 

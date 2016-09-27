@@ -15,6 +15,8 @@ public interface PeedService {
 	public PeedDTO getPeed(int image_number) throws Exception;
 	public int getPeedCount(PagingParam param) throws Exception;
 	public List<PeedReplyDTO> getPeedReplylist(int peed_seq) throws Exception;
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception;
+	
 	
 
 }
