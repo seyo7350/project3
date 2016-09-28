@@ -5,8 +5,9 @@ import java.util.Date;
 /*
 	CREATE TABLE INSTA_PEED_REPLY(
 		SEQ NUMBER(8) PRIMARY KEY,
-		PEED_SEQ NUMBER(8) NOT NULL,
+		PEED_SEQ NUMBER(8) NOT NULL,		
 		MEMBER_SEQ NUMBER(8) NOT NULL,
+		MEMBER_ID VARCHAR2(50) NOT NULL,
 		CONTENT VARCHAR2(4000),
 		REGI_DATE DATE NOT NULL
 	)
@@ -18,6 +19,10 @@ import java.util.Date;
 	ALTER TABLE INSTA_PEED_REPLY
 	ADD CONSTRAINT FK_INSTA_PEED_REPLY_MEMBER_SEQ FOREIGN KEY(MEMBER_SEQ)
 	REFERENCES INSTA_MEMBER(SEQ);
+	
+	ALTER TABLE INSTA_PEED_REPLY
+	ADD CONSTRAINT FK_INSTA_PEED_REPLY_MEMBER_ID FOREIGN KEY(MEMBER_ID)
+	REFERENCES INSTA_MEMBER(ID);
 
 	CREATE SEQUENCE SEQ_INSTA_PEED_REPLY;
 */
@@ -27,6 +32,7 @@ public class PeedReplyDTO {
 	private int seq;
 	private int peed_seq;
 	private int member_seq;
+	private String member_id;
 	private String content;
 	private Date regi_date;
 	
@@ -34,11 +40,12 @@ public class PeedReplyDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PeedReplyDTO(int seq, int peed_seq, int member_seq, String content, Date regi_date) {
+	public PeedReplyDTO(int seq, int peed_seq, int member_seq, String member_id, String content, Date regi_date) {
 		super();
 		this.seq = seq;
 		this.peed_seq = peed_seq;
 		this.member_seq = member_seq;
+		this.member_id = member_id;
 		this.content = content;
 		this.regi_date = regi_date;
 	}
@@ -65,6 +72,14 @@ public class PeedReplyDTO {
 
 	public void setMember_seq(int member_seq) {
 		this.member_seq = member_seq;
+	}	
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 	public String getContent() {
@@ -85,8 +100,9 @@ public class PeedReplyDTO {
 
 	@Override
 	public String toString() {
-		return "Peed_Reply [seq=" + seq + ", peed_seq=" + peed_seq + ", member_seq=" + member_seq + ", content="
-				+ content + ", regi_date=" + regi_date + "]";
+		return "PeedReplyDTO [seq=" + seq + ", peed_seq=" + peed_seq + ", member_seq=" + member_seq + ", member_id="
+				+ member_id + ", content=" + content + ", regi_date=" + regi_date + "]";
 	}
+	
 	
 }

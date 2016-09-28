@@ -81,7 +81,13 @@ public class PeedDAOImpl implements PeedDAO {
 	@Override
 	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
 		return sqlSession.selectOne(ns+"searchThumbsUp", thumbsUpDTO);
-		
+	}
+	
+	@Override
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(ns+"insertreply", replyDTO);
+		return true;
 	}
 	
 	

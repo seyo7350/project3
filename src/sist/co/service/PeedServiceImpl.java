@@ -76,4 +76,11 @@ public class PeedServiceImpl implements PeedService {
 		return peedDAO.searchThumbsUp(thumbsUpDTO);
 	}
 	
+	@Override
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
+		// TODO Auto-generated method stub
+		peedDAO.insertreply(replyDTO);
+		return true;
+	}
+	
 }

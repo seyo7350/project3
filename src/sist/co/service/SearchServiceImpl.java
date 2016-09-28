@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sist.co.dao.SearchDAO;
+import sist.co.model.PeedDTO;
 import sist.co.model.SearchDTO;
 
 @Service
@@ -24,5 +25,11 @@ public class SearchServiceImpl implements SearchService {
 	public List<SearchDTO> searchMember(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return searchDAO.searchMember(keyword);
+	}
+
+	@Override
+	public List<PeedDTO> getPeedList(int hash_seq) {
+		// TODO Auto-generated method stub
+		return searchDAO.getPeedList(hash_seq);
 	}
 }

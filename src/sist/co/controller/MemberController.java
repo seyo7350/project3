@@ -30,9 +30,12 @@ import sist.co.model.CheckMember;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.model.PeedDTO;
+import sist.co.model.SearchDTO;
+import sist.co.service.HashService;
 import sist.co.service.FollowService;
 import sist.co.service.MemberService;
 import sist.co.service.ProfileService;
+import sist.co.service.SearchService;
 
 @Controller
 public class MemberController {
@@ -52,6 +55,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+		
+	@Autowired
+	private SearchService searchService;
 	
 	
 	@RequestMapping(value="index.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -74,11 +80,11 @@ public class MemberController {
 		int count = -1;
 		MemberDTO login = memberService.login(memberDTO);
 		
-		count = memberService.loginPwd(memberDTO);
+		/*count = memberService.loginPwd(memberDTO);*/
 		
 		CheckMember checkMember = new CheckMember();
 		
-		if(count > 1){
+		if(login != null){
 			checkMember.setMessage("로그인 성공");
 			request.getSession().setAttribute("login", login);
 			l_seq = login.getSeq();
@@ -123,53 +129,76 @@ public class MemberController {
 		model.addAttribute("id", id);
 		return "newspeed.tiles";
 	}
+	
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
-	   public String profile(HttpServletRequest request, Model model, int seq) throws Exception{
-	      logger.info("profile " + new Date());
-	      
-	      MemberDTO memberDTO = new MemberDTO();
-	      memberDTO = profileService.findMemberDTO(seq);
-	      
-	      List<PeedDTO> peedList = new ArrayList<PeedDTO>();
-	      peedList = profileService.getPeedList(seq);
-	      
-	      int peedCount = profileService.countPeed(memberDTO);
-	      
-	      int followCount = profileService.countFollow(memberDTO);
-	      
-	      int followerCount = profileService.countFollower(memberDTO);
-	      
-	      /*System.out.println(peedCount+"!!!!!");
-	      System.out.println(followCount+"@@@@@@");
-	      System.out.println(followerCount+"#######");
-	      System.out.println(peedList.toString()+"$$$$$$$$");*/
-	      
-	      model.addAttribute("peedCount", peedCount);
-	      model.addAttribute("followCount", followCount);
-	      model.addAttribute("followerCount", followerCount);
-	      request.getSession().setAttribute("peedList", peedList);
-	      /*model.addAttribute("peedList", peedList);*/
-	    
-	      //팔로우 여부 확인
-	      FollowDTO followDTO = new FollowDTO();
-	      followDTO.setMember_seq(l_seq);
-	      followDTO.setFollow(seq);
-	      
-	      request.getSession().setAttribute("mem", memberDTO);
+	public String profile(HttpServletRequest request, Model model, int seq) throws Exception{
+		logger.info("profile " + new Date());
+		
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO = profileService.findMemberDTO(seq);
+		
+		List<PeedDTO> peedList = new ArrayList<PeedDTO>();
+		peedList = profileService.getPeedList(seq);
+		
+		int peedCount = profileService.countPeed(memberDTO);
+		
+		int followCount = profileService.countFollow(memberDTO);
+		
+		int followerCount = profileService.countFollower(memberDTO);
+		
+		/*System.out.println(peedCount+"!!!!!");
+		System.out.println(followCount+"@@@@@@");
+		System.out.println(followerCount+"#######");
+		System.out.println(peedList.toString()+"$$$$$$$$");*/
+		
+		model.addAttribute("peedCount", peedCount);
+		model.addAttribute("followCount", followCount);
+		model.addAttribute("followerCount", followerCount);
+		request.getSession().setAttribute("peedList", peedList);
+		/*model.addAttribute("peedList", peedList);*/
+		
+		//팔로우 여부 확인
+        FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(l_seq);
+        followDTO.setFollow(seq);
+        request.getSession().setAttribute("mem", memberDTO);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+        model.addAttribute("follow", follow);
+		
+		
+		model.addAttribute("mem", memberDTO);
+		
+		String filename = memberService.Loadprofile(memberDTO);
+		String file = "upload/" + filename;
+		
+		model.addAttribute("file", file);
 			
-	      int follow = followService.getFollow(followDTO);
-	      System.out.println("팔로우 관계 = " + follow );	      
-	      model.addAttribute("follow", follow);
-	      
-	      //프로필 이미지 불러오기
-	      model.addAttribute("mem", memberDTO);
-		  String filename = memberService.Loadprofile(memberDTO);
-		  String file = "upload/" + filename;
-		  model.addAttribute("file", file);
-		  System.out.println("파일 위치 및 주소 = " + file );
-
-	      return "profile.tiles";
-	   }
+		System.out.println("파일 위치 및 주소 = " + file );
+		
+		return "profile.tiles";
+	}
+	
+	@RequestMapping(value="hash.do",method={RequestMethod.GET, RequestMethod.POST})
+	public String hash(HttpServletRequest request, Model model, SearchDTO searchDTO) throws Exception{
+		logger.info("profile " + new Date());
+				
+		int hash_seq = searchDTO.getSeq();
+		
+		
+		
+		List<PeedDTO> peedList = searchService.getPeedList(hash_seq);
+		
+		System.out.println(peedList);
+		
+		model.addAttribute("searchDTO", searchDTO);
+		request.getSession().setAttribute("peedList", peedList);
+		
+		
+				
+		return "hash.tiles";
+	}
 		
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) throws Exception{
@@ -389,6 +418,22 @@ public class MemberController {
 				
 				memberService.upload(memberDTO);
 				logger.info("프로필 이미지 업로드 success");
+				
+				
+				
+				MemberDTO login = null;
+				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				String pwd = ((MemberDTO)request.getSession().getAttribute("login")).getPwd();
+				
+				memberDTO.setId(id);
+				memberDTO.setPwd(pwd);
+				
+				login = memberService.login(memberDTO);
+				
+				System.out.println(memberDTO.toString());
+				
+				request.getSession().setAttribute("login", login);
+				
 			} catch (Exception e) {
 
 				logger.info("프로필 이미지 업로드 fail");

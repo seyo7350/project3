@@ -4,11 +4,24 @@
 
 <header class="_s6yvg">
 	<a class="_5lote _pss4f _vbtk2">
+<<<<<<< HEAD
 		<img class="_a012k" src="${peedList[peed_index].image }" >
 	</a>
 	<div class="_f95g7">
 		<a class="_4zhc5 notranslate _ook48" title="${mem.id }" href="#">${mem.id }</a>
 		<a class="_kul9p _rnlnu" title="페넬로페" href="#">위치 정보(나중에 할 것)</a>
+=======
+		<c:if test="${peedList[peedIndex].member_profile_image eq null}">
+          <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
+        </c:if>
+        <c:if test="${peedList[peedIndex].member_profile_image ne null}">
+           <img class="_a012k" src="upload/${peedList[peedIndex].member_profile_image }">
+        </c:if>
+	</a>
+	<div class="_f95g7">
+		<a class="_4zhc5 notranslate _ook48" title="anhwichan" href="#">${peedList[peedIndex].member_id}</a>
+		<a class="_kul9p _rnlnu" title="페넬로페" href="#">위치정보</a>
+>>>>>>> e8a75dc2061a15d071bb04b1e3e905b2433cdee4
 	</div>
 	<span class="_fbms8 _e616g" id="fbms8">
 		
@@ -26,7 +39,11 @@
 <div>
 	<div class="_22yr2 _e0mru">
 		<div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
+<<<<<<< HEAD
 			<img alt="이미지 없음${follow_connect_cnt}" src="${peedList[peed_index].image }" style="height: 600px; width: 600px;">
+=======
+			<img alt="이미지 없음${peedIndex }" src="upload/${peedList[peedIndex].image }" style="height: 600px; width: 600px;">
+>>>>>>> e8a75dc2061a15d071bb04b1e3e905b2433cdee4
 		</div>
 		<div class="_ovg3g"></div>
 	</div>

@@ -21,4 +21,5 @@ public interface PeedService {
 	public void insertThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception;
+	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception;
 }

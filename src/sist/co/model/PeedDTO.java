@@ -3,9 +3,16 @@ package sist.co.model;
 import java.io.Serializable;
 
 /*
+DROP TABLE INSTA_PEED
+CASCADE CONSTRAINT
+
+DROP SEQUENCE SEQ_INSTA_PEED
+
 CREATE TABLE INSTA_PEED(
 	SEQ NUMBER(8) PRIMARY KEY,
 	MEMBER_SEQ NUMBER(8) NOT NULL,
+	MEMBER_ID VARCHAR2(50) NOT NULL,
+	MEMBER_PROFILE_IMAGE VARCHAR2(500),
 	IMAGE VARCHAR2(500) NOT NULL,
 	PEED_LIKE NUMBER(38) NOT NULL,
 	REGI_DATE DATE NOT NULL,
@@ -15,8 +22,6 @@ CREATE TABLE INSTA_PEED(
 ALTER TABLE INSTA_PEED
 ADD CONSTRAINT FK_INSTA_PEED_MEMBER_SEQ FOREIGN KEY(MEMBER_SEQ)
 REFERENCES INSTA_MEMBER(SEQ);
-
-CREATE SEQUENCE SEQ_INSTA_PEED;
 */
 
 import java.util.Date;
@@ -25,6 +30,8 @@ public class PeedDTO implements Serializable{
 	
 	private int seq;
 	private int member_seq;
+	private String member_id;
+	private String member_profile_image;
 	private String image;
 	private int peed_like;
 	private Date regi_date;
@@ -32,9 +39,11 @@ public class PeedDTO implements Serializable{
 	
 	public PeedDTO() {	}
 	
-	public PeedDTO(int seq, int member_seq, String image, int peed_like, Date regi_date, String content) {
+	public PeedDTO(int seq, int member_seq, String member_id, String member_profile_image, String image, int peed_like, Date regi_date, String content) {
 		this.seq = seq;
 		this.member_seq = member_seq;
+		this.member_id = member_id;
+		this.member_profile_image = member_profile_image;
 		this.image = image;
 		this.peed_like = peed_like;
 		this.regi_date = regi_date;
@@ -55,6 +64,22 @@ public class PeedDTO implements Serializable{
 
 	public void setMember_seq(int member_seq) {
 		this.member_seq = member_seq;
+	}
+	
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	
+	public String getMember_profile_image() {
+		return member_profile_image;
+	}
+
+	public void setMember_profile_image(String member_profile_image) {
+		this.member_profile_image = member_profile_image;
 	}
 
 	public String getImage() {
@@ -91,8 +116,10 @@ public class PeedDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "PeedDTO [seq=" + seq + ", member_seq=" + member_seq + ", image=" + image + ", peed_like=" + peed_like
+		return "PeedDTO [seq=" + seq + ", member_seq=" + member_seq + ", member_id=" + member_id
+				+ ", member_profile_image=" + member_profile_image + ", image=" + image + ", peed_like=" + peed_like
 				+ ", regi_date=" + regi_date + ", content=" + content + "]";
 	}
+
 	
 }
