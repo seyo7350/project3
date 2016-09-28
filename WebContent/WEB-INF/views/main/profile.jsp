@@ -169,12 +169,12 @@
           		<div class="_nljxa">
           		
           		<c:set var="peedlists" value="${peedList }" />
-          		<%
+          		<%-- <%
           			List<PeedDTO> r_peedlists = (List<PeedDTO>)pageContext.getAttribute("peedlists");
           			Collections.reverse(r_peedlists);
           			pageContext.setAttribute("peedlists", r_peedlists);
           		%>
-          		
+          		 --%>
                    <c:forEach items="${peedlists }" var="peed" varStatus="vs">
                    	<c:if test="${vs.count%3 eq 1 }">
              			<div class="_myci9">
@@ -402,6 +402,7 @@
                   </header>
                   <div>
                      <div class="_22yr2 _e0mru">
+                     
                         <div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
                            <img alt="기다림이 즐거워🙄💕케이크 먹고싶다는 한마디에 뚝!딱! 항상 고맙지만 오늘은 이렇게 딱 표현해야지,잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
                         </div>
@@ -476,7 +477,7 @@ $(function(){
           type:"POST",
           url:"follower.do",
           async:true,
-          data:"id=${login.id}&seq=${login.seq}",
+          data:"id=${mem.id}&seq=${mem.seq}",
           success: function(data){
              /* alert(data); */
              $('#modal3').html(data);
@@ -495,7 +496,7 @@ $(function(){
           type:"POST",
           url:"follow.do",
           async:true,
-          data:"id=${login.id}&seq=${login.seq}",
+          data:"id=${mem.id}&seq=${mem.seq}",
           success: function(data){
              /* alert(data); */
              $('#modal4').html(data);
@@ -511,19 +512,21 @@ $(function(){
 // detail
 var end = '${fn:length(peedList)}'-1;
 var peed_index = -1;
+
 function openModal5(peed_idx){
    peed_index = peed_idx;
       /* alert(peed_index); */
-
       $.ajax({
          type:"POST",
          url:"detail.do",
          async:true,
-         data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+         data:"member_seq=${login.seq}&peed_index="+peed_index,
          success: function(data){
+        	 
              var s = '';
-             
-             if(peed_index == 0){
+             if(peed_index==0 && end==0){
+            	 s = '';
+             }else if(peed_index == 0){
                  s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
                  
              }else if(peed_index == end){
@@ -613,17 +616,18 @@ $(function(){
 });
 
 $(document).ready(function(){
-   $('._quk42').click(function(){
-       /* alert(this.className); */
+  	 $('._quk42').click(function(){
+      
       $('#myModal5').modal('hide');
+      /* window.location.reload(true); */ 
    });
    
    $('._3eajp').click(function(){
-      
       $('#myModal5').modal('hide');
+      /* window.location.reload(true); */
    });
 });
-
+ 
 $(document).ready(function(){
    $('._quk42').click(function(){
        /* alert(this.className); */

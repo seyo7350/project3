@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sist.co.model.CheckMember;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.service.FollowService;
@@ -27,14 +30,14 @@ public class FollowController {
 	@RequestMapping(value="follow.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String follow(Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follow " + new Date());
-		/*System.out.println(memberDTO.toString());*/
+		System.out.println(memberDTO.toString()+"((((((((((((");
 		
 		List<MemberDTO> followList = new ArrayList<MemberDTO>();
 		followList = followService.getFollowList(memberDTO);
 		
-		/*System.out.println("size : " + followList.size());
-		System.out.println(followList.toString());
-		*/
+		System.out.println("size : " + followList.size());
+		System.out.println(followList.toString()+"!@#!@#!@#!@#");
+		
 		model.addAttribute("followList", followList);
 		
 		return "modal4.tiles";
@@ -57,12 +60,32 @@ public class FollowController {
 	
 	@RequestMapping(value="sendFollow.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String sendFollow(Model model, FollowDTO followDTO) throws Exception{
+	public int sendFollow(Model model, FollowDTO followDTO, HttpServletRequest request) throws Exception{
 		logger.info("sendFollow " + new Date());
-		System.out.println(followDTO.toString()+"시팔로팔로미");
+		System.out.println(followDTO.toString()+"팔로팔로미");
 		
+		int getFollow_count = followService.getFollow(followDTO);
 		
-		return "";
+		if(getFollow_count == 1){
+			followService.updateFollow(followDTO);
+		}else if(getFollow_count == 0){
+			followService.IntFollow(followDTO);
+		}else if(getFollow_count == 2){
+			return getFollow_count;
+		}
+		
+		int follow_check = followService.getFollow(followDTO);
+	    
+	    if(follow_check == 2){
+	    	System.out.println(follow_check+"팔로팔로미2");
+	    	int follow_connect_cnt = followService.getFollowConnect(followDTO);
+	    	System.out.println(follow_connect_cnt+"팔로팔로미_1");
+	    	request.getSession().setAttribute("follow_connect_cnt", follow_connect_cnt);
+	    	return follow_check;
+		}else{
+			System.out.println(follow_check+"팔로팔로미3");
+			return follow_check;
+		}
 	}
 }
 

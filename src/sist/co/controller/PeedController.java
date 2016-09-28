@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import sist.co.help.FUpUtil;
@@ -27,6 +28,7 @@ import sist.co.model.MemberDTO;
 import sist.co.model.PeedDTO;
 import sist.co.service.HashService;
 import sist.co.model.PeedReplyDTO;
+import sist.co.model.ThumbsUpDTO;
 import sist.co.service.PeedService;
 
 @Controller
@@ -179,19 +181,93 @@ public class PeedController {
 	
 	// 개인 피드
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String detail(HttpServletRequest request, Model model, MemberDTO memberDTO, int peed_index) throws Exception{
+	public String detail(HttpServletRequest request, Model model, int peed_index, PeedDTO peedDTO) throws Exception{
 		logger.info("detail " + new Date());
-		System.out.println(peed_index+"!@#!@#!@");
-		// 내 아이디에 해당하는 peed를 가져와야지
 		
-		// ajax로 보낸후 a태그 href에 넣어주자.
+		request.getSession().setAttribute("peed_index", peed_index);
 		
-		/*model.addAttribute("peed_index", peed_index);*/
-		request.getSession().setAttribute("peedIndex", peed_index);
+		List<PeedDTO> peedList = (List<PeedDTO>)(request.getSession().getAttribute("peedList"));
+		int peed_seq = peedList.get(peed_index).getSeq();
+		
+		ThumbsUpDTO thumbsUpDTO = new ThumbsUpDTO();
+		thumbsUpDTO.setPeed_seq(peed_seq);
+		thumbsUpDTO.setMember_seq(peedDTO.getMember_seq());
+		
+		System.out.println(thumbsUpDTO.toString()+"떰쩝");
+		
+		int like_state = peedService.searchThumbsUp(thumbsUpDTO);		
+		
+		request.getSession().setAttribute("like_state", like_state);
 		
 		return "modal5.tiles";
 
 	}
+	
+	@RequestMapping(value="openModal5.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public int openModal5(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
+		logger.info("openModal5 " + new Date());
 		
+		int like_state = peedService.searchThumbsUp(thumbsUpDTO);
+		
+		System.out.println("씨이발");
+		
+		return like_state;
+
+	}
+	
+	
+	@RequestMapping(value="plusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String plusPeedCnt(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
+		logger.info("plusPeedCnt " + new Date());
+		System.out.println(thumbsUpDTO.toString()+"굿굿");
+		
+		peedService.insertThumbsUp(thumbsUpDTO);
+		
+		PeedDTO peedDTO = new PeedDTO();
+		peedDTO.setSeq(thumbsUpDTO.getPeed_seq());
+		
+		peedService.plusLikeCnt(peedDTO);
+		
+		thumbsUpDTO.setLike_state(1);
+		
+		System.out.println(thumbsUpDTO.toString()+"좋아요 누르기");
+		
+		request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
+		request.getSession().setAttribute("peedDTO", peedDTO);
+		
+		/*model.addAttribute("thumbsUpDTO", thumbsUpDTO);
+		model.addAttribute("peedDTO", peedDTO);*/
+		
+		return "modal5.tiles";
+
+	}
+	
+	@RequestMapping(value="minusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String minusPeedCnt(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
+		logger.info("minusPeedCnt " + new Date());
+		System.out.println(thumbsUpDTO.toString()+"ㅠㅠ");
+		
+		peedService.deleteThumbsUp(thumbsUpDTO);
+		
+		PeedDTO peedDTO = new PeedDTO();
+		peedDTO.setSeq(thumbsUpDTO.getPeed_seq());
+		
+		peedService.minusLikeCnt(peedDTO);
+		
+		thumbsUpDTO.setLike_state(0);
+		
+		System.out.println(thumbsUpDTO.toString()+"좋아요 취소");
+		
+		request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
+		request.getSession().setAttribute("peedDTO", peedDTO);
+		
+		/*model.addAttribute("thumbsUpDTO", thumbsUpDTO);
+		model.addAttribute("peedDTO", peedDTO);*/
+		
+		return "modal5.tiles";
+
+	}
+
 
 }

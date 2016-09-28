@@ -11,6 +11,7 @@ import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.model.PeedReplyDTO;
+import sist.co.model.ThumbsUpDTO;
 
 @Service
 public class PeedServiceImpl implements PeedService {
@@ -49,7 +50,30 @@ public class PeedServiceImpl implements PeedService {
 		// TODO Auto-generated method stub
 		return peedDAO.getPeedReplylist(peed_seq);
 	}
-	
-	
+
+	@Override
+	public void plusLikeCnt(PeedDTO peedDTO) throws Exception {
+		peedDAO.plusLikeCnt(peedDTO);
+	}
+
+	@Override
+	public void minusLikeCnt(PeedDTO peedDTO) throws Exception {
+		peedDAO.minusLikeCnt(peedDTO);
+	}
+
+	@Override
+	public void insertThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.insertThumbsUp(thumbsUpDTO);
+	}
+
+	@Override
+	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.deleteThumbsUp(thumbsUpDTO);
+	}
+
+	@Override
+	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		return peedDAO.searchThumbsUp(thumbsUpDTO);
+	}
 	
 }

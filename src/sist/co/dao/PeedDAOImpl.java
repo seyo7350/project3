@@ -12,6 +12,7 @@ import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.model.PeedReplyDTO;
+import sist.co.model.ThumbsUpDTO;
 
 @Repository
 public class PeedDAOImpl implements PeedDAO {
@@ -55,6 +56,32 @@ public class PeedDAOImpl implements PeedDAO {
 		List<PeedReplyDTO> peedreplylist = new ArrayList<>();
 		peedreplylist = sqlSession.selectList(ns+"getPeedReplyList", peed_seq);
 		return peedreplylist;
+	}
+
+	@Override
+	public void plusLikeCnt(PeedDTO peedDTO) throws Exception {
+		sqlSession.update(ns+"plusLikeCnt", peedDTO);
+	}
+
+	@Override
+	public void minusLikeCnt(PeedDTO peedDTO) throws Exception {
+		sqlSession.update(ns+"minusLikeCnt", peedDTO);
+	}
+
+	@Override
+	public void insertThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		sqlSession.insert(ns+"insertThumbsUp", thumbsUpDTO);
+	}
+
+	@Override
+	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		sqlSession.delete(ns+"deleteThumbsUp", thumbsUpDTO);
+	}
+
+	@Override
+	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		return sqlSession.selectOne(ns+"searchThumbsUp", thumbsUpDTO);
+		
 	}
 	
 	
