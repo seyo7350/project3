@@ -148,7 +148,7 @@ public class MemberController {
 		
 		/*System.out.println(peedCount+"!!!!!");
 		System.out.println(followCount+"@@@@@@");
-		System.out.println(followerCount+"#######");
+		System.out.println(followerCouㄴnt+"#######");
 		System.out.println(peedList.toString()+"$$$$$$$$");*/
 		
 		model.addAttribute("peedCount", peedCount);

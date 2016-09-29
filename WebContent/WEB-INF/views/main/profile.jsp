@@ -524,7 +524,6 @@ function openModal5(peed_idx){
          success: function(data){
         	 
              var s = '';
-<<<<<<< HEAD
              if(peed_index==0 && end==0){
             	 s = '';
              }else if(peed_index == 0){
@@ -536,21 +535,8 @@ function openModal5(peed_idx){
                  /* alert(peed_index); */
                  s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                  s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-=======
-
-             if(end != 0){
-            	 if(peed_index == 0){
-                     s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-                     
-                 }else if(peed_index == end){
-                     s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-                 }else{
-                     alert(peed_index);
-                     s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-                     s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-                 }
->>>>>>> e8a75dc2061a15d071bb04b1e3e905b2433cdee4
              }
+            
              
              $('._hj98d').html(s);
             

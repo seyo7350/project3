@@ -96,7 +96,7 @@ public class PeedController {
 		
 		/*return "redirect:/write.do";*/
 		
-		/*String fupload = "c:\\upload";*/
+		String fupload0 = "D:/3hdProject/Project3/upload";
 		String fupload = request.getServletContext().getRealPath("/upload");
 		logger.info(": " + fupload);
 		
@@ -109,6 +109,9 @@ public class PeedController {
 		try {
 			File file = new File(fupload + "/" + newFile);
 			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+			
+			File file1 = new File(fupload0 + "/" + newFile);
+			FileUtils.writeByteArrayToFile(file1, fupload0.getBytes());
 			
 			System.out.println(peedDTO.toString());
 			
@@ -183,7 +186,7 @@ public class PeedController {
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String detail(HttpServletRequest request, Model model, int peed_index, PeedDTO peedDTO) throws Exception{
 		logger.info("detail " + new Date());
-		
+		System.out.println(peedDTO.toString()+"피이이이뜨");
 		request.getSession().setAttribute("peed_index", peed_index);
 		
 		List<PeedDTO> peedList = (List<PeedDTO>)(request.getSession().getAttribute("peedList"));
@@ -202,20 +205,6 @@ public class PeedController {
 		return "modal5.tiles";
 
 	}
-	
-	@RequestMapping(value="openModal5.do", method={RequestMethod.GET, RequestMethod.POST})
-	@ResponseBody
-	public int openModal5(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
-		logger.info("openModal5 " + new Date());
-		
-		int like_state = peedService.searchThumbsUp(thumbsUpDTO);
-		
-		System.out.println("씨이발");
-		
-		return like_state;
-
-	}
-	
 	
 	@RequestMapping(value="plusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String plusPeedCnt(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
