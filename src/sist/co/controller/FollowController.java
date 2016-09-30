@@ -28,7 +28,7 @@ public class FollowController {
 	@Autowired FollowService followService;
 	
 	@RequestMapping(value="follow.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String follow(Model model, MemberDTO memberDTO) throws Exception{
+	public String follow(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follow " + new Date());
 		System.out.println(memberDTO.toString()+"((((((((((((");
 		
@@ -40,11 +40,21 @@ public class FollowController {
 		
 		model.addAttribute("followList", followList);
 		
+		//팔로우 여부 확인
+		/*MemberDTO memberDTO2 = (MemberDTO) request.getSession().getAttribute("login");
+        FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(memberDTO2.getSeq());
+        followDTO.setFollow(seq);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+		request.getSession().setAttribute("follow", follow);*/
+		
 		return "modal4.tiles";
 	}
 	
 	@RequestMapping(value="follower.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String follower(Model model, MemberDTO memberDTO) throws Exception{
+	public String follower(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follower " + new Date());
 		System.out.println(memberDTO.toString());
 		
@@ -54,6 +64,15 @@ public class FollowController {
 		/*System.out.println(followerList+"@#$@#$@#$");*/
 		
 		model.addAttribute("followerList", followerList);
+		
+		//팔로우 여부 확인
+        /*FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(l_seq);
+        followDTO.setFollow(seq);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+		request.getSession().setAttribute("follow", follow);*/
 		
 		return "modal3.tiles";
 	}

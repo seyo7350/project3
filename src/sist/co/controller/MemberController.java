@@ -158,12 +158,12 @@ public class MemberController {
         FollowDTO followDTO = new FollowDTO();
         followDTO.setMember_seq(l_seq);
         followDTO.setFollow(seq);
-        request.getSession().setAttribute("mem", memberDTO);
         
         int follow = followService.getFollow(followDTO);
         System.out.println("팔로우 관계 = " + follow );         
 		request.getSession().setAttribute("follow", follow);
 		
+		request.getSession().setAttribute("mem", memberDTO);
 		model.addAttribute("mem", memberDTO);
 		
 		String filename = memberService.Loadprofile(memberDTO);
