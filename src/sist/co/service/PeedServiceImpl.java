@@ -78,9 +78,18 @@ public class PeedServiceImpl implements PeedService {
 	
 	@Override
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
-		// TODO Auto-generated method stub
 		peedDAO.insertreply(replyDTO);
 		return true;
+	}
+
+	@Override
+	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.changeLikeState(thumbsUpDTO);
+	}
+
+	@Override
+	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
+		return peedDAO.countThumbsUp(peedDTO);
 	}
 	
 }

@@ -3,7 +3,9 @@ package sist.co.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.mysql.cj.x.json.JsonArray;
 
 import sist.co.help.FUpUtil;
 
@@ -202,13 +206,35 @@ public class PeedController {
 		
 		request.getSession().setAttribute("like_state", like_state);
 		
+		peedDTO.setSeq(thumbsUpDTO.getPeed_seq());
+		
+		int countThumbsUp = peedService.countThumbsUp(peedDTO);
+		System.out.println(countThumbsUp+"좋아요 몇개");
+		model.addAttribute("countThumbsUp", countThumbsUp);
+		
+		List<PeedReplyDTO> detailReplyList = new ArrayList<PeedReplyDTO>();
+		
+		detailReplyList = peedService.getPeedReplylist(peed_seq);
+		
+		model.addAttribute("detailReplyList", detailReplyList);
+		
 		return "modal5.tiles";
 
 	}
 	
 	@RequestMapping(value="plusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String plusPeedCnt(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
+	@ResponseBody
+	public int plusPeedCnt(HttpServletRequest request, Model model, int peed_index, int member_seq) throws Exception{
 		logger.info("plusPeedCnt " + new Date());
+		
+		List<PeedDTO> peedList = (List<PeedDTO>) request.getSession().getAttribute("peedList");
+		int peed_seq = peedList.get(peed_index).getSeq();
+		
+		ThumbsUpDTO thumbsUpDTO = new ThumbsUpDTO();
+		
+		thumbsUpDTO.setMember_seq(member_seq);
+		thumbsUpDTO.setPeed_seq(peed_seq);
+		
 		System.out.println(thumbsUpDTO.toString()+"굿굿");
 		
 		peedService.insertThumbsUp(thumbsUpDTO);
@@ -217,24 +243,45 @@ public class PeedController {
 		peedDTO.setSeq(thumbsUpDTO.getPeed_seq());
 		
 		peedService.plusLikeCnt(peedDTO);
+		System.out.println("좋아요 +1");
 		
-		thumbsUpDTO.setLike_state(1);
+		/*thumbsUpDTO.setLike_state(1);*/
 		
 		System.out.println(thumbsUpDTO.toString()+"좋아요 누르기");
 		
-		request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
+	  /*request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
 		request.getSession().setAttribute("peedDTO", peedDTO);
+		*/
 		
-		/*model.addAttribute("thumbsUpDTO", thumbsUpDTO);
-		model.addAttribute("peedDTO", peedDTO);*/
+		int like_state = peedService.searchThumbsUp(thumbsUpDTO);		
 		
-		return "modal5.tiles";
+		System.out.println(like_state+"좋아요 하고 라이크 스테이트");
+		
+		request.getSession().setAttribute("like_state", like_state);
+		
+		int p_countThumbsUp = peedService.countThumbsUp(peedDTO);
+		System.out.println(p_countThumbsUp+"좋아요 몇개++++");
+		
+		System.out.println("p_countThumbsUp : " + p_countThumbsUp);
+		
+		return p_countThumbsUp;
 
 	}
 	
 	@RequestMapping(value="minusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String minusPeedCnt(HttpServletRequest request, Model model, ThumbsUpDTO thumbsUpDTO) throws Exception{
+	@ResponseBody
+	public int minusPeedCnt(HttpServletRequest request, Model model, int peed_index, int member_seq) throws Exception{
 		logger.info("minusPeedCnt " + new Date());
+		
+		List<PeedDTO> peedList = (List<PeedDTO>) request.getSession().getAttribute("peedList");
+		
+		// jsp에서 vs.count을 받아와서 peed_seq로 하면 안되나?
+		int peed_seq = peedList.get(peed_index).getSeq();
+		
+		ThumbsUpDTO thumbsUpDTO = new ThumbsUpDTO();
+		thumbsUpDTO.setMember_seq(member_seq);
+		thumbsUpDTO.setPeed_seq(peed_seq);
+		
 		System.out.println(thumbsUpDTO.toString()+"ㅠㅠ");
 		
 		peedService.deleteThumbsUp(thumbsUpDTO);
@@ -243,20 +290,47 @@ public class PeedController {
 		peedDTO.setSeq(thumbsUpDTO.getPeed_seq());
 		
 		peedService.minusLikeCnt(peedDTO);
-		
-		thumbsUpDTO.setLike_state(0);
+		System.out.println("좋아요 -1");
+		/*thumbsUpDTO.setLike_state(0);*/
 		
 		System.out.println(thumbsUpDTO.toString()+"좋아요 취소");
 		
-		request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
+		/*request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
 		request.getSession().setAttribute("peedDTO", peedDTO);
+		*/
 		
-		/*model.addAttribute("thumbsUpDTO", thumbsUpDTO);
-		model.addAttribute("peedDTO", peedDTO);*/
+		peedService.changeLikeState(thumbsUpDTO);
 		
-		return "modal5.tiles";
+		int like_state = peedService.searchThumbsUp(thumbsUpDTO);
+		
+		System.out.println(like_state+"좋아요 취소 라이크 스테이트");
+		
+		request.getSession().setAttribute("like_state", like_state);
+		
+		int m_countThumbsUp = peedService.countThumbsUp(peedDTO);
+		System.out.println(m_countThumbsUp+"좋아요 몇개---");
+		/*model.addAttribute("m_countThumbsUp", m_countThumbsUp);*/
+		
+		System.out.println("m_countThumbsUp : " + m_countThumbsUp);
+		
+		return m_countThumbsUp;
 
 	}
 
+	@RequestMapping(value="detailReply.do",method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String, String> detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
 
+		System.out.println(peedReplyDTO.toString()+"나는 디테일 안에 댓글이야");
+		
+		// 댓글 DB 삽입
+		peedService.insertreply(peedReplyDTO);
+		
+		Map<String, String> map_id = new HashMap<String, String>();
+		
+		map_id.put("write_id", peedReplyDTO.getMember_id());
+		
+		
+		return map_id;
+	}
 }

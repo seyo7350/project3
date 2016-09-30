@@ -39,8 +39,8 @@
 	
 	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
 		SELECT * FROM INSTA_PEED_REPLY
-			WHERE PEED_SEQ = #{peed_seq} 
-			ORDER BY REGI_DATE ASC
+		WHERE PEED_SEQ = #{peed_seq} 
+		ORDER BY REGI_DATE DESC
 	</select>
 	
 	<update id="plusLikeCnt" parameterType="sist.co.model.PeedDTO">
@@ -72,9 +72,21 @@
 				WHERE MEMBER_SEQ=#{member_seq} AND PEED_SEQ=#{peed_seq}
 	</select>
 	
+	<update id="changeLikeState" parameterType="sist.co.model.ThumbsUpDTO">
+		UPDATE INSTA_THUMBSUP
+			SET LIKE_STATE = 0
+				WHERE MEMBER_SEQ=#{member_seq} AND PEED_SEQ=#{peed_seq}
+	</update>
+	
 	<insert id="insertreply" parameterType="sist.co.model.PeedReplyDTO">
 		INSERT INTO INSTA_PEED_REPLY(SEQ, PEED_SEQ, MEMBER_SEQ, MEMBER_ID, CONTENT, REGI_DATE)
 		VALUES(SEQ_INSTA_PEED_REPLY.NEXTVAL,#{peed_seq},#{member_seq},#{member_id},#{content},SYSDATE)
 	</insert>
+	
+	<select id="countThumbsUp" parameterType="sist.co.model.PeedDTO" resultType="int">
+		SELECT NVL(MAX(PEED_LIKE),0)
+			FROM INSTA_PEED
+				WHERE SEQ=#{seq}
+	</select>
 
 </mapper>
