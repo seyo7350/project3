@@ -5,14 +5,14 @@
 
 <mapper namespace="profile">
 	
-	<select id="countPeed" parameterType="sist.co.model.MemberDTO" resultType="int">
-		SELECT /* +INDEX_FFS(INSTA_PEED,SYS_C007790) */ NVL(COUNT(*),0) 
+	<select id="countPeed" parameterType="sist.co.model.MemberDTO" resultType="java.lang.Integer">
+		SELECT /* +INDEX_FFS(INSTA_PEED,SYS_C007790) */ NVL(COUNT(SEQ),0) 
 			FROM INSTA_PEED
 				WHERE MEMBER_SEQ=#{seq}
 	</select>
 	
-	<select id="countFollow" parameterType="sist.co.model.MemberDTO" resultType="int">
-		SELECT /* +INDEX_FFS(INSTA_MEMBER,SYS_C007779) */ NVL(COUNT(*),0) 
+	<select id="countFollow" parameterType="sist.co.model.MemberDTO" resultType="java.lang.Integer">
+		SELECT /* +INDEX_FFS(INSTA_MEMBER,SYS_C007779) */ NVL(COUNT(SEQ),0) 
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT INSTA_FOLLOW.FOLLOW
 								FROM INSTA_MEMBER, INSTA_FOLLOW
@@ -20,8 +20,8 @@
 		
 	</select>
 	
-	<select id="countFollower" parameterType="sist.co.model.MemberDTO" resultType="int">
-		SELECT /* +INDEX_FFS(INSTA_MEMBER,SYS_C007779) */ NVL(COUNT(*),0) 
+	<select id="countFollower" parameterType="sist.co.model.MemberDTO" resultType="java.lang.Integer">
+		SELECT /* +INDEX_FFS(INSTA_MEMBER,SYS_C007779) */ NVL(COUNT(SEQ),0) 
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT MEMBER_SEQ
 								FROM INSTA_FOLLOW

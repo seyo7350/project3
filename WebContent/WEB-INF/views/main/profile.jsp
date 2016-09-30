@@ -173,8 +173,8 @@
           			List<PeedDTO> r_peedlists = (List<PeedDTO>)pageContext.getAttribute("peedlists");
           			Collections.reverse(r_peedlists);
           			pageContext.setAttribute("peedlists", r_peedlists);
-          		%>
-          		 --%>
+          		%> --%>
+          		
                    <c:forEach items="${peedlists }" var="peed" varStatus="vs">
                    	<c:if test="${vs.count%3 eq 1 }">
              			<div class="_myci9">
@@ -289,7 +289,7 @@
         <div class="modal-content">
          <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-         <h4 class="modal-title" id="myModalLabel">팔로잉</h4>
+         <h4 class="modal-title" id="myModalLabel">팔로워</h4>
          </div>
          <div class="modal-body" id="modal3">
          <!-- <ul class="_539vh _4j13h">
@@ -334,7 +334,7 @@
        <div class="modal-content">
          <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-      <h4 class="modal-title" id="myModalLabel">팔로워</h4>
+      <h4 class="modal-title" id="myModalLabel">팔로잉</h4>
          </div>
          <div class="modal-body" id="modal4">
          <!-- <ul class="_539vh _4j13h" id="contentList">
@@ -481,7 +481,7 @@ $(function(){
           success: function(data){
              /* alert(data); */
              $('#modal3').html(data);
-              $('#myModal3').modal();
+             $('#myModal3').modal();
           }
        });
     })
@@ -498,9 +498,9 @@ $(function(){
           async:true,
           data:"id=${mem.id}&seq=${mem.seq}",
           success: function(data){
-             /* alert(data); */
+            /*  alert(data); */
              $('#modal4').html(data);
-              $('#myModal4').modal();
+             $('#myModal4').modal();
               
           }
        });

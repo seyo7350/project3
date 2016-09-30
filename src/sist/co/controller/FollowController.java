@@ -72,6 +72,7 @@ public class FollowController {
 			followService.IntFollow(followDTO);
 		}else if(getFollow_count == 2){
 			return getFollow_count;
+			
 		}
 		
 		int follow_check = followService.getFollow(followDTO);
@@ -86,6 +87,21 @@ public class FollowController {
 			System.out.println(follow_check+"팔로팔로미3");
 			return follow_check;
 		}
+	}
+	
+	@RequestMapping(value="cancleFollow.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public boolean cancleFollow(Model model, FollowDTO followDTO, HttpServletRequest request) throws Exception{
+		logger.info("sendFollow " + new Date());
+		System.out.println(followDTO.toString()+"팔로팔로미");
+		
+		System.out.println("팔로우 취소 컨트롤러");
+		boolean isS = followService.delFollow(followDTO);
+		System.out.println(isS + "팔로우 취소 컨트롤러");
+		if(isS){
+			return isS;
+		}else
+			return isS;
 	}
 }
 
