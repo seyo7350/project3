@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <fmt:requestEncoding value="utf-8"/>
 
 <c:if test="${empty peedlist  }">
@@ -35,7 +35,7 @@
 		<div>
 			<div class="_22yr2 _e0mru">
 				<div class="_jjzlb" style="padding-buttom: 100%">
-					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}" style>
+					<img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}">
 				</div>
 				<!-- react - empthy : 3308 -->
 				<div class="_ovg3g"></div>
@@ -45,17 +45,13 @@
 				<section class="_tfkbw _hpiil">
 					<div class="_iuf51  _oajsw">
 						<span>
-							<!-- react text: 3316 -->
 							좋아요
-							<!-- /react text -->
 							<span>${peed.peed_like }</span>
-							<!-- reat-text : 3318 -->
 							개
-							<!-- /react-text -->
 						</span>
 					</div>
 				</section><!-- 좋아요 아이콘 부분 끝 -->
-				<ul class="_mo9iw _pnraw">
+				<ul class="_mo9iw _pnraw" id="_ul${peed.seq}">
 					<li class="_nk46a">
 						<h1>
 							<a class="_4zhc5 notranslate _iqaka" title="어아다" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
@@ -69,8 +65,6 @@
 							<c:set var="replyIndex" value="${replyVs.index}"/>
 						</c:if>
 					</c:forEach>
-			
-					<%-- <c:out value="${fn:length(peedreplylist[replyIndex])}"/> --%>
 					
 					<c:if test="${empty peedreplylist[replyIndex] }">
 						<li></li>
@@ -78,11 +72,11 @@
 					
 					<c:if test="${not empty peedreplylist[replyIndex] }">
 						<c:if test="${(fn:length(peedreplylist[replyIndex])) > 2 }">
-							<button class="_1086v _ifrvy">댓글더보기</button>
+							<button class="_1086v _ifrvy" id="_btnreply">댓글더보기</button>
 						</c:if>
 						<c:if test="${replyIndex ne -1}">
-							<c:forEach begin="0" end="${fn:length(peedreplylist[replyIndex])}" var="i">
-								<li class="_nk46a">						
+							<c:forEach begin="0" end="1" var="i">
+								<li class="_nk46a" id="_lastreply">						
 									<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?seq=${peedreplylist[replyIndex][i].member_seq}">${peedreplylist[replyIndex][i].member_id}</a>
 										<span>
 										<!-- react text:3330 -->
@@ -91,24 +85,6 @@
 									</span>
 								</li>
 							</c:forEach>
-							<%-- <li class="_nk46a">						
-								<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][0].member_seq}</a>
-								<span>
-								<!-- react text:3330 -->
-								${peedreplylist[replyIndex][0].content }
-								<!-- /react text -->
-								</span>
-							</li><!-- 댓글 부분 끝 -->
-						</c:if>
-						<c:if test="${replyIndex ne -1}">
-							<li class="_nk46a">						
-								<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="댓글 쓴 아이디 프로필 페이지">${peedreplylist[replyIndex][1].member_seq}</a>
-								<span>
-								<!-- react text:3330 -->
-								${peedreplylist[replyIndex][1].content }
-								<!-- /react text -->
-								</span>
-							</li><!-- 댓글 부분 끝 --> --%>
 						</c:if>
 					</c:if>
 				</ul>
@@ -116,12 +92,10 @@
 					<a class="_ebwb5 _1tv0k" href="#" role="button" aria-disbled="false">
 						<span class="_soakw coreSpriteHeartOpen">좋아요</span>
 					</a>
-					<form class="_k3t69" name="replyform">
-						<%-- <input type="hidden" id="_peed_seq" name="peed_seq" value="${peed.seq}"/> --%>
+					<form class="_k3t69" name="replyform" onsubmit="return false">
 						<input type="text" name="reply" id="_reply${peed.seq}" class="_7uiwk _qy55y" aria-label="Add a comment....." placeholder="Add a comment..." 
 							onkeydown="javascript:if(event.keyCode==13){insertreply(${peed.seq})};" value="">
 					</form>
-					<!-- <button class="_9q0pi coreSpriteEllipsis _soakw">옵션더보기</button> -->
 				</section>
 			</div>
 	</article>
@@ -131,15 +105,50 @@
 <script  type="text/javascript">
 function insertreply(val){
 	var content= $('#_reply'+val).val();
-	alert('content:'+content+'val'+val);
-	$.ajax({
-		type:"POST",
-   		url:"./insertreply.do",
-   		data:{content:content,val:val},
-   		async:true,
-   		success: function(content) {
-   			alert("content:"+content+" "+"peed_seq:"+val);
-   		}
-	});
+	
+	var id = '${login.id}';
+	s+= '<li class="_nk46a">';
+	s+='<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="">' + id + '</a>';
+	s+='<span>';
+	s+= content;
+	s+='</span>';
+	s+='</li>';
+
+	if(content==""){
+		alert('댓글 입력하세요');
+	}else{
+		alert('content:'+content+'val'+val);
+		
+		$.ajax({
+			type:"POST",
+	   		url:"./insertreply.do",
+	   		data:{content:content,val:val},
+	   		success: function(){
+	   			alert('성공');
+	   			$('#_ul'+val+' li:last-child').after(s);
+	   			$('#_reply'+val).val('');
+	   		}   		
+		}); 
+	} 
 }
+
+function replylist(val){
+	alert('버튼 눌림'+val);
+	var r_size = '${fn:length(peedreplylist[])}';
+	alert(r_size);
+	
+	var s ="";
+	for (var i = 0; i < peedreplylist[replyIndex].length; i++) {
+		s+= '<li class="_nk46a">';
+		s+='<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?seq=${peedreplylist[replyIndex][i].member_seq}">'+${peedreplylist[replyIndex][i].member_id}+'</a>';
+		s+='<span>';
+		s+=${peedreplylist[replyIndex][i].content};
+		s+='</span>';
+		s+='</li>';
+	} 
+	
+	$('#_ul'+val+' li:first-child').before(s);
+
+} 
+
 </script> 
