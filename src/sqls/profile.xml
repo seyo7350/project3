@@ -39,7 +39,12 @@
 		SELECT *
 			FROM INSTA_PEED
 				WHERE MEMBER_SEQ=#{seq} 
-	</select>
+	</select>	
 	
+	<select id="getMemberSeq" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT SEQ
+		FROM INSTA_MEMBER
+		WHERE ID = #{id}
+	</select>
 
 </mapper>  

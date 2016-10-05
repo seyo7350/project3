@@ -45,4 +45,10 @@ public class ProfileServiceImpl implements ProfileService {
 		peedList = profileDAO.getPeedList(member_seq);
 		return peedList;
 	}
+
+	@Override
+	public int getMemberSeq(String id) {
+		// TODO Auto-generated method stub
+		return profileDAO.getMemberSeq(id);
+	}
 }

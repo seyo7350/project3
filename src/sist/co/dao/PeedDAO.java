@@ -16,4 +16,5 @@ public interface PeedDAO {
 	public int getPeedCount(PagingParam param) throws Exception;
 	public List<PeedReplyDTO> getPeedReplylist(int peed_seq) throws Exception;
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception;
+	public boolean linkedContent(PeedDTO peedDTO);
 }

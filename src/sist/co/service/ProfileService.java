@@ -11,4 +11,5 @@ public interface ProfileService {
 	public int countFollower(MemberDTO memberDTO) throws Exception;
 	public MemberDTO findMemberDTO(int member_seq) throws Exception;
 	public List<PeedDTO> getPeedList(int member_seq) throws Exception;
+	public int getMemberSeq(String id);
 }

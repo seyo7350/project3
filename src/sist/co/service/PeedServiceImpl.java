@@ -56,6 +56,13 @@ public class PeedServiceImpl implements PeedService {
 		peedDAO.insertreply(replyDTO);
 		return true;
 	}
+
+	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		peedDAO.linkedContent(peedDTO);
+		return false;
+	}
 	
 	
 	

@@ -8,7 +8,7 @@
 <!--실제내용 시작  -->
          
          <main class="_6ltyr _rnpza" role="main">
-         <article class="_42elc">
+         <article class="_3n7ri">
          	<header class="_1l53n">
          		<h1 class="_totu9">
          			#${searchDTO.top}

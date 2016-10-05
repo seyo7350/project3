@@ -50,5 +50,11 @@ public class ProfileDAOImpl implements ProfileDAO {
 		peedList = sqlSession.selectList(ns+"getPeedList", member_seq);
 		return peedList;
 	}
+
+	@Override
+	public int getMemberSeq(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(ns+"getMemberSeq", id);
+	}
 	
 }

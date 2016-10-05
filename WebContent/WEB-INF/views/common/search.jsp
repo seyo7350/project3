@@ -12,12 +12,12 @@
 					<!-- <a class="_k2vj6" href="#">
 						<div class="_oluat"> -->
 							<c:if test="${search.state eq 0}">
-								<a class="_k2vj6" href="javascript:;" onclick="goHash(${search.seq}, '${search.top}', '${search.bottom}')">
+								<a class="_k2vj6" href="javascript:;" onclick="goHash('${search.top}')">
 									<div class="_oluat">
 										<span class="_90x7z coreSpriteHashtag"></span>
 							</c:if>
 							<c:if test="${search.state eq 1}">
-								<a class="_k2vj6" href="profile.do?seq=${search.seq}">
+								<a class="_k2vj6" href="profile.do?id=${search.top}">
 									<div class="_oluat">
 										<img class="_q6fzq" src="${search.image}">
 							</c:if>
@@ -38,18 +38,8 @@
 	</div>
 </div>
 
-<form action="hash.do" name="searchFrm" method="post">
-	<input type="hidden" name="seq" value="">
-	<input type="hidden" name="top" value="">
-	<input type="hidden" name="bottom" value="">
-</form>
-
 <script>
-function goHash(seq, top, bottom){
-	var frm = document.searchFrm;
-	frm.seq.value = seq;
-	frm.top.value = top;
-	frm.bottom.value = bottom;
-	frm.submit();
+function goHash(keyword){
+	location.href='hash.do?keyword='+keyword;
 }
 </script>

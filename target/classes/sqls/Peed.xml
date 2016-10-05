@@ -47,5 +47,9 @@
 		VALUES(SEQ_INSTA_PEED_REPLY.NEXTVAL,#{peed_seq},#{member_seq},#{member_id},#{content},SYSDATE)
 	</insert>
 	
+	<update id="linkedContent" parameterType="sist.co.model.PeedDTO">
+		UPDATE INSTA_PEED SET CONTENT = #{content} WHERE SEQ = #{seq}
+	</update>
+	
 
 </mapper>

@@ -63,6 +63,13 @@ public class PeedDAOImpl implements PeedDAO {
 		sqlSession.insert(ns+"insertreply", replyDTO);
 		return true;
 	}
+
+	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		sqlSession.update(ns+"linkedContent", peedDTO);
+		return false;
+	}
 	
 	
 	
