@@ -29,7 +29,7 @@
 									</c:if>
 									
 									<c:if test="${login.seq ne follow.seq && follow_connect_cnt ne 1}">
-										<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" value="팔로우" id="send_follow_btn" onclick="sendFollow(${follow.seq})" />
+										<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" value="팔로우" id="send_follow_btn${follow.seq }" onclick="sendFollow(${follow.seq})" />
 									</c:if>
 									
 									<c:if test="${login.id eq follow.id }">
@@ -54,7 +54,7 @@ function sendFollow(follow_seq) {
 		data:"follow="+follow_seq+"&member_seq=${login.seq}",
 		success: function(follow_check){
 			if(follow_check==2){
-				$('#send_follow_btn').attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로우 취소','id':'cancle_follow_btn','onclick':'cancleFollow('+follow_seq+')'});				
+				$('#send_follow_btn'+follow_seq).attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로우 취소','id':'cancle_follow_btn'+follow_seq,'onclick':'cancleFollow('+follow_seq+')'});				
 			}else{ 
 				alert('팔로우 실패');
 			}
@@ -73,7 +73,7 @@ function cancleFollow(follow_seq){
 			/* alert(follow_check); */
 
 			if(follow_check==true){
-				$('#cancle_follow_btn').attr({'class':'_aj7mu _2hpcs _kenyh _o0442','value':'팔로우','id':'send_follow_btn','onclick':'sendFollow('+follow_seq+')'});				
+				$('#cancle_follow_btn'+follow_seq).attr({'class':'_aj7mu _2hpcs _kenyh _o0442','value':'팔로우','id':'send_follow_btn'+follow_seq,'onclick':'sendFollow('+follow_seq+')'});				
 			}else{ 
 				alert('팔로우 취소 실패');
 			}

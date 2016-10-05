@@ -98,5 +98,19 @@ public class PeedDAOImpl implements PeedDAO {
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
 		return sqlSession.selectOne(ns+"countThumbsUp", peedDTO);
 	}
+
+	@Override
+	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception {
+		sqlSession.update(ns+"delReply", peedReplyDTO);
+	}
+
+	@Override
+	public PeedReplyDTO getReplyDTO(PeedDTO peedDTO) throws Exception {
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		
+		peedReplyDTO = sqlSession.selectOne(ns+"getReplyDTO", peedDTO);
+		return peedReplyDTO;
+		
+	}
 	
 }

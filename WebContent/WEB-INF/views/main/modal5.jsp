@@ -47,28 +47,31 @@
 			<time class="_379kp" datetime="2016-08-29T16:26:48.000Z" title="2016년 8월 30일">1주</time>
 		</a>
 	</section>
-	<ul class="_mo9iw _123ym">
+	<ul class="_mo9iw _123ym" style="overflow: auto;">
 		<c:if test="${empty detailReplyList}">
-			<li class="_nk46a">
-				<h1>
+			<li class="_nk46a" id="first_reply_view">
+				<!-- <h1> -->
 					<a class="_4zhc5 notranslate _iqaka" title="" href="#" style="text-decoration: none;"></a>
 					<span>
 					댓글이 없습니다. 님이 댓글 달면 1빠
 					</span>
-				</h1>
+				<!-- </h1> -->
 			</li>
 		</c:if>
 		
 		<c:if test="${not empty detailReplyList }">
 			<c:forEach items="${detailReplyList }" var="detailReply" varStatus="vs">
-					<li class="_nk46a">
-						<h1>
-							<a class="_4zhc5 notranslate _iqaka" title="" href="#">${detailReply.member_id }</a>
-							<span>
+					<li class="_nk46a${detailReply.seq }">
+						<c:if test="${detailReply.member_id eq login.id }">
+							<button class="_4vltl" title="댓글 삭제" onclick="delReply(${detailReply.seq},${detailReply.peed_seq })"></button>
+						</c:if>
+						<!-- <h1> -->
+							<a class="_4zhc5 notranslate _iqaka" title="" href="#" id="after_del_reply_a">${detailReply.member_id }</a>
+							<span id="after_del_reply_span">
 							${detailReply.content }
 							<br>
 							</span>
-						</h1>
+						<!-- </h1> -->
 					</li>
 			</c:forEach>
 		</c:if>
@@ -176,11 +179,11 @@ function changeHeart(info) {
 		
 	}
 }
-
-
-
+//${detailReply.member_id eq login.id }">
+var login_id = '${login.id}';
 function insertReply(peed_seq) {
 	/* alert(peed_seq); */
+
 	var reply_msg = $('#detail_reply').val();
 	
 	/* var msg = jQuery('._nk46a h1').html(); */
@@ -194,12 +197,16 @@ function insertReply(peed_seq) {
 		data:"content="+reply_msg+"&peed_seq="+peed_seq+"&member_seq=${login.seq}&member_id=${login.id}",
 		dataType:"json",
 		success: function(map_id) {
+			$('#first_reply_view').hide();
 			/* alert(map_id); */
 			//alert(map.detailReplyList2.member_id);
 			/* alert(map.detailReplyList2); */
 			//for (var idx = 0; idx < map.detailReplyList2.length; idx++) {
 				var s = '<li class="_nk46a">';
-					s += '<h1>';
+					if(login_id == map_id.write_id){
+						s += '<button class="_4vltl" title="댓글 삭제"></button>';
+					}
+					//s += '<h1>';
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">${detailReplyList[peed_seq].member_id }</a>';
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#"><c:out value="${detailReplyList[0].member_id}"/>'; */
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">'+map.detailReplyList2[idx].member_id;
@@ -210,31 +217,52 @@ function insertReply(peed_seq) {
 					s += reply_msg;
 					s += '<br>';
 					s += '</span>';
-					s += '</h1>';
+					//s += '</h1>';
 					s += '</li>';
-					/* alert(s); */
+				 	/* alert(s); */
 				$('._mo9iw').append(s);
 				$('#detail_reply').val('');
+				
+				$.ajax({
+					type:"POST",
+					url:"detailReply2.do",
+					async:true,
+					data:"seq="+peed_seq,
+					success: function(data) {
+						/* alert(data.seq+'블라블라'); */
+						reply = data.seq;
+						
+						$('._nk46a').attr('class','_nk46a'+reply);
+						
+						$('._mo9iw').scrollTop($('._mo9iw').prop('scrollHeight'));
+					}
+				});
+				
+				$('._4vltl').on("click", function () {
+					delReply(reply, peed_seq);
+				});
+				
 			//}
-			
+		}
+	});
+	
+}
+
+function delReply(reply_seq, peed_seq) {
+	/* alert(reply_seq); */
+	/* alert(peed_seq); */
+	$.ajax({
+		type:"POST",
+		url:"delReply.do",
+		async:true,
+		data:"seq="+reply_seq+"&peed_seq="+peed_seq,
+		success : function(reply_seq){
+			/* alert(reply_seq); */
+			$('._nk46a'+reply_seq).html('');
 			
 		}
-		
 	});
 }
+
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	

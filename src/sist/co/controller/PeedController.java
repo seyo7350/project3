@@ -320,8 +320,8 @@ public class PeedController {
 	@RequestMapping(value="detailReply.do",method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public Map<String, String> detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
-
-		System.out.println(peedReplyDTO.toString()+"나는 디테일 안에 댓글이야");
+		
+		logger.info("detailReply " + new Date());
 		
 		// 댓글 DB 삽입
 		peedService.insertreply(peedReplyDTO);
@@ -332,5 +332,35 @@ public class PeedController {
 		
 		
 		return map_id;
+	}
+	
+	@RequestMapping(value="detailReply2.do",method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public PeedReplyDTO detailReply2(Model model, PeedDTO peedDTO) throws Exception{
+		
+		logger.info(peedDTO.toString()+"블라블라11111111");
+		
+		logger.info("detailReply2 " + new Date());
+		
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		peedReplyDTO = peedService.getReplyDTO(peedDTO);
+		
+		logger.info(peedReplyDTO.toString()+"블라블라22222222");
+		
+		return peedReplyDTO;
+	}
+	
+	@RequestMapping(value="delReply.do",method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public int delReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
+		
+		logger.info("delReply " + new Date());
+		logger.info(peedReplyDTO.toString()+"삭제할 댓글 정보");
+		
+		int reply_seq = peedReplyDTO.getSeq();
+		peedService.delReply(peedReplyDTO);
+		
+		return reply_seq;
+		
 	}
 }

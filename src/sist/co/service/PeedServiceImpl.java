@@ -91,5 +91,20 @@ public class PeedServiceImpl implements PeedService {
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
 		return peedDAO.countThumbsUp(peedDTO);
 	}
+
+	@Override
+	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception {
+		peedDAO.delReply(peedReplyDTO);
+		
+	}
+
+	@Override
+	public PeedReplyDTO getReplyDTO(PeedDTO peedDTO) throws Exception {
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		
+		peedReplyDTO = peedDAO.getReplyDTO(peedDTO);
+		
+		return peedReplyDTO;
+	}
 	
 }

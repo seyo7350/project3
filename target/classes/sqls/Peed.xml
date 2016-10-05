@@ -40,7 +40,7 @@
 	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
 		SELECT * FROM INSTA_PEED_REPLY
 		WHERE PEED_SEQ = #{peed_seq} 
-		ORDER BY REGI_DATE DESC
+		ORDER BY REGI_DATE ASC
 	</select>
 	
 	<update id="plusLikeCnt" parameterType="sist.co.model.PeedDTO">
@@ -88,5 +88,21 @@
 			FROM INSTA_PEED
 				WHERE SEQ=#{seq}
 	</select>
+	
+	<delete id="delReply" parameterType="sist.co.model.PeedReplyDTO">
+		DELETE
+			FROM INSTA_PEED_REPLY
+				WHERE SEQ=#{seq}
+	</delete>
 
+	<select id="getReplyDTO" parameterType="sist.co.model.PeedDTO" resultType="sist.co.model.PeedReplyDTO">
+		SELECT NVL(MAX(SEQ), 0) AS SEQ
+			FROM INSTA_PEED_REPLY
+				WHERE PEED_SEQ=#{seq}
+	</select>
 </mapper>
+
+
+
+
+

@@ -24,4 +24,6 @@ public interface PeedService {
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception;
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception;
+	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception;
+	public PeedReplyDTO getReplyDTO(PeedDTO peedDTO) throws Exception;
 }

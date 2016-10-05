@@ -5,14 +5,21 @@
   
   <mapper namespace="follow">
   	
-  	<select id="getFollowList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+  	<!-- <select id="getFollowList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
   		SELECT * 
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT INSTA_FOLLOW.FOLLOW
 								FROM INSTA_MEMBER, INSTA_FOLLOW
 									WHERE INSTA_FOLLOW.MEMBER_SEQ=#{seq} AND FOLLOW_CONNECT=1)
 			
-  	</select>
+  	</select> -->
+  	
+  	<select id="getFollowList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.FFDTO">
+	  	SELECT MEMBER.PROFILE_IMAGE AS PROFILE_IMAGE, MEMBER.ID AS ID, MEMBER.NAME AS NAME, FOLLOW.FOLLOW_CONNECT AS FOLLOW CONNECT
+		FROM INSTA_MEMBER MEMBER JOIN INSTA_FOLLOW FOLLOW
+		ON MEMBER.SEQ = FOLLOW.FOLLOW
+		WHERE FOLLOW.MEMBER_SEQ = #{seq}
+	</select>
   	
   	<select id="getFollowerList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
   		SELECT * 

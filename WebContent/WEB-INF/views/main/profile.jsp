@@ -179,12 +179,25 @@
                    	<c:if test="${vs.count%3 eq 1 }">
              			<div class="_myci9">
                    	</c:if>
-                           <a class="_8mlbc _vbtk2 _t5r8b"   href="#none"> 
+                           <a class="_8mlbc _vbtk2 _t5r8b" href="#none"> 
                                <div class="_22yr2">
                                   <div class="_jjzlb">
                                      <img alt="이미지 없음${vs.index }" class="_icyx7" src="upload/${peed.image }" onclick="openModal5(${vs.index})" />
                                   </div>
                                </div>
+                               
+                               <!-- <div class="_sppa1">
+	                               	<ul class="_m9z3c">
+	                               		<li class="_sjq6j _ajqft">
+	                               			<span class="_4aw90 _soakw coreSpriteHeartSmall"></span>
+	                               			<span>6</span>"개"
+	                               		</li>
+	                               		<li class="_qq2if">
+	                               			<span class="_fuu7c _soakw coreSpriteSpeechBubbleSmall"></span>
+	                               			<span>2</span>"개"
+	                               		</li>
+	                               	</ul>
+                               </div> -->
                             </a>
                        <c:if test="${vs.last && (vs.count%3 eq 1)}">
                         	<div class="_t5r8b _81g1f"></div>
@@ -378,7 +391,7 @@
             </div>
          </div>
          <div class="_7629j">
-            <div class="_hj98d">
+            <div class="_hj98d" id="hj98d">
                <a class="_qdy3e coreSpriteLeftPaginationArrow" href="javascript:alert('11');" role="button">이전</a>
                <a class="_de018 coreSpriteRightPaginationArrow" href="#" role="button">다음</a>
             </div>
@@ -536,9 +549,8 @@ function openModal5(peed_idx){
                  s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                  s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
              }
-            
              
-             $('._hj98d').html(s);
+             $('#hj98d').html(s);///////////////////////////////////////////////////////
             
             $('#modal5').html(data);
             
@@ -550,7 +562,7 @@ function openModal5(peed_idx){
 };
 
 $(document).ready(function(){
-    $('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
+    $('#hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
         peed_index++;
         /* alert(peed_index); */
         if(peed_index == end){
@@ -559,7 +571,7 @@ $(document).ready(function(){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
             s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
         }
-        $('._hj98d').html(s);
+        $('#hj98d').html(s);
         
         $.ajax({
             type:"POST",
@@ -574,7 +586,7 @@ $(document).ready(function(){
         });
     });
     
-    $('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
+    $('#hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
         peed_index--;
         /* alert(peed_index); */
         if(peed_index == 0){
@@ -584,7 +596,7 @@ $(document).ready(function(){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
             s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
         }
-        $('._hj98d').html(s);
+        $('#hj98d').html(s);
         
         $.ajax({
             type:"POST",
@@ -599,7 +611,6 @@ $(document).ready(function(){
         });
     });
 });
-
 
 /* function showModal4(데이터) {
    
@@ -657,9 +668,6 @@ $(document).ready(function(){
    }); */
 });
 
-
-
-
 /* function wrapWindowByMask(){
     //화면의 높이와 너비를 구한다.
     var maskHeight = $(document).height();  
@@ -687,6 +695,8 @@ $(document).ready(function(){
        $('.window').hide();  
    });
 }); */
+
+	
 
 $('#delete').click(function(){
    alert("프로필 사진을 기본사진으로 변경합니다.");
