@@ -12,6 +12,7 @@ import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.model.PeedReplyDTO;
+import sist.co.model.ThumbsUpDTO;
 
 @Repository
 public class PeedDAOImpl implements PeedDAO {
@@ -58,8 +59,32 @@ public class PeedDAOImpl implements PeedDAO {
 	}
 
 	@Override
+	public void plusLikeCnt(PeedDTO peedDTO) throws Exception {
+		sqlSession.update(ns+"plusLikeCnt", peedDTO);
+	}
+
+	@Override
+	public void minusLikeCnt(PeedDTO peedDTO) throws Exception {
+		sqlSession.update(ns+"minusLikeCnt", peedDTO);
+	}
+
+	@Override
+	public void insertThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		sqlSession.insert(ns+"insertThumbsUp", thumbsUpDTO);
+	}
+
+	@Override
+	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		sqlSession.delete(ns+"deleteThumbsUp", thumbsUpDTO);
+	}
+
+	@Override
+	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		return sqlSession.selectOne(ns+"searchThumbsUp", thumbsUpDTO);
+	}
+	
+	@Override
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
-		// TODO Auto-generated method stub
 		sqlSession.insert(ns+"insertreply", replyDTO);
 		return true;
 	}
@@ -72,6 +97,13 @@ public class PeedDAOImpl implements PeedDAO {
 	}
 	
 	
-	
+	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		sqlSession.update(ns+"changeLikeState", thumbsUpDTO);
+	}
+
+	@Override
+	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
+		return sqlSession.selectOne(ns+"countThumbsUp", peedDTO);
+	}
 	
 }

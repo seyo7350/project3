@@ -80,11 +80,9 @@ public class MemberController {
 	@ResponseBody
 	public CheckMember loginAf(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception {
 		logger.info("loginAf " + new Date());
-
+		System.out.println(memberDTO.toString());
 		int count = -1;
-		MemberDTO login = null;
-		
-		login = memberService.login(memberDTO);
+		MemberDTO login = memberService.login(memberDTO);
 		
 		/*count = memberService.loginPwd(memberDTO);*/
 		
@@ -143,6 +141,7 @@ public class MemberController {
 		int seq = profileService.getMemberSeq(id);
 		
 		MemberDTO memberDTO = new MemberDTO();
+		
 		memberDTO = profileService.findMemberDTO(seq);
 		
 		List<PeedDTO> peedList = new ArrayList<PeedDTO>();
@@ -153,18 +152,12 @@ public class MemberController {
 		int followCount = profileService.countFollow(memberDTO);
 		
 		int followerCount = profileService.countFollower(memberDTO);
-		
-		/*System.out.println(peedCount+"!!!!!");
-		System.out.println(followCount+"@@@@@@");
-		System.out.println(followerCount+"#######");
-		System.out.println(peedList.toString()+"$$$$$$$$");*/
-		
+
 		model.addAttribute("peedCount", peedCount);
 		model.addAttribute("followCount", followCount);
 		model.addAttribute("followerCount", followerCount);
 		request.getSession().setAttribute("peedList", peedList);
-		/*model.addAttribute("peedList", peedList);*/
-		
+
 		//팔로우 여부 확인
         FollowDTO followDTO = new FollowDTO();
         followDTO.setMember_seq(l_seq);
@@ -173,8 +166,7 @@ public class MemberController {
         
         int follow = followService.getFollow(followDTO);
         System.out.println("팔로우 관계 = " + follow );         
-        model.addAttribute("follow", follow);
-		
+		request.getSession().setAttribute("follow", follow);
 		
 		model.addAttribute("mem", memberDTO);
 		
@@ -210,7 +202,6 @@ public class MemberController {
 				
 		return "hash.tiles";
 	}
-	
 		
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) throws Exception{
@@ -472,7 +463,7 @@ public class MemberController {
 		    boolean isS = followService.delFollow(followDTO);
 			
 			if(isS){
-				return "forward:/profile.do?seq="+seq;
+				return "redirect:/profile.do?seq="+seq;
 			}else{
 				return "redirect:/profile.do?seq="+seq;
 			}
@@ -495,7 +486,7 @@ public class MemberController {
 		    boolean isS = followService.IntFollow(followDTO);
 			
 			if(isS){
-				return "forward:/profile.do?seq="+seq;
+				return "redirect:/profile.do?seq="+seq;
 			}else{
 				return "redirect:/profile.do?seq="+seq;
 			}
@@ -519,7 +510,7 @@ public class MemberController {
 		    boolean isS = followService.updateFollow(followDTO);
 			
 			if(isS){
-				return "forward:/profile.do?seq="+seq;
+				return "redirect:/profile.do?seq="+seq;
 			}else{
 				return "redirect:/profile.do?seq="+seq;
 			}

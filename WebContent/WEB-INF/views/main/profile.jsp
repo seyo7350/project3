@@ -169,11 +169,11 @@
           		<div class="_nljxa">
           		
           		<c:set var="peedlists" value="${peedList }" />
-          		<%
+          		<%-- <%
           			List<PeedDTO> r_peedlists = (List<PeedDTO>)pageContext.getAttribute("peedlists");
           			Collections.reverse(r_peedlists);
           			pageContext.setAttribute("peedlists", r_peedlists);
-          		%>
+          		%> --%>
           		
                    <c:forEach items="${peedlists }" var="peed" varStatus="vs">
                    	<c:if test="${vs.count%3 eq 1 }">
@@ -289,7 +289,7 @@
         <div class="modal-content">
          <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-         <h4 class="modal-title" id="myModalLabel">팔로잉</h4>
+         <h4 class="modal-title" id="myModalLabel">팔로워</h4>
          </div>
          <div class="modal-body" id="modal3">
          <!-- <ul class="_539vh _4j13h">
@@ -334,7 +334,7 @@
        <div class="modal-content">
          <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
-      <h4 class="modal-title" id="myModalLabel">팔로워</h4>
+      <h4 class="modal-title" id="myModalLabel">팔로잉</h4>
          </div>
          <div class="modal-body" id="modal4">
          <!-- <ul class="_539vh _4j13h" id="contentList">
@@ -402,6 +402,7 @@
                   </header>
                   <div>
                      <div class="_22yr2 _e0mru">
+                     
                         <div class="_jjzlb" style="padding-bottom: 100%; height: 600px; width: 600px">
                            <img alt="기다림이 즐거워🙄💕케이크 먹고싶다는 한마디에 뚝!딱! 항상 고맙지만 오늘은 이렇게 딱 표현해야지,잘먹을게~ 고마워 힛... #케이크#선물#고마워#맛있게#먹겠습니다" class="_icyx7" src="image/like.PNG">
                         </div>
@@ -476,11 +477,11 @@ $(function(){
           type:"POST",
           url:"follower.do",
           async:true,
-          data:"id=${login.id}&seq=${login.seq}",
+          data:"id=${mem.id}&seq=${mem.seq}",
           success: function(data){
              /* alert(data); */
              $('#modal3').html(data);
-              $('#myModal3').modal();
+             $('#myModal3').modal();
           }
        });
     })
@@ -495,11 +496,11 @@ $(function(){
           type:"POST",
           url:"follow.do",
           async:true,
-          data:"id=${login.id}&seq=${login.seq}",
+          data:"id=${mem.id}&seq=${mem.seq}",
           success: function(data){
-             /* alert(data); */
+            /*  alert(data); */
              $('#modal4').html(data);
-              $('#myModal4').modal();
+             $('#myModal4').modal();
               
           }
        });
@@ -511,30 +512,31 @@ $(function(){
 // detail
 var end = '${fn:length(peedList)}'-1;
 var peed_index = -1;
+
 function openModal5(peed_idx){
    peed_index = peed_idx;
       /* alert(peed_index); */
-
       $.ajax({
          type:"POST",
          url:"detail.do",
          async:true,
-         data:"id=${login.id}&seq=${login.seq}&peed_index="+peed_index,
+         data:"member_seq=${login.seq}&peed_index="+peed_index,
          success: function(data){
+        	 
              var s = '';
-
-             if(end != 0){
-            	 if(peed_index == 0){
-                     s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-                     
-                 }else if(peed_index == end){
-                     s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-                 }else{
-                     alert(peed_index);
-                     s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
-                     s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
-                 }
+             if(peed_index==0 && end==0){
+            	 s = '';
+             }else if(peed_index == 0){
+                 s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
+                 
+             }else if(peed_index == end){
+                 s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+             }else{
+                 /* alert(peed_index); */
+                 s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
+                 s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
              }
+            
              
              $('._hj98d').html(s);
             
@@ -615,17 +617,18 @@ $(function(){
 });
 
 $(document).ready(function(){
-   $('._quk42').click(function(){
-       /* alert(this.className); */
+  	 $('._quk42').click(function(){
+      
       $('#myModal5').modal('hide');
+      /* window.location.reload(true); */ 
    });
    
    $('._3eajp').click(function(){
-      
       $('#myModal5').modal('hide');
+      /* window.location.reload(true); */
    });
 });
-
+ 
 $(document).ready(function(){
    $('._quk42').click(function(){
        /* alert(this.className); */

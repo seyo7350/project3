@@ -52,4 +52,9 @@ public class FollowServiceImpl implements FollowService {
 		return true;
 	}
 
+	@Override
+	public int getFollowConnect(FollowDTO followDTO) throws Exception {
+		return followDAO.getFollowConnect(followDTO);
+	}
+
 }

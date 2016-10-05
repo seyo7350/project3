@@ -60,4 +60,10 @@ public class FollowDAOImpl implements FollowDAO {
 		return true;
 	}
 
+	@Override
+	public int getFollowConnect(FollowDTO followDTO) throws Exception {
+		return sqlSession.selectOne(ns+"getFollowConnect", followDTO);
+		
+	}
+
 }

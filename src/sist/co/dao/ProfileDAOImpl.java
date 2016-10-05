@@ -36,9 +36,9 @@ public class ProfileDAOImpl implements ProfileDAO {
 	}
 
 	@Override
-	public MemberDTO findMemberDTO(int member_seq) throws Exception {
+	public MemberDTO findMemberDTO(int seq) throws Exception {
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = sqlSession.selectOne(ns+"findMemberDTO", member_seq);
+		memberDTO = sqlSession.selectOne(ns+"findMemberDTO", seq);
 		return memberDTO;
 		
 	}

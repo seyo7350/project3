@@ -10,14 +10,15 @@
 		FROM(
 			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE DESC) AS RN, SEQ, MEMBER_SEQ, MEMBER_ID, MEMBER_PROFILE_IMAGE, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
 			FROM(
-				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE ASC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.MEMBER_ID,PEED.MEMBER_PROFILE_IMAGE,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
+				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE DESC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.MEMBER_ID,PEED.MEMBER_PROFILE_IMAGE,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
 				FROM INSTA_FOLLOW FOLLOW RIGHT JOIN INSTA_PEED PEED
 				ON FOLLOW.FOLLOW = PEED.MEMBER_SEQ
 				WHERE FOLLOW.MEMBER_SEQ = #{member_seq} OR PEED.MEMBER_SEQ = #{member_seq}
 			) A
 			WHERE rnum = 1
+			ORDER BY REGI_DATE DESC
 		)
-		WHERE RN BETWEEN #{start} AND #{end} ORDER BY REGI_DATE DESC
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="getPeedCount" parameterType="sist.co.model.PagingParam" resultType="java.lang.Integer">
@@ -38,9 +39,44 @@
 	
 	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
 		SELECT * FROM INSTA_PEED_REPLY
-			WHERE PEED_SEQ = #{peed_seq} 
-			ORDER BY REGI_DATE ASC
+		WHERE PEED_SEQ = #{peed_seq} 
+		ORDER BY REGI_DATE DESC
 	</select>
+	
+	<update id="plusLikeCnt" parameterType="sist.co.model.PeedDTO">
+		UPDATE INSTA_PEED
+			SET PEED_LIKE=PEED_LIKE+1
+				WHERE SEQ=#{seq}
+	</update>
+	
+	<update id="minusLikeCnt" parameterType="sist.co.model.PeedDTO">
+		UPDATE INSTA_PEED
+			SET PEED_LIKE=PEED_LIKE-1
+				WHERE SEQ=#{seq}
+	</update>
+	
+	<insert id="insertThumbsUp" parameterType="sist.co.model.ThumbsUpDTO">
+		INSERT INTO INSTA_THUMBSUP(SEQ, MEMBER_SEQ, PEED_SEQ, LIKE_STATE, REGI_DATE) 
+			VALUES(SEQ_INSTA_THUMBSUP.NEXTVAL, #{member_seq}, #{peed_seq}, 1, SYSDATE)
+	</insert>
+	
+	<delete id="deleteThumbsUp" parameterType="sist.co.model.ThumbsUpDTO">
+		DELETE 
+			FROM INSTA_THUMBSUP
+				WHERE MEMBER_SEQ=#{member_seq} AND PEED_SEQ=#{peed_seq}
+	</delete>
+	
+	<select id="searchThumbsUp" parameterType="sist.co.model.ThumbsUpDTO" resultType="int">	
+		SELECT NVL(MAX(LIKE_STATE),0)
+			FROM INSTA_THUMBSUP
+				WHERE MEMBER_SEQ=#{member_seq} AND PEED_SEQ=#{peed_seq}
+	</select>
+	
+	<update id="changeLikeState" parameterType="sist.co.model.ThumbsUpDTO">
+		UPDATE INSTA_THUMBSUP
+			SET LIKE_STATE = 0
+				WHERE MEMBER_SEQ=#{member_seq} AND PEED_SEQ=#{peed_seq}
+	</update>
 	
 	<insert id="insertreply" parameterType="sist.co.model.PeedReplyDTO">
 		INSERT INTO INSTA_PEED_REPLY(SEQ, PEED_SEQ, MEMBER_SEQ, MEMBER_ID, CONTENT, REGI_DATE)
@@ -51,5 +87,10 @@
 		UPDATE INSTA_PEED SET CONTENT = #{content} WHERE SEQ = #{seq}
 	</update>
 	
+	<select id="countThumbsUp" parameterType="sist.co.model.PeedDTO" resultType="int">
+		SELECT NVL(MAX(PEED_LIKE),0)
+			FROM INSTA_PEED
+				WHERE SEQ=#{seq}
+	</select>
 
 </mapper>

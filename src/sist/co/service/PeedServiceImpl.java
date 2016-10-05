@@ -11,6 +11,7 @@ import sist.co.model.MemberDTO;
 import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.model.PeedReplyDTO;
+import sist.co.model.ThumbsUpDTO;
 
 @Service
 public class PeedServiceImpl implements PeedService {
@@ -51,8 +52,32 @@ public class PeedServiceImpl implements PeedService {
 	}
 
 	@Override
+	public void plusLikeCnt(PeedDTO peedDTO) throws Exception {
+		peedDAO.plusLikeCnt(peedDTO);
+	}
+
+	@Override
+	public void minusLikeCnt(PeedDTO peedDTO) throws Exception {
+		peedDAO.minusLikeCnt(peedDTO);
+	}
+
+	@Override
+	public void insertThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.insertThumbsUp(thumbsUpDTO);
+	}
+
+	@Override
+	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.deleteThumbsUp(thumbsUpDTO);
+	}
+
+	@Override
+	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		return peedDAO.searchThumbsUp(thumbsUpDTO);
+	}
+	
+	@Override
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception {
-		// TODO Auto-generated method stub
 		peedDAO.insertreply(replyDTO);
 		return true;
 	}
@@ -63,7 +88,13 @@ public class PeedServiceImpl implements PeedService {
 		peedDAO.linkedContent(peedDTO);
 		return false;
 	}
-	
-	
+	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
+		peedDAO.changeLikeState(thumbsUpDTO);
+	}
+
+	@Override
+	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
+		return peedDAO.countThumbsUp(peedDTO);
+	}
 	
 }

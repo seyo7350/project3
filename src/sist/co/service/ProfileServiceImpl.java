@@ -32,9 +32,9 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public MemberDTO findMemberDTO(int member_seq) throws Exception {
+	public MemberDTO findMemberDTO(int seq) throws Exception {
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = profileDAO.findMemberDTO(member_seq);
+		memberDTO = profileDAO.findMemberDTO(seq);
 		return memberDTO;
 		
 	}
