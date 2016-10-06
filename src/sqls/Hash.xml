@@ -14,7 +14,19 @@
   		SELECT NVL(MAX(SEQ), 0) AS SEQ
   		FROM INSTA_HASH
   		WHERE HASH = #{keyword}
-  	</select> 	
+  	</select>
+  	
+  	<select id="getPeedCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  		SELECT NVL(COUNT(*), 0)
+  		FROM INSTA_HASH_SUB
+  		WHERE HASH_SEQ = #{hash_seq}
+  	</select>
+  	
+  	<select id="getHashCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		SELECT NVL(COUNT(*), 0)
+  		FROM INSTA_HASH_SUB
+  		WHERE HASH = #{keyword}
+  	</select>
   	
   	<insert id="insertHash" parameterType="java.lang.String">
   		INSERT INTO INSTA_HASH(SEQ, HASH)

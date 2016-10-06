@@ -83,6 +83,11 @@ public class PeedServiceImpl implements PeedService {
 	}
 
 	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		peedDAO.linkedContent(peedDTO);
+		return false;
+	}
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
 		peedDAO.changeLikeState(thumbsUpDTO);
 	}

@@ -34,4 +34,16 @@ public class HashDAOImpl implements HashDAO {
 		return true;
 	}
 
+	@Override
+	public int getHashSeq(String keyword) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(ns+"getHashSeq", keyword);
+	}
+
+	@Override
+	public int getPeedCount(int hash_seq) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(ns+"getPeedCount", hash_seq);
+	}
+
 }

@@ -66,7 +66,7 @@
 							<button class="_4vltl" title="댓글 삭제" onclick="delReply(${detailReply.seq},${detailReply.peed_seq })"></button>
 						</c:if>
 						<!-- <h1> -->
-							<a class="_4zhc5 notranslate _iqaka" title="" href="#" id="after_del_reply_a">${detailReply.member_id }</a>
+							<a class="_4zhc5 notranslate _iqaka" title="${detailReply.member_id }" href="profile.do?id=${detailReply.member_id }" id="after_del_reply_a">${detailReply.member_id }</a>
 							<span id="after_del_reply_span">
 							${detailReply.content }
 							<br>
@@ -210,7 +210,7 @@ function insertReply(peed_seq) {
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">${detailReplyList[peed_seq].member_id }</a>';
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#"><c:out value="${detailReplyList[0].member_id}"/>'; */
 					//s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">'+map.detailReplyList2[idx].member_id;
-					s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">'+map_id.write_id;
+					s += '<a class="_4zhc5 notranslate _iqaka" title="" href="#">'+login_id;//+map_id.write_id;
 					s += '</a>';
 					s += '<span>';
 					s += '&nbsp';

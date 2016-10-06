@@ -1,6 +1,7 @@
 package sist.co.model;
 
 public class FFDTO {
+	private int seq;
 	private String profile_image;
 	private String id;
 	private String name;
@@ -9,12 +10,19 @@ public class FFDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public FFDTO(String profile_image, String id, String name, int follow_connect) {
+	public FFDTO(int seq, String profile_image, String id, String name, int follow_connect) {
 		super();
+		this.seq = seq;
 		this.profile_image = profile_image;
 		this.id = id;
 		this.name = name;
 		this.follow_connect = follow_connect;
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 	public String getProfile_image() {
 		return profile_image;
@@ -42,8 +50,9 @@ public class FFDTO {
 	}
 	@Override
 	public String toString() {
-		return "FFDTO [profile_image=" + profile_image + ", id=" + id + ", name=" + name + ", follow_connect="
-				+ follow_connect + "]";
+		return "FFDTO [seq=" + seq + ", profile_image=" + profile_image + ", id=" + id + ", name=" + name
+				+ ", follow_connect=" + follow_connect + "]";
 	}
+	
 	
 }

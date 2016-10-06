@@ -22,6 +22,7 @@ public interface PeedDAO {
 	public void deleteThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public int searchThumbsUp(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public boolean insertreply(PeedReplyDTO replyDTO) throws Exception;
+	public boolean linkedContent(PeedDTO peedDTO);
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception;
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception;
 	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception;

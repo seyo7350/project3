@@ -24,4 +24,16 @@ public class HashServiceImpl implements HashService {
 		return true;
 	}
 
+	@Override
+	public int getHashSeq(String keyword) {
+		// TODO Auto-generated method stub
+		return hashDAO.getHashSeq(keyword);
+	}
+
+	@Override
+	public int getPeedCount(int hash_seq) {
+		// TODO Auto-generated method stub
+		return hashDAO.getPeedCount(hash_seq);
+	}
+
 }

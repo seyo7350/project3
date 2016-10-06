@@ -18,17 +18,19 @@
 					<div class="_9tu8m">
 						<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a>
 						<div class="_mmgca">
-							<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디">${follower.id }</a></div>
+							<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디" href="profile.do?id=${follower.id }">${follower.id }</a></div>
 							<div class="_2uju6">${follower.name }</div>
 						</div>	
 											
 						<div class="_72gdz">
 							<span class="_e616g">
-								<c:if test="${login.id ne follower.id && follower.follow_connect ne 1}">
-									<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" id="send_follow_btn${follower.seq }" onclick="sendFollow(${follower.seq})" value="팔로우" />
-								</c:if>
-								<c:if test="${login.id ne follower.id && follower.follow_connect eq 1}">
-									<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" id="cancle_follow_btn${follower.seq }" onclick="cancleFollow(${follower.seq})" value="팔로우 취소" />
+								<c:if test="${login.id ne follower.id }">
+									<c:if test="${follower.follow_connect ne 1}">
+										<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" id="send_follow_btn${follower.seq }" onclick="sendFollow(${follower.seq})" value="팔로우" />
+									</c:if>
+									<c:if test="${follower.follow_connect eq 1}">
+										<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" id="cancle_follow_btn${follower.seq }" onclick="cancleFollow(${follower.seq})" value="팔로잉" />
+									</c:if>
 								</c:if>
 							</span>
 						</div>
@@ -52,7 +54,7 @@ function sendFollow(follow_seq) {
 		data:"follow="+follow_seq+"&member_seq=${login.seq}",
 		success: function(follow_check){
 			if(follow_check==2){
-				$('#send_follow_btn'+follow_seq).attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로우 취소','id':'cancle_follow_btn'+follow_seq,'onclick':'cancleFollow('+follow_seq+')'});				
+				$('#send_follow_btn'+follow_seq).attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로잉','id':'cancle_follow_btn'+follow_seq,'onclick':'cancleFollow('+follow_seq+')'});				
 			}else{ 
 				alert('팔로우 실패');
 			}

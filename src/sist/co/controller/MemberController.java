@@ -1,6 +1,7 @@
 package sist.co.controller;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +56,10 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-		
+	
+	@Autowired
+	private HashService hashService;
+	
 	@Autowired
 	private SearchService searchService;
 	
@@ -131,10 +135,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="profile.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String profile(HttpServletRequest request, Model model, MemberDTO memberDTO2) throws Exception{
+	public String profile(HttpServletRequest request, Model model, String id) throws Exception{
 		logger.info("profile " + new Date());
 		
-		int seq = memberDTO2.getSeq();
+		int seq = profileService.getMemberSeq(id);
 		
 		MemberDTO memberDTO = new MemberDTO();
 		
@@ -177,21 +181,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="hash.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String hash(HttpServletRequest request, Model model, SearchDTO searchDTO) throws Exception{
+	public String hash(HttpServletRequest request, Model model, String keyword) throws Exception{
 		logger.info("profile " + new Date());
 				
-		int hash_seq = searchDTO.getSeq();
+		int hash_seq = hashService.getHashSeq(keyword);
+		int peed_count = hashService.getPeedCount(hash_seq);
 		
+		DecimalFormat df = new DecimalFormat("#,###");
+		String bottom = "게시물 " + df.format(peed_count) +"개";
+		
+		SearchDTO searchDTO = new SearchDTO();
+		searchDTO.setTop(keyword);
+		searchDTO.setBottom(bottom);
 		
 		
 		List<PeedDTO> peedList = searchService.getPeedList(hash_seq);
 		
-		System.out.println(peedList);
-		
 		model.addAttribute("searchDTO", searchDTO);
-		request.getSession().setAttribute("peedList", peedList);
-		
-		
+		request.getSession().setAttribute("peedList", peedList);		
 				
 		return "hash.tiles";
 	}
@@ -445,6 +452,7 @@ public class MemberController {
 
 			String mseq = request.getParameter("member_seq");
 			String fseq = request.getParameter("follow");
+			String id = request.getParameter("sid");
 			
 			int seq = Integer.parseInt(fseq);
 			int member_seq = Integer.parseInt(mseq);
@@ -456,9 +464,9 @@ public class MemberController {
 		    boolean isS = followService.delFollow(followDTO);
 			
 			if(isS){
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}else{
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}
 		}
 		
@@ -468,10 +476,12 @@ public class MemberController {
 
 			String mseq = request.getParameter("member_seq");
 			String fseq = request.getParameter("follow");
+			String id = request.getParameter("sid");
 			
 			int seq = Integer.parseInt(fseq);
 			int member_seq = Integer.parseInt(mseq);
 			int follow = Integer.parseInt(fseq);
+			
 			
 			followDTO.setMember_seq(member_seq);
 			followDTO.setFollow(follow);
@@ -479,9 +489,9 @@ public class MemberController {
 		    boolean isS = followService.IntFollow(followDTO);
 			
 			if(isS){
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}else{
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}
 			
 		}
@@ -492,6 +502,7 @@ public class MemberController {
 
 			String mseq = request.getParameter("member_seq");
 			String fseq = request.getParameter("follow");
+			String id = request.getParameter("sid");
 			
 			int seq = Integer.parseInt(fseq);
 			int member_seq = Integer.parseInt(mseq);
@@ -503,9 +514,9 @@ public class MemberController {
 		    boolean isS = followService.updateFollow(followDTO);
 			
 			if(isS){
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}else{
-				return "redirect:/profile.do?seq="+seq;
+				return "redirect:/profile.do?id="+id;
 			}
 			
 		}

@@ -14521,6 +14521,6 @@ transform
 }
 
 .modal-content {
-  position: relative; 
-  top:250px; 
+  position: relative; /* 
+  top:250px;  */
 }

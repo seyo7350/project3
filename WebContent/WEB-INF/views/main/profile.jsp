@@ -68,7 +68,7 @@
                </a></li>
                <li class=" _7gq8o"><a class="_s53mj _13vpi" href="javacript:;" id="popbutton2">
                      팔로우
-                     <span class="_bkw5z _kjym7"  title="0">${followCount }</span>명
+                     <span class="_bkw5z _kjym7"  title="0" id="follow_count">${followCount }</span>명
                </a></li>
             </ul>
             </div>
@@ -105,7 +105,7 @@
 		                     </form>
 		                      <span	class="_5ji7m _e616g">
 		                        <c:if test="${2 eq follow }">
-  		                           <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로우 삭제</button>
+  		                           <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로잉</button>
 		                        </c:if>
 		                        <c:if test="${2 ne follow }">
 		                          <button class="_aj7mu _2hpcs _kenyh _o0442" onclick="IntFollow()">팔로우</button>
@@ -297,8 +297,7 @@
          </div>
       </div>
       
-     <div class="modal-dialog">
-        
+     <div class="modal-dialog">        
         <div class="modal-content">
          <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
@@ -760,6 +759,9 @@ function singo(){
    alert("사칭 계정이나 부적절한 컨텐츠를 올린 사용자를 신고합니다. \n신고가 사실이 아닐경우 본인에게 이용에 불이익이 올 수 있습니다.");
    $('#Form').attr({'target':'_self', "action":"singo.do"}).submit();
 }
+
+var follow_cnt = '${followCount}';
+var follower_cnt = '${followerCount}';
 </script>
   
   

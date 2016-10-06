@@ -15,19 +15,26 @@
   	</select> -->
   	
   	<select id="getFollowList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.FFDTO">
-	  	SELECT MEMBER.PROFILE_IMAGE AS PROFILE_IMAGE, MEMBER.ID AS ID, MEMBER.NAME AS NAME, FOLLOW.FOLLOW_CONNECT AS FOLLOW CONNECT
+	  	SELECT FOLLOW.SEQ AS SEQ, MEMBER.PROFILE_IMAGE AS PROFILE_IMAGE, MEMBER.ID AS ID, MEMBER.NAME AS NAME, FOLLOW.FOLLOW_CONNECT AS FOLLOW_CONNECT
 		FROM INSTA_MEMBER MEMBER JOIN INSTA_FOLLOW FOLLOW
 		ON MEMBER.SEQ = FOLLOW.FOLLOW
-		WHERE FOLLOW.MEMBER_SEQ = #{seq}
+		WHERE FOLLOW.MEMBER_SEQ = #{seq} AND FOLLOW.FOLLOW_CONNECT = 1
 	</select>
   	
-  	<select id="getFollowerList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
+  	<!-- <select id="getFollowerList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.MemberDTO">
   		SELECT * 
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT MEMBER_SEQ
 								FROM INSTA_FOLLOW
 									WHERE FOLLOW=#{seq} AND FOLLOW_CONNECT=1)
-  	</select>
+  	</select> -->
+  	
+  	<select id="getFollowerList" parameterType="sist.co.model.MemberDTO" resultType="sist.co.model.FFDTO">
+	  	SELECT FOLLOW.SEQ AS SEQ, MEMBER.PROFILE_IMAGE AS PROFILE_IMAGE, MEMBER.ID AS ID, MEMBER.NAME AS NAME, FOLLOW.FOLLOW_CONNECT AS FOLLOW_CONNECT
+		FROM INSTA_MEMBER MEMBER JOIN INSTA_FOLLOW FOLLOW
+		ON MEMBER.SEQ = FOLLOW.MEMBER_SEQ
+		WHERE FOLLOW.FOLLOW = #{seq} AND FOLLOW.FOLLOW_CONNECT = 1
+	</select>
   	
   	<select id="getFollow1" parameterType="sist.co.model.FollowDTO" resultType="int">
   	    SELECT /* +INDEX_FFS(INSTA_FOLLOW,SYS_C007783) */ NVL(COUNT(*), 0) FROM INSTA_FOLLOW WHERE MEMBER_SEQ=#{member_seq} AND FOLLOW=#{follow} AND FOLLOW_CONNECT = 1
@@ -38,7 +45,7 @@
   	</select>
   	
   	<update id="delFollow" parameterType="sist.co.model.FollowDTO">
-  	    UPDATE INSTA_FOLLOW SET FOLLOW_CONNECT=0 WHERE MEMBER_SEQ=#{member_seq} AND FOLLOW=#{follow} 
+  	    UPDATE INSTA_FOLLOW SET FOLLOW_CONNECT=0 WHERE SEQ=#{seq} 
   	</update>
   	
   	<insert id="IntFollow"  parameterType="sist.co.model.FollowDTO">

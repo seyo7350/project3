@@ -729,6 +729,7 @@ ol, ul {
 
 .modal-dialog{
 	z-index: 10;
+	top: 250px;
 }
 
 /* ._k2vj6 {

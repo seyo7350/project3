@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sist.co.model.CheckMember;
+import sist.co.model.FFDTO;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.service.FollowService;
@@ -33,7 +34,7 @@ public class FollowController {
 		logger.info("follow " + new Date());
 		System.out.println(memberDTO.toString()+"((((((((((((");
 		
-		List<MemberDTO> followList = new ArrayList<MemberDTO>();
+		List<FFDTO> followList = new ArrayList<FFDTO>();
 		followList = followService.getFollowList(memberDTO);
 		
 		System.out.println("size : " + followList.size());
@@ -59,7 +60,7 @@ public class FollowController {
 		logger.info("follower " + new Date());
 		System.out.println(memberDTO.toString());
 		
-		List<MemberDTO> followerList = new ArrayList<MemberDTO>();
+		List<FFDTO> followerList = new ArrayList<FFDTO>();
 		followerList = followService.getFollowerList(memberDTO);
 		
 		/*System.out.println(followerList+"@#$@#$@#$");*/
@@ -113,15 +114,11 @@ public class FollowController {
 	@ResponseBody
 	public boolean cancleFollow(Model model, FollowDTO followDTO, HttpServletRequest request) throws Exception{
 		logger.info("sendFollow " + new Date());
-		System.out.println(followDTO.toString()+"팔로팔로미");
 		
-		System.out.println("팔로우 취소 컨트롤러");
 		boolean isS = followService.delFollow(followDTO);
 		System.out.println(isS + "팔로우 취소 컨트롤러");
-		if(isS){
-			return isS;
-		}else
-			return isS;
+		
+		return isS;
 	}
 }
 

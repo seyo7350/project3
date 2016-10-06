@@ -90,6 +90,13 @@ public class PeedDAOImpl implements PeedDAO {
 	}
 
 	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		sqlSession.update(ns+"linkedContent", peedDTO);
+		return false;
+	}
+	
+	
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
 		sqlSession.update(ns+"changeLikeState", thumbsUpDTO);
 	}
