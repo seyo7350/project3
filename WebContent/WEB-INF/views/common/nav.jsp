@@ -20,7 +20,8 @@
 							<a class="_soakw _vbtk2 coreSpriteDesktopNavExplore" href="write.do">새 피드</a>
 						</div>
 						<div class="_7smet" style="margin-right: 30px;">
-							<a class="_im3et _soakw _vbtk2 coreSpriteDesktopNavActivity" href="#">활동 피드</a>
+							<span class="_im3et _soakw _vbtk2 coreSpriteDesktopNavActivity"  id="aa">활동피드</span>
+							<div class="qwer"></div>
 						</div>
 						<div class="_7smet">
 							<a class="_soakw _vbtk2 coreSpriteDesktopNavProfile" href="profile.do?id=${login.id}">프로필</a>
@@ -84,6 +85,26 @@ $(document).ready(function(){
 		s += '</div>';
 		
 		$('._9pxkq').html(s);
+	});
+	
+	//알림
+	$('span').on('click', '#aa', function(){
+		var member_seq = ${login.seq}
+
+ 		$.ajax({
+			type:"POST",
+			url:"getNoticeList.do",
+			data:"member_seq="+member_seq,
+			async:true,
+			success: function(data){
+				$('div.qwer').html(data);
+			}
+		});
+	});
+	
+	//알림 제거
+	$('div').on('click', '._4i862', function(){
+		$('#cc').remove();
 	});
 	
 	
