@@ -16,4 +16,5 @@ public interface FollowDAO {
 	public boolean IntFollow(FollowDTO followDTO) throws Exception;
 	public boolean updateFollow(FollowDTO followDTO) throws Exception;
 	public int getFollowConnect(FollowDTO followDTO) throws Exception;
+	public int getMyFollowConnect(FollowDTO followDTO);
 }

@@ -67,4 +67,10 @@ public class FollowDAOImpl implements FollowDAO {
 		
 	}
 
+	@Override
+	public int getMyFollowConnect(FollowDTO followDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(ns+"getMyFollowConnect", followDTO);
+	}
+
 }

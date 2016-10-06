@@ -26,11 +26,11 @@
 								<span class="_e616g">
 									<c:if test="${login.id ne follow.id}">
 										<c:if test="${follow.follow_connect eq 1 }">
-											<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" value="팔로잉" onclick="myFollowDel(${follow.seq});" id="_myFollowDel${follow.seq }"/>
+											<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" value="팔로잉" onclick="myFollowDel(${follow.follow});" id="_myFollowDel${follow.follow}"/>
 										</c:if>
 										
-										<c:if test="${login.seq ne follow.seq && follow.follow_connect ne 1}">
-											<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" value="팔로우" id="send_follow_btn${follow.seq }" onclick="sendFollow(${follow.seq})" />
+										<c:if test="${follow.follow_connect ne 1}">
+											<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" value="팔로우" id="send_follow_btn${follow.follow}" onclick="sendFollow(${follow.follow})" />
 										</c:if>
 									</c:if>
 									<!-- <button class="_aj7mu _2hpcs _95tat _o0442">팔로우</button> -->

@@ -58,4 +58,10 @@ public class FollowServiceImpl implements FollowService {
 		return followDAO.getFollowConnect(followDTO);
 	}
 
+	@Override
+	public int getMyFollowConnect(FollowDTO followDTO) {
+		// TODO Auto-generated method stub
+		return followDAO.getMyFollowConnect(followDTO);
+	}
+
 }
