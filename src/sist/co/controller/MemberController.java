@@ -158,12 +158,16 @@ public class MemberController {
 		model.addAttribute("followerCount", followerCount);
 		request.getSession().setAttribute("peedList", peedList);
 
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		
+		
 		//팔로우 여부 확인
         FollowDTO followDTO = new FollowDTO();
-        followDTO.setMember_seq(l_seq);
+        followDTO.setMember_seq(loginDTO.getSeq());
         followDTO.setFollow(seq);
         
         int follow = followService.getFollow(followDTO);
+        System.out.println(followDTO.toString() ); 
         System.out.println("팔로우 관계 = " + follow );         
 		request.getSession().setAttribute("follow", follow);
 		

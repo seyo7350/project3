@@ -40,6 +40,17 @@ public class FollowController {
 		System.out.println("size : " + followList.size());
 		System.out.println(followList.toString()+"!@#!@#!@#!@#");
 		
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		int member_seq = loginDTO.getSeq();
+		
+		for(int i = 0; i < followList.size(); i++){
+			int follow = followList.get(i).getFollow();
+			FollowDTO fdto = new FollowDTO(0, member_seq, follow, 0);
+			System.out.println(i +"번쨰 " + fdto.toString());
+			int follow_connect = followService.getMyFollowConnect(fdto);	// 어떤새끼 프로필 들어갔을 때 팔로워리스트에 있는 놈들과 로그인한 사람과의 관계 -> 팔로우 되어 있으면 1, 아니면 0
+			followList.get(i).setFollow_connect(follow_connect);
+		}
+		
 		model.addAttribute("followList", followList);
 		
 		//팔로우 여부 확인
@@ -63,7 +74,18 @@ public class FollowController {
 		List<FFDTO> followerList = new ArrayList<FFDTO>();
 		followerList = followService.getFollowerList(memberDTO);
 		
-		/*System.out.println(followerList+"@#$@#$@#$");*/
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		int member_seq = loginDTO.getSeq();
+		
+		for(int i = 0; i < followerList.size(); i++){
+			int follow = followerList.get(i).getMember_seq();
+			FollowDTO fdto = new FollowDTO(0, member_seq, follow, 0);
+			System.out.println(i +"번쨰 " + fdto.toString());
+			int follow_connect = followService.getMyFollowConnect(fdto);	// 어떤새끼 프로필 들어갔을 때 팔로워리스트에 있는 놈들과 로그인한 사람과의 관계 -> 팔로우 되어 있으면 1, 아니면 0
+			followerList.get(i).setFollow_connect(follow_connect);
+		}
+		
+		System.out.println(followerList+"@#$@#$@#$");
 		
 		model.addAttribute("followerList", followerList);
 		
