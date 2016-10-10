@@ -113,7 +113,7 @@
 					</c:choose>
 				</a>
 				<form class="_k3t69" style="z-index: 2;" onsubmit="return false;">					
-					<input type="text" id="_reply${peed.seq}" class="_7uiwk _qy55y" aria-label="Add a comment…" placeholder="Add a comment…" onkeydown="javascript:if(event.keyCode==13){insertreply(${peed.seq})};" onkeyup="javascript:autoSearch(${peed.seq});" value="">
+					<input type="text" id="_reply${peed.seq}" class="_7uiwk _qy55y" aria-label="Add a comment…" placeholder="Add a comment…" onkeydown="javascript:if(event.keyCode==13){insertreply(${peed.seq}, '${peed.image}', ${peed.member_seq})};" onkeyup="javascript:autoSearch(${peed.seq});" value="">
 				</form>
 				<button class="_9q0pi coreSpriteEllipsis _soakw">옵션 더 보기</button>
 			</section>
@@ -123,23 +123,22 @@
 </c:if>
 
 <script  type="text/javascript">
-function insertreply(val){
+function insertreply(val, val2, val3){
    
    var content=$('#_reply'+val).val();
    alert(content);
    var id = '${login.id}';
    alert('id'+id);
    
-
    if(content==""){
       alert('댓글 입력하세요');
    }else{
-      alert('content:'+content+'val'+val);
+      alert('content:'+content+'val'+val+'val2'+val2+'val3'+val3);
       
       $.ajax({
          type:"POST",
             url:"./insertreply.do",
-            data:{content:content,val:val},
+            data:{content:content,val:val,val2:val2,val3:val3},
             success: function(linkedContent){
                var s='<li class="_nk46a">';
                s+='<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="">' + id + '</a>';
