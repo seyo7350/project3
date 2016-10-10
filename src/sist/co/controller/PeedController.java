@@ -28,9 +28,10 @@ import sist.co.help.FUpUtil;
 import sist.co.model.PagingParam;
 
 import sist.co.model.MemberDTO;
-
+import sist.co.model.NoticeDTO;
 import sist.co.model.PeedDTO;
 import sist.co.service.HashService;
+import sist.co.service.NoticeService;
 import sist.co.model.PeedReplyDTO;
 import sist.co.model.ThumbsUpDTO;
 import sist.co.service.PeedService;
@@ -44,6 +45,9 @@ public class PeedController {
 	
 	@Autowired
 	private HashService hashService;
+	
+	@Autowired 
+	private NoticeService noticeService;
 	
 	@RequestMapping(value="article.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String newspeedsarticle(HttpServletRequest request, PagingParam param, Model model) throws Exception{
@@ -119,7 +123,7 @@ public class PeedController {
 		
 		/*return "redirect:/write.do";*/
 		
-		String fupload0 = "D:/3hdProject/Project3/upload";
+		/*String fupload0 = "D:/3hdProject/Project3/upload";*/
 		String fupload = request.getServletContext().getRealPath("/upload");
 		logger.info(": " + fupload);
 		
@@ -133,8 +137,8 @@ public class PeedController {
 			File file = new File(fupload + "/" + newFile);
 			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
 			
-			File file1 = new File(fupload0 + "/" + newFile);
-			FileUtils.writeByteArrayToFile(file1, fupload0.getBytes());
+			/*File file1 = new File(fupload0 + "/" + newFile);
+			FileUtils.writeByteArrayToFile(file1, fupload0.getBytes());*/
 			
 			System.out.println(peedDTO.toString());
 			
@@ -258,7 +262,7 @@ public class PeedController {
 	
 	@RequestMapping(value="plusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public int plusPeedCnt(HttpServletRequest request, Model model, int peed_index, int member_seq) throws Exception{
+	public int plusPeedCnt(HttpServletRequest request, Model model, int peed_index, int member_seq, NoticeDTO noticeDTO) throws Exception{
 		logger.info("plusPeedCnt " + new Date());
 		
 		List<PeedDTO> peedList = (List<PeedDTO>) request.getSession().getAttribute("peedList");
@@ -288,13 +292,40 @@ public class PeedController {
 		*/
 		
 		int like_state = peedService.searchThumbsUp(thumbsUpDTO);		
+		
 		System.out.println(like_state+"좋아요 하고 라이크 스테이트");
 		
 		request.getSession().setAttribute("like_state", like_state);
 		
 		int p_countThumbsUp = peedService.countThumbsUp(peedDTO);
 		System.out.println(p_countThumbsUp+"좋아요 몇개++++");
+		
 		System.out.println("p_countThumbsUp : " + p_countThumbsUp);
+		
+		
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		noticeDTO.setWho_id(loginDTO.getId());    
+		noticeDTO.setWho_seq(loginDTO.getSeq());
+		
+		MemberDTO memDTO = (MemberDTO)request.getSession().getAttribute("mem");
+       	noticeDTO.setMember_seq(memDTO.getSeq());
+       	noticeDTO.setPeed_seq(peed_seq);
+       	
+       	String peed_image = peedList.get(peed_index).getImage();
+       	noticeDTO.setPeed_image(peed_image);
+       	System.out.println(peed_image);
+       	
+			if(loginDTO.getProfile_image() != null){
+				System.out.println("who_profile 있다~~~");
+				noticeDTO.setWho_profile(loginDTO.getProfile_image());
+				System.out.println(noticeDTO);
+				boolean isB = noticeService.IntNotice1(noticeDTO);
+			}else{
+				System.out.println("who_profile 없다~~~");
+				System.out.println(noticeDTO);
+				boolean isB = noticeService.IntNotice0(noticeDTO);
+			}
+		
 		
 		return p_countThumbsUp;
 
@@ -431,7 +462,7 @@ public class PeedController {
 	
 	@RequestMapping(value="detailReply.do",produces="application/text;charset=utf8",method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
+	public String detailReply(Model model, PeedReplyDTO peedReplyDTO,  NoticeDTO noticeDTO, HttpServletRequest request, String peed_image) throws Exception{
 		logger.info("detailReply " + new Date());
 
 		
@@ -490,6 +521,31 @@ public class PeedController {
 			
 		}
 		
+		//알림
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		noticeDTO.setWho_id(loginDTO.getId());    
+		noticeDTO.setWho_seq(loginDTO.getSeq());
+		
+		MemberDTO memDTO = (MemberDTO)request.getSession().getAttribute("mem");
+       	noticeDTO.setMember_seq(memDTO.getSeq());
+       
+        int peed_seq = peedReplyDTO.getPeed_seq();
+       	noticeDTO.setPeed_seq(peed_seq);
+
+       	System.out.println("피드 이미지 = "+peed_image);
+       	noticeDTO.setPeed_image(peed_image);
+		     		
+			if(loginDTO.getProfile_image() != null){
+				System.out.println("who_profile 있다~~~");
+				noticeDTO.setWho_profile(loginDTO.getProfile_image());
+				System.out.println(noticeDTO);
+				boolean isB = noticeService.IntNotice5(noticeDTO);
+			}else{
+				System.out.println("who_profile 없다~~~");
+				System.out.println(noticeDTO);
+				boolean isB = noticeService.IntNotice4(noticeDTO);
+			}
+		
 		peedReplyDTO.setContent(linkedContent);
 		
 		
@@ -527,7 +583,7 @@ public class PeedController {
 		
 		System.out.println(thumbsUpDTO.toString()+"좋아요 누르기");
 		
-	  request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
+	    request.getSession().setAttribute("thumbsUpDTO", thumbsUpDTO);
 		request.getSession().setAttribute("peedDTO", peedDTO);
 		
 		

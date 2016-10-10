@@ -16,6 +16,7 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
+<script type="text/javascript" src="js/dynamicdate.js"></script> 
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/profile.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/detail.css">

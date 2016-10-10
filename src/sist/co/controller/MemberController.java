@@ -45,7 +45,7 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
     
-	public int l_seq = -1;
+	//public int l_seq = -1;
 	
 	@Autowired
 	private MemberService memberService;
@@ -96,7 +96,7 @@ public class MemberController {
 		if(login != null){
 			checkMember.setMessage("로그인 성공");
 			request.getSession().setAttribute("login", login);
-			l_seq = login.getSeq();
+			//l_seq = login.getSeq();
 		}else{
 			checkMember.setMessage("로그인 실패");
 		}
@@ -215,7 +215,7 @@ public class MemberController {
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) throws Exception{
 		logger.info("logout  " + new Date());
-		    l_seq = -1;
+		   // l_seq = -1;
 			request.getSession().invalidate();
 			return "index.tiles";
 	}
@@ -241,10 +241,12 @@ public class MemberController {
 	@RequestMapping(value="editAF.do",method={RequestMethod.GET, RequestMethod.POST})
 	public String editAF(HttpServletRequest request, MemberDTO memberDTO, Model model) throws Exception{
 		logger.info("editAF " + new Date());
-		
-		boolean isS = memberService.profileChange(memberDTO);
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		String id = request.getParameter("cid");
+		memberDTO.setId(id);
+		
+		boolean isS = memberService.profileChange(memberDTO);
+	
 		
 		if(isS){
 			request.getSession().invalidate();
@@ -343,14 +345,28 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="imageDelAF.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String imageDelAF(MemberDTO memberDTO, Model model) throws Exception{
+	public String imageDelAF(MemberDTO memberDTO, Model model, HttpServletRequest request) throws Exception{
 		logger.info("imageDelAF " + new Date());
+		
+		MemberDTO login = null;
+		String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+		String pwd = ((MemberDTO)request.getSession().getAttribute("login")).getPwd();
 		
 		boolean isS = memberService.imageDelAF(memberDTO);
 		if(isS){
-			return "forward:/profile.do";
+
+			memberDTO.setId(id);
+			memberDTO.setPwd(pwd);
+			
+			login = memberService.login(memberDTO);
+			
+			System.out.println(memberDTO.toString());
+			
+			request.getSession().setAttribute("login", login);
+			
+			return "redirect:/profile.do?id="+id;
 		}else{
-			return "redirect:/profile.do";
+			return "redirect:/profile.do?id="+id;
 		}
 	}
 	
@@ -369,7 +385,7 @@ public class MemberController {
 	   resultMsg = "사용가능한 아이디입니다.";
 	  } else {
 	   result = "failure";
-	   resultMsg = "이미 사용중인 아이디입니다.";
+	   resultMsg = "이미 사용중인 아이디입니다.\n\n단, 회원님이 사용하는 아이디는 사용가능합니다.";
 	  }
 	  
 	  resultMap.put("result", result);
@@ -393,7 +409,7 @@ public class MemberController {
 	   resultMsg = "사용가능한 이메일입니다.";
 	  } else {
 	   result = "failure";
-	   resultMsg = "이미 사용중인 이메일입니다.";
+	   resultMsg = "이미 사용중인 이메일입니다.\n\n단, 회원님이 사용하는 이메일은 사용가능합니다.";
 	  }
 	  
 	  resultMap.put("result", result);
@@ -406,10 +422,14 @@ public class MemberController {
 		public String uploadAF(@RequestParam(value="fileload", required=false)MultipartFile fileload, Model model, MemberDTO memberDTO, HttpServletRequest request){
 			
 		    logger.info("uploadAF");
-		    
+		    		    
 			System.out.println(fileload.getOriginalFilename());
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			String aid = request.getParameter("id");
+			
+			MemberDTO login = null;
+			String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+			int seq = ((MemberDTO)request.getSession().getAttribute("login")).getSeq();
+			String pwd = ((MemberDTO)request.getSession().getAttribute("login")).getPwd();
+			
 			
 			System.out.println(memberDTO.toString());
 
@@ -433,12 +453,6 @@ public class MemberController {
 				memberService.upload(memberDTO);
 				logger.info("프로필 이미지 업로드 success");
 				
-				
-				
-				MemberDTO login = null;
-				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
-				String pwd = ((MemberDTO)request.getSession().getAttribute("login")).getPwd();
-				
 				memberDTO.setId(id);
 				memberDTO.setPwd(pwd);
 				
@@ -453,7 +467,7 @@ public class MemberController {
 				logger.info("프로필 이미지 업로드 fail");
 			}
 
-			return "redirect:/profile.do?id="+aid;
+			return "redirect:/profile.do?id="+id;
 			
 		}	
 	 

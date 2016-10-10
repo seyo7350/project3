@@ -7,8 +7,8 @@
 <c:if test="${empty peedlist  }">
 	<div class="_s6b3o _i5nnf">
 		<div class="_3fhxa coreSpriteWelcomeDesktop"></div>
-			<h2 class="_9sg67">Instagram에 오신 것을 환영합니다!</h2>
-			<p class="_qq0ct">피드에서 사진과 동영상을 보려면 다른 사람의 계정을 팔로우하세요.</p>
+			<h2 class="_9sg67">인수다구래문에 오신 것을 환영합니다!</h2>
+			<p class="_qq0ct">피드에서 사진을 보려면 다른 사람의 계정을 팔로우하세요.</p>
 	</div>
 </c:if>
 
@@ -16,7 +16,7 @@
    <c:forEach items="${peedlist }" var="peed" varStatus="peedVs">
    <article class="_8ab8k _j5hrx _pieko">
          <header class="_s6yvg">
-         <a class="_5lote _pss4f _vbtk2" href="" style="width: 30px; height: 30px;">
+         <a class="_5lote _pss4f _vbtk2" href="profile.do?id=${peed.member_id}">
          <c:if test="${peed.member_profile_image eq null}">
               <img alt="이미지 오류" class="_a012k" src="image/not.jpg" id="blah">
             </c:if>
@@ -26,12 +26,14 @@
       </a>
       <div class="_f95g7">
         <%--  <input type="hidden" id="_peed_seq${peed.seq}" name="peed_seq" value="${peed.seq}"/> --%>
-         <a class="_4zhc5 notranslate _ook48" title="아이디" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
+         <a class="_4zhc5 notranslate _ook48" title="아이디" href="profile.do?id=${peed.member_id}">${peed.member_id }</a>
          <!-- <a class="_ku19p _rnlnu" title="장소태그명" href="지도로 이동하는곳">장소명</a> -->
       </div>
-      <a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/"><c:out value="${peed.seq }"/>
-            <time class="_379kp" datetime="날짜 .시간" title="날짜">${peed.regi_date }</time>
-      </a>
+     <!-- <a class="_ljyfo _8snt5" href="#"> -->
+            <time class="_379kp" datetime="날짜 .시간" title="날짜"><fmt:formatDate value="${peed.regi_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+           <br>
+            <span class="_timestamp" date="<fmt:formatDate value="${peed.regi_date }" pattern="yyyy-MM-dd HH:mm:ss"/>"></span></time>
+     <!--  </a>  -->
    </header><!-- 게시글 상단 메뉴  끝-->
       <div>
          <div class="_22yr2 _e0mru">
@@ -51,7 +53,7 @@
             <ul class="_mo9iw _pnraw" style="z-index: 2;" id="_ul${peed.seq}">
                <li class="_nk46a">
                   <h1>
-                     <a class="_4zhc5 notranslate _iqaka" title="아이디" href="profile.do?seq=${peed.member_seq}">${peed.member_id }</a>
+                     <a class="_4zhc5 notranslate _iqaka" title="아이디" href="profile.do?id=${peed.member_id}">${peed.member_id }</a>
                         ${peed.content }
                   </h1>
                </li><!-- content 내용 부분 끝 -->
@@ -72,7 +74,7 @@
                      <div id="_replydiv${peed.seq }" style="display: none">
                      	<c:forEach begin="2" end="${fn:length(peedreplylist[replyIndex])}" var="i">
                      		<li class="_nk46a">                  
-                        		<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?seq=${peedreplylist[replyIndex][i].member_seq}">${peedreplylist[replyIndex][i].member_id}</a>
+                        		<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][i].member_id}">${peedreplylist[replyIndex][i].member_id}</a>
                               	<span>
                               	<!-- react text:3330 -->
                              	${peedreplylist[replyIndex][i].content}
@@ -86,7 +88,7 @@
                   <c:if test="${replyIndex ne -1}">
                      <c:forEach begin="0" end="1" var="i">
                         <li class="_nk46a">                  
-                           <a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?seq=${peedreplylist[replyIndex][i].member_seq}">${peedreplylist[replyIndex][i].member_id}</a>
+                           <a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][i].member_id}">${peedreplylist[replyIndex][i].member_id}</a>
                               <span>
                               <!-- react text:3330 -->
                               ${peedreplylist[replyIndex][i].content}

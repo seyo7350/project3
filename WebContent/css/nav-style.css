@@ -35,7 +35,7 @@
 }
 
 .coreSpriteDesktopNavLogoAndWordmark {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -504px -176px;
     height: 35px;
@@ -175,7 +175,7 @@
 }
 
 .coreSpriteSearchIcon {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -706px -23px;
     height: 10px;
@@ -221,7 +221,7 @@
 
 /* 사람찾기 */
 /* .coreSpriteDesktopNavExplore {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -659px -321px;    
     height: 24px;
@@ -230,7 +230,7 @@
 
 /* 사진기 */
 .coreSpriteDesktopNavExplore {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+      background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -505px -585px;
     height: 25px;
@@ -254,7 +254,7 @@
 
 /* 알림 */
 .coreSpriteDesktopNavActivity {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+      background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -636px -585px;
     height: 24px;
@@ -277,7 +277,7 @@
 
 /* 프로필 */
 .coreSpriteDesktopNavProfile {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -584px -585px;
     height: 24px;

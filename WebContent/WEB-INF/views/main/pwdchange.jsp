@@ -14,7 +14,12 @@
 			</ul>
 			<article class="_e5cd3">
 			<div class="_ljqf0">
-				<img class="_8gpiy _f7gj7"	src="${file }">
+				  <c:if test="${login.profile_image eq null}">
+						     <img alt="이미지 오류" class="_8gpiy _f7gj7"" src="image/not.jpg">
+					      </c:if>
+					      <c:if test="${login.profile_image ne null}">
+						      <img alt="이미지 오류" class="_8gpiy _f7gj7"" src="${file }"  > 
+					 </c:if>
 				<h1 class="_4s1oa">${login.id }</h1>
 			</div>
 			<form class="_tf7jx" action="pwdchangeAF.do" method="post" name ="form" onsubmit="return checkIt()">

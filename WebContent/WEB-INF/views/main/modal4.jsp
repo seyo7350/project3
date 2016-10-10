@@ -16,7 +16,16 @@
 				<li class="_cx1ua">
 					<div class="_6jvgy">
 						<div class="_9tu8m">
-								<a class="_5lote _pfo25 _vbtk2" href="#none" style="width: 30px; height: 30px;"><img class="_a012k" src="123.jpg" alt="이미지 없음"></a>
+								<a class="_5lote _pfo25 _vbtk2" href="profile.do?id=${follower.id}" >
+						
+						<c:if test="${mem.profile_image eq null}">
+								<img class="_a012k" src="image/not.jpg" alt="이미지 없음"> 
+						</c:if> 
+						
+						<c:if test="${mem.profile_image ne null}">
+								<img class="_a012k" src="upload/${mem.profile_image}" alt="profile">
+						</c:if>
+						</a>
 								<div class="_mmgca"><!--  아이디, 이름 -->
 									<div class="_gzjax"><a class="_4zhc5 notranslate _j71fh" title="아이디" href="profile.do?id=${follow.id }">${follow.id }</a></div>
 									<div class="_2uju6">${follow.name}</div>

@@ -29,9 +29,7 @@
 					</form>
 				</div>
 				<h1 class="_4s1oa">${mem.id }</h1>
-				
-				
-				
+
 			</div>
 
 			<form class="_cmoxu" action="editAF.do" method="post" name ="form" onsubmit="return checkIt()">
@@ -48,7 +46,7 @@
 					<aside class="_891mt">
 					<label for="pepUsername">사용자 이름</label></aside>
 					<div class="_lxlnj">
-						<input type="text" class="_cm95b _qy55y" aria-required="true" id="id" name="id" value="${mem.id }" onkeyup="noSpaceForm(this)"><br>
+						<input type="text" class="_cm95b _qy55y" aria-required="true" id="cid" name="cid" value="${mem.id }" onkeyup="noSpaceForm(this)"><br>
 					    &nbsp;&nbsp;<span class="_e616g"><input type="button" class="_cm95b _qy55y _aj7mu _2hpcs _kenyh _o0442" value="중복 체크" onclick="chkMbId();"></span>
 					    <input type="hidden" id="chkid" value="false">
 					</div>
@@ -114,7 +112,7 @@
 					<div class="_lxlnj">
 						<div class="_c7q5m">
 							<span class="_e616g">
-							   <input type="hidden" name="cid" value="${mem.id}">
+							   <input type="hidden" name="id" value="${mem.id}">
 							   <input type="hidden" name="cemail" value="${mem.email}">
 							   <input type="hidden" name="seq" value="${mem.seq}">
 							   <input type="hidden" name="pwd" value="${mem.pwd}">
@@ -167,6 +165,13 @@
 		});
   });
   
+  $(document).ready(function(){
+	 if("${mem.seq }" != "${login.seq}"){
+		 alert("다른사람의 정보를 수정하는 것은 불법입니다.");
+		 history.go(-1);
+		 }
+});
+  
   function noSpaceForm(obj) { // 공백사용못하게
 	    var str_space = /\s/;  // 공백체크
 	    if(str_space.exec(obj.value)) { //공백 체크
@@ -194,13 +199,13 @@
 		
 		if (user.id.value == '') {
 			alert('사용자 이름을 입력하세요');
-			user.id.focus();
+			user.cid.focus();
 			return false;
 		}
 		
-		if (user.chkid.value == 'false' && user.id.value != user.cid.value ) {
+		if (user.chkid.value == 'false' && user.cid.value != user.cid.value ) {
 			alert('아이디 중복체크를 제대로 해주세요');
-			user.id.focus();
+			user.cid.focus();
 			return false;
 		}
 		
@@ -217,8 +222,8 @@
 		}
 		
 		if (user.chkemail.value == 'false' && user.email.value != user.cemail.value ) {
-			alert('아이디 중복체크를 제대로 해주세요');
-			user.id.focus();
+			alert('이메일 중복체크를 제대로 해주세요');
+			user.email.focus();
 			return false;
 		}
 		
@@ -236,7 +241,7 @@
 		   url : "chkMbId.do",
 		   type : "post",
 		   data : {
-		    id : $("#id").val()
+		    id : $("#cid").val()
 		   },
 		   dataType : "json",
 		   success : function(data){

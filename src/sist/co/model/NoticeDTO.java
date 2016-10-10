@@ -1,5 +1,7 @@
 package sist.co.model;
 /*
+select * from INSTA_NOTICE
+
 DROP TABLE INSTA_NOTICE
 CASCADE CONSTRAINT
 
@@ -12,7 +14,8 @@ DROP SEQUENCE SEQ_INSTA_NOTICE
       WHO_ID VARCHAR2(500) NOT NULL,
       WHO_PROFILE VARCHAR2(500),
       WHAT NUMBER(8) NOT NULL,
-      FEED_SEQ NUMBER(8),
+      PEED_SEQ NUMBER(8),
+      PEED_IMAGE VARCHAR2(500),
       REGI_DATE DATE NOT NULL,
       READ_CONFIRM NUMBER(8) NOT NULL
   )
@@ -25,7 +28,7 @@ REFERENCES INSTA_MEMBER(SEQ);
  
 ALTER TABLE INSTA_NOTICE
 ADD CONSTRAINT FK_INSTA_NOTICE_WHO_SEQ FOREIGN KEY(WHO_SEQ)
-REFERENCES INSTA_MEMBER(SEQ);  
+REFERENCES INSTA_MEMBER(SEQ);    
  */
 
 import java.util.Date;
@@ -38,35 +41,13 @@ public class NoticeDTO {
 	private String who_id;
 	private String who_profile;
 	private int what;
-	private int feed_seq;
+	private int peed_seq;
+	private String peed_image;
 	private Date regi_date;
 	private int read_confirm;
 	
 	
 	public NoticeDTO(){
-	}
-
-
-	public NoticeDTO(int seq, int member_seq, int who_seq, String who_id, String who_profile, int what, int feed_seq,
-			Date regi_date, int read_confirm) {
-		super();
-		this.seq = seq;
-		this.member_seq = member_seq;
-		this.who_seq = who_seq;
-		this.who_id = who_id;
-		this.who_profile = who_profile;
-		this.what = what;
-		this.feed_seq = feed_seq;
-		this.regi_date = regi_date;
-		this.read_confirm = read_confirm;
-	}
-
-
-	@Override
-	public String toString() {
-		return "NoticeDTO [seq=" + seq + ", member_seq=" + member_seq + ", who_seq=" + who_seq + ", who_id=" + who_id
-				+ ", who_profile=" + who_profile + ", what=" + what + ", feed_seq=" + feed_seq + ", regi_date="
-				+ regi_date + ", read_confirm=" + read_confirm + "]";
 	}
 
 
@@ -130,13 +111,23 @@ public class NoticeDTO {
 	}
 
 
-	public int getFeed_seq() {
-		return feed_seq;
+	public int getPeed_seq() {
+		return peed_seq;
 	}
 
 
-	public void setFeed_seq(int feed_seq) {
-		this.feed_seq = feed_seq;
+	public void setPeed_seq(int peed_seq) {
+		this.peed_seq = peed_seq;
+	}
+
+
+	public String getPeed_image() {
+		return peed_image;
+	}
+
+
+	public void setPeed_image(String peed_image) {
+		this.peed_image = peed_image;
 	}
 
 
@@ -158,9 +149,33 @@ public class NoticeDTO {
 	public void setRead_confirm(int read_confirm) {
 		this.read_confirm = read_confirm;
 	}
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "NoticeDTO [seq=" + seq + ", member_seq=" + member_seq + ", who_seq=" + who_seq + ", who_id=" + who_id
+				+ ", who_profile=" + who_profile + ", what=" + what + ", peed_seq=" + peed_seq + ", peed_image="
+				+ peed_image + ", regi_date=" + regi_date + ", read_confirm=" + read_confirm + "]";
+	}
+
+
+	public NoticeDTO(int seq, int member_seq, int who_seq, String who_id, String who_profile, int what, int peed_seq,
+			String peed_image, Date regi_date, int read_confirm) {
+		super();
+		this.seq = seq;
+		this.member_seq = member_seq;
+		this.who_seq = who_seq;
+		this.who_id = who_id;
+		this.who_profile = who_profile;
+		this.what = what;
+		this.peed_seq = peed_seq;
+		this.peed_image = peed_image;
+		this.regi_date = regi_date;
+		this.read_confirm = read_confirm;
+	}
+
+
+	
 	
 	
 	

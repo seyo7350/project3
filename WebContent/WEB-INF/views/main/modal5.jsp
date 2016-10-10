@@ -15,9 +15,7 @@
 	
 	</a> 
 	<div class="_f95g7">
-		<a class="_4zhc5 notranslate _ook48" title="${mem.id }" href="#">${mem.id }</a>
-		<a class="_kul9p _rnlnu" title="페넬로페" href="#">위치정보</a>
-
+		<a class="_4zhc5 notranslate _ook48" title="${mem.id }" href="profile.do?id=${mem.id }">${mem.id }</a>
 	</div>
 	<span class="_fbms8 _e616g" id="fbms8">
 		
@@ -45,9 +43,11 @@
 		<div class="_iuf51 _oajsw">
 			<span class="_tf9x3">좋아요 <span id="_countThumbsUp">${countThumbsUp}</span>개</span>
 		</div>
-		<a class="_rmo1e" href="#">
-			<time class="_379kp" datetime="2016-08-29T16:26:48.000Z" title="2016년 8월 30일">1주</time>
-		</a>
+	<!-- 	<a class="_rmo1e" href="#">  -->
+			 <time class="_379kp" datetime="날짜 .시간" title="날짜"><fmt:formatDate value="${peedList[peed_index].regi_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+           <br>
+            <span class="_timestamp" date="<fmt:formatDate value="${peedList[peed_index].regi_date}" pattern="yyyy-MM-dd HH:mm:ss"/>"></span></time>
+	<!--     </a> -->
 	</section>
 	<ul class="_mo9iw _123ym" style="overflow: auto;">
 		<c:if test="${empty detailReplyList}">
@@ -55,7 +55,7 @@
 				<!-- <h1> -->
 					<a class="_4zhc5 notranslate _iqaka" title="" href="#" style="text-decoration: none;"></a>
 					<span>
-					댓글이 없습니다. 님이 댓글 달면 1빠
+					댓글이 없습니다.
 					</span>
 				<!-- </h1> -->
 			</li>
@@ -196,7 +196,7 @@ function insertReply(peed_seq) {
 		type:"POST",
 		url:"detailReply.do",
 		async:true,
-		data:"content="+reply_msg+"&peed_seq="+peed_seq+"&member_seq=${login.seq}&member_id=${login.id}",
+		data:"content="+reply_msg+"&peed_seq="+peed_seq+"&member_seq=${login.seq}&member_id=${login.id}&peed_image=${peedList[peed_index].image }",
 		success: function(linkedContent) {
 			$('#first_reply_view').hide();
 			var s = '<li class="_nk46a">';
