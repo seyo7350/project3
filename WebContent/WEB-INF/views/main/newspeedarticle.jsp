@@ -104,7 +104,7 @@
 				<a class="_ebwb5 _1tv0k" style="z-index: 2;" href="javascript:;" role="button" aria-disabled="false" id="thumbsUp">
 					<c:choose>
 						<c:when test="${likeList[peedVs.index] eq 0}">
-							<span class="_soakw coreSpriteHeartOpen" id="like${peed.seq}" onclick="changeHeart(this, ${peed.seq})">좋아요</span>
+							<span class="_soakw coreSpriteHeartOpen" id="like${peed.seq}" onclick="changeHeart(this, ${peed.seq},'${peed.image }' , ${peed.member_seq});">좋아요</span>
 						</c:when>
 						
 						<c:when test="${likeList[peedVs.index] eq 1}">
@@ -125,8 +125,8 @@
 <script  type="text/javascript">
 function insertreply(val){
    
-	var content=$('#_reply'+val).val();
-	alert(content);
+   var content=$('#_reply'+val).val();
+   alert(content);
    var id = '${login.id}';
    alert('id'+id);
    
@@ -161,8 +161,8 @@ function replyplus(val){
 }
 
 /* #_countThumbsUp 뒤에 피드 시퀀스를 줘서 알아보게 해야되는데 안도미!!!! */
-function changeHeart(info, seq) {
-	alert(info.className);
+function changeHeart(info, seq, peed_image, writer_seq) {
+
 	if(info.className == '_soakw coreSpriteHeartOpen'){
 		$('#like'+seq).attr('class','_soakw coreSpriteHeartFull');
 		
@@ -170,7 +170,7 @@ function changeHeart(info, seq) {
 			type:"POST",
 			url:"fplusPeedCnt.do",
 			async:true,
-			data:"member_seq=${login.seq}&peed_seq="+seq,
+			data:"member_seq=${login.seq}&id=${login.id}&profile_image=${login.profile_image}&peed_seq="+seq+"&peed_image="+peed_image+"&writer_seq="+writer_seq,
 			success: function(p_countThumbsUp){
 				alert('좋아요 성공'); 
 				/* alert(p_countThumbsUp); */
