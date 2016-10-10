@@ -35,3 +35,21 @@
     color: #262626;
     font-weight: 600;
 }
+
+@media (min-width: 736px){
+._3n7ri {
+    box-sizing: content-box;
+    padding: 0 20px;
+    width: calc(100% - 40px);
+}
+}
+
+._3n7ri {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin: 0 auto 30px;
+    max-width: 935px;
+    width: 100%;
+}

@@ -16,7 +16,7 @@
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT INSTA_FOLLOW.FOLLOW
 								FROM INSTA_MEMBER, INSTA_FOLLOW
-									WHERE INSTA_FOLLOW.MEMBER_SEQ=#{seq})
+									WHERE INSTA_FOLLOW.MEMBER_SEQ=#{seq} AND INSTA_FOLLOW.FOLLOW_CONNECT = 1)
 		
 	</select>
 	
@@ -25,7 +25,7 @@
 			FROM INSTA_MEMBER
 				WHERE SEQ IN(SELECT MEMBER_SEQ
 								FROM INSTA_FOLLOW
-									WHERE FOLLOW=#{seq})
+									WHERE FOLLOW=#{seq} AND INSTA_FOLLOW.FOLLOW_CONNECT = 1)
 		
 	</select>
 	
@@ -42,5 +42,10 @@
 					ORDER BY REGI_DATE DESC
 	</select>
 	
+	<select id="getMemberSeq" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT SEQ
+		FROM INSTA_MEMBER
+		WHERE ID = #{id}
+	</select>
 
 </mapper>  

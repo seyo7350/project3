@@ -11,11 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sist.co.model.CheckMember;
+import sist.co.model.FFDTO;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.service.FollowService;
@@ -28,32 +30,73 @@ public class FollowController {
 	@Autowired FollowService followService;
 	
 	@RequestMapping(value="follow.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String follow(Model model, MemberDTO memberDTO) throws Exception{
+	public String follow(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follow " + new Date());
 		System.out.println(memberDTO.toString()+"((((((((((((");
 		
-		List<MemberDTO> followList = new ArrayList<MemberDTO>();
+		List<FFDTO> followList = new ArrayList<FFDTO>();
 		followList = followService.getFollowList(memberDTO);
 		
 		System.out.println("size : " + followList.size());
 		System.out.println(followList.toString()+"!@#!@#!@#!@#");
 		
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		int member_seq = loginDTO.getSeq();
+		
+		for(int i = 0; i < followList.size(); i++){
+			int follow = followList.get(i).getFollow();
+			FollowDTO fdto = new FollowDTO(0, member_seq, follow, 0);
+			System.out.println(i +"번쨰 " + fdto.toString());
+			int follow_connect = followService.getMyFollowConnect(fdto);	// 어떤새끼 프로필 들어갔을 때 팔로워리스트에 있는 놈들과 로그인한 사람과의 관계 -> 팔로우 되어 있으면 1, 아니면 0
+			followList.get(i).setFollow_connect(follow_connect);
+		}
+		
 		model.addAttribute("followList", followList);
+		
+		//팔로우 여부 확인
+		/*MemberDTO memberDTO2 = (MemberDTO) request.getSession().getAttribute("login");
+        FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(memberDTO2.getSeq());
+        followDTO.setFollow(seq);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+		request.getSession().setAttribute("follow", follow);*/
 		
 		return "modal4.tiles";
 	}
 	
 	@RequestMapping(value="follower.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String follower(Model model, MemberDTO memberDTO) throws Exception{
+	public String follower(HttpServletRequest request, Model model, MemberDTO memberDTO) throws Exception{
 		logger.info("follower " + new Date());
 		System.out.println(memberDTO.toString());
 		
-		List<MemberDTO> followerList = new ArrayList<MemberDTO>();
+		List<FFDTO> followerList = new ArrayList<FFDTO>();
 		followerList = followService.getFollowerList(memberDTO);
 		
-		/*System.out.println(followerList+"@#$@#$@#$");*/
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		int member_seq = loginDTO.getSeq();
+		
+		for(int i = 0; i < followerList.size(); i++){
+			int follow = followerList.get(i).getMember_seq();
+			FollowDTO fdto = new FollowDTO(0, member_seq, follow, 0);
+			System.out.println(i +"번쨰 " + fdto.toString());
+			int follow_connect = followService.getMyFollowConnect(fdto);	// 어떤새끼 프로필 들어갔을 때 팔로워리스트에 있는 놈들과 로그인한 사람과의 관계 -> 팔로우 되어 있으면 1, 아니면 0
+			followerList.get(i).setFollow_connect(follow_connect);
+		}
+		
+		System.out.println(followerList+"@#$@#$@#$");
 		
 		model.addAttribute("followerList", followerList);
+		
+		//팔로우 여부 확인
+        /*FollowDTO followDTO = new FollowDTO();
+        followDTO.setMember_seq(l_seq);
+        followDTO.setFollow(seq);
+        
+        int follow = followService.getFollow(followDTO);
+        System.out.println("팔로우 관계 = " + follow );         
+		request.getSession().setAttribute("follow", follow);*/
 		
 		return "modal3.tiles";
 	}
@@ -93,15 +136,11 @@ public class FollowController {
 	@ResponseBody
 	public boolean cancleFollow(Model model, FollowDTO followDTO, HttpServletRequest request) throws Exception{
 		logger.info("sendFollow " + new Date());
-		System.out.println(followDTO.toString()+"팔로팔로미");
 		
-		System.out.println("팔로우 취소 컨트롤러");
 		boolean isS = followService.delFollow(followDTO);
 		System.out.println(isS + "팔로우 취소 컨트롤러");
-		if(isS){
-			return isS;
-		}else
-			return isS;
+		
+		return isS;
 	}
 }
 

@@ -74,5 +74,31 @@
 		<put-attribute name="main" value="/WEB-INF/views/main/write.jsp"/>
 	</definition>
 	
+		<definition name="introduction.tiles"  template="/WEB-INF/views/layouts-tiles.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/views/common/introduction.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/views/common/nav.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	
+	<definition name="member.tiles"  extends="introduction.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/common/member.jsp"/>
+	</definition>
+	
+	<definition name="flow.tiles"  extends="introduction.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/common/flow.jsp"/>
+	</definition>
+	
+	<definition name="model.tiles"  extends="introduction.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/common/model.jsp"/>
+	</definition>
+	
+	<definition name="sogam.tiles"  extends="introduction.tiles">
+		<put-attribute name="main" value="/WEB-INF/views/common/sogam.jsp"/>
+	</definition>
+	
+	<definition name="notice.tiles" template="/WEB-INF/views/common/notice.jsp">
+	</definition>
+	
 	
 </tiles-definitions>

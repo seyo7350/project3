@@ -62,7 +62,7 @@ public class PeedController {
 		System.out.println(param.toString());
 		
 		int totalPeedCount = peedService.getPeedCount(param);
-		List<PeedDTO> peedlist = peedService.getpeedlist(param);		
+		List<PeedDTO> peedlist = peedService.getpeedlist(param);
 		
 		System.out.println("totalPeedCount:" +totalPeedCount);
 		System.out.println("size:" + peedlist.size());
@@ -145,65 +145,80 @@ public class PeedController {
 			logger.info("writeAf fail");
 		}
 		
-		// hash 추가
+		// hash, a 링크걸고 hash 추가 시키기
 		String content = peedDTO.getContent();
+		String linkedContent = "";
+		int start_pos = -1;
 		int hash_pos = -1;
+		int at_pos = -1;		
 		int next_hash_pos = -1;	// 뒤에 바로 #이 붙는 경우
+		int next_at_pos = -1;
 		int end_enter_pos = -1;
 		int end_space_pos = -1;
 		int end_pos = -1;
 		String keyword = "";
 		int peed_seq = hashService.getLastPeedSeq();
 		
-		while(true){			
-			hash_pos = content.indexOf('#');
-			if(hash_pos < 0){
+		while(true){
+			int data[] = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+			
+			data[0] = content.indexOf('#')<0?Integer.MAX_VALUE:content.indexOf('#');
+			data[1] = content.indexOf('@')<0?Integer.MAX_VALUE:content.indexOf('@');
+			
+			start_pos = min(data);
+			
+			if(start_pos==Integer.MAX_VALUE){
+				linkedContent += content;
 				break;
-			}
-			next_hash_pos = content.indexOf('#', hash_pos+1);
-			end_enter_pos = content.indexOf('\n', hash_pos);
-			end_space_pos = content.indexOf(' ', hash_pos);
-			
-			if(next_hash_pos < 0){				// hash 없음
-				if(end_enter_pos < 0){			// enter 없음
-					end_pos = end_space_pos;	// ------------------------------------------------------ hash x, enter x, space ? == space
-				}else if(end_space_pos < 0){	// space 없음
-					end_pos = end_enter_pos;	// ------------------------------------------------------ hash x, enter ?, space x == enter
-				}else{							// enter, space 있음
-					end_pos = (end_enter_pos > end_space_pos) ? end_space_pos : end_enter_pos;	// ------ hash x, enter o, space o == enter, space 비교
+			}else{
+				data[0] = content.indexOf('#', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('#', start_pos+1);
+				data[1] = content.indexOf('@', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('@', start_pos+1);
+				data[2] = content.indexOf('\n', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('\n', start_pos+1);
+				data[3] = content.indexOf(' ', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf(' ', start_pos+1);
+				
+				end_pos = min(data);
+				
+				end_pos = end_pos==Integer.MAX_VALUE?content.length():end_pos;
+				
+				if(start_pos == content.indexOf('#')){	// 해시면 해시 추가
+					keyword = content.substring(start_pos + 1, end_pos);
+					System.out.println("insert 전 keyword : " + keyword);			
+					hashService.insertHash(peed_seq, keyword.trim());
+					linkedContent += content.substring(0, start_pos);
+					linkedContent += "<a href='./hash.do?keyword="+keyword+"'>#" + keyword + "</a>";
+				}else if(start_pos == content.indexOf('@')){
+					keyword = content.substring(start_pos + 1, end_pos);
+					linkedContent += content.substring(0, start_pos);
+					linkedContent += "<a href='./profile.do?id="+keyword+"'>@" + keyword + "</a>";
 				}
-			}else{								// hash 있음
-				if(end_enter_pos < 0){			// enter 없음
-					if(end_space_pos < 0){		// space 없음
-						end_pos = next_hash_pos;	// -------------------------------------------------- hash o, enter x, space x == hash
-					}else{						// space 있음
-						end_pos = (next_hash_pos > end_space_pos) ? end_space_pos : next_hash_pos;	// -- hash o, enter x, space o == hash, space 비교
-					}					
-				}else{							// enter 있음
-					if(end_space_pos < 0){		// space 없음
-						end_pos = (next_hash_pos > end_enter_pos) ? end_enter_pos : next_hash_pos;	// -- hash o, enter o, space x == hash, enter 비교
-					}else{						// space 있음
-						end_pos = (next_hash_pos > end_enter_pos) ? end_enter_pos : next_hash_pos;	// -- hash o, enter o, space o
-						end_pos = (end_pos > end_space_pos) ? end_space_pos : end_pos;				// -- == hash, enter 비교 후 작은거 저장, 그걸 space랑 비교
-					}
-				}
-			}
+				
+				System.out.println("end_pos : " + end_pos);
+				
+				content = content.substring(end_pos);
+				
+			}		
 			
-			end_pos = (end_pos == -1) ? content.length() : end_pos;	// 그래도 -1이면 셋 다 없는거
-			
-			System.out.println("content : " + content);
-			System.out.println("hash_pos : " + hash_pos);
-			System.out.println("end_pos : " + end_pos);
-			
-			keyword = content.substring(hash_pos + 1, end_pos);
-			content = content.substring(end_pos);
-			
-			// hash 추가
-			System.out.println("insert 전 keyword : " + keyword);			
-			hashService.insertHash(peed_seq, keyword.trim());
 		}
+		
+		System.out.println("마지막에 : " + linkedContent);
+		PeedDTO linkedPeed = new PeedDTO();
+		linkedPeed.setSeq(peed_seq);
+		linkedPeed.setContent(linkedContent);
+		peedService.linkedContent(linkedPeed);
+		
 		return "redirect:/newspeed.do";
-	}	
+	}
+	
+	public int min(int[] data){
+		int min = Integer.MAX_VALUE;
+		
+		for(int i = 0; i < data.length; i++){
+			if(data[i] < min){
+				min = data[i];
+			}
+		}
+		return min;
+	}
 	
 	// 개인 피드
 	@RequestMapping(value="detail.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -334,7 +349,6 @@ public class PeedController {
 
 	}
 
-
 	@RequestMapping(value="insertreply.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public void insertreply(HttpServletRequest request, Model model, PeedReplyDTO replyDTO) throws Exception{
@@ -362,7 +376,11 @@ public class PeedController {
 	@ResponseBody
 	public Map<String, String> detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
 		
+
 		System.out.println(peedReplyDTO.toString()+"나는 디테일 안에 댓글이야");
+
+		logger.info("detailReply " + new Date());
+
 		
 		// 댓글 DB 삽입
 		peedService.insertreply(peedReplyDTO);
@@ -372,6 +390,7 @@ public class PeedController {
 		return map_id;
 	}
 	
+
 	@RequestMapping(value="fplusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public int fplusPeedCnt(HttpServletRequest request, Model model, int peed_seq, int member_seq) throws Exception{
@@ -464,6 +483,37 @@ public class PeedController {
 		System.out.println("m_countThumbsUp : " + m_countThumbsUp);
 		
 		return m_countThumbsUp;
+	}
+
+	
+	@RequestMapping(value="detailReply2.do",method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public PeedReplyDTO detailReply2(Model model, PeedDTO peedDTO) throws Exception{
+		
+		logger.info(peedDTO.toString()+"블라블라11111111");
+		
+		logger.info("detailReply2 " + new Date());
+		
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		peedReplyDTO = peedService.getReplyDTO(peedDTO);
+		
+		logger.info(peedReplyDTO.toString()+"블라블라22222222");
+		
+		return peedReplyDTO;
+	}
+	
+	@RequestMapping(value="delReply.do",method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public int delReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
+		
+		logger.info("delReply " + new Date());
+		logger.info(peedReplyDTO.toString()+"삭제할 댓글 정보");
+		
+		int reply_seq = peedReplyDTO.getSeq();
+		peedService.delReply(peedReplyDTO);
+		
+		return reply_seq;
+		
 
 	}
 }

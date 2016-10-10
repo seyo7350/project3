@@ -52,6 +52,7 @@
 						<div class="_rlb47">
 							<span class="_e616g">
 							  <input type="hidden" name="seq" value="${login.seq}">
+							  <input type="hidden" name="id" value="${login.id}">
 							  <button class="_aj7mu _2hpcs _kenyh _o0442" id="button">비밀번호 변경</button></span>
 						</div>
 					</div>

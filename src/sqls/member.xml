@@ -6,8 +6,8 @@
   <mapper namespace="member">
   	
   	<insert id="addMember" parameterType="sist.co.model.MemberDTO">
-  		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN)
-  		VALUES(SEQ_INSTA_MEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE, 0)
+  		INSERT INTO INSTA_MEMBER(SEQ, ID, PWD, EMAIL, NAME, REGI_DATE)
+  		VALUES(SEQ_INSTA_MEMBER.NEXTVAL, #{id}, #{pwd}, #{email}, #{name}, SYSDATE)
   	</insert>
   	
   	<select id="getMemberList" resultType="sist.co.model.MemberDTO">
@@ -56,11 +56,15 @@
 	</update> 
 	
     <update id="profileChange" parameterType="sist.co.model.MemberDTO">
-	    UPDATE INSTA_MEMBER SET ID= #{id}, NAME=#{name}, EMAIL=#{email}, HOMEPAGE=#{homepage} where SEQ= #{seq}
+	    UPDATE INSTA_MEMBER SET ID=#{id}, NAME=#{name}, EMAIL=#{email}, HOMEPAGE=#{homepage}, INTRO=#{intro} where SEQ= #{seq}
 	</update>
 	
 	<update id="profileChangePeed" parameterType="sist.co.model.MemberDTO">
-		UPDATE INSTA_PEED SET MEMBER_ID=#{id}
+		UPDATE INSTA_PEED SET MEMBER_ID=#{id} WHERE MEMBER_SEQ=#{seq}
+	</update>
+	
+	<update id="profileChangeNotice" parameterType="sist.co.model.MemberDTO">
+		UPDATE INSTA_NOTICE SET WHO_ID=#{id} WHERE WHO_SEQ=#{seq}
 	</update>
 	
 	<update id="findPW" parameterType="sist.co.model.MemberDTO">
@@ -89,6 +93,18 @@
 	
 	<update id="peed_profile_upload" parameterType="sist.co.model.MemberDTO">
 		UPDATE INSTA_PEED SET MEMBER_PROFILE_IMAGE = #{profile_image} WHERE MEMBER_SEQ =#{seq}
+	</update>
+	
+	<update id="notice_profile_upload" parameterType="sist.co.model.MemberDTO">
+		UPDATE INSTA_NOTICE SET WHO_PROFILE=#{profile_image} WHERE WHO_SEQ =#{seq}
+	</update>
+		
+	<update id="notice_profile_null" parameterType="sist.co.model.MemberDTO">
+	    UPDATE INSTA_NOTICE SET WHO_PROFILE=null WHERE WHO_SEQ =#{seq}
+	</update>  
+	
+	<update id="peed_profile_null" parameterType="sist.co.model.MemberDTO">
+		UPDATE INSTA_PEED SET MEMBER_PROFILE_IMAGE=null WHERE MEMBER_SEQ =#{seq}
 	</update>
 	
   </mapper>

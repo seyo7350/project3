@@ -1,14 +1,19 @@
 package sist.co.model;
 
-/*CREATE TABLE INSTA_MEMBER(
+/*   drop table INSTA_MEMBER
+   cascade constraint;
+   
+   drop sequence SEQ_INSTA_MEMBER
+   
+CREATE TABLE INSTA_MEMBER(
 		SEQ NUMBER(8) PRIMARY KEY,
-		ID VARCHAR2(50) UNIQUE,
+		ID VARCHAR2(50) NOT NULL,
 		PWD VARCHAR2(50) NOT NULL,
 		EMAIL VARCHAR2(50) NOT NULL,
 		NAME VARCHAR2(50) NOT NULL,
 		REGI_DATE DATE NOT NULL,
-		OPEN NUMBER(2),
-		PROFILE_IMAGE VARCHAR2(500) UNIQUE,
+		INTRO VARCHAR2(1000),
+		PROFILE_IMAGE VARCHAR2(500),
 		HOMEPAGE VARCHAR2(500)
 	);
 
@@ -25,26 +30,12 @@ public class MemberDTO implements Serializable{
 	private String email;
 	private String name;
 	private Date regi_date;
-	private int open;
+    private String intro;
 	private String profile_image;
 	private String homepage;
 	
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public MemberDTO(int seq, String id, String pwd, String email, String name, Date regi_date, int open,
-			String profile_image, String homepage) {
-		super();
-		this.seq = seq;
-		this.id = id;
-		this.pwd = pwd;
-		this.email = email;
-		this.name = name;
-		this.regi_date = regi_date;
-		this.open = open;
-		this.profile_image = profile_image;
-		this.homepage = homepage;
 	}
 
 	public int getSeq() {
@@ -95,12 +86,12 @@ public class MemberDTO implements Serializable{
 		this.regi_date = regi_date;
 	}
 
-	public int getOpen() {
-		return open;
+	public String getIntro() {
+		return intro;
 	}
 
-	public void setOpen(int open) {
-		this.open = open;
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 
 	public String getProfile_image() {
@@ -122,9 +113,24 @@ public class MemberDTO implements Serializable{
 	@Override
 	public String toString() {
 		return "MemberDTO [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name
-				+ ", regi_date=" + regi_date + ", open=" + open + ", profile_image=" + profile_image + ", homepage="
+				+ ", regi_date=" + regi_date + ", intro=" + intro + ", profile_image=" + profile_image + ", homepage="
 				+ homepage + "]";
 	}
+
+	public MemberDTO(int seq, String id, String pwd, String email, String name, Date regi_date, String intro,
+			String profile_image, String homepage) {
+		super();
+		this.seq = seq;
+		this.id = id;
+		this.pwd = pwd;
+		this.email = email;
+		this.name = name;
+		this.regi_date = regi_date;
+		this.intro = intro;
+		this.profile_image = profile_image;
+		this.homepage = homepage;
+	}
+
 	
 	
 

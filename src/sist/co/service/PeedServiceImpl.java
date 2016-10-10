@@ -83,6 +83,11 @@ public class PeedServiceImpl implements PeedService {
 	}
 
 	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		peedDAO.linkedContent(peedDTO);
+		return false;
+	}
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
 		peedDAO.changeLikeState(thumbsUpDTO);
 	}
@@ -90,6 +95,21 @@ public class PeedServiceImpl implements PeedService {
 	@Override
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
 		return peedDAO.countThumbsUp(peedDTO);
+	}
+
+	@Override
+	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception {
+		peedDAO.delReply(peedReplyDTO);
+		
+	}
+
+	@Override
+	public PeedReplyDTO getReplyDTO(PeedDTO peedDTO) throws Exception {
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		
+		peedReplyDTO = peedDAO.getReplyDTO(peedDTO);
+		
+		return peedReplyDTO;
 	}
 	
 }

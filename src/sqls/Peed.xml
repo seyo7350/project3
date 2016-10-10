@@ -83,10 +83,30 @@
 		VALUES(SEQ_INSTA_PEED_REPLY.NEXTVAL,#{peed_seq},#{member_seq},#{member_id},#{content},SYSDATE)
 	</insert>
 	
+	<update id="linkedContent" parameterType="sist.co.model.PeedDTO">
+		UPDATE INSTA_PEED SET CONTENT = #{content} WHERE SEQ = #{seq}
+	</update>
+	
 	<select id="countThumbsUp" parameterType="sist.co.model.PeedDTO" resultType="int">
 		SELECT NVL(MAX(PEED_LIKE),0)
 			FROM INSTA_PEED
 				WHERE SEQ=#{seq}
 	</select>
+	
+	<delete id="delReply" parameterType="sist.co.model.PeedReplyDTO">
+		DELETE
+			FROM INSTA_PEED_REPLY
+				WHERE SEQ=#{seq}
+	</delete>
 
+	<select id="getReplyDTO" parameterType="sist.co.model.PeedDTO" resultType="sist.co.model.PeedReplyDTO">
+		SELECT NVL(MAX(SEQ), 0) AS SEQ
+			FROM INSTA_PEED_REPLY
+				WHERE PEED_SEQ=#{seq}
+	</select>
 </mapper>
+
+
+
+
+

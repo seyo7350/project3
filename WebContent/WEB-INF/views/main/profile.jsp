@@ -26,6 +26,7 @@
 					   </button>
 					   <form id="_frmForm" method="post" enctype="multipart/form-data">
 						  <input type="hidden" name="seq" value="${mem.seq}">
+						  <input type="hidden" name="id" value="${mem.id}">
 						  <input type="file" name="fileload"  id="image_file" size="60" class="_loq3v" onchange="previewUploadImg(this);"  accept="image/*" /> 
 					   </form>
                   </div>
@@ -45,6 +46,9 @@
 					<c:if test="${mem.homepage == null}">
 				        <div class="_bugdy">
 							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<c:if test="${mem.intro != null}">
+							   <span>${mem.intro }</span><br>
+							</c:if>
 							<a class="_56pjv" href="#none" target="_blank"></a>
 						</div>
 				    </c:if>
@@ -52,6 +56,9 @@
 					<c:if test="${mem.homepage != null}">
 				        <div class="_bugdy">
 							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<c:if test="${mem.intro != null}">
+							   <span>${mem.intro }</span><br>
+							</c:if>
 							<a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
 						</div>
 				    </c:if>
@@ -68,7 +75,7 @@
                </a></li>
                <li class=" _7gq8o"><a class="_s53mj _13vpi" href="javacript:;" id="popbutton2">
                      팔로우
-                     <span class="_bkw5z _kjym7"  title="0">${followCount }</span>명
+                     <span class="_bkw5z _kjym7"  title="0" id="follow_count">${followCount }</span>명
                </a></li>
             </ul>
             </div>
@@ -102,10 +109,11 @@
 		                        <input type="hidden" value="${follow }" name="connection" id="connection">
 		                        <input type="hidden" value="${login.seq }" name="member_seq" id="member_seq">
 		                        <input type="hidden" value="${login.id }" name="id" id="id">
+		                        <input type="hidden" value="${login.profile_image }" name="profile_image" id="profile_image">
 		                     </form>
 		                      <span	class="_5ji7m _e616g">
 		                        <c:if test="${2 eq follow }">
-  		                           <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로우 삭제</button>
+  		                           <button class="_aj7mu _r4e4p _kenyh _o0442" onclick="DelFollow()">팔로잉</button>
 		                        </c:if>
 		                        <c:if test="${2 ne follow }">
 		                          <button class="_aj7mu _2hpcs _kenyh _o0442" onclick="IntFollow()">팔로우</button>
@@ -179,12 +187,25 @@
                    	<c:if test="${vs.count%3 eq 1 }">
              			<div class="_myci9">
                    	</c:if>
-                           <a class="_8mlbc _vbtk2 _t5r8b"   href="#none"> 
+                           <a class="_8mlbc _vbtk2 _t5r8b" href="#none"> 
                                <div class="_22yr2">
                                   <div class="_jjzlb">
                                      <img alt="이미지 없음${vs.index }" class="_icyx7" src="upload/${peed.image }" onclick="openModal5(${vs.index})" />
                                   </div>
                                </div>
+                               
+                               <!-- <div class="_sppa1">
+	                               	<ul class="_m9z3c">
+	                               		<li class="_sjq6j _ajqft">
+	                               			<span class="_4aw90 _soakw coreSpriteHeartSmall"></span>
+	                               			<span>6</span>"개"
+	                               		</li>
+	                               		<li class="_qq2if">
+	                               			<span class="_fuu7c _soakw coreSpriteSpeechBubbleSmall"></span>
+	                               			<span>2</span>"개"
+	                               		</li>
+	                               	</ul>
+                               </div> -->
                             </a>
                        <c:if test="${vs.last && (vs.count%3 eq 1)}">
                         	<div class="_t5r8b _81g1f"></div>
@@ -284,8 +305,7 @@
          </div>
       </div>
       
-     <div class="modal-dialog">
-        
+     <div class="modal-dialog">        
         <div class="modal-content">
          <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="float: right;">×</span><span class="sr-only">Close</span></button>
@@ -378,7 +398,7 @@
             </div>
          </div>
          <div class="_7629j">
-            <div class="_hj98d">
+            <div class="_hj98d" id="hj98d">
                <a class="_qdy3e coreSpriteLeftPaginationArrow" href="javascript:alert('11');" role="button">이전</a>
                <a class="_de018 coreSpriteRightPaginationArrow" href="#" role="button">다음</a>
             </div>
@@ -536,9 +556,8 @@ function openModal5(peed_idx){
                  s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                  s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
              }
-            
              
-             $('._hj98d').html(s);
+             $('#hj98d').html(s);///////////////////////////////////////////////////////
             
             $('#modal5').html(data);
             
@@ -550,7 +569,7 @@ function openModal5(peed_idx){
 };
 
 $(document).ready(function(){
-    $('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
+    $('#hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
         peed_index++;
         /* alert(peed_index); */
         if(peed_index == end){
@@ -559,7 +578,7 @@ $(document).ready(function(){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
             s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
         }
-        $('._hj98d').html(s);
+        $('#hj98d').html(s);
         
         $.ajax({
             type:"POST",
@@ -574,7 +593,7 @@ $(document).ready(function(){
         });
     });
     
-    $('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
+    $('#hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
         peed_index--;
         /* alert(peed_index); */
         if(peed_index == 0){
@@ -584,7 +603,7 @@ $(document).ready(function(){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
             s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
         }
-        $('._hj98d').html(s);
+        $('#hj98d').html(s);
         
         $.ajax({
             type:"POST",
@@ -599,7 +618,6 @@ $(document).ready(function(){
         });
     });
 });
-
 
 /* function showModal4(데이터) {
    
@@ -657,9 +675,6 @@ $(document).ready(function(){
    }); */
 });
 
-
-
-
 /* function wrapWindowByMask(){
     //화면의 높이와 너비를 구한다.
     var maskHeight = $(document).height();  
@@ -688,9 +703,11 @@ $(document).ready(function(){
    });
 }); */
 
+	
+
 $('#delete').click(function(){
    alert("프로필 사진을 기본사진으로 변경합니다.");
-   location.href='imageDelAF.do?seq=${mem.seq}';
+   location.href='imageDelAF.do?seq=${mem.seq}&id=${login.id}';
 });
 
 $('#upload').click(function(){
@@ -750,6 +767,9 @@ function singo(){
    alert("사칭 계정이나 부적절한 컨텐츠를 올린 사용자를 신고합니다. \n신고가 사실이 아닐경우 본인에게 이용에 불이익이 올 수 있습니다.");
    $('#Form').attr({'target':'_self', "action":"singo.do"}).submit();
 }
+
+var follow_cnt = '${followCount}';
+var follower_cnt = '${followerCount}';
 </script>
   
   

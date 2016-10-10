@@ -90,6 +90,13 @@ public class PeedDAOImpl implements PeedDAO {
 	}
 
 	@Override
+	public boolean linkedContent(PeedDTO peedDTO) {
+		// TODO Auto-generated method stub
+		sqlSession.update(ns+"linkedContent", peedDTO);
+		return false;
+	}
+	
+	
 	public void changeLikeState(ThumbsUpDTO thumbsUpDTO) throws Exception {
 		sqlSession.update(ns+"changeLikeState", thumbsUpDTO);
 	}
@@ -97,6 +104,20 @@ public class PeedDAOImpl implements PeedDAO {
 	@Override
 	public int countThumbsUp(PeedDTO peedDTO) throws Exception {
 		return sqlSession.selectOne(ns+"countThumbsUp", peedDTO);
+	}
+
+	@Override
+	public void delReply(PeedReplyDTO peedReplyDTO) throws Exception {
+		sqlSession.update(ns+"delReply", peedReplyDTO);
+	}
+
+	@Override
+	public PeedReplyDTO getReplyDTO(PeedDTO peedDTO) throws Exception {
+		PeedReplyDTO peedReplyDTO = new PeedReplyDTO();
+		
+		peedReplyDTO = sqlSession.selectOne(ns+"getReplyDTO", peedDTO);
+		return peedReplyDTO;
+		
 	}
 	
 }

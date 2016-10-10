@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sist.co.dao.FollowDAO;
+import sist.co.model.FFDTO;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 
@@ -16,15 +17,15 @@ public class FollowServiceImpl implements FollowService {
 	@Autowired FollowDAO followDAO;
 	
 	@Override
-	public List<MemberDTO> getFollowList(MemberDTO memberDTO) throws Exception {
-		List<MemberDTO> followList = new ArrayList<MemberDTO>();
+	public List<FFDTO> getFollowList(MemberDTO memberDTO) throws Exception {
+		List<FFDTO> followList = new ArrayList<FFDTO>();
 		followList = followDAO.getFollowList(memberDTO);
 		return followList;
 	}
 	
 	@Override
-	public List<MemberDTO> getFollowerList(MemberDTO memberDTO) throws Exception {
-		List<MemberDTO> followerList = new ArrayList<MemberDTO>();
+	public List<FFDTO> getFollowerList(MemberDTO memberDTO) throws Exception {
+		List<FFDTO> followerList = new ArrayList<FFDTO>();
 		followerList = followDAO.getFollowerList(memberDTO);
 		return followerList;
 	}
@@ -55,6 +56,12 @@ public class FollowServiceImpl implements FollowService {
 	@Override
 	public int getFollowConnect(FollowDTO followDTO) throws Exception {
 		return followDAO.getFollowConnect(followDTO);
+	}
+
+	@Override
+	public int getMyFollowConnect(FollowDTO followDTO) {
+		// TODO Auto-generated method stub
+		return followDAO.getMyFollowConnect(followDTO);
 	}
 
 }
