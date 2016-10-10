@@ -351,7 +351,7 @@ public class PeedController {
 
 	@RequestMapping(value="insertreply.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public void insertreply(HttpServletRequest request, Model model, PeedReplyDTO replyDTO) throws Exception{
+	public String insertreply(HttpServletRequest request, Model model, PeedReplyDTO replyDTO) throws Exception{
 		logger.info("insertreply " + new Date());
 		
 		String content = request.getParameter("content");
@@ -369,23 +369,69 @@ public class PeedController {
 		
 		System.out.println(replyDTO.toString());
 		
+		// hash, a 링크걸고 hash 추가 시키기
+		String linkedContent = "";
+		int start_pos = -1;
+		int hash_pos = -1;
+		int at_pos = -1;		
+		int next_hash_pos = -1;	// 뒤에 바로 #이 붙는 경우
+		int next_at_pos = -1;
+		int end_enter_pos = -1;
+		int end_space_pos = -1;
+		int end_pos = -1;
+		String keyword = "";
+		
+		while(true){
+			int data[] = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+			
+			data[0] = content.indexOf('#')<0?Integer.MAX_VALUE:content.indexOf('#');
+			data[1] = content.indexOf('@')<0?Integer.MAX_VALUE:content.indexOf('@');
+			
+			start_pos = min(data);
+			
+			if(start_pos==Integer.MAX_VALUE){
+				linkedContent += content;
+				break;
+			}else{
+				data[0] = content.indexOf('#', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('#', start_pos+1);
+				data[1] = content.indexOf('@', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('@', start_pos+1);
+				data[2] = content.indexOf('\n', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf('\n', start_pos+1);
+				data[3] = content.indexOf(' ', start_pos+1)<0?Integer.MAX_VALUE:content.indexOf(' ', start_pos+1);
+				
+				end_pos = min(data);
+				
+				end_pos = end_pos==Integer.MAX_VALUE?content.length():end_pos;
+				
+				if(start_pos == content.indexOf('#')){	// 해시면 해시 추가
+					keyword = content.substring(start_pos + 1, end_pos);
+					System.out.println("insert 전 keyword : " + keyword);			
+					hashService.insertHash(-1, keyword.trim());
+					linkedContent += content.substring(0, start_pos);
+					linkedContent += "<a href='./hash.do?keyword="+keyword+"'>#" + keyword + "</a>";
+				}else if(start_pos == content.indexOf('@')){
+					keyword = content.substring(start_pos + 1, end_pos);
+					linkedContent += content.substring(0, start_pos);
+					linkedContent += "<a href='./profile.do?id="+keyword+"'>@" + keyword + "</a>";
+				}
+				
+				System.out.println("end_pos : " + end_pos);
+				
+				content = content.substring(end_pos);
+				
+			}		
+			
+		}
+		
+		replyDTO.setContent(linkedContent);
+		
 		peedService.insertreply(replyDTO);
+		
+		return linkedContent;
 	}
-<<<<<<< HEAD
 	
 	@RequestMapping(value="detailReply.do",produces="application/text;charset=utf8",method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
-=======
-
-	@RequestMapping(value="detailReply.do",method={RequestMethod.GET, RequestMethod.POST})
-	@ResponseBody
-	public Map<String, String> detailReply(Model model, PeedReplyDTO peedReplyDTO) throws Exception{
-		
-
-		System.out.println(peedReplyDTO.toString()+"나는 디테일 안에 댓글이야");
-
->>>>>>> d5b4250d75ebc5a852f7e43c9e43ff635571c4ad
 		logger.info("detailReply " + new Date());
 
 		
@@ -448,18 +494,9 @@ public class PeedController {
 		
 		
 		// 댓글 DB 삽입
-		peedService.insertreply(peedReplyDTO);
-<<<<<<< HEAD
-		
-		
+		peedService.insertreply(peedReplyDTO);		
 		
 		return linkedContent;
-=======
-		Map<String, String> map_id = new HashMap<String, String>();
-		map_id.put("write_id", peedReplyDTO.getMember_id());
-		
-		return map_id;
->>>>>>> d5b4250d75ebc5a852f7e43c9e43ff635571c4ad
 	}
 	
 

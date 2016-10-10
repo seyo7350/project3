@@ -14524,3 +14524,26 @@ transform
   position: relative; /* 
   top:250px;  */
 }
+
+@media (min-width: 736px){
+._7uiwk, ._es1du, ._l086v {
+    font-size: 15px;
+    line-height: 18px;
+}
+
+._i5ueh, ._l086v {
+    vertical-align: middle;
+}
+
+._ifrvy {
+    cursor: pointer;
+}
+
+._l086v {
+    background: 0 0;
+    border: none;
+    color: #999;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
