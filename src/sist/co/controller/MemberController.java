@@ -30,11 +30,13 @@ import sist.co.help.FUpUtil;
 import sist.co.model.CheckMember;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
+import sist.co.model.NoticeDTO;
 import sist.co.model.PeedDTO;
 import sist.co.model.SearchDTO;
 import sist.co.service.HashService;
 import sist.co.service.FollowService;
 import sist.co.service.MemberService;
+import sist.co.service.NoticeService;
 import sist.co.service.ProfileService;
 import sist.co.service.SearchService;
 
@@ -62,6 +64,9 @@ public class MemberController {
 	
 	@Autowired
 	private SearchService searchService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	
 	@RequestMapping(value="index.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -239,7 +244,7 @@ public class MemberController {
 		
 		boolean isS = memberService.profileChange(memberDTO);
 		int seq = Integer.parseInt(request.getParameter("seq"));
-		
+		String id = request.getParameter("cid");
 		
 		if(isS){
 			request.getSession().invalidate();
@@ -248,7 +253,7 @@ public class MemberController {
 			login = memberService.login(memberDTO);
 			request.getSession().setAttribute("login", login);
 			
-			return "forward:/profile.do";
+			return "redirect:/profile.do?id="+id;
 		}else{
 		   return "edit.tiles";
 		}
@@ -272,12 +277,13 @@ public class MemberController {
 
 
 	@RequestMapping(value="pwdchangeAF.do",method={RequestMethod.GET, RequestMethod.POST})
-	public String pwdchangeAF(MemberDTO memberDTO, Model model) throws Exception{
+	public String pwdchangeAF(MemberDTO memberDTO, Model model, HttpServletRequest request) throws Exception{
 
 		boolean isS = memberService.PWDChange(memberDTO);
+		String id = request.getParameter("id");
 		
 		if(isS){
-			return "forward:/profile.do";
+			return "redirect:/profile.do?id="+id;
 		}else{
 		   return "pwdchange.tiles";
 		}
@@ -403,6 +409,7 @@ public class MemberController {
 		    
 			System.out.println(fileload.getOriginalFilename());
 			int seq = Integer.parseInt(request.getParameter("seq"));
+			String aid = request.getParameter("id");
 			
 			System.out.println(memberDTO.toString());
 
@@ -446,7 +453,7 @@ public class MemberController {
 				logger.info("프로필 이미지 업로드 fail");
 			}
 
-			return "forward:/profile.do";
+			return "redirect:/profile.do?id="+aid;
 			
 		}	
 	 
@@ -458,7 +465,6 @@ public class MemberController {
 			String fseq = request.getParameter("follow");
 			String id = request.getParameter("sid");
 			
-			int seq = Integer.parseInt(fseq);
 			int member_seq = Integer.parseInt(mseq);
 			int follow = Integer.parseInt(fseq);
 			
@@ -475,7 +481,7 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="IntFollow.do",method={RequestMethod.GET, RequestMethod.POST})
-		public String IntFollow(Model model, HttpServletRequest request, FollowDTO followDTO) throws Exception{
+		public String IntFollow(Model model, HttpServletRequest request, FollowDTO followDTO, NoticeDTO noticeDTO) throws Exception{
 			logger.info("IntFollow " + new Date());
 
 			String mseq = request.getParameter("member_seq");
@@ -491,8 +497,18 @@ public class MemberController {
 			followDTO.setFollow(follow);
 
 		    boolean isS = followService.IntFollow(followDTO);
+		    
+		    //알림 생성
+		    String who_id = request.getParameter("id");
+		    String who_profile = request.getParameter("profile_image");
+		    noticeDTO.setWho_id(who_id);
+		    noticeDTO.setWho_seq(member_seq);
+		    noticeDTO.setMember_seq(follow);
+		    noticeDTO.setWho_profile(who_profile);
+	 
+		    boolean isB = noticeService.IntNotice2(noticeDTO);
 			
-			if(isS){
+			if(isS && isB){
 				return "redirect:/profile.do?id="+id;
 			}else{
 				return "redirect:/profile.do?id="+id;
@@ -501,7 +517,7 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="updateFollow.do",method={RequestMethod.GET, RequestMethod.POST})
-		public String updateFollow(Model model, HttpServletRequest request, FollowDTO followDTO) throws Exception{
+		public String updateFollow(Model model, HttpServletRequest request, FollowDTO followDTO, NoticeDTO noticeDTO) throws Exception{
 			logger.info("updateFollow " + new Date());
 
 			String mseq = request.getParameter("member_seq");
@@ -516,8 +532,19 @@ public class MemberController {
 			followDTO.setFollow(follow);
 
 		    boolean isS = followService.updateFollow(followDTO);
+		    
+		    //알림 생성
+		    String who_id = request.getParameter("id");
+		    String who_profile = request.getParameter("profile_image");
+		    noticeDTO.setWho_id(who_id);
+		    noticeDTO.setWho_seq(member_seq);
+		    noticeDTO.setMember_seq(follow);
+		    noticeDTO.setWho_profile(who_profile);
+	 
+		    boolean isB = noticeService.IntNotice2(noticeDTO);
+		    
 			
-			if(isS){
+			if(isS && isB){
 				return "redirect:/profile.do?id="+id;
 			}else{
 				return "redirect:/profile.do?id="+id;
@@ -548,8 +575,8 @@ public class MemberController {
 		public String singoAF(Model model, HttpServletRequest request) throws Exception{
 			logger.info("singoAF " + new Date());
 			        
-			        String fseq = request.getParameter("seq"); 
-			        int seq = Integer.parseInt(fseq);
+			        String id = request.getParameter("id"); 
+			       
 			        
 					String setfrom = "qlalf666@gmail.com";         
 				    String tomail  = "qlalf666@gmail.com";  
@@ -570,7 +597,37 @@ public class MemberController {
 				    } catch(Exception e){
 				      System.out.println(e);
 				    }
-				    return "forward:/profile.do?seq="+seq;
+				    return "redirect:/profile.do?id="+id;
+		}
+		
+		@RequestMapping(value="introduction.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String introduction(Model model) throws Exception{
+			logger.info("introduction " + new Date());
+			return "introduction.tiles";
+		}
+		
+		@RequestMapping(value="member.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String member(Model model) throws Exception{
+			logger.info("member " + new Date());
+			return "member.tiles";
+		}
+		
+		@RequestMapping(value="model.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String model(Model model) throws Exception{
+			logger.info("model " + new Date());
+			return "model.tiles";
+		}
+		
+		@RequestMapping(value="flow.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String flow(Model model) throws Exception{
+			logger.info("flow " + new Date());
+			return "flow.tiles";
+		}
+		
+		@RequestMapping(value="sogam.do",method={RequestMethod.GET, RequestMethod.POST})
+		public String sogam(Model model) throws Exception{
+			logger.info("sogam " + new Date());
+			return "sogam.tiles";
 		}
 
 }

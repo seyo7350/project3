@@ -27,6 +27,7 @@
 					   </button>
 					   <form id="_frmForm" method="post" enctype="multipart/form-data">
 						  <input type="hidden" name="seq" value="${mem.seq}">
+						  <input type="hidden" name="id" value="${mem.id}">
 						  <input type="file" name="fileload"  id="image_file" size="60" class="_loq3v" onchange="previewUploadImg(this);"  accept="image/*" /> 
 					   </form>
                   </div>
@@ -46,6 +47,9 @@
 					<c:if test="${mem.homepage == null}">
 				        <div class="_bugdy">
 							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<c:if test="${mem.intro != null}">
+							   <span>${mem.intro }</span><br>
+							</c:if>
 							<a class="_56pjv" href="#none" target="_blank"></a>
 						</div>
 				    </c:if>
@@ -53,6 +57,9 @@
 					<c:if test="${mem.homepage != null}">
 				        <div class="_bugdy">
 							<h2 class="_79dar">${mem.name }</h2>&nbsp;&nbsp;&nbsp;
+							<c:if test="${mem.intro != null}">
+							   <span>${mem.intro }</span><br>
+							</c:if>
 							<a class="_56pjv" href="http://${mem.homepage }" target="_blank">${mem.homepage }</a>
 						</div>
 				    </c:if>
@@ -103,6 +110,7 @@
 		                        <input type="hidden" value="${follow }" name="connection" id="connection">
 		                        <input type="hidden" value="${login.seq }" name="member_seq" id="member_seq">
 		                        <input type="hidden" value="${login.id }" name="id" id="id">
+		                        <input type="hidden" value="${login.profile_image }" name="profile_image" id="profile_image">
 		                     </form>
 		                      <span	class="_5ji7m _e616g">
 		                        <c:if test="${2 eq follow }">
@@ -700,7 +708,7 @@ $(document).ready(function(){
 
 $('#delete').click(function(){
    alert("프로필 사진을 기본사진으로 변경합니다.");
-   location.href='imageDelAF.do?seq=${mem.seq}';
+   location.href='imageDelAF.do?seq=${mem.seq}&id=${login.id}';
 });
 
 $('#upload').click(function(){

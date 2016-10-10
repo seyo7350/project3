@@ -64,10 +64,9 @@ public class PagingParam implements Serializable{
 
 	@Override
 	public String toString() {
-		return "PagingParam [member_seq=" + member_seq + ", peedCountPerPage=" + peedCountPerPage + ", index="
-				+ index + ", start=" + start + ", end=" + end + "]";
+		return "PagingParam [member_seq=" + member_seq + ", peedCountPerPage="
+				+ peedCountPerPage + ", index=" + index + ", start=" + start + ", end=" + end + "]";
 	}
 
-	
 	
 }

@@ -15,7 +15,7 @@
 		  <form id="Form" method="post">
               <div><!-- 내용 --> 
                     내용<br>
-                     <input type="hidden" value="${seq }" id="seq" name="seq">
+                     <input type="hidden" value="${id }" id="id" name="id">
 <textarea name="content1" cols="30" rows="4" style="width:75%; resize:none" readonly="readonly">
 신고자 시퀀스: ${seq }  신고자 id: ${id }
 신고 시퀀스: ${sseq }    신고 id: ${sid }</textarea>
@@ -45,7 +45,7 @@
 
 <script>
 function goback(){
-	location.href='profile.do?seq=${sseq }';
+	location.href='profile.do?id=${sid }';
 }
 
 function gosingo(){
