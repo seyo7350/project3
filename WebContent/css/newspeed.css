@@ -308,7 +308,7 @@ a, a:visited {
     white-space: nowrap;
 }
 .coreSpriteHeartOpen {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -130px -635px;
     height: 24px;
@@ -372,7 +372,7 @@ a, a:visited {
     white-space: nowrap;
 }
 .coreSpriteEllipsis {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -493px -448px;
     height: 44px;
@@ -434,4 +434,3 @@ a, a:visited {
 ._i5ueh, ._l086v {
     vertical-align: middle;
 }
-

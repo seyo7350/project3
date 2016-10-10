@@ -45,6 +45,34 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeDAO.IntNotice2(noticeDTO);
 		return true;
 	}
+
+
+
+
+	@Override
+	public boolean IntNotice3(NoticeDTO noticeDTO) throws Exception {
+		noticeDAO.IntNotice3(noticeDTO);
+		return true;
+	}
+
+
+
+
+	@Override
+	public boolean IntNotice4(NoticeDTO noticeDTO) throws Exception {
+		noticeDAO.IntNotice4(noticeDTO);
+		return true;
+	}
+
+
+
+
+	@Override
+	public boolean IntNotice5(NoticeDTO noticeDTO) throws Exception {
+		noticeDAO.IntNotice5(noticeDTO);
+		return true;
+	}
+	
 	
 	
 

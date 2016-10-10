@@ -4,7 +4,9 @@
 	<div class="_fjpuc _sq03j">
 		<div class="_6v8vp">
 			<div class="_df358">
-				<a class="_1b8in _soakw coreSpriteDesktopNavLogoAndWordmark" href="newspeed.do">Instagram</a>
+				<!-- <a class="_1b8in _soakw coreSpriteDesktopNavLogoAndWordmark" href="newspeed.do">Instagram</a> -->
+				<a class="_1b8in _soakw" href="newspeed.do"><img class="_soakw" src="image/logo.png" width="180px"/></a>
+				
 				<div class="_nhei4">
 					<div class="_9pxkq _icv3j">
 						<input type="text" class="_9x5sw _qy55y" placeholder="검색">

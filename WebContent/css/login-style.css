@@ -154,7 +154,7 @@ body {
 }
 
 .coreSpriteLoggedOutWordmark {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -520px -268px;
     height: 51px;

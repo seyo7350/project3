@@ -7,7 +7,7 @@
 	<article class="_60k3m">
 		<div class="_p8ymb">
 			<div class="_nvyyp">
-				<h1 class="_du7bh _soakw coreSpriteLoggedOutWordmark">Instagram</h1>
+				<div align="center"><img src="image/logo.png" width="180px"/></div><br>
 				<div class="_uikn3">
 					<form class="_rwf8p" method="post" id="_frmForm">
 						<div class="_ccek6 _i31zu">
@@ -32,17 +32,6 @@
 					계정이 없으신가요?
 					<a class="_fcn8k" href="#" id="a_join">가입하기</a>
 				</p>
-			</div>
-			<div class="_m8ogu">
-				<p class="_gnsgq">앱을 다운로드하세요.</p>
-				<div class="_rwl8x">
-					<a class="_okmo7" href="#">
-						<img class="_t5w1b" src="//instagramstatic-a.akamaihd.net/h1/images/appstore-install-badges/badge_ios_korean-ko.png/a5b7c639e096.png">
-					</a>
-					<a class="_okmo7" href="#">
-						<img class="_t5w1b" src="//instagramstatic-a.akamaihd.net/h1/images/appstore-install-badges/korean_get.png/0e2ed99efd27.png">
-					</a>
-				</div>
 			</div>
 		</div>
 	</article>

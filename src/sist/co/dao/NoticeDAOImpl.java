@@ -50,6 +50,27 @@ public class NoticeDAOImpl implements NoticeDAO {
 		sqlSession.insert(ns+"IntNotice2", noticeDTO);
 		return true;
 	}
+
+
+	@Override
+	public boolean IntNotice3(NoticeDTO noticeDTO) throws Exception {
+		sqlSession.insert(ns+"IntNotice3", noticeDTO);
+		return true;
+	}
+
+
+	@Override
+	public boolean IntNotice4(NoticeDTO noticeDTO) throws Exception {
+		sqlSession.insert(ns+"IntNotice4", noticeDTO);
+		return true;
+	}
+
+
+	@Override
+	public boolean IntNotice5(NoticeDTO noticeDTO) throws Exception {
+		sqlSession.insert(ns+"IntNotice5", noticeDTO);
+		return true;
+	}
 	
 	
 

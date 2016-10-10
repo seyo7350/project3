@@ -295,7 +295,7 @@ a._kul9p, a._kul9p:visited {
 }
 
 .coreSpriteLeftPaginationArrow {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+       background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -150px -585px;
     height: 40px;
@@ -321,7 +321,7 @@ a._kul9p, a._kul9p:visited {
 }
 
 .coreSpriteRightPaginationArrow {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -583px -448px;
     height: 40px;
@@ -606,7 +606,7 @@ ol, ul {
 }
 
 .coreSpriteHeartOpen {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -130px -635px;
     height: 24px;
@@ -647,7 +647,7 @@ ol, ul {
 }
 
 .coreSpriteEllipsis {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/684453.png);
+        background-image: url('../image/insta.png');
     background-repeat: no-repeat;
     background-position: -493px -448px;
     height: 44px;

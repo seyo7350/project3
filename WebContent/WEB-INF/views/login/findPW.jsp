@@ -43,7 +43,7 @@
 							    <input type="hidden" id="pwd" name="pwd" value="${t_pwd }">
 							   <button class="_aj7mu _2hpcs _kenyh _o0442" id="btn">제출</button>
 							   </span>
-							    &nbsp;&nbsp;&nbsp;<button class="_aj7mu _2hpcs _kenyh _o0442"  onclick="">돌아가기</button>
+							    &nbsp;&nbsp;&nbsp;<input type="button" class="_aj7mu _2hpcs _kenyh _o0442"  onclick="goback()" value="돌아가기">
 						</div>
 					</div>
 				</div>
@@ -63,24 +63,28 @@
 			    }
 			}
 		  
+		  function goback() {
+			  location.href='index.do';
+		  }
+		  
+		  
 		  function checkIt() {
 				var user = document.form;
-				
-				if (user.name.value == '') {
-					alert('이름을 입력하세요!');
-					user.name.focus();
-					return false;
-				}
 				
 				if (user.id.value == '') {
 					alert('사용자 이름을 입력하세요');
 					user.id.focus();
 					return false;
 				}
+				
+				if (user.name.value == '') {
+					alert('성명을 입력하세요!');
+					user.name.focus();
+					return false;
+				}
+
 			   alert("비밀번호 찾기를 시작합니다. 고객님이 입력하신 정보가 올바른 경우 회원가입 시 입력한 이메일 걔정으로 임시 비밀번호를 보내드립니다.");
 			}
 		  
-		  function goback() {
-			  location.href='index.do';
-		  }
+
 		</script>
