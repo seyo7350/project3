@@ -22,14 +22,17 @@ public class HashDAOImpl implements HashDAO {
 	
 	@Override
 	public boolean insertHash(int peed_seq, String keyword) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		int hash_seq = sqlSession.selectOne(ns+"getHashSeq", keyword);
 		if(hash_seq == 0){
 			sqlSession.insert(ns+"insertHash", keyword);
 			hash_seq = sqlSession.selectOne(ns+"getLastHashSeq");
 		}
-		HashSubDTO hashSubDTO = new HashSubDTO(0, peed_seq, hash_seq, 0);		// seq는 nextval, del은 0이 연결된거
-		sqlSession.insert(ns+"insertHashSub", hashSubDTO);
+		
+		if(peed_seq > 0){
+			HashSubDTO hashSubDTO = new HashSubDTO(0, peed_seq, hash_seq, 0);		// seq는 nextval, del은 0이 연결된거
+			sqlSession.insert(ns+"insertHashSub", hashSubDTO);
+		}		
 		
 		return true;
 	}

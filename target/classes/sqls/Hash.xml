@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Hash">
+  	
+  	<select id="getLastPeedSeq" resultType="java.lang.Integer">
+  		SELECT MAX(SEQ)
+  		FROM INSTA_PEED
+  	</select>
+  	
+  	<select id="getHashSeq" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		SELECT NVL(MAX(SEQ), 0) AS SEQ
+  		FROM INSTA_HASH
+  		WHERE HASH = #{keyword}
+  	</select>
+  	
+  	<select id="getPeedCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  		SELECT NVL(COUNT(*), 0)
+  		FROM INSTA_HASH_SUB
+  		WHERE HASH_SEQ = #{hash_seq}
+  	</select>
+  	
+  	<select id="getHashCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		SELECT NVL(COUNT(*), 0)
+  		FROM INSTA_HASH_SUB
+  		WHERE HASH = #{keyword}
+  	</select>
+  	
+  	<insert id="insertHash" parameterType="java.lang.String">
+  		INSERT INTO INSTA_HASH(SEQ, HASH)
+  		VALUES(SEQ_INSTA_HASH.NEXTVAL, #{keyword})
+  	</insert>
+  	
+  	<select id="getLastHashSeq" resultType="java.lang.Integer">
+  		SELECT NVL(MAX(SEQ), 0) AS SEQ
+  		FROM INSTA_HASH
+  	</select>
+  	
+  	<insert id="insertHashSub" parameterType="sist.co.model.HashSubDTO">
+  		INSERT INTO INSTA_HASH_SUB(SEQ, PEED_SEQ, HASH_SEQ, DEL)
+  		VALUES(SEQ_INSTA_HASH_SUB.NEXTVAL, #{peed_seq}, #{hash_seq}, 0)
+  	</insert>
+	  	
+  </mapper>

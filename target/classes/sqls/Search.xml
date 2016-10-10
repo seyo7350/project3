@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Search">
+  	
+  	<select id="searchHash" parameterType="java.lang.String" resultType="sist.co.model.HashDTO">
+  		SELECT SEQ, HASH
+  		FROM(
+  			SELECT ROW_NUMBER() OVER (ORDER BY HASH ASC) as rnum, SEQ, HASH
+  			FROM INSTA_HASH
+  			WHERE HASH LIKE '%'||#{keyword}||'%'
+  		) A
+  		WHERE rnum BETWEEN 1 AND 10
+  	</select>
+  	
+  	<select id="getPeedCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  		SELECT NVL(COUNT(*), 0)
+  		FROM INSTA_HASH_SUB
+  		WHERE HASH_SEQ = #{hash_seq}
+  	</select>
+  	
+  	<select id="getPeedList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedDTO">
+  		SELECT SEQ, MEMBER_SEQ, MEMBER_ID, MEMBER_PROFILE_IMAGE, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
+		FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY REGI_DATE DESC) AS RN, SEQ, MEMBER_SEQ, MEMBER_ID, MEMBER_PROFILE_IMAGE, IMAGE, PEED_LIKE, REGI_DATE, CONTENT
+			FROM(
+				SELECT ROW_NUMBER() OVER (PARTITION BY PEED.SEQ ORDER BY PEED.REGI_DATE DESC) as rnum, PEED.SEQ,PEED.MEMBER_SEQ,PEED.MEMBER_ID,PEED.MEMBER_PROFILE_IMAGE,PEED.IMAGE,PEED.PEED_LIKE,PEED.REGI_DATE,PEED.CONTENT
+				FROM INSTA_HASH_SUB HASH_SUB JOIN INSTA_PEED PEED
+				ON HASH_SUB.PEED_SEQ = PEED.SEQ
+				WHERE HASH_SUB.HASH_SEQ = #{hash_seq}
+			) A
+			WHERE rnum = 1
+			ORDER BY REGI_DATE DESC
+		)
+  	</select>
+  	
+  	<select id="searchMember" parameterType="java.lang.String" resultType="sist.co.model.MemberDTO">
+  		SELECT SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE, HOMEPAGE
+  		FROM(
+  			SELECT ROW_NUMBER() OVER (ORDER BY SEQ ASC) as rnum, SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE, HOMEPAGE
+  			FROM INSTA_MEMBER
+  			WHERE ID LIKE '%'||#{keyword}||'%' OR NAME LIKE '%'||#{keyword}||'%'
+  		) A
+  		WHERE rnum BETWEEN 1 AND 10
+  	</select>
+	  	
+  </mapper>
