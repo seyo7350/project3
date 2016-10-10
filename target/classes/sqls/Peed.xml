@@ -40,7 +40,7 @@
 	<select id="getPeedReplyList" parameterType="java.lang.Integer" resultType="sist.co.model.PeedReplyDTO">
 		SELECT * FROM INSTA_PEED_REPLY
 		WHERE PEED_SEQ = #{peed_seq} 
-		ORDER BY REGI_DATE DESC
+		ORDER BY REGI_DATE ASC
 	</select>
 	
 	<update id="plusLikeCnt" parameterType="sist.co.model.PeedDTO">
