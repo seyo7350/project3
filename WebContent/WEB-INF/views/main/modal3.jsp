@@ -46,7 +46,6 @@
 <script>
  
 function sendFollow(follow_seq) {
-	alert(follow_seq);
 	$.ajax({
 		type:"POST",
 		url:"sendFollow.do",
@@ -63,7 +62,6 @@ function sendFollow(follow_seq) {
 }
 
 function cancleFollow(follow_seq){
-	alert('팔로우 취소');
 	$.ajax({
 		type:"POST",
 		url:"cancleFollow.do",

@@ -26,7 +26,7 @@
 				<input type="button" class="_aj7mu _2hpcs _kenyh _o0442" id="send_follow_btn" value="팔로우"/>
 			</c:when>
 			<c:when test="${mem.id ne login.id && follow eq 2 }">
-				<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" id="cancle_follow_btn" value="팔로우 취소"/>
+				<input type="button" class="_aj7mu _r4e4p _kenyh _o0442" id="cancle_follow_btn" value="팔로잉"/>
 			</c:when> 
 		</c:choose>	
 		 
@@ -118,7 +118,7 @@ $('#send_follow_btn').click(function(){
 			/* alert(follow_check); */
 			
 			if(follow_check==2){
-				$('#send_follow_btn').attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로우 취소','id':'cancle_follow_btn'});				
+				$('#send_follow_btn').attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로잉','id':'cancle_follow_btn'});				
 			}else{ 
 				alert('팔로우 실패');
 			}

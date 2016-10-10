@@ -45,7 +45,6 @@
 
 <script>
 function sendFollow(follow_seq) {
-	alert(follow_seq);
 	$.ajax({
 		type:"POST",
 		url:"sendFollow.do",
@@ -55,7 +54,6 @@ function sendFollow(follow_seq) {
 			if(follow_check==2){
 				$('#send_follow_btn'+follow_seq).attr({'class':'_aj7mu _r4e4p _kenyh _o0442','value':'팔로잉','id':'cancle_follow_btn'+follow_seq,'onclick':'cancleFollow('+follow_seq+')'});
 				follow_cnt++;
-				alert(follow_cnt+'팔로우카운트 증가');
 				$('#follow_count').html(follow_cnt);
 			}else{ 
 				alert('팔로우 실패');
@@ -65,7 +63,6 @@ function sendFollow(follow_seq) {
 }
 
 function cancleFollow(follow_seq){
-	alert('팔로우 취소');
 	$.ajax({
 		type:"POST",
 		url:"cancleFollow.do",
@@ -73,7 +70,6 @@ function cancleFollow(follow_seq){
 		data:"follow="+follow_seq+"&member_seq=${login.seq}",
 		success: function(follow_check){
 			/* alert(follow_check); */
-
 			if(follow_check==true){
 				$('#cancle_follow_btn'+follow_seq).attr({'class':'_aj7mu _2hpcs _kenyh _o0442','value':'팔로우','id':'send_follow_btn'+follow_seq,'onclick':'sendFollow('+follow_seq+')'});				
 			}else{ 
@@ -89,12 +85,11 @@ function myFollowDel(follow_seq) {
 		type:"POST",
 		url:"cancleFollow.do",
 		async:true,
-		data:"seq="+follow_seq,
+		data:"follow="+follow_seq+"&member_seq=${login.seq}",
 		success: function(follow_check){
 			if(follow_check==true){
 				$('#_myFollowDel'+follow_seq).attr({'class':'_aj7mu _2hpcs _kenyh _o0442','value':'팔로우','id':'send_follow_btn'+follow_seq,'onclick':'sendFollow('+follow_seq+')'});				
 				follow_cnt--;
-				alert(follow_cnt+'팔로우카운트');
 				$('#follow_count').html(follow_cnt);
 			}else{ 
 				alert('팔로우 취소 실패');
