@@ -285,6 +285,11 @@ public class MemberController {
 		String id = request.getParameter("id");
 		
 		if(isS){
+            request.getSession().invalidate();
+			MemberDTO login = null;
+			login = memberService.login(memberDTO);
+			request.getSession().setAttribute("login", login);
+			
 			return "redirect:/profile.do?id="+id;
 		}else{
 		   return "pwdchange.tiles";

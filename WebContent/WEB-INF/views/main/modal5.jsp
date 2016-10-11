@@ -48,12 +48,16 @@
            <br>
             <span class="_timestamp" date="<fmt:formatDate value="${peedList[peed_index].regi_date}" pattern="yyyy-MM-dd HH:mm:ss"/>"></span></time>
 	<!--     </a> -->
+			
 	</section>
+		
 	<ul class="_mo9iw _123ym" style="overflow: auto;">
 		<c:if test="${empty detailReplyList}">
 			<li class="_nk46a" id="first_reply_view">
 				<!-- <h1> -->
-					<a class="_4zhc5 notranslate _iqaka" title="" href="#" style="text-decoration: none;"></a>
+					<a class="_4zhc5 notranslate _iqaka"  href="profile.do?id=${peedList[peed_index].member_id}" >${peedList[peed_index].member_id}</a>
+		            <span id="_4zhc5 notranslate _iqaka">${peedList[peed_index].content}</span><br>
+		    
 					<span>
 					댓글이 없습니다.
 					</span>
@@ -64,6 +68,10 @@
 		<c:if test="${not empty detailReplyList }">
 			<c:forEach items="${detailReplyList }" var="detailReply" varStatus="vs">
 					<li class="_nk46a${detailReply.seq }">
+					
+					<a class="_4zhc5 notranslate _iqaka"  href="profile.do?id=${peedList[peed_index].member_id}" >${peedList[peed_index].member_id}</a>
+		            <span id="_4zhc5 notranslate _iqaka">${peedList[peed_index].content}</span><br>
+		            
 						<c:if test="${detailReply.member_id eq login.id }">
 							<button class="_4vltl" title="댓글 삭제" onclick="delReply(${detailReply.seq},${detailReply.peed_seq })"></button>
 						</c:if>

@@ -18,11 +18,11 @@
 					<div class="_9tu8m">
 						<a class="_5lote _pfo25 _vbtk2" href="profile.do?id=${follower.id}" >
 						
-						<c:if test="${mem.profile_image eq null}">
+						<c:if test="${follower.profile_image eq null}">
 								<img class="_a012k" src="image/not.jpg" alt="이미지 없음"> 
 						</c:if> 
 						
-						<c:if test="${mem.profile_image ne null}">
+						<c:if test="${follower.profile_image ne null}">
 								<img class="_a012k" src="upload/${mem.profile_image}" alt="profile">
 						</c:if>
 						</a>
