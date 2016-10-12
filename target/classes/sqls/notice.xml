@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="notice">
+       <select id="getNoticeList" parameterType="int" resultType="sist.co.model.NoticeDTO">
+           SELECT * FROM INSTA_NOTICE WHERE MEMBER_SEQ=#{member_seq} AND READ_CONFIRM=0 ORDER BY REGI_DATE DESC
+       </select>
+       
+       <update id="updateNoticeList" parameterType="int" >
+           UPDATE INSTA_NOTICE SET READ_CONFIRM=1 WHERE MEMBER_SEQ=#{member_seq} AND READ_CONFIRM=0
+       </update>
+       
+        <insert id="IntNotice0" parameterType="sist.co.model.NoticeDTO">
+             INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHAT, PEED_SEQ, PEED_IMAGE, REGI_DATE, READ_CONFIRM)
+             VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, 1, #{peed_seq}, #{peed_image}, SYSDATE, 0)
+       </insert>
+       
+        <insert id="IntNotice1" parameterType="sist.co.model.NoticeDTO">
+            INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHO_PROFILE, WHAT, PEED_SEQ, PEED_IMAGE, REGI_DATE, READ_CONFIRM)
+            VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, #{who_profile}, 1, #{peed_seq}, #{peed_image}, SYSDATE, 0)
+       </insert>
+       
+       
+       <insert id="IntNotice2" parameterType="sist.co.model.NoticeDTO">
+            INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHO_PROFILE, WHAT, REGI_DATE, READ_CONFIRM)
+            VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, #{who_profile}, 2, SYSDATE, 0)
+       </insert>
+       
+       <insert id="IntNotice3" parameterType="sist.co.model.NoticeDTO">
+             INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHAT, REGI_DATE, READ_CONFIRM)
+             VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, 2, SYSDATE, 0)
+       </insert>
+       
+       <insert id="IntNotice4" parameterType="sist.co.model.NoticeDTO">
+             INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHAT, PEED_SEQ, PEED_IMAGE, REGI_DATE, READ_CONFIRM)
+             VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, 0, #{peed_seq}, #{peed_image}, SYSDATE, 0)
+       </insert>
+              
+       <insert id="IntNotice5" parameterType="sist.co.model.NoticeDTO">
+            INSERT INTO INSTA_NOTICE(SEQ, MEMBER_SEQ, WHO_SEQ, WHO_ID, WHO_PROFILE, WHAT, PEED_SEQ, PEED_IMAGE, REGI_DATE, READ_CONFIRM)
+            VALUES(SEQ_INSTA_NOTICE.NEXTVAL, #{member_seq}, #{who_seq}, #{who_id}, #{who_profile}, 0, #{peed_seq}, #{peed_image}, SYSDATE, 0)
+      </insert>
+       
+       
+       
+     </mapper>

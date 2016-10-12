@@ -29,7 +29,7 @@ window.onload = function(){
 	   			$('#_last').append(data);
 	   			count = '${totalPeedCount}';
 	   			if(count == 0){
-	   				
+
 	   			}else{
 	   				$(window).bind('scroll', function(){
 	   					if ($(window).scrollTop() == $(document).height() - $(window).height()){
@@ -43,7 +43,7 @@ window.onload = function(){
 };
 
 function add(){
-	alert('add');
+	alert('피드를 불러옵니다. 기다려주세요');
 	$(window).unbind('scroll');
 	$.ajax({
 		type:"POST",
@@ -51,7 +51,6 @@ function add(){
    		data:"index="+index,
    		async:true,
    		success: function(data) {
-   			alert(index);
 			if(index>(count/5)){
   
    			}else{
