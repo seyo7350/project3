@@ -45,9 +45,7 @@ import sist.co.service.SearchService;
 @Controller
 public class MemberController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-    
-	//public int l_seq = -1;
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);    
 	
 	@Autowired
 	private MemberService memberService;
