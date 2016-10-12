@@ -64,11 +64,11 @@ function dynamicDate(dt, option, nocalcserverdif){
 						}
 						else if (days == 2)
 						{
-							return "그저께 "+date("H시", dt);
+							return "어제 "+date("H시", dt);
 						}
 						else if (days == 3)
 						{
-							return "그끄저께 "+date("H시", dt);
+							return "3일"+date("H시", dt);
 						}
 						else if (days < 7)
 						{

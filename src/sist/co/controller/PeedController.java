@@ -457,6 +457,39 @@ public class PeedController {
 		
 		peedService.insertreply(replyDTO);
 		
+    	//알림
+		String member_profile = ((MemberDTO)request.getSession().getAttribute("login")).getProfile_image();
+		String peed_image = request.getParameter("val2");
+		String s_writer_seq = request.getParameter("val3");
+		int writer_seq = Integer.parseInt(s_writer_seq);
+
+		
+		System.out.println("int peed_seq : " + peed_seq);
+		System.out.println(" int member_seq : " + member_seq);
+		System.out.println(" member_profile : " + member_profile);
+		System.out.println(" member_id : " + member_id);
+		System.out.println("피드이미지,  : " + peed_image );
+		System.out.println("writer_seq,  : " + writer_seq);
+		System.out.println("~~~~~");
+
+		NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setMember_seq(writer_seq);
+		noticeDTO.setWho_seq(member_seq);   //완료
+		noticeDTO.setWho_id(member_id);      //완료
+		noticeDTO.setPeed_seq(peed_seq);    //완료
+		noticeDTO.setPeed_image(peed_image);
+			
+		if(member_profile != null){
+			System.out.println("who_profile 있다~~~");
+			noticeDTO.setWho_profile(member_profile);
+			System.out.println(noticeDTO);
+			boolean isB = noticeService.IntNotice5(noticeDTO);
+		}else{
+			System.out.println("who_profile 없다~~~");
+			System.out.println(noticeDTO);
+			boolean isB = noticeService.IntNotice4(noticeDTO);
+		}
+	
 		return linkedContent;
 	}
 	
@@ -558,7 +591,8 @@ public class PeedController {
 
 	@RequestMapping(value="fplusPeedCnt.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public int fplusPeedCnt(HttpServletRequest request, Model model, int peed_seq, int member_seq) throws Exception{
+	public int fplusPeedCnt(HttpServletRequest request, Model model, int peed_seq, int member_seq, String id, String profile_image, String peed_image, int writer_seq
+) throws Exception{
 		logger.info("fplusPeedCnt " + new Date());
 		
 		/*List<PeedDTO> peedList = (List<PeedDTO>) request.getSession().getAttribute("peedList");
@@ -598,6 +632,34 @@ public class PeedController {
 		
 		System.out.println("p_countThumbsUp : " + p_countThumbsUp);
 		
+		//확인
+		System.out.println("int peed_seq : " + peed_seq);
+		System.out.println(" int member_seq : " + member_seq);
+		System.out.println("String id : " + id);
+		System.out.println("profile_image,  : " + profile_image );
+		System.out.println("피드이미지,  : " + peed_image );
+		System.out.println("writer_seq,  : " + writer_seq);
+		System.out.println("~~~~~");
+
+        NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setMember_seq(writer_seq);
+		noticeDTO.setWho_seq(member_seq);
+		noticeDTO.setWho_id(id);   
+		noticeDTO.setPeed_seq(peed_seq);
+		noticeDTO.setPeed_image(peed_image);
+		
+	
+			if(profile_image != null){
+				System.out.println("who_profile 있다~~~" + profile_image);
+				noticeDTO.setWho_profile(profile_image);
+				boolean isB = noticeService.IntNotice1(noticeDTO);
+
+			}else{
+				System.out.println("who_profile 없다~~~");
+			    System.out.println(noticeDTO);
+				boolean isB = noticeService.IntNotice0(noticeDTO);
+			}
+
 		return p_countThumbsUp;
 
 	}

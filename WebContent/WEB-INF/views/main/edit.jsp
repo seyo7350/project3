@@ -70,8 +70,7 @@
 					<label for="pepWebsite">웹사이트</label></aside>
 					<div class="_lxlnj">
 						<input type="text" class="_cm95b _qy55y" aria-required="false" 
-						id="homepage" name="homepage"  value="${mem.homepage }" onkeyup="noSpaceForm(this)"
-						placeholder="http://를 제외한 웹페이지 주소를 입력하세요">
+						id="homepage" name="homepage"  value="${mem.homepage }" onkeyup="noSpaceForm(this)" placeholder="http://를 제외한 웹페이지 주소를 입력하세요">
 					</div>
 				</div>
 				</c:if>
@@ -227,6 +226,13 @@
 			return false;
 		}
 		
+		var home = user.homepage.value.substring(0,4);
+		if(home == 'http' ){
+			alert('홈페이지 주소에 http:// 는 입력하시면 안됩니다.');
+			user.homepage.focus();
+			return false;
+		}
+	
 	   alert("회원정보 수정을 시작합니다.");
 	}
 	
@@ -236,7 +242,6 @@
 
 	
 	function chkMbId(){
-
 		  $.ajax({
 		   url : "chkMbId.do",
 		   type : "post",
@@ -253,7 +258,6 @@
 				   alert(data.resultMsg);
 				   $('input[id=chkid]').attr('value',false); 
 			   }
-			   
 		   }
 		        });
 		 }
@@ -274,7 +278,6 @@
 				   alert(data.resultMsg);
 				   $('input[id=chkemail]').attr('value',false); 
 			   }
-			   
 		   }
 		        });
 		 }

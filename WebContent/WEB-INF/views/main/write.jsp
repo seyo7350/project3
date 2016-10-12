@@ -31,7 +31,7 @@
 						</div>
 						<div class="filebox">				
 							<label for="ff">사진</label>
-							<input type="file" id="ff" name="fileload" onchange="previewImage(this,'previewId');">
+							<input type="file" id="ff" name="fileload" onchange="previewImage(this,'previewId');" accept="image/*" >
 						</div>
 						<!-- <a class="_ljyfo _8snt5" href="/시간에 게시물 상세히 보기 페이지/">
 								<time class="_379kp" datetime="날짜 .시간" title="날짜">몇시간전에 올렸는지</time>

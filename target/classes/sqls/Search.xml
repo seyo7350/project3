@@ -37,9 +37,9 @@
   	</select>
   	
   	<select id="searchMember" parameterType="java.lang.String" resultType="sist.co.model.MemberDTO">
-  		SELECT SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE, HOMEPAGE
+  		SELECT SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, INTRO, PROFILE_IMAGE, HOMEPAGE
   		FROM(
-  			SELECT ROW_NUMBER() OVER (ORDER BY SEQ ASC) as rnum, SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, OPEN, PROFILE_IMAGE, HOMEPAGE
+  			SELECT ROW_NUMBER() OVER (ORDER BY SEQ ASC) as rnum, SEQ, ID, PWD, EMAIL, NAME, REGI_DATE, INTRO, PROFILE_IMAGE, HOMEPAGE
   			FROM INSTA_MEMBER
   			WHERE ID LIKE '%'||#{keyword}||'%' OR NAME LIKE '%'||#{keyword}||'%'
   		) A
