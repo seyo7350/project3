@@ -38,7 +38,7 @@
       <div>
          <div class="_22yr2 _e0mru">
             <div class="_jjzlb" style="padding-buttom: 100%">
-               <img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}" style>
+               <img alt="content내용을 보여줌" class="_icyx7" id="pImage_52" src="upload/${peed.image}">
             </div>
             <!-- react - empthy : 3308 -->
             <div class="_ovg3g"></div>
@@ -70,9 +70,9 @@
                         
                <c:if test="${not empty peedreplylist[replyIndex] }">
                   <c:if test="${(fn:length(peedreplylist[replyIndex])) > 2 }">
-                     <button class="_l086v _ifrvy" id="_replybtn" onclick="replyplus(${peed.seq})">댓글더보기</button>
+                     <button class="_l086v _ifrvy" style="margin-bottom: 7px;" id="_replybtn" onclick="replyplus(${peed.seq})">댓글더보기</button>
                      <div id="_replydiv${peed.seq }" style="display: none">
-                     	<c:forEach begin="2" end="${fn:length(peedreplylist[replyIndex])}" var="i">
+                     	<c:forEach begin="0" end="${fn:length(peedreplylist[replyIndex])-3}" var="i">
                      		<li class="_nk46a">                  
                         		<a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][i].member_id}">${peedreplylist[replyIndex][i].member_id}</a>
                               	<span>
@@ -81,22 +81,34 @@
                               	<!-- /react text -->
                            		</span>
                         	</li>
-                     	</c:forEach>
+                     	</c:forEach>                     	
                      </div>
                   </c:if>
                   
                   <c:if test="${replyIndex ne -1}">
-                     <c:forEach begin="0" end="1" var="i">
-                        <li class="_nk46a">                  
-                           <a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][i].member_id}">${peedreplylist[replyIndex][i].member_id}</a>
+                  	<c:if test="${fn:length(peedreplylist[replyIndex])-2 gt 0}">
+                  		<li class="_nk46a">                  
+                           <a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-2].member_id}">${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-2].member_id}</a>
                               <span>
                               <!-- react text:3330 -->
-                              ${peedreplylist[replyIndex][i].content}
+                              ${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-2].content}
                               <!-- /react text -->
                            </span>
                         </li>
-                     </c:forEach>
-                  </c:if>
+                  	</c:if>
+                  	<c:if test="${fn:length(peedreplylist[replyIndex])-1 gt 0}">
+                  		<li class="_nk46a">                  
+                           <a class="_4zhc5 notranslate _iqaka" title="댓글 쓴 아이디" href="profile.do?id=${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-1].member_id}">${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-1].member_id}</a>
+                              <span>
+                              <!-- react text:3330 -->
+                              ${peedreplylist[replyIndex][fn:length(peedreplylist[replyIndex])-1].content}
+                              <!-- /react text -->
+                           </span>
+                        </li>
+                  	</c:if>                    
+                 </c:if>
+                  
+                  
                </c:if>
             </ul>
             <section class="_jveic _rhgel">
@@ -126,15 +138,12 @@
 function insertreply(val){
    
 	var content=$('#_reply'+val).val();
-	alert(content);
    var id = '${login.id}';
-   alert('id'+id);
    
 
    if(content==""){
       alert('댓글 입력하세요');
    }else{
-      alert('content:'+content+'val'+val);
       
       $.ajax({
          type:"POST",
@@ -155,14 +164,12 @@ function insertreply(val){
 }
 
 function replyplus(val){
-	alert('val'+val);
 	
 	$('#_replydiv'+val).toggle();
 }
 
 /* #_countThumbsUp 뒤에 피드 시퀀스를 줘서 알아보게 해야되는데 안도미!!!! */
 function changeHeart(info, seq) {
-	alert(info.className);
 	if(info.className == '_soakw coreSpriteHeartOpen'){
 		$('#like'+seq).attr('class','_soakw coreSpriteHeartFull');
 		
@@ -172,8 +179,6 @@ function changeHeart(info, seq) {
 			async:true,
 			data:"member_seq=${login.seq}&peed_seq="+seq,
 			success: function(p_countThumbsUp){
-				alert('좋아요 성공'); 
-				/* alert(p_countThumbsUp); */
 				$('#_countThumbsUp'+seq).html(p_countThumbsUp);
 			}
 			
@@ -188,7 +193,6 @@ function changeHeart(info, seq) {
 			async:true,
 			data:"member_seq=${login.seq}&peed_seq="+seq,
 			success: function(m_countThumbsUp){
-				alert('좋아요 취소');
 				/* alert(m_countThumbsUp); */
 				$('#_countThumbsUp'+seq).html(m_countThumbsUp);
 			}

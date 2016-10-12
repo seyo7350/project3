@@ -114,7 +114,6 @@ function goJoin(email, fullname, username, password){
 		async:true,
 		data:"email="+email+"&name="+fullname+"&id="+username+"&pwd="+password,
 		success: function(ok){
-			alert(ok.message);
 			if(ok.message=='회원가입 성공'){
 				alert('회원 가입 성공');
 				location.href='index.do';

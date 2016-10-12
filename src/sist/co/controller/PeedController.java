@@ -380,7 +380,7 @@ public class PeedController {
 
 	}
 
-	@RequestMapping(value="insertreply.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="insertreply.do",produces="application/text;charset=utf8", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String insertreply(HttpServletRequest request, Model model, PeedReplyDTO replyDTO) throws Exception{
 		logger.info("insertreply " + new Date());

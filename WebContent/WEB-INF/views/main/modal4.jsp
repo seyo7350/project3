@@ -89,7 +89,6 @@ function cancleFollow(follow_seq){
 }
 
 function myFollowDel(follow_seq) {
-	alert('1단계'+follow_seq);
 	$.ajax({
 		type:"POST",
 		url:"cancleFollow.do",

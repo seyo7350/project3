@@ -328,7 +328,6 @@ var end = '${fn:length(peedList)}'-1;
 var peed_index = -1;
 function openModal5(peed_idx){
    peed_index = peed_idx;
-      alert(peed_index);
 
       $.ajax({
          type:"POST",
@@ -345,7 +344,6 @@ function openModal5(peed_idx){
                  }else if(peed_index == end){
                      s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                  }else{
-                     alert(peed_index);
                      s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
                      s += '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
                  }
@@ -366,7 +364,6 @@ function openModal5(peed_idx){
 $(document).ready(function(){
     $('._hj98d').on('click', '.coreSpriteRightPaginationArrow', function(){
         peed_index++;
-        alert(peed_index);
         if(peed_index == end){
             s = '<a class="_qdy3e coreSpriteLeftPaginationArrow" id="_left" href="#none" role="button">이전</a>';
         }else{
@@ -390,7 +387,6 @@ $(document).ready(function(){
     
     $('._hj98d').on('click', '.coreSpriteLeftPaginationArrow', function(){
         peed_index--;
-        alert(peed_index);
         if(peed_index == 0){
             s = '<a class="_de018 coreSpriteRightPaginationArrow" id="_right" href="#none" role="button">다음</a>';
             

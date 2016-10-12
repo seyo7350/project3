@@ -19,7 +19,7 @@
 var index = 0;
 var count = -1;
 
-window.onload = function(){
+window.onload = function(){	
 	$.ajax({
 			type:"POST",
 	   		url:"./article.do",
@@ -43,7 +43,6 @@ window.onload = function(){
 };
 
 function add(){
-	alert('add');
 	$(window).unbind('scroll');
 	$.ajax({
 		type:"POST",
@@ -51,7 +50,6 @@ function add(){
    		data:"index="+index,
    		async:true,
    		success: function(data) {
-   			alert(index);
 			if(index>(count/5)){
   
    			}else{

@@ -31,12 +31,14 @@ import sist.co.model.CheckMember;
 import sist.co.model.FollowDTO;
 import sist.co.model.MemberDTO;
 import sist.co.model.NoticeDTO;
+import sist.co.model.PagingParam;
 import sist.co.model.PeedDTO;
 import sist.co.model.SearchDTO;
 import sist.co.service.HashService;
 import sist.co.service.FollowService;
 import sist.co.service.MemberService;
 import sist.co.service.NoticeService;
+import sist.co.service.PeedService;
 import sist.co.service.ProfileService;
 import sist.co.service.SearchService;
 
@@ -64,6 +66,9 @@ public class MemberController {
 	
 	@Autowired
 	private SearchService searchService;
+	
+	@Autowired
+	private PeedService peedService;
 	
 	@Autowired
 	private NoticeService noticeService;
@@ -133,9 +138,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="newspeed.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String newspeed(Model model, String id){
+	public String newspeed(HttpServletRequest request, Model model, String id) throws Exception{
 		logger.info("newspeed " + new Date());
 		model.addAttribute("id", id);
+		
+		MemberDTO loginDTO = (MemberDTO)request.getSession().getAttribute("login");
+		
+		if(loginDTO == null){
+			return "redirect:/index.do";
+		}
+		
+		PagingParam p = new PagingParam();
+		p.setMember_seq(loginDTO.getSeq());
+		int totalPeedCount = peedService.getPeedCount(p);
+		request.getSession().setAttribute("totalPeedCount", totalPeedCount);
+		
 		return "newspeed.tiles";
 	}
 	
